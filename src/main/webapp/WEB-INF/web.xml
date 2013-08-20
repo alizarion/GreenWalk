@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <!--context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param-->
+
+    <security-role>
+        <description>Account Users</description>
+        <role-name>Users</role-name>
+    </security-role>
+
+    <security-role>
+        <description>Account ADMIN</description>
+        <role-name>ADMIN</role-name>
+    </security-role>
+
+    <security-role>
+        <description>Guild ADMIN</description>
+        <role-name>GUILDADMIN</role-name>
+    </security-role>
+
+
+    <security-constraint>
+        <display-name>Account Editor</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin content</web-resource-name>
+            <description>Page used tu create, edit, duplicate...</description>
+            <url-pattern>/account/*</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Only for authorised users</description>
+            <role-name>Users</role-name>
+            <role-name>ADMIN</role-name>
+            <role-name>GUILDADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <context-param>
+        <param-name>primefaces.PUSH_SERVER_URL</param-name>
+        <param-value>http://ingresswatch.com</param-value>
+    </context-param>
+
+    <security-constraint>
+        <display-name>Account Editor</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin content</web-resource-name>
+            <description>Page used tu create, edit, duplicate...</description>
+            <url-pattern>/guild/*</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Only for authorised admin</description>
+            <role-name>GUILDADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>Account Editor</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin content</web-resource-name>
+            <description>Page used tu create, edit, duplicate...</description>
+            <url-pattern>/admin/*</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Only for authorised admin</description>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>
+            org.primefaces.webapp.filter.FileUploadFilter
+        </filter-class>
+
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+
+
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>root-address</param-name>
+        <param-value>http://ingresswatch.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>ingress-defence.project.version</param-name>
+        <param-value>${project.version}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.sun.faces.allowTextChildren</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6Ldt4dYSAAAAABfVpYKQAmg95sA5iKXWmXduYln5</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6Ldt4dYSAAAAAHTwVsB_I8bLSOpI-Lh8VBIMOXee</param-value>
+    </context-param>
+
+    <!-- productionParam -->
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <welcome-file-list>
+        <welcome-file>home.html</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>600</session-timeout>
+    </session-config>
+
+    <!-- productionParam -->
+    <persistence-context-ref>
+        <persistence-context-ref-name>persistence/em</persistence-context-ref-name>
+        <persistence-unit-name>myProjectPU</persistence-unit-name>
+    </persistence-context-ref>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/index.html</location>
+    </error-page>
+
+
+
+</web-app>

@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view locale="fr">
+
+<h:head>
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
+</h:head>
+<h:body style="background-color: #ffffff !important;">
+<ui:composition template="/template/template.xhtml">
+ <ui:define name="meta-data">
+                <meta name="Description" content="Inscription :: #{msg['UserNameValidatormeta.data.title']}"/>
+                <meta name="Language" content="fr"/>
+                <meta name="Keywords" content="#{msg['meta.data.keywords.head']}"/>
+            </ui:define>
+<ui:define name="loginLink">
+    <h:link outcome="login-outcome" styleClass="login" >Connexion
+        <f:param  value="home-outcome" name="from"/>
+    </h:link>
+</ui:define>
+<ui:define name="title" >Inscription #{msg['meta.data.title']}</ui:define>
+<ui:define name="content">
+    <div style="width: 100%;height:1000px; ">
+        <div class="registerContent">
+            <h:form  styleClass="Form StaticForm registerForm noMargin">
+                <h:panelGroup id="capchaContent">
+                    <ul>
+                        <li>
+                            <p:inputText  value="#{registerCtrl.account.credential.userName}"
+                                          requiredMessage="Ce champs est obligatoire"
+                                          required="true"
+
+                                          style="border-radius: 8px;" id="userName" >
+                                <f:validator validatorId="com.bookmgr.jsf.validator.UserNameValidator" />
+                                <p:ajax update=":growlfrom:growl" event="blur" />
+                            </p:inputText>
+
+                            <p:watermark value="Nom utilisateur" for="userName"/>
+                        </li>
+                        <li>
+                            <p:inputText  value="#{registerCtrl.account.emailAddress}"
+                                          required="true"
+                                          style="border-radius: 8px;"
+                                          requiredMessage="Ce champs est obligatoire"
+                                          id="email" >
+                                <f:validator validatorId="com.bookmgr.jsf.validator.RegisterEmailValidator"/>
+                                <p:ajax event="blur" update=":growlfrom:growl"  />
+                            </p:inputText>
+
+                            <p:watermark value="email" for="email"/>
+                        </li>
+
+
+                        <li>
+                            <p:inputText  value="#{registerCtrl.account.firstName}"
+                                          required="true"
+                                          style="border-radius: 8px;"
+                                          requiredMessage="Ce champs est obligatoire"
+                                          id="fistname" >
+                                <p:ajax event="blur" update=":growlfrom:growl"  />
+                            </p:inputText>
+                            <p:watermark value="Nom" for="fistname"/>
+                        </li>
+                        <li>
+                            <p:inputText  value="#{registerCtrl.account.lastName}"
+                                          required="true"
+                                          style="border-radius: 8px;"
+                                          requiredMessage="Ce champs est obligatoire"
+                                          id="lastname" >
+                                <p:ajax event="blur" update=":growlfrom:growl"  />
+                            </p:inputText>
+                            <p:watermark value="Prénom" for="lastname"/>
+                        </li>
+
+                        <li>
+                            <p:inputText  value="#{registerCtrl.account.localisation}"
+                                          required="true"
+                                          style="border-radius: 8px;"
+                                          requiredMessage="Ce champs est obligatoire"
+                                          id="localisation" >
+                                <p:ajax event="blur" update=":growlfrom:growl"  />
+                            </p:inputText>
+                            <p:watermark value="Ville, pays ...." for="localisation"/>
+                        </li>
+
+                        <li>
+                            <p:password  value="#{registerCtrl.account.credential.password}"
+                                         id="pwd1"
+                                         match="pwd2"
+                                         required="true"
+                                         style="border-radius: 8px;"
+                                         promptLabel="Mot de passe"
+                                         strongLabel="ok"
+                                         goodLabel="Bon"
+                                         weakLabel="Faible"
+                                         requiredMessage="Ce champs est obligatoire"
+                                         minLength="4"  feedback="true">
+                            </p:password>
+                            <p:watermark value="Mot de passe" for="pwd1"/>
+                        </li>
+                        <li>
+                            <p:password value="#{registerCtrl.account.credential.password}"
+                                        id="pwd2" minLength="4"
+                                        required="true"
+                                        promptLabel="Mot de passe"
+                                        goodLabel="Bon"
+                                        strongLabel="ok"
+                                        weakLabel="Faible"
+                                        style="border-radius: 8px;"
+                                        requiredMessage="Ce champs est obligatoire"
+                                        validatorMessage="Ce champs doit correspondre au premier mot de passe saisi."
+                                        feedback="true">
+                            </p:password>
+                            <p:watermark value="Confirmation mot de passe" for="pwd2"/>
+                        </li>
+                        <li>
+
+                            <p:captcha language="fr"
+                                       id="captcha"
+                                       validatorMessage="Vous devez saisir le contenu du captcha"
+                                       requiredMessage="Vous devez saisir le contenu du captcha"
+                                       theme="white"/>
+                        </li>
+                        <li>
+                            <h:outputLabel value="Vous êtes :" />
+                            <p:selectOneRadio required="true" styleClass="registerInput "
+                                              style="float: right;"
+                                              requiredMessage="Ce champ est obligatoire"
+                                              id="genre" value="#{registerCtrl.sexe}">
+                                <f:selectItem  itemLabel="une femme" itemValue="Femme" />
+                                <f:selectItem itemLabel="un homme" itemValue="Homme" />
+                            </p:selectOneRadio>
+                        </li>
+                        <li>
+                            <h:outputText value="J'ai lu et approuvé les conditions générales d'utilisation" /> <a target='_blank' href="/legales-#{msg['project.name.minuscule']}">CGU</a>
+                            <p:selectBooleanCheckbox required="true" styleClass="cgu" style="float: right;border-color:black !important;" requiredMessage="Vous devez valider les conditions d'utilisation" value="#{registerCtrl.legales}" />
+                        </li>
+                        <li>
+                            <p:commandButton
+                                    actionListener="#{registerCtrl.submit}"
+                                    update=":growlfrom:growl,capchaContent"
+                                    value="CR&Eacute;EZ VOTRE COMPTE"
+                                    ajax="false"
+                                    onclick="PrimeFaces.cleanWatermarks();"
+                                    oncomplete="PrimeFaces.showWatermarks();"/>
+                        </li>
+                    </ul>
+                </h:panelGroup>
+
+            </h:form>
+        </div>
+
+
+
+    </div>
+
+
+
+
+</ui:define>
+<ui:define name="bottomContent">
+    <h:panelGroup id="googlepixefolio" rendered="#{msg['project.name.minuscule'] == 'pixefolio'}">
+                    <script type="text/javascript">
+                        var _gaq = _gaq || [];
+                        _gaq.push(['_setAccount', 'UA-28439330-1']);
+                        _gaq.push(['_trackPageview']);
+
+                        (function() {
+                            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                        })();
+                    </script>
+
+                </h:panelGroup>
+
+                <h:panelGroup id="googlepausecaca" rendered="#{msg['project.name.minuscule'] == 'pausecaca'}">
+                    <script type="text/javascript">
+                        var _gaq = _gaq || [];
+                        _gaq.push(['_setAccount', 'UA-35269447-1']);
+                        _gaq.push(['_trackPageview']);
+
+                        (function() {
+                            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                        })();
+                    </script>
+
+                </h:panelGroup>
+</ui:define>
+<script type="text/javascript">
+
+    (function($){
+        $.fn.juizScrollTo = function(speed, v_indent){
+
+            if(!speed) var speed = 'slow';
+            if(!v_indent) var v_indent = 0;
+
+            return this.each(function(){
+                $(this).click(function(){
+
+                    var goscroll = false;
+                    var the_hash = $(this).attr("hreflang");
+                    var regex = new RegExp("\#(.*)","gi");
+                    if(the_hash ==null){
+                        return false;
+                    }
+                    if(the_hash.match("\#")) {
+
+                        the_hash = the_hash.replace(regex,"$1");
+
+                        if($("#"+the_hash).length>0) {
+                            the_element = "#" + the_hash;
+                            goscroll = true;
+                        }
+                        else if($("a[name=" + the_hash + "]").length>0) {
+                            the_element = "a[name=bottom]";
+                            goscroll = true;
+                        }
+
+                        if(goscroll) {
+                            var container = 'html';
+                            if ($.browser.webkit) container = 'body';
+
+                            $(container).animate({
+                                        scrollTop:$(the_element).offset().top + v_indent
+                                    }, speed,
+                                    function(){$(the_element).attr('tabindex','0').focus().removeAttr('tabindex');});
+                            return false;
+                        }
+                    }
+                });
+            });
+        };
+    })(jQuery)
+
+    $('a:first').juizScrollTo('slow').css('color', 'red');
+    $('a:not(:first)').juizScrollTo('slow').css('color', '#444');
+
+
+    $(document).ready(function() {
+
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear'
+         };
+         */
+
+        $().UItoTop({ easingType: 'easeOutQuart',
+            scrollSpeed: 500});
+
+    });
+
+    function scrollToTop(){
+        $('html, body').animate({scrollTop:0}, 500, 'easeOutQuart');
+    }
+
+
+
+
+
+
+
+
+</script>
+</ui:composition>
+</h:body>
+
+</f:view>
+</html>
+

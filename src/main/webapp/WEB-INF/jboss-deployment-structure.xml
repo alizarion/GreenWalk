@@ -1,0 +1,17 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.0">
+
+    <deployment>
+
+        <exclusions>
+
+            <!--module name="org.jboss.as.jaxrs"/>
+
+            <module name="org.jboss.resteasy"/>
+
+            <module name="org.jboss.resteasy.resteasy-jaxrs"/-->
+
+        </exclusions>
+
+    </deployment>
+
+</jboss-deployment-structure>

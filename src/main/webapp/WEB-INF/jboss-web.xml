@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <!-- productionParam -->
+  <!--context-root>/MonProjet</context-root>
+      <security-domain flushOnSessionInvalidation="true">java:/jaas/ingress</security-domain-->
+</jboss-web>

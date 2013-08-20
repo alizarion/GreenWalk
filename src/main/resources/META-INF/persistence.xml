@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <!-- productionParam -->
+    <persistence-unit name="myProjectPU" transaction-type="JTA">
+        <!-- productionParam -->
+        <jta-data-source>java:/GreenWalk</jta-data-source>
+        <class>com.project.entities.Account</class>
+        <class>com.project.entities.Address</class>
+        <class>com.project.entities.Person</class>
+        <class>com.project.entities.AvatarImageFile</class>
+        <class>com.project.entities.Comment</class>
+        <class>com.project.entities.Country</class>
+        <class>com.project.entities.Credential</class>
+        <class>com.project.entities.CredentialsState</class>
+        <class>com.project.entities.Event</class>
+        <class>com.project.entities.GroupEvent</class>
+        <class>com.project.entities.PersistentEntry</class>
+        <class>com.project.entities.SexeEnum</class>
+        <class>com.project.entities.SingleEvent</class>
+        <class>com.project.entities.UploadedFile</class>
+        <class>com.project.entities.Content</class>
+        <class>com.project.entities.GroupEvent</class>
+        <class>com.project.entities.ImageContent</class>
+        <class>com.project.entities.ImageContentFile</class>
+        <class>com.project.entities.VideoContent</class>
+        <class>com.project.entities.VideoContentFile</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.max_fetch_depth" value="1"/>
+            <property name="hibernate.jdbc.batch_size" value="32" />
+
+            <!-- uncomment this to delegate hibernate to create the database-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+            <property name="hibernate.default_batch_fetch_size" value="16" />
+            <property name="hibernate.show_sql" value="false" />
+        </properties>
+    </persistence-unit>
+</persistence>

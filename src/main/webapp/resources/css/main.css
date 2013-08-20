@@ -1,0 +1,186 @@
+
+html, body {
+    margin : 0;
+    width : 100%;
+    height : 100%;
+    background-image: url('../resources/img/motif_background.png');
+}
+a {
+    text-decoration: none;
+    font-family: Arial regular;
+    color: black;
+    font-size: 16pt;
+}
+
+ol li{
+    list-style: none;
+
+}
+ol, ul, li {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.menuItem:last-child:after{
+    content: "";
+}
+
+body .ui-button {
+    background-image: none;
+    background-color: greenyellow;
+    border: none;
+    box-shadow: 2px 2px 2px 2px 2px #AAA;
+    border-radius: 10px;
+}
+body .ui-button .ui-button-text {
+
+}
+body .ui-button .ui-button-text:after {
+    content:" >";
+}
+
+.menuItem {
+    position: relative;
+    display: -moz-inline-box;
+    display: inline-block;
+    line-height: 50px;
+
+    padding: 0;
+    vertical-align: top;
+
+}
+.menuItem  a{
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: normal;
+
+}
+.menuItem:after{
+    content: "|";
+    color: #53C6C4;
+
+}
+
+
+.active {
+    color: #53C6C4;
+}
+
+a:hover {
+    color: #53C6C4;
+}
+
+.head  {
+    width: 100%;
+    z-index: 5;
+    height: 200px;
+    border-bottom: 1px solid #888;
+    position: relative;
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
+.logo {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 351px;
+    height: 157px;
+    background-image: url("../resources/img/logo_greenwalk.png");
+    background-repeat: no-repeat;
+}
+
+.center{
+    width: 100%;
+    height: 1050px;
+    position: relative;
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+    z-index: 3;
+    background-image: url('../resources/img/motif_background_green.png');
+}
+
+.counter{
+    top: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    width: 906px;
+    height: 873px;
+    background-image: url('../resources/img/visuel_principal_HD.png');
+    background-repeat: no-repeat;
+}
+
+.counterText{
+    padding-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 900px;
+    height: 90px;
+}
+
+.counterText1{
+    width: 200px;
+    height: 100%;
+}
+
+#commentAndEvent{
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1024px;
+    height: 500px;
+}
+
+#comments{
+    width: 65%;
+    display: inline-block;
+    height: 100%;
+}
+
+#events{
+    width: 34%;
+    height: 100%;
+    float: right;
+    display: inline-block;
+}
+
+.commentAndEventHead{
+    width: 100%;
+    color: #009E9D;
+}
+
+#socialContainer{
+    width: 100%;
+    height: 200px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
+#nextPickup{
+    width: 100%;
+    height: 500px;
+    float: inherit;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
+.centerMargin{
+    display: block !important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
+.eventDisplayContainer{
+    width: 100%;
+    height: 200px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}

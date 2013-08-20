@@ -1,0 +1,53 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:cc="http://java.sun.com/jsf/composite/component"
+        contentType="text/html">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="center">
+                <div class="center">
+                    <div class="counterText">
+                        <div class="counterText1">
+                            <p style="margin:0;font-size: 40pt;">
+                                Together,
+                            </p>
+
+                        </div>
+
+                    </div>
+                    <div class="counter"></div>
+                </div>
+            </ui:define>
+            <ui:define name="content">
+                <div id="commentAndEvent">
+                    <div id="comments">
+                        <div class="commentAndEventHead">
+                            <h1>#{lang['last.events-'.concat(sessionAttributeCtrl.selectedLang)]}</h1>
+                        </div>
+                        <cc:lastEvents/>
+                    </div>
+                    <div id="events">
+                        <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang)]}</h1>
+                        <cc:gwSocial facebook="#{true}"
+                                     twitter="#{true}"
+                                     gplus="#{true}"/>
+                        <br/>
+                        <cc:nextPickups />
+
+
+                    </div>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</f:view>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="fr">
+    <h:head>
+        <h:outputStylesheet library="css" name="main.css" />
+    </h:head>
+
+    <h:body>
+
+
+        <ui:insert name="viewparam">
+
+
+        </ui:insert>
+        <div class="head">
+         <div onclick="window.location.href='#{app['APP_URL']}'" class="logo"></div>
+
+            <div class="menu" >
+                <ol style="display: inline-block">
+                    <li class="menuItem">
+                        <h:link value="Community" outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link value="Future Missions" outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link value="Tri-memo" outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link value="Partners" outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <p:button  value="SingIn" outcome="community-outcome" />
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <ui:insert name="center">
+
+
+        </ui:insert>
+
+        <ui:insert name="content">
+
+
+        </ui:insert>
+
+    </h:body>
+
+</f:view>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        contentType="text/html">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <h:form>
+
+            <h:panelGrid columns="3" >
+
+                <h:outputLabel value="Nom : "/>
+                <p:inputText id="name" required="true"
+                             requiredMessage="vous devez saisir un prenom"
+                             value="#{personController.person.lastName}" />
+                <p:message for="name" id="namemsg" />
+
+
+                <h:outputLabel value="Prenom : "/>
+                <p:inputText id="lastname" required="true"
+                             requiredMessage="vous devez saisir un prenom"
+                             value="#{personController.person.firstName}" />
+                <p:message for="lastname" id="lastnamemsg" />
+
+
+                <h:outputLabel value="Tel : "/>
+                <p:inputText id="phone" required="true"
+                             requiredMessage="vous devez saisir un numèro de telephone"
+                             value="#{personController.person.phoneNumber}" />
+                <p:message for="phone" id="phonemsg" />
+
+                <p:commandButton action="#{personController.addNewPerson}"
+                                 update="@parent"
+                                 process="@form"
+                                 oncomplete="window.location.reload()"
+                                 value="Enregistrer la personne"/>
+
+            </h:panelGrid>
+
+        </h:form>
+        <p:dataTable value="#{personController.personList}" var="person">
+
+            <p:column headerText="Nom">
+              <h:outputText value="#{person.firstName}" />
+            </p:column>
+
+            <p:column headerText="Prénom">
+                <h:outputText value="#{person.lastName}" />
+            </p:column>
+
+            <p:column headerText="Téléphone">
+                <h:outputText value="#{person.phoneNumber}" />
+
+            </p:column>
+        </p:dataTable>
+
+    </h:body>
+
+</f:view>
