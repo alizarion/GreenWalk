@@ -34,10 +34,10 @@ public class VideoContentFile extends UploadedFile implements Serializable {
     }
 
     @Override
-    public File getFullPath() {
+    public File getFileFullPath() {
         if (getTemporary()){
             return new File(Helper.getTempDirectoryPath() +
-                    File.pathSeparator + getId().toString());
+                    File.separator + getId().toString());
 
         }    else {
             if (this.videoContent != null){
@@ -45,6 +45,26 @@ public class VideoContentFile extends UploadedFile implements Serializable {
                     return new File(this.videoContent.
                             getEvent().getEventPathDirectoryFile(),
                             this.getId().toString()) ;
+                }
+            }else {
+                return null;
+            }
+            return null;
+        }
+    }
+
+    @Override
+    public File getResizedFileFullPath(Integer witdh, Integer weight) {
+        if (getTemporary()){
+            return new File(Helper.getTempDirectoryPath() +
+                    File.separator + getId().toString()+ "_" +witdh + "_" + weight);
+
+        }    else {
+            if (this.videoContent != null){
+                if (this.videoContent.getEvent() != null) {
+                    return new File(this.videoContent.
+                            getEvent().getEventPathDirectoryFile(),
+                            this.getId().toString() + "_" +witdh + "_" + weight) ;
                 }
             }else {
                 return null;
@@ -64,7 +84,7 @@ public class VideoContentFile extends UploadedFile implements Serializable {
     @PreRemove
     public void onPreRemove(){
 
-        File file = getFullPath();
+        File file = getFileFullPath();
         if (file != null){
             file.delete();
         }

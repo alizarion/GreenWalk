@@ -5,7 +5,21 @@ package com.project.entities;
  */
 public enum  AvailableLang {
 
-    fr,
-    en;
+    FR("fr"),
+    EN("en");
+
+    private String key;
+
+    private AvailableLang() {
+
+    }
+
+    private AvailableLang(final String key) {
+       this.key = key;
+    }
+
+    public String getKey() {
+        return key;
+    }
 
 }

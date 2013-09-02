@@ -18,25 +18,30 @@
 
         </ui:insert>
         <div class="head">
-         <div onclick="window.location.href='#{app['APP_URL']}'" class="logo"></div>
+            <div onclick="window.location.href='#{app['APP_URL']}'" class="logo"></div>
 
             <div class="menu" >
                 <ol style="display: inline-block">
                     <li class="menuItem">
-                        <h:link value="Community" outcome="community-outcome"/>
+                        <h:link value="#{lang['page.template.community.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <h:link value="Future Missions" outcome="community-outcome"/>
+                        <h:link value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <h:link value="Tri-memo" outcome="community-outcome"/>
+                        <h:link value="#{lang['page.template.tri.memo.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <h:link value="Partners" outcome="community-outcome"/>
+                        <h:link value="#{lang['page.template.partners.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <p:button  value="SingIn" outcome="community-outcome" />
+                        <h:form>
+                            <p:button  rendered="#{request.userPrincipal == null}" value="#{lang['page.template.login.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="login-outcome" />
+                            <p:button  rendered="#{request.userPrincipal != null}" value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="login-outcome" />
+                            <p:commandButton  rendered="#{request.userPrincipal != null}" value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" action="#{loginCtrl.logout(facesContext)}" />
+                        </h:form>
                     </li>
+
                 </ol>
             </div>
         </div>
@@ -48,6 +53,24 @@
 
         <ui:insert name="content">
 
+
+        </ui:insert>
+
+        <ui:insert name="footerContent">
+            <h:panelGroup id="google" rendered="#{msg['project.name.minuscule'] == 'pixefolio'}">
+                <script type="text/javascript">
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
+                    _gaq.push(['_trackPageview']);
+
+                    (function() {
+                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();
+                </script>
+
+            </h:panelGroup>
 
         </ui:insert>
 

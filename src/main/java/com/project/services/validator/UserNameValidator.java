@@ -1,7 +1,9 @@
 package com.project.services.validator;
 
-import com.bookmgr.EntityFacade;
-import com.bookmgr.entity.biz.Credential;
+
+
+import com.project.entities.Credential;
+import com.project.services.EntityFacade;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -45,7 +47,7 @@ public class UserNameValidator implements Validator{
 
         EntityFacade facade = (EntityFacade)
                 context.getViewRoot().getAttributes().
-                        get(EntityFacade.EL_NAME);
+                        get(EntityFacade.EF_NAME);
         final Credential credential = facade.getCredentialByUserName(value.toString());
 
         if(credential != null){

@@ -1,8 +1,10 @@
 package com.project.services;
 
-import com.project.entities.Account;
-import com.project.entities.CredentialsState;
-import com.project.entities.Person;
+import com.project.comingsoon.MailingList;
+import com.project.entities.*;
+import com.project.services.mail.MailSender;
+import com.project.services.mail.RegisterEmail;
+import com.project.services.mail.SMTPEmailProvider;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -96,12 +99,63 @@ public class EntityFacade implements Serializable{
         em.clear();
 
         //TODO change for production Email
-    /*    EmailCounter emailCounter =  new EmailCounter(account.getEmailAddress(),"inscription",new Date());
+        EmailCounter emailCounter =  new EmailCounter(account.getEmailAddress(),"inscription",new Date());
 
         mergeEmailCounter(emailCounter);
         MailSender sender = new MailSender(new SMTPEmailProvider());
-        sender.sendEmail(new RegisterEmail(account));  */
+        sender.sendEmail(new RegisterEmail(account));
+    }
+
+    public Credential getCredentialByUserName(String userName){
+        try{
+            Credential credential = (Credential) em.createNamedQuery(
+                    Credential.FIND_CREDENTIAL_BY_USERNAME).
+                    setParameter("query",userName).
+                    getSingleResult();
+            // credential.getAccountEagerly();
+            credential.getAccount().loadFollowEagerly();
+            return credential;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public Account findAccountByName(String name){
+        return (Account) em.createNamedQuery(
+                Account.FIND_ACCOUNT_BY_NAME).
+                setParameter("name", name).getSingleResult();
+    }
+
+    public Account mergeAccount(Account account){
+        Account mergedAccount = em.merge(account);
+
+        return mergedAccount;
     }
 
 
+    public void mergeEmailCounter(EmailCounter emailCounter){
+        em.merge(emailCounter);
+    }
+
+    public ImageContent addNewTemporaryImageContent(ImageContent content) {
+        content = em.merge(content);
+        em.flush();
+        em.clear();
+        return content;
+
+    }
+
+    public UploadedFile getUploadedFileById(Long id){
+        return em.find(UploadedFile.class, id);
+
+    }
+
+    public void updateUploadedFile(UploadedFile contentFile) {
+        em.merge(contentFile);
+    }
+
+
+    public void registerFromComingSoon(MailingList mailingList){
+        em.merge(mailingList);
+    }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web>
     <!-- productionParam -->
-  <!--context-root>/MonProjet</context-root>
-      <security-domain flushOnSessionInvalidation="true">java:/jaas/ingress</security-domain-->
+  <context-root>/</context-root>
+      <security-domain flushOnSessionInvalidation="true">java:/jaas/greenwalk</security-domain>
 </jboss-web>

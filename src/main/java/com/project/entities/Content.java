@@ -65,7 +65,8 @@ public abstract class Content implements Serializable, Cloneable{
     @Column(nullable = false)
     private Boolean publish;
 
-    @ManyToOne (optional = true)
+    @ManyToOne (optional = true,
+            cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "event_id")
     private Event event;
 
@@ -162,6 +163,7 @@ public abstract class Content implements Serializable, Cloneable{
 
     public void setEvent(Event event) {
         this.event = event;
+        this.event.getContents().add(this);
     }
 
     public String getType() {

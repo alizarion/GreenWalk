@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -34,6 +35,9 @@ public class RegisterCtrl implements Serializable {
 
     @EJB
     EntityFacade facade;
+
+    @Inject
+    SessionAttributeCtrl sessionAttribute;
 
     @PostConstruct
     private void postInit(){
@@ -66,6 +70,8 @@ public class RegisterCtrl implements Serializable {
     }
 
     public void submit(ActionEvent event) throws IOException {
+        final ResourceBundle resourceBundle =
+                            ResourceBundle.getBundle("lang");
         if (legales){
             if (this.sexe.equals("Homme")){
                 account.setSexe(SexeEnum.M);
@@ -75,8 +81,7 @@ public class RegisterCtrl implements Serializable {
             account.setIndexed(true);
             account.setLikeEnabled(true);
             account.setCommentEnabled(true);
-            final ResourceBundle resourceBundle =
-                    ResourceBundle.getBundle("msg");
+
             facade.createAccount(account);
             FacesContext context = FacesContext.getCurrentInstance();
             context.getViewRoot().getAttributes().put("username", account.getCredential().getUserName());
@@ -85,7 +90,8 @@ public class RegisterCtrl implements Serializable {
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "vous devez valider les CGU", null));
+                            resourceBundle.getString("CGU.validation.required-"+
+                                    sessionAttribute.getSelectedLang().getKey()), null));
         }
 
     }

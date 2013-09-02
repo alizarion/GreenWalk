@@ -75,6 +75,14 @@ public class LoginCtrl  implements Serializable {
         return password;
     }
 
+    public CommandButton getCommandButton() {
+        return commandButton;
+    }
+
+    public void setCommandButton(CommandButton commandButton) {
+        this.commandButton = commandButton;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -101,7 +109,7 @@ public class LoginCtrl  implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             bundle.getString("you.are.connected-"+
-                                    sessionAttribute.getSelectedLang().toString()), null));
+                                    sessionAttribute.getSelectedLang().getKey()), null));
             if (this.from != null){
                 HttpServletRequest requests = (HttpServletRequest)
                         FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -120,7 +128,7 @@ public class LoginCtrl  implements Serializable {
                     getClientId(FacesContext.getCurrentInstance()),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             bundle.getString("bad.password.or.username-"+
-                                    sessionAttribute.getSelectedLang().toString()), null));
+                                    sessionAttribute.getSelectedLang().getKey()), null));
 
         }
     }

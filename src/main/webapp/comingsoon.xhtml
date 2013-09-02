@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>GreenWalk, walk and help your planet</title>
+    <h:head>
+        <h:outputStylesheet library="css" name="main.css" />
+    </h:head>
+</h:head>
+<h:body>
+    <div style="margin-left: auto;margin-right: auto;width: 500px;">
+        <div  onclick="window.location.href='/GreenWalk-coming-soon'" class="logo animatelogo"></div>
+    </div>
+    <div style="margin-left: auto;margin-right: auto;width: 600px;text-align: center;">
+
+
+        <h1 class="gwfontTitle">Coming Soon</h1>
+        <p style="font-size: 20px;font-family: Arial ;"> The beach of your childhood is disfigured by littering?<br/>
+            The park next door is soiled by foolishly discarded cans?<br/> Do we organize collectively to clean our landscapes and offer a healthier earth for our children.</p>
+        <h2 class="gwfontTitle">The site is still in the oven. But, you can be among the first get notified when we launch :</h2>
+
+        <div style="clear: both;"></div>
+        <div style="margin-top: 30px;">
+            <h:form>
+                <h:panelGrid id="registerGrid" columns="3">
+                    <p:inputText  value="#{comingSoonCtrl.mailingList.email}"
+                                  required="true"
+
+                                  style="border-radius: 8px;width: 300px;height: 27px;"
+                                  requiredMessage="this field is required !"
+                                  id="email" >
+                        <f:validator validatorId="com.bookmgr.jsf.validator.RegisterEmailValidator"/>
+                        <p:ajax event="blur" update="registerGrid,emailMsg"  />
+                    </p:inputText>
+                    <p:watermark value="Enter your email" for="email"/>
+                    <p:commandButton  style="width: 240px;" update="registerGrid,emailMsg"  value="Tell me when it's ready" action="#{comingSoonCtrl.register}"/>
+
+                </h:panelGrid>
+                <p:messages  id="emailMsg"/>
+            </h:form>
+
+        </div>
+        <div class="socialcontainer">
+            <div style="float: left;margin-right: 10px;">
+                <h2 style="margin: 0;">Connect with us : </h2>
+            </div>
+
+            <div  style="float: left;" class="twitter"><a href="http://www.twitter.com/alizarion" title="Follow Us on Twitter" target="_blank"></a></div><!-- end twitter -->
+
+            <div  style="float: left;" class="facebook"><a href="https://fr-fr.facebook.com/pages/Pixefolio/154439131346842?hc_location=timelines" title="Like Us on Facebook" target="_blank"></a></div><!-- end facebook -->
+        </div>
+
+        <div style="margin-top: 40px;max-height: 250px;overflow-y: scroll;" class="container">
+            <h2 class="gwfontTitle">News </h2>
+            <p:feedReader  value="http://www.greenpeace.org/international/Templates/Planet3/Handlers/RssHandler.ashx?type=videos&amp;epslanguage=en-GB" var="feed" size="20">
+                <h:panelGrid columns="2">
+
+                    <h:graphicImage value="#{feed.enclosures[0].url}" />
+                    <h:panelGroup style="text-align: left ! important;float: left;">
+                        <a href="#{feed.link}" target="_blank">
+                            <h:outputText value="#{feed.title}:" style="font-weight: bold"/>
+                        </a>
+                        <br/>
+                        <h:outputText value="#{feed.description.value}"  escape="false"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+                <p:separator />
+            </p:feedReader>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</h:body>
+</html>
+

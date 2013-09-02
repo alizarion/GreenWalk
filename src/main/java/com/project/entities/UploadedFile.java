@@ -14,8 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-import java.io.File;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -87,7 +86,9 @@ public abstract class UploadedFile implements Serializable{
         this.temporary = temporary;
     }
 
-    public abstract File getFullPath();
+    public abstract File getFileFullPath();
+
+    public abstract File getResizedFileFullPath(Integer witdh, Integer weight);
 
     public String getType() {
         return type;
@@ -121,6 +122,60 @@ public abstract class UploadedFile implements Serializable{
         this.preSelected = false;
     }
 
+
+    public Boolean writeFile(InputStream inputStream) throws IOException {
+
+        File targetFile = getFileFullPath();
+        FileOutputStream out = new FileOutputStream(targetFile);
+        int BUFFER_SIZE = 8192;
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int a;
+        while (true) {
+            a = inputStream.read(buffer);
+            if (a < 0)
+                break;
+            out.write(buffer, 0, a);
+            out.flush();
+        }
+        out.close();
+        inputStream.close();
+        return true;
+    }
+
+
+    public InputStream readFile() throws FileNotFoundException {
+        InputStream in = new FileInputStream(getFileFullPath());
+        return in;
+    }
+
+    public InputStream readResizedFile(Integer width,
+                                       Integer height) throws FileNotFoundException {
+        InputStream in = new FileInputStream(getResizedFileFullPath(width,height));
+        return in;
+    }
+
+
+    public Boolean writeResizedFile(InputStream inputStream,
+                                    Integer width,Integer height) throws IOException {
+
+        File targetFile = getResizedFileFullPath(width,height);
+        FileOutputStream out = new FileOutputStream(targetFile);
+        int BUFFER_SIZE = 8192;
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int a;
+        while (true) {
+            a = inputStream.read(buffer);
+            if (a < 0)
+                break;
+            out.write(buffer, 0, a);
+            out.flush();
+        }
+        out.close();
+        inputStream.close();
+        return true;
+    }
+
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -148,12 +203,12 @@ public abstract class UploadedFile implements Serializable{
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-               this.hashControl = UUID.randomUUID().toString();
+        this.hashControl = UUID.randomUUID().toString();
     }
 
     public void setName(String name) {
         this.fileName = name;
-         this.hashControl = UUID.randomUUID().toString();
+        this.hashControl = UUID.randomUUID().toString();
     }
 
     public Date getCreationDateTime() {

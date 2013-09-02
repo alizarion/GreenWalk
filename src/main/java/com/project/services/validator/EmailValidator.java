@@ -1,7 +1,8 @@
 package com.project.services.validator;
 
-import com.bookmgr.EntityFacade;
-import com.bookmgr.entity.biz.Account;
+import com.project.entities.Account;
+import com.project.services.EntityFacade;
+import com.project.web.controlers.SessionAttributeCtrl;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -9,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import javax.inject.Inject;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +27,9 @@ public class EmailValidator implements Validator{
     private Pattern pattern;
     private Matcher matcher;
 
+    @Inject
+    SessionAttributeCtrl sessionAttribute;
+
     public EmailValidator(){
         pattern = Pattern.compile(EMAIL_PATTERN);
     }
@@ -31,13 +37,12 @@ public class EmailValidator implements Validator{
     @Override
     public void validate(FacesContext context, UIComponent component,
                          Object value) throws ValidatorException {
-
+        ResourceBundle bundle =  ResourceBundle.getBundle("mail.validation.failed-"+this.sessionAttribute.getSelectedLang().getKey());
         matcher = pattern.matcher(value.toString());
-
         matcher = pattern.matcher(value.toString());
         EntityFacade facade = (EntityFacade)
                 context.getViewRoot().getAttributes().
-                        get(EntityFacade.EL_NAME);
+                        get(EntityFacade.EF_NAME);
         if(!matcher.matches()){
 
             FacesMessage msg =

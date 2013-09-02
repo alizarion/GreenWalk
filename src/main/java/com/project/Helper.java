@@ -1,6 +1,8 @@
 package com.project;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ResourceBundle;
 
 /**
@@ -38,7 +40,12 @@ public  class Helper {
 
     public static File getTempDirectoryPath(){
         ResourceBundle bundle = ResourceBundle.getBundle("app");
-        return new File(getRootDirectoryPath(),bundle.getString("TMP_DIRECTORY"));
+        return new File(getRootDirectoryPath(),bundle.getString("TEMP_DIRECTORY"));
+    }
+
+    public static String getRandomHash(){
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32);
     }
 
 }

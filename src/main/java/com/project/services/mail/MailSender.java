@@ -1,5 +1,7 @@
 package com.project.services.mail;
 
+import org.apache.log4j.Logger;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sphinx
@@ -9,6 +11,7 @@ package com.project.services.mail;
  */
 public class MailSender {
     private IMailProvider mailProvider;
+    private final static Logger LOG = Logger.getLogger(MailSender.class);
 
     public void setMailProvider (IMailProvider provider) {
         this.mailProvider = provider;
@@ -24,7 +27,11 @@ public class MailSender {
             throw new RuntimeException("Need a mail provider to send email.");
 
         try {
-            mailProvider.send(obj);
+            //Todo change for production
+            LOG.info("Email Sent : \n" +
+                    "Email Subject : "+ obj.getSubject() +"\n " +
+                    "Email HTML Content : "+ obj.getHTML() );
+            // mailProvider.send(obj);
         } catch (Exception e) {
             // do something here
         }

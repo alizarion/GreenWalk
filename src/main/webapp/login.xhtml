@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:bm="http://www.bookmgr.com/bm"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view locale="fr">
+
+    <h:head>
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+
+            <ui:define name="content">
+                <f:metadata>
+                    <f:viewParam
+                            name="from"
+                            value="#{loginCtrl.from}"/>
+
+                </f:metadata>
+                <div style="margin-right:auto;margin-left:auto;width: 300px;height: 400px;margin-top: 200px;">
+                    <h:form  styleClass="Form StaticForm registerForm noMargin">
+                        <h:panelGroup id="loginGrid">
+                            <ul>
+                                <li class="noBorderBefore">
+                                    <h:outputText  style="margin-left: auto;margin-right: auto;display: block;"
+                                                   value="IDENTIFIEZ-VOUS"/>
+                                </li>
+                                <li class="noBorderAfter">
+                                    <p:inputText  value="#{loginCtrl.username}"
+                                                  id="userName"
+                                                  style="border-radius: 8px 8px 8px 8px;"
+                                            />
+                                    <p:watermark for="userName"
+                                                 value="Compte"/>
+                                </li>
+                                <li class="noBorderBefore ">
+                                    <p:password value="#{loginCtrl.password}"
+                                                style="border-radius: 8px 8px 8px 8px;"
+                                                id="passWord" />
+                                    <p:watermark  for="passWord"
+                                                  value="Mot de passe"/>
+                                </li>
+                                <li class="noBorderAfter noBorderBefore">
+                                    <p:commandButton action="#{loginCtrl.login}"
+                                                     id="loginbutton"
+                                                     binding="#{loginCtrl.commandButton}"
+                                                     style="margin-left: auto;margin-right: auto;display: block;"
+                                                     value="Connexion" update="loginGrid"/>
+                                </li>
+                                <li class="noBorderAfter noBorderBefore">
+                                    <h:link style="margin-left: auto;margin-right: auto;display: block;" outcome="resetPassword-outcome" >
+                                        #{lang['login.password.forgoten-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h:link>
+                                    <p:message   id="logmsg" for="loginbutton" />
+                                </li>
+                                <li class="noBorderAfter noBorderBefore">
+                                    <h:link style="margin-left: auto;margin-right: auto;display: block;" outcome="register-outcome" >
+                                        #{lang['login.register.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h:link>
+                                </li>
+                            </ul>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+
+
+            </ui:define>
+            <ui:define name="footerContent">
+
+
+                <h:panelGroup id="googlepausecaca" rendered="#{msg['project.name.minuscule'] == 'pausecaca'}">
+                    <script type="text/javascript">
+                        var _gaq = _gaq || [];
+                        _gaq.push(['_setAccount', 'UA-35269447-1']);
+                        _gaq.push(['_trackPageview']);
+
+                        (function() {
+                            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                        })();
+                    </script>
+
+                </h:panelGroup>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+
+</f:view>
+</html>
+

@@ -78,23 +78,43 @@ public class ImageContentFile extends UploadedFile implements Serializable {
     }
 
     @Override
-    public File getFullPath() {
+    public File getFileFullPath() {
         if (getTemporary()){
             return new File(Helper.getTempDirectoryPath() +
-                    File.pathSeparator + getId().toString());
-
+                    File.separator + getId().toString());
         }    else {
             if (this.imageContent != null){
                 if (this.imageContent.getEvent() != null) {
                     return new File(this.imageContent.
                             getEvent().getEventPathDirectoryFile(),
-                            this.getId().toString()) ;
+                            this.getId().toString());
                 }
             }else {
                 return null;
             }
             return null;
         }
+    }
+
+    @Override
+    public File getResizedFileFullPath(Integer witdh, Integer weight) {
+        if (getTemporary()){
+                 return new File(Helper.getTempDirectoryPath() +
+                         File.separator + getId().toString() + "_" +witdh + "_" + weight);
+
+
+             }    else {
+                 if (this.imageContent != null){
+                     if (this.imageContent.getEvent() != null) {
+                         return new File(this.imageContent.
+                                 getEvent().getEventPathDirectoryFile(),
+                                 this.getId().toString() + "_" +witdh + "_" + weight);
+                     }
+                 }else {
+                     return null;
+                 }
+                 return null;
+             }
     }
 
     public ImageContentFile(String fileName) {
@@ -108,7 +128,7 @@ public class ImageContentFile extends UploadedFile implements Serializable {
 
     @PreRemove
     public void onPreRemove(){
-        File file = getFullPath();
+        File file = getFileFullPath();
         if (file != null){
             file.delete();
         }

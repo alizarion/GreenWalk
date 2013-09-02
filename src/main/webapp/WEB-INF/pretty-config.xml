@@ -3,10 +3,10 @@
                xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.2
                http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.2.xsd">
 
-    <!--url-mapping id="publicmap">
-            <pattern value="/map/#{inGameName}/s/#{id}/#{hashsecure}"/>
-            <view-id>/map.jsf</view-id>
-        </url-mapping-->
+    <url-mapping id="comingsoon">
+            <pattern value="/GreenWalk-coming-soon"/>
+            <view-id>/comingsoon.jsf</view-id>
+        </url-mapping>
 
 
     

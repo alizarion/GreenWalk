@@ -37,12 +37,21 @@ public class AvatarImageFile extends UploadedFile  implements Serializable {
     }
 
     @Override
-    public File getFullPath() {
+    public File getFileFullPath() {
         return new File(Helper.getUserDirectoryPath()
-                + File.pathSeparator +
+                + File.separator +
                 this.account.getId().toString() +
-                File.pathSeparator +
+                File.separator +
                 this.getId().toString());
+    }
+
+    @Override
+    public File getResizedFileFullPath(Integer witdh, Integer weight) {
+        return new File(Helper.getUserDirectoryPath()
+                + File.separator +
+                this.account.getId().toString() +
+                File.separator +
+                this.getId().toString() + "_" + witdh + "_" + weight);
     }
 
     public AvatarImageFile() {
@@ -61,7 +70,7 @@ public class AvatarImageFile extends UploadedFile  implements Serializable {
 
     @PreRemove
     public void onPreRemove(){
-        File file = getFullPath();
+        File file = getFileFullPath();
         if (file != null){
             file.delete();
         }

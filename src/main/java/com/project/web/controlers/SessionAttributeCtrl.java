@@ -19,7 +19,7 @@ public class SessionAttributeCtrl implements Serializable {
     private List<AvailableLang> langs = new ArrayList<AvailableLang>(
             Arrays.asList(AvailableLang.values()));
 
-    private AvailableLang selectedLang = AvailableLang.en;
+    private AvailableLang selectedLang = AvailableLang.EN;
 
 
     public List<AvailableLang> getLangs() {

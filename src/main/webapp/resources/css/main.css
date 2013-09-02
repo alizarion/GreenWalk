@@ -3,8 +3,17 @@ html, body {
     margin : 0;
     width : 100%;
     height : 100%;
+    font-family: Arial regular;
     background-image: url('../resources/img/motif_background.png');
 }
+
+@font-face {
+    font-family: 'Boogaloo';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Boogaloo'), local('Boogaloo-Regular'), surl("http://#{app['APP_DOMAIN']}/resources/css/Boogaloo-Regular.woff") format('woff');
+}
+
 a {
     text-decoration: none;
     font-family: Arial regular;
@@ -20,6 +29,8 @@ ol, ul, li {
     border: 0;
     margin: 0;
     padding: 0;
+    list-style: none;
+
 }
 
 .menu {
@@ -32,17 +43,25 @@ ol, ul, li {
 }
 
 body .ui-button {
-    background-image: none;
-    background-color: greenyellow;
-    border: none;
-    box-shadow: 2px 2px 2px 2px 2px #AAA;
-    border-radius: 10px;
+    background-image: none !important;
+    background-color: greenyellow!important;
+    font-family: 'Boogaloo',regular;
+    border: none!important;
+    box-shadow: 2px 2px 2px 2px 2px #AAA!important;
+    border-radius: 10px!important;
 }
 body .ui-button .ui-button-text {
 
 }
 body .ui-button .ui-button-text:after {
     content:" >";
+}
+body .ui-button .fileupload-buttonbar{
+    background-image: none !important;
+    background-color: greenyellow!important;
+    border: none!important;
+    box-shadow: 2px 2px 2px 2px 2px #AAA!important;
+    border-radius: 10px!important;
 }
 
 .menuItem {
@@ -74,6 +93,18 @@ body .ui-button .ui-button-text:after {
 
 a:hover {
     color: #53C6C4;
+}
+
+.ui-fileupload .ui-widget-header{
+    background-image: none;
+    background-color: transparent;
+    border: none;
+
+}
+.ui-fileupload .ui-widget-content{
+    background-image: none;
+    background-color: transparent;
+    border: none;
 }
 
 .head  {
@@ -152,6 +183,7 @@ a:hover {
 .commentAndEventHead{
     width: 100%;
     color: #009E9D;
+    font-family: 'Boogaloo',regular;
 }
 
 #socialContainer{
@@ -159,6 +191,14 @@ a:hover {
     height: 200px;
     background-color: whitesmoke;
     border-radius: 10px;
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
+
+.container {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 20px;
     box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
 }
 
@@ -184,3 +224,95 @@ a:hover {
     border-radius: 10px;
     box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
 }
+
+html body .registerContent  .StaticForm li{
+    border-bottom:none;
+    border-top: none;
+}
+
+html body .StaticForm li.ui-orderlist-item  {
+    border-bottom: 1px solid rgba(34, 25, 25, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    clear: both;
+    color: #8C7E7E;
+    float: left;
+    margin: 0;
+    padding: 5px 0;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+    width: 100%;
+}
+
+html body .StaticForm li {
+    border-bottom: 1px solid rgba(34, 25, 25, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    clear: both;
+    color: #8C7E7E;
+    float: left;
+    margin: 0;
+    padding: 15px 0;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+    width: 100%;
+}
+
+.registerContent {
+    width:400px;margin-left: auto;margin-right: auto; padding-top: 70px;
+}
+
+html body .registerContent  .StaticForm li{
+    border-bottom:none;
+    list-style: none;
+    border-top: none;
+}
+
+html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
+    color: #848484 !important;
+}
+
+.socialcontainer {
+    position: relative;
+    margin-top: 30px;
+    width: 450px;
+    height: 32px;
+    line-height: 32px;
+    color: #009E9D;
+    font-family: 'Boogaloo',regular;
+    display: block;
+}
+
+.gwfontTitle{
+    color: #009E9D;
+
+    font-family: 'Boogaloo',regular;
+
+}
+
+.facebook a {
+    position: relative;
+    float: right;
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin: 0 10px 0 0;
+    background: url(../resources/img/facebook.png) no-repeat;
+}
+
+.twitter a {
+    position: relative;
+    float: right;
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin: 0 10px 0 0;
+    background: url(../resources/img/twitter.png) no-repeat;
+}
+
+
+.animatelogo {position:relative;
+    top:20px;
+    display:block;
+    -webkit-transition:all .4s linear;
+    -moz-transition:all .4s linear;
+    -o-transition:all .4s linear;
+    -ms-transition:all .4s linear;
+    transition:all .4s linear;}
+.animatelogo:hover {top:0;}
