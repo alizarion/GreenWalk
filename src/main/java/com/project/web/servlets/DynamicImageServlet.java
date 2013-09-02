@@ -37,10 +37,9 @@ public class DynamicImageServlet extends HttpServlet {
     EntityFacade facade;
 
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-            ,FileNotFoundException
-
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+            ,FileNotFoundException{
 
         try {
 
