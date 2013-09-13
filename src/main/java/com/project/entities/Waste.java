@@ -76,4 +76,12 @@ public abstract class Waste {
     public void setEvent(Set<SingleEvent> event) {
         this.event = event;
     }
+
+    public String getLabelProperty() {
+        return labelProperty;
+    }
+
+    public void setLabelProperty(String labelProperty) {
+        this.labelProperty = labelProperty;
+    }
 }

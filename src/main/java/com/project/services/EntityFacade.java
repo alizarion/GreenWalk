@@ -1,6 +1,7 @@
 package com.project.services;
 
 import com.project.comingsoon.MailingList;
+import com.project.dao.Explorer;
 import com.project.entities.*;
 import com.project.services.mail.MailSender;
 import com.project.services.mail.RegisterEmail;
@@ -35,9 +36,12 @@ public class EntityFacade implements Serializable{
     @PersistenceContext
     EntityManager em;
 
+    private Explorer explorer;
+
     @PostConstruct
     protected void postConstruct() {
         LOG.debug("PostConstruct " + this);
+        this.explorer = new Explorer(this.em);
     }
 
 
@@ -69,8 +73,7 @@ public class EntityFacade implements Serializable{
 
 
     public List<Person> findAllPersons(){
-        return  new ArrayList<Person>(this.em.createNamedQuery(Person.FIND_ALL).
-                getResultList());
+        return this.explorer.findAllPersons();
     }
 
 
@@ -99,7 +102,8 @@ public class EntityFacade implements Serializable{
         em.clear();
 
         //TODO change for production Email
-        EmailCounter emailCounter =  new EmailCounter(account.getEmailAddress(),"inscription",new Date());
+        EmailCounter emailCounter =  new EmailCounter(account.getEmailAddress(),
+                "inscription",new Date());
 
         mergeEmailCounter(emailCounter);
         MailSender sender = new MailSender(new SMTPEmailProvider());
@@ -107,23 +111,11 @@ public class EntityFacade implements Serializable{
     }
 
     public Credential getCredentialByUserName(String userName){
-        try{
-            Credential credential = (Credential) em.createNamedQuery(
-                    Credential.FIND_CREDENTIAL_BY_USERNAME).
-                    setParameter("query",userName).
-                    getSingleResult();
-            // credential.getAccountEagerly();
-            credential.getAccount().loadFollowEagerly();
-            return credential;
-        } catch (NoResultException e){
-            return null;
-        }
+      return   this.explorer.getCredentialByUserName(userName);
     }
 
     public Account findAccountByName(String name){
-        return (Account) em.createNamedQuery(
-                Account.FIND_ACCOUNT_BY_NAME).
-                setParameter("name", name).getSingleResult();
+       return this.explorer.findAccountByName(name);
     }
 
     public Account mergeAccount(Account account){
@@ -158,4 +150,9 @@ public class EntityFacade implements Serializable{
     public void registerFromComingSoon(MailingList mailingList){
         em.merge(mailingList);
     }
+
+    public List<Waste> getAllAvailableWastes(){
+    return this.explorer.getAllAvailableWastes();
+    }
+
 }

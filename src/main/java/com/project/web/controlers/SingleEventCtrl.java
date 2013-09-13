@@ -32,17 +32,23 @@ public class SingleEventCtrl implements Serializable {
     @Inject
     SessionAttributeCtrl sessionAttribute;
 
+    private List<Waste> wasteList;
+
     private Account userAccount;
+
+    private Waste selectedWaste;
 
     @PostConstruct
     private void postInit(){
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
-        if (FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null) {
+        this.selectedEvent = new SingleEvent();
+        if(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null){
             Credential credential = this.facade.getCredentialByUserName(FacesContext.
                     getCurrentInstance().getExternalContext().getUserPrincipal().getName());
             this.userAccount = credential.getAccount();
         }
+        this.wasteList = this.facade.getAllAvailableWastes();
     }
 
     public SingleEvent getSelectedEvent() {
@@ -86,8 +92,24 @@ public class SingleEventCtrl implements Serializable {
 
     public void handleFileUpload(FileUploadEvent event) {
 
-        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesMessage msg = new FacesMessage("Succesful",
+                event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    public List<Waste> getWasteList() {
+        return wasteList;
+    }
+
+    public void setWasteList(List<Waste> wasteList) {
+        this.wasteList = wasteList;
+    }
+
+    public Waste getSelectedWaste() {
+        return selectedWaste;
+    }
+
+    public void setSelectedWaste(Waste selectedWaste) {
+        this.selectedWaste = selectedWaste;
+    }
 }

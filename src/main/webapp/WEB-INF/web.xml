@@ -13,11 +13,11 @@
 
 
     <security-constraint>
-        <display-name>Account Editor</display-name>
+        <display-name>User Editor</display-name>
         <web-resource-collection>
-            <web-resource-name>Admin content</web-resource-name>
-            <description>Page used tu create, edit, duplicate...</description>
-            <url-pattern>/account/*</url-pattern>
+            <web-resource-name>user forms</web-resource-name>
+            <description>What registred users can do .....</description>
+            <url-pattern>/user/*</url-pattern>
             <http-method>GET</http-method>
         </web-resource-collection>
         <auth-constraint>
@@ -122,6 +122,11 @@
     <error-page>
         <error-code>404</error-code>
         <location>/index.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/auth-redirect.html</location>
     </error-page>
 
 
