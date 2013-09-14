@@ -45,6 +45,12 @@ public abstract class Event {
             orphanRemoval = true,cascade = CascadeType.ALL)
     private Set<Content> contents = new HashSet<Content>();
 
+    @OneToMany(mappedBy="content",
+            fetch = FetchType.EAGER,
+            orphanRemoval = true,cascade = CascadeType.ALL)
+    @OrderBy(value = "creationdate")
+    private Set<Comment> comments = new HashSet<Comment>();
+
     public Long getId() {
         return id;
     }

@@ -33,7 +33,8 @@
             <ui:repeat
                     value="#{singleEventCtrl.imageContents}"
                     var="imagecontent"   >
-                <p:graphicImage width="100" height="100" value="/images/dynamic/?file=#{imagecontent.file.id}&#38;hctrl=#{imagecontent.file.hashControl}" alt="Image Description for "/>
+                <p:graphicImage width="100" height="100"
+                                value="/images/dynamic/?file=#{imagecontent.file.id}&#38;hctrl=#{imagecontent.file.hashControl}" alt="Image Description for "/>
             </ui:repeat>
 
         </h:panelGroup>

@@ -31,22 +31,13 @@
                         <h:panelGroup id="homeEventHead">
                             <div class="commentAndEventHead">
                                 <h1>#{lang['last.events-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
-                                <h:form>
-                                    <p:commandButton
-                                            value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                            action="#{singleEventCtrl.initNewSingleEvent}"
-                                            update=":homeEventHead"/>
-                                </h:form>
+
+                                <p:button value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                          outcome="singleform-outcome" />
                             </div>
                             <br/>
                             <h:panelGroup  rendered="#{singleEventCtrl.selectedEvent !=  null}">
-                                <div class="eventDisplayContainer">
-                                    <cc:signleEventForm
-                                            rendered="#{singleEventCtrl.selectedEvent !=  null}"
-                                            singleEventObject="#{singleEventCtrl.selectedEvent}"
-                                            handleFileUpload="#{singleEventCtrl.handleFileUpload}"/>
 
-                                </div>
 
                             </h:panelGroup>
                         </h:panelGroup>

@@ -194,6 +194,18 @@ a:hover {
     box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
 }
 
+.wasteContainer {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #ffffff;
+}
+
+.wasteContainer:hover{
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
 
 .container {
     background-color: whitesmoke;

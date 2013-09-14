@@ -28,6 +28,11 @@
         <class>com.project.entities.ImageContent</class>
         <class>com.project.entities.ImageContentFile</class>
         <class>com.project.entities.VideoContent</class>
+        <class>com.project.entities.Waste</class>
+        <class>com.project.entities.RecyclableWaste</class>
+        <class>com.project.entities.PutrescibleWaste</class>
+        <class>com.project.entities.OtherWaste</class>
+        <class>com.project.entities.WasteGarbage</class>
         <class>com.project.entities.VideoContentFile</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
@@ -35,7 +40,7 @@
             <property name="hibernate.jdbc.batch_size" value="32" />
 
             <!-- uncomment this to delegate hibernate to create the database-->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
             <property name="hibernate.default_batch_fetch_size" value="16" />
             <property name="hibernate.show_sql" value="false" />
