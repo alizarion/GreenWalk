@@ -1,9 +1,6 @@
 package com.project.dao;
 
-import com.project.entities.Account;
-import com.project.entities.Credential;
-import com.project.entities.Person;
-import com.project.entities.Waste;
+import com.project.entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -63,4 +60,13 @@ public class Explorer {
     }
 
 
+    public List<SingleEvent> findLastSingleEvents() {
+        try{
+            List<SingleEvent> events = new ArrayList<SingleEvent>(em.createNamedQuery(
+                    SingleEvent.FIND_ALL).
+                    getResultList());
+            return events;
+        } catch (NoResultException e){
+            return null;
+        }    }
 }

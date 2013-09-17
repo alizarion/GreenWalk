@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 @DiscriminatorValue(value = "IMAGE")
-public class ImageContent extends Content implements Serializable {
+public class  ImageContent extends Content implements Serializable {
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH,CascadeType.PERSIST},
             fetch = FetchType.EAGER, orphanRemoval = true)

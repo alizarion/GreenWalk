@@ -31,7 +31,7 @@ public abstract class Waste {
             pkColumnName="SEQ_NAME", valueColumnName="SEQ_COUNT")
     @GeneratedValue(strategy=GenerationType.TABLE, generator="Waste_SEQ")
     @Column
-    private String id;
+    private Long id;
 
     @Column(updatable = false,insertable = false)
     private String type;
@@ -45,11 +45,11 @@ public abstract class Waste {
     @ManyToMany
     private Set<SingleEvent> event = new HashSet<SingleEvent>();
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,5 +83,36 @@ public abstract class Waste {
 
     public void setLabelProperty(String labelProperty) {
         this.labelProperty = labelProperty;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Waste)) return false;
+
+        Waste waste = (Waste) o;
+
+        if (approximateWeight != null ? !approximateWeight.
+                equals(waste.approximateWeight) :
+                waste.approximateWeight != null)
+            return false;
+        if (id != null ? !id.equals(waste.id) :
+                waste.id != null) return false;
+        if (labelProperty != null ? !labelProperty.
+                equals(waste.labelProperty) :
+                waste.labelProperty != null)
+            return false;
+        if (type != null ? !type.equals(waste.type) :
+                waste.type != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (approximateWeight != null ? approximateWeight.hashCode() : 0);
+        result = 31 * result + (labelProperty != null ? labelProperty.hashCode() : 0);
+        return result;
     }
 }

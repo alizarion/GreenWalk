@@ -230,11 +230,13 @@ a:hover {
 }
 
 .eventDisplayContainer{
-    width: 100%;
+    width: 95%;
     height: 200px;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+    background-color: #FCFCFC;
+    border-radius: 5px;
+    border: solid 1px #EAEAEA;
+    padding: 10px;
+    margin-top: 15px;
 }
 
 html body .registerContent  .StaticForm li{
@@ -327,4 +329,41 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
     -o-transition:all .4s linear;
     -ms-transition:all .4s linear;
     transition:all .4s linear;}
+
 .animatelogo:hover {top:0;}
+
+.avatar{
+    background: transparent; /* background */
+    width:70px;
+    height: 70px;
+    border-radius: 50%; /* border-radius is equal to 50 percent of a general width, actually 25 pixels, here and a circle was got(there is also with prefix - moz and - o) */
+}
+.avatar:hover {
+    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
+.avatar img{
+    display: block; /* a picture is being displayed as a block, by a width it will be equal to the parent(in the div) */
+    width: 100%; /* width 100% */
+    border: 0; /* zero border */
+    margin: 0; /* external margin is lacking */
+    border-radius: 50%; /* read above */
+}
+
+.eventContent{
+    width: 85%;
+    height: 100%;
+    background-color: red;
+}
+
+.eventTable{
+    width: 100%;
+}
+.avatarContainer{
+    width: 10%;
+}
+
+.eventHeader h3{
+    margin: 0;
+    display: inline-block;
+}

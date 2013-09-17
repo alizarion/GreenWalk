@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="account"
+            type="com.project.entities.Account"
+            required="true"/>
+
+    <cc:attribute
+            name="twitter"
+            type="java.lang.Boolean"
+            required="false"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+    <div  title="#{cc.attrs.account.firstName} #{cc.attrs.account.lastName}" class="avatar">
+        <p:graphicImage
+                rendered="#{cc.attrs.account.avatarImageFile == null and cc.attrs.account.sexe == 'M'}"
+                value="/resources/img/male.png"/>
+        <p:graphicImage
+                rendered="#{cc.attrs.account.avatarImageFile == null and cc.attrs.account.sexe == 'F'}"
+                value="/resources/img/female.jpg"/>
+        <p:graphicImage
+                rendered="#{cc.attrs.account.avatarImageFile != null}"
+                value="/images/dynamic/?file=#{cc.attrs.account.avatarImageFile.id}&#38;hctrl=#{cc.attrs.account.avatarImageFile.hashControl}"
+                />
+    </div>
+
+</cc:implementation>
+
+</html>

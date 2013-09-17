@@ -2,6 +2,7 @@ package com.project.web.controlers;
 
 import com.project.entities.*;
 import com.project.services.EntityFacade;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 
 import javax.annotation.PostConstruct;
@@ -11,8 +12,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -33,6 +36,9 @@ public class SingleEventCtrl implements Serializable {
     SessionAttributeCtrl sessionAttribute;
 
     private List<Waste> wasteList;
+    private List<WasteGarbage> wasteGarbages;
+
+    private WasteGarbage selectedWasteGarbage;
 
     private Account userAccount;
 
@@ -47,7 +53,9 @@ public class SingleEventCtrl implements Serializable {
             Credential credential = this.facade.getCredentialByUserName(FacesContext.
                     getCurrentInstance().getExternalContext().getUserPrincipal().getName());
             this.userAccount = credential.getAccount();
+            this.selectedEvent.setOwner(this.userAccount);
         }
+
         this.wasteList = this.facade.getAllAvailableWastes();
     }
 
@@ -68,7 +76,7 @@ public class SingleEventCtrl implements Serializable {
     public void fileUploadListenerImageContent(FileUploadEvent event)
             throws JAXBException, IOException, CloneNotSupportedException {
         ImageContent tempImageContent = new ImageContent() ;
-        tempImageContent.setEvent(this.selectedEvent);
+
         tempImageContent.setImage(null);
         if(tempImageContent.getId() == null){
             tempImageContent = facade.addNewTemporaryImageContent(tempImageContent);
@@ -111,5 +119,32 @@ public class SingleEventCtrl implements Serializable {
 
     public void setSelectedWaste(Waste selectedWaste) {
         this.selectedWaste = selectedWaste;
+    }
+
+    public void addGarbage(){
+        this.selectedWasteGarbage = new WasteGarbage(this.selectedWaste);
+    }
+
+    public void addGarbageToEvent(){
+        this.selectedEvent.addNewGarbage(this.selectedWasteGarbage);
+        this.selectedWasteGarbage = null;
+        final RequestContext requestContext =
+                RequestContext.getCurrentInstance();
+        requestContext.addCallbackParam("isValid", true);
+    }
+
+
+    public WasteGarbage getSelectedWasteGarbage() {
+        return selectedWasteGarbage;
+    }
+
+    public void setSelectedWasteGarbage(WasteGarbage selectedWasteGarbage) {
+        this.selectedWasteGarbage = selectedWasteGarbage;
+    }
+
+    public void submitEvent(){
+        this.selectedEvent.addAllContents(new HashSet<Content>(this.imageContents));
+        facade.addNewSingleEvent(this.selectedEvent);
+
     }
 }

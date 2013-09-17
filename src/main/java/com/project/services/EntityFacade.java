@@ -16,7 +16,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -79,10 +78,9 @@ public class EntityFacade implements Serializable{
 
     public Account findAccountByEmail(String email){
         try{
-            Account account =  (Account) em.createNamedQuery(
+            return (Account) em.createNamedQuery(
                     Account.FIND_ACCOUNT_BY_EMAIL).
                     setParameter("email", email).getSingleResult();
-            return account;
         }
         catch (NoResultException e ){
             return null;
@@ -111,17 +109,16 @@ public class EntityFacade implements Serializable{
     }
 
     public Credential getCredentialByUserName(String userName){
-      return   this.explorer.getCredentialByUserName(userName);
+        return   this.explorer.getCredentialByUserName(userName);
     }
 
     public Account findAccountByName(String name){
-       return this.explorer.findAccountByName(name);
+        return this.explorer.findAccountByName(name);
     }
 
     public Account mergeAccount(Account account){
-        Account mergedAccount = em.merge(account);
 
-        return mergedAccount;
+        return em.merge(account);
     }
 
 
@@ -152,7 +149,17 @@ public class EntityFacade implements Serializable{
     }
 
     public List<Waste> getAllAvailableWastes(){
-    return this.explorer.getAllAvailableWastes();
+        return this.explorer.getAllAvailableWastes();
     }
 
+    public void addNewSingleEvent(SingleEvent selectedEvent) {
+        this.em.flush();
+        this.em.clear();
+     //   selectedEvent.clearBeforePersist();
+        this.em.merge(selectedEvent);
+    }
+
+    public List<SingleEvent> findLastSingleEvents() {
+        return this.explorer.findLastSingleEvents();
+    }
 }

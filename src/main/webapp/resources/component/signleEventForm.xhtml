@@ -13,6 +13,11 @@
 <cc:interface>
 
     <cc:attribute
+                name="wasteList"
+                type="java.util.List"
+                required="false"/>
+
+    <cc:attribute
             name="singleEventObject"
             type="com.project.entities.SingleEvent"
             required="false"/>
@@ -20,7 +25,10 @@
             name="handleFileUpload"
             method-signature="void action()"
             required="false"/>
-
+    <cc:attribute
+                name="submitEvent"
+                method-signature="void action()"
+                required="false"/>
 
 </cc:interface>
 
@@ -29,6 +37,15 @@
 
 
     <h:form id="singleEventForm"  prependId="false">
+        <h:panelGroup id="wastesGroup">
+                 <ui:repeat
+                         value="#{cc.attrs.wasteList}"
+                         var="wasteGarbage"   >
+                    <span> #{wasteGarbage.quantity}  #{wasteGarbage.waste.labelProperty}</span>
+                 </ui:repeat>
+
+             </h:panelGroup>
+
         <h:panelGroup id="gallerieGroup">
             <ui:repeat
                     value="#{singleEventCtrl.imageContents}"
@@ -46,7 +63,7 @@
                              requiredMessage="#{lang['form.singleEvent.description.required.message'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                              required="true"
                              autoResize="false"
-                             value="#{cc.attrs.singleEventObject.title}"/>
+                             value="#{cc.attrs.singleEventObject.description}"/>
             <p:message for="description"  />
 
 
@@ -63,7 +80,9 @@
                       sizeLimit="100000"
                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
-
+         <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                          oncomplete="window.location.reload()"
+                          action="#{cc.attrs.submitEvent}" />
 
     </h:form>
 

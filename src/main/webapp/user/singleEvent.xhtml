@@ -15,12 +15,46 @@
 
             </ui:define>
             <ui:define name="content">
+                <p:dialog widgetVar="wasteQuatityWidget"
+                          id="wasteQuatity"
+                          modal="true"
+                          dynamic="true">
+                    <h:panelGroup id="wasteQuatityGroup">
+                        <h:form  id="wasteQuatityForm">
+                            <h:panelGrid columns="3">
+                                <h:outputLabel value="#{lang['form.singleEvent.garbage.quantity.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                               for="quatityValue"/>
+                                <p:inputText id="quatityValue"
+                                             required="true"
+                                             requiredMessage="#{lang['form.singleEvent.garbage.quantity.required.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                             value="#{singleEventCtrl.selectedWasteGarbage.quantity}">
+                                </p:inputText>
+                                <p:message for="quatityValue"
+                                           id="quatityValueMsg"/>
+                                <cc:waste wasteObject="#{singleEventCtrl.selectedWasteGarbage.waste}"
+                                          onWasteSelectionCompleted="console.log('#{singleEventCtrl.selectedWasteGarbage.waste.labelProperty}')"/>
+                                <p:commandButton value="#{lang['form.singleEvent.garbage.quantity.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                                 action="#{singleEventCtrl.addGarbageToEvent}"
+                                                 update=":singleEventComponent:singleEventForm:wastesGroup"
+                                                 oncomplete="hideOnSuccess(xhr, status, args,wasteQuatityWidget)"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </h:panelGroup>
+
+                </p:dialog>
                 <ui:repeat value="#{singleEventCtrl.wasteList}" var="waste">
-                    <cc:waste wasteObject="#{waste}"/>
+                    <cc:waste wasteObject="#{waste}"
+                              onWasteSelectionCompleted="wasteQuatityWidget.show()"
+                              update=":wasteQuatityGroup"
+                              createGarbageMethodAction="#{singleEventCtrl.addGarbage()}"
+                              targetWasteObject="#{singleEventCtrl.selectedWaste}"/>
                 </ui:repeat>
 
                 <cc:signleEventForm
+                        id="singleEventComponent"
+                        wasteList="#{singleEventCtrl.selectedEvent.garbageAsList}"
                         rendered="#{singleEventCtrl.selectedEvent !=  null}"
+                        submitEvent="#{singleEventCtrl.submitEvent}"
                         singleEventObject="#{singleEventCtrl.selectedEvent}"
                         handleFileUpload="#{singleEventCtrl.handleFileUpload}"/>
 

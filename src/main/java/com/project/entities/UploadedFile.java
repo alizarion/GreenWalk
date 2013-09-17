@@ -9,6 +9,7 @@ package com.project.entities;
  */
 
 import com.project.Helper;
+import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,8 @@ import java.util.UUID;
 public abstract class UploadedFile implements Serializable{
 
     static public final String FIND_ALL = "UploadedFile.FIND_ALL";
+    private final static Logger LOG = Logger.getLogger(UploadedFile.class);
+
 
     @Id
     @TableGenerator(name="UploadedFile_SEQ", table="sequence",catalog = Helper.ENTITIES_CATALOG,
@@ -83,6 +86,7 @@ public abstract class UploadedFile implements Serializable{
     }
 
     public void setTemporary(Boolean temporary) {
+
         this.temporary = temporary;
     }
 
@@ -242,5 +246,32 @@ public abstract class UploadedFile implements Serializable{
         return true;
     }
 
+    @PostUpdate
+    public void  postPersist(){
+        if (!getFileFullPath().exists()){
+            File toFile =this.getFileFullPath();
+            File toDirectory = getFileFullPath().getParentFile();
+            this.temporary = !this.temporary;
+            File fromFile = this.getFileFullPath();
+            if (fromFile != null){
+                if (fromFile.exists()){
+                    if (!toDirectory.exists()){
+                        toDirectory.mkdirs();
+                    }
+                    if (fromFile.renameTo(toFile)){
+                        LOG.info("File moved from : "+
+                                fromFile.getAbsolutePath() +
+                                ", to " +toFile.getAbsolutePath());
+                    }else {
+                        LOG.error("Error in moving file from : "+
+                                fromFile.getAbsolutePath() +
+                                ", to " +toFile.getAbsolutePath());
+                    }
+                }
+            } else {
 
+            }
+            this.temporary = !this.temporary;
+        }
+    }
 }

@@ -57,8 +57,16 @@
         </ui:insert>
 
         <ui:insert name="footerContent">
-            <h:panelGroup id="google" rendered="#{msg['project.name.minuscule'] == 'pixefolio'}">
+            <h:panelGroup id="google" >
                 <script type="text/javascript">
+                    function hideOnSuccess(xhr, status, args,dialogToHide) {
+                        if (args) {
+                            var isValid = args.isValid;
+                            if (isValid) {
+                                dialogToHide.hide();
+                            }
+                        }
+                    }
                     var _gaq = _gaq || [];
                     _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
                     _gaq.push(['_trackPageview']);

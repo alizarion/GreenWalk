@@ -1,6 +1,7 @@
 package com.project.entities;
 
 import com.project.Helper;
+import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import java.io.File;
@@ -19,6 +20,8 @@ public class ImageContentFile extends UploadedFile implements Serializable {
 
     @OneToOne(mappedBy = "image")
     private ImageContent imageContent;
+    private final static Logger LOG = Logger.getLogger(ImageContentFile.class);
+
 
     public final static double DISPLAY_HEIGHT = 7000;
     public final static double DISPLAY_WIDTH = 192;
@@ -138,4 +141,6 @@ public class ImageContentFile extends UploadedFile implements Serializable {
     public int hashCode() {
         return super.hashCode();
     }
+
+
 }

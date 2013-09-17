@@ -4,8 +4,7 @@ import com.project.Helper;
 
 import javax.persistence.*;
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author selim@openlinux.fr
@@ -15,7 +14,7 @@ import java.util.Set;
 @Table(schema= Helper.ENTITIES_CATALOG, name="event")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NamedQuery(name= Event.FIND_ALL,
-        query="SELECT e FROM Event e")
+        query="SELECT e FROM Event e order by e.creationDate  desc ")
 @DiscriminatorColumn(name = "type")
 public abstract class Event {
 
@@ -30,6 +29,9 @@ public abstract class Event {
 
     @ManyToOne
     private Account owner;
+
+    @Column
+    private Date creationDate;
 
     @Column(name = "title")
     private String title;
@@ -51,6 +53,10 @@ public abstract class Event {
     @OrderBy(value = "creationdate")
     private Set<Comment> comments = new HashSet<Comment>();
 
+    protected Event() {
+        this.creationDate = new Date();
+    }
+
     public Long getId() {
         return id;
     }
@@ -63,12 +69,24 @@ public abstract class Event {
         return owner;
     }
 
+    public List<Content> getContentAsList(){
+        return new ArrayList<Content>(this.contents);
+    }
+
     public void setOwner(Account owner) {
         this.owner = owner;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public void setTitle(String title) {
@@ -104,4 +122,11 @@ public abstract class Event {
         return folder;
     }
 
+    public  void addAllContents(HashSet<Content> contents){
+        for (Content content : contents){
+            content.getFile().setTemporary(false);
+            content.setEvent(this);
+            this.contents.add(content);
+        }
+    };
 }

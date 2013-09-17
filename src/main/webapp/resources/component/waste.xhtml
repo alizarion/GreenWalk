@@ -17,17 +17,37 @@
             type="com.project.entities.Waste"
             required="true"/>
 
+    <cc:attribute
+            name="targetWasteObject"
+            type="com.project.entities.Waste"
+            required="false"/>
+
+    <cc:attribute
+            name="createGarbageMethodAction"
+            method-signature="void action()"
+            required="false"/>
+    <cc:attribute
+            name="onWasteSelectionCompleted"
+            type="java.lang.String"
+            required="true"/>
+    <cc:attribute
+               name="update"
+               type="java.lang.String"
+               required="false"/>
+
 </cc:interface>
 
 
 <cc:implementation>
-    <p:commandLink oncomplete="console.log('toto')" >
+    <p:commandLink   action="#{cc.attrs.createGarbageMethodAction}"
+                     update="#{cc.attrs.update}"
+                     oncomplete="#{cc.attrs.onWasteSelectionCompleted}" >
          <span title="#{cc.attrs.wasteObject.labelProperty}"  class="wasteContainer">
-
+              #{cc.attrs.wasteObject.labelProperty}
          </span>
         <f:setPropertyActionListener
                 value="#{cc.attrs.wasteObject}"
-                target="#{singleEventCtrl.selectedWaste}"/>
+                target="#{cc.attrs.targetWasteObject}"/>
     </p:commandLink>
 </cc:implementation>
 

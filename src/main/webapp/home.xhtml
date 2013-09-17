@@ -35,14 +35,9 @@
                                 <p:button value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                           outcome="singleform-outcome" />
                             </div>
-                            <br/>
-                            <h:panelGroup  rendered="#{singleEventCtrl.selectedEvent !=  null}">
-
-
-                            </h:panelGroup>
                         </h:panelGroup>
                         <br/>
-                        <cc:lastEvents/>
+                        <cc:lastEvents singleEvents="#{homeCtrl.singleEvents}"/>
                     </div>
                     <div id="events">
                         <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
