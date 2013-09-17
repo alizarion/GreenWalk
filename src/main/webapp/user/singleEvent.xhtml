@@ -14,7 +14,7 @@
             <ui:define name="center">
 
             </ui:define>
-            <ui:define name="content">
+            <ui:define name="contentLeft">
                 <p:dialog widgetVar="wasteQuatityWidget"
                           id="wasteQuatity"
                           modal="true"
@@ -50,6 +50,13 @@
                               targetWasteObject="#{singleEventCtrl.selectedWaste}"/>
                 </ui:repeat>
 
+
+
+
+
+            </ui:define>
+            <ui:define name="contentRight">
+                <div class="container">
                 <cc:signleEventForm
                         id="singleEventComponent"
                         wasteList="#{singleEventCtrl.selectedEvent.garbageAsList}"
@@ -57,9 +64,7 @@
                         submitEvent="#{singleEventCtrl.submitEvent}"
                         singleEventObject="#{singleEventCtrl.selectedEvent}"
                         handleFileUpload="#{singleEventCtrl.handleFileUpload}"/>
-
-
-
+                </div>
             </ui:define>
 
         </ui:composition>

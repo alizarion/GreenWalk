@@ -4,10 +4,15 @@
                http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.2.xsd">
 
     <url-mapping id="comingsoon">
-            <pattern value="/GreenWalk-coming-soon"/>
-            <view-id>/comingsoon.jsf</view-id>
-        </url-mapping>
+        <pattern value="/GreenWalk-coming-soon"/>
+        <view-id>/comingsoon.jsf</view-id>
+    </url-mapping>
+
+    <url-mapping id="comingsoon">
+        <pattern value="/profile/#{username}"/>
+        <view-id>/profile.jsf</view-id>
+    </url-mapping>
 
 
-    
+
 </pretty-config>

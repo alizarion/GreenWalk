@@ -3,7 +3,7 @@ html, body {
     margin : 0;
     width : 100%;
     height : 100%;
-    font-family: Arial regular;
+    font-family: 'Open Sans', sans-serif;
     background-image: url('../resources/img/motif_background.png');
 }
 
@@ -11,7 +11,14 @@ html, body {
     font-family: 'Boogaloo';
     font-style: normal;
     font-weight: 400;
-    src: local('Boogaloo'), local('Boogaloo-Regular'), surl("http://#{app['APP_DOMAIN']}/resources/css/Boogaloo-Regular.woff") format('woff');
+    src: local('Boogaloo'), local('Boogaloo-Regular'), url("http://#{app['APP_DOMAIN']}/resources/css/Boogaloo-Regular.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url("http://#{app['APP_DOMAIN']}/resources/css/OpenSans.woff") format('woff');
 }
 
 a {
@@ -167,13 +174,13 @@ a:hover {
     height: 500px;
 }
 
-#comments{
+#contentLeft {
     width: 65%;
     display: inline-block;
     height: 100%;
 }
 
-#events{
+#contentRight {
     width: 34%;
     height: 100%;
     float: right;
@@ -229,9 +236,9 @@ a:hover {
     margin-right: auto!important;
 }
 
-.eventDisplayContainer{
+.container {
     width: 95%;
-    height: 200px;
+    height:auto;
     background-color: #FCFCFC;
     border-radius: 5px;
     border: solid 1px #EAEAEA;
@@ -334,8 +341,7 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
 
 .avatar{
     background: transparent; /* background */
-    width:70px;
-    height: 70px;
+
     border-radius: 50%; /* border-radius is equal to 50 percent of a general width, actually 25 pixels, here and a circle was got(there is also with prefix - moz and - o) */
 }
 .avatar:hover {
@@ -353,7 +359,6 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
 .eventContent{
     width: 85%;
     height: 100%;
-    background-color: red;
 }
 
 .eventTable{
@@ -361,9 +366,30 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
 }
 .avatarContainer{
     width: 10%;
+    vertical-align:top;
 }
 
 .eventHeader h3{
     margin: 0;
     display: inline-block;
+}
+.photoDisplay{
+    margin-left: 10px;
+}
+
+.eventPhotos{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.sectionHeaderLabel{
+  padding: 10px !important;
+}
+
+.label{
+    font-weight: bold;
+}
+
+html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+    font-weight: normal !important;
 }

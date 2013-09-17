@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="account"
+            type="com.project.entities.Account"
+            required="true"/>
+
+
+
+</cc:interface>
+
+<cc:implementation>
+    <gw:header headerLabelId="component.header.members.profile.label-" />
+    <div class="container">
+        <h:panelGrid columns="2">
+            <gw:avatarDisplay
+                    width="100"
+                    height="100"
+                    account="#{cc.attrs.account}"/>
+            <h:outputLabel value="replace"/>
+
+            <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.firstName-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.firstName}" />
+
+            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.lastName-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.lastName}" />
+
+            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.birthDay-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.birthDay}" />
+
+            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.address.country}" />
+
+            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.address.city}" />
+
+            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.pickedWaste-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.address.city}" />
+
+            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.participation-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <h:outputText value="#{cc.attrs.account.address.city}" />
+
+
+        </h:panelGrid>
+    </div>
+</cc:implementation>
+
+</html>

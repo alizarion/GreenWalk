@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface>
+
+    <cc:attribute
+            name="imageContent"
+            type="com.project.entities.ImageContentFile"
+            required="true"/>
+    <cc:attribute
+            name="width"
+            type="java.lang.String"
+            required="true"/>
+    <cc:attribute
+            name="height"
+            type="java.lang.String"
+            required="true"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+    <h:outputLink styleClass="lightBox"   hreflang="../../../../../../../images/dynamic/?file=#{cc.attrs.imageContent.id}&#38;hctrl=#{cc.attrs.imageContent.hashControl}&#38;width=[width]&#38;height=999999">
+         <gw:image
+                 imageContent="#{cc.attrs.imageContent}"/>
+    </h:outputLink>
+
+
+</cc:implementation>
+
+</html>

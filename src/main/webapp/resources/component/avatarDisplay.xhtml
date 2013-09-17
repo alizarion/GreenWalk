@@ -7,7 +7,7 @@
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:cc="http://java.sun.com/jsf/composite"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <cc:interface>
@@ -18,27 +18,34 @@
             required="true"/>
 
     <cc:attribute
-            name="twitter"
-            type="java.lang.Boolean"
-            required="false"/>
+            name="width"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
+            name="height"
+            type="java.lang.String"
+            required="true"/>
 
 </cc:interface>
 
 
 <cc:implementation>
-    <div  title="#{cc.attrs.account.firstName} #{cc.attrs.account.lastName}" class="avatar">
+    <div onclick="window.location.href='/profile/#{cc.attrs.account.credential.userName}'" title="#{cc.attrs.account.firstName} #{cc.attrs.account.lastName}" style="width: #{cc.attrs.width}px; height: #{cc.attrs.height}px;" class="avatar">
         <p:graphicImage
+                width="#{cc.attrs.width}"
                 rendered="#{cc.attrs.account.avatarImageFile == null and cc.attrs.account.sexe == 'M'}"
                 value="/resources/img/male.png"/>
         <p:graphicImage
+                width="#{cc.attrs.width}"
                 rendered="#{cc.attrs.account.avatarImageFile == null and cc.attrs.account.sexe == 'F'}"
                 value="/resources/img/female.jpg"/>
-        <p:graphicImage
+        <gw:image
+                width="#{cc.attrs.width}"
+                height="#{cc.attrs.height}"
                 rendered="#{cc.attrs.account.avatarImageFile != null}"
-                value="/images/dynamic/?file=#{cc.attrs.account.avatarImageFile.id}&#38;hctrl=#{cc.attrs.account.avatarImageFile.hashControl}"
-                />
+                imageContent="#{cc.attrs.account.avatarImageFile}"/>
     </div>
-
 </cc:implementation>
 
 </html>

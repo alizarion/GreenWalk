@@ -26,6 +26,14 @@ public class Address implements Serializable {
     @Column
     private String Street;
 
+
+    @Column
+    private String city;
+
+    @Column
+    private String country;
+
+
     @Column
     private String zipCode;
 
@@ -35,10 +43,6 @@ public class Address implements Serializable {
 
     @OneToOne(optional = true)
     private Account account;
-
-    @ManyToOne(optional = false)
-    private Country country;
-
 
     public Account getAccount() {
         return account;
@@ -70,5 +74,21 @@ public class Address implements Serializable {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

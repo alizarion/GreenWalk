@@ -8,6 +8,9 @@
 <f:view locale="fr">
     <h:head>
         <h:outputStylesheet library="css" name="main.css" />
+        <h:outputScript library="js" name="jquery.lightbox-0.5.js"/>
+        <h:outputStylesheet library="css" name="jquery.lightbox-0.5.css"/>
+        <h:outputScript library="js" name="main.js"/>
     </h:head>
 
     <h:body>
@@ -51,12 +54,40 @@
 
         </ui:insert>
 
-        <ui:insert name="content">
+
+        <div id="commentAndEvent">
+            <div id="contentLeft">
+                <ui:insert name="contentLeft">
+                </ui:insert>
+            </div>
+
+            <div id="contentRight">
+                <ui:insert name="contentRight">
+                </ui:insert>
+            </div>
+        </div>
 
 
-        </ui:insert>
 
         <ui:insert name="footerContent">
+            <script type="text/javascript">
+
+                $(function() {
+                    createLightBox()
+
+                });
+
+                function createLightBox(){
+                    var ratio = Math.round((screen.width * 65)/100);
+                    $("a.lightBox").each(function() {
+                        $(this).lightBox({fixedNavigation:true});
+                        return $(this).replaceAttr('hreflang', '[width]', ratio);
+                    });
+
+
+                }
+            </script>
+
             <h:panelGroup id="google" >
                 <script type="text/javascript">
                     function hideOnSuccess(xhr, status, args,dialogToHide) {

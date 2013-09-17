@@ -64,7 +64,7 @@ public class Account implements Serializable {
     private Date creationDate;
 
     @Column
-    private String portfolioName;
+    private Date birthDay;
 
     @Column(unique = true)
     private String emailAddress;
@@ -148,6 +148,14 @@ public class Account implements Serializable {
 
     public String getFirstNameHtml() {
         return StringEscapeUtils.escapeHtml(firstName).replaceAll("'", "").replaceAll("\"", "");
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
     }
 
     public void setFirstName(String firstName) {
@@ -317,30 +325,7 @@ public class Account implements Serializable {
     }
 
 
-    public String getPortfolioName() {
-        if (portfolioName == null){
-            return "...";
-        }  else if (portfolioName.isEmpty()){
-            return "...";
-        }
-        return portfolioName;
-    }
 
-    public void setPortfolioName(String portfolioName) {
-        if (portfolioName != null){
-            if (portfolioName.equals("...")){
-                this.portfolioName = null;
-            } else {
-                this.portfolioName = portfolioName;
-            }
-        }  else {
-            this.portfolioName = null;
-        }
-    }
-
-    public String getReadOnlyPortfolioName(){
-        return this.portfolioName;
-    }
 
     public AvatarImageFile getAvatarImageFile() {
         return avatarImageFile;

@@ -3,7 +3,7 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:cc="http://java.sun.com/jsf/composite/component"
+        xmlns:gw="http://java.sun.com/jsf/composite/component"
         contentType="text/html">
 
     <h:head>
@@ -25,31 +25,32 @@
                     <div class="counter"></div>
                 </div>
             </ui:define>
-            <ui:define name="content">
-                <div id="commentAndEvent">
-                    <div id="comments">
-                        <h:panelGroup id="homeEventHead">
-                            <div class="commentAndEventHead">
-                                <h1>#{lang['last.events-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+            <ui:define name="contentLeft">
 
-                                <p:button value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                          outcome="singleform-outcome" />
-                            </div>
-                        </h:panelGroup>
-                        <br/>
-                        <cc:lastEvents singleEvents="#{homeCtrl.singleEvents}"/>
+                <h:panelGroup id="homeEventHead">
+                    <div class="commentAndEventHead">
+                        <h1>#{lang['last.events-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+
+                        <p:button value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                  outcome="singleform-outcome" />
                     </div>
-                    <div id="events">
-                        <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
-                        <cc:gwSocial facebook="#{true}"
-                                     twitter="#{true}"
-                                     gplus="#{true}"/>
-                        <br/>
-                        <cc:nextPickups />
+                </h:panelGroup>
+                <br/>
+                <gw:lastEvents singleEvents="#{homeCtrl.singleEvents}"/>
+
+            </ui:define>
+            <ui:define name="contentRight">
+
+                <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+                <gw:gwSocial facebook="#{true}"
+                             twitter="#{true}"
+                             gplus="#{true}"/>
+                <br/>
+                <gw:nextPickups />
 
 
-                    </div>
-                </div>
+
+
 
             </ui:define>
 
