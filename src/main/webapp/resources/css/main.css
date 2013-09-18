@@ -383,7 +383,9 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
 }
 
 .sectionHeaderLabel{
-  padding: 10px !important;
+    padding: 10px !important;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .label{

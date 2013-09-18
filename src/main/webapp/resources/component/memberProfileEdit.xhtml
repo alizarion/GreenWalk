@@ -25,36 +25,43 @@
 <cc:implementation>
 
     <div class="container">
+        <h:form id="memberEditForm" prependId="false">
         <h:panelGrid columns="2">
+
             <gw:avatarDisplay
                     width="100"
                     height="100"
                     account="#{cc.attrs.account}"/>
-            <h:outputLabel value="replace"/>
+            <p:fileUpload fileUploadListener="#{memberProfileEditCtrl.fileUploadListenerImageContent}"
+                          dragDropSupport="true"
+                          auto="true"
+                          process="@this"
+                          immediate="true"
+                          showButtons="false"
+                          multiple="false"
+                          update="@form"
+                          sizeLimit="10000000"
+                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
             <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.firstName-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.firstName}" />
+            <p:inputText required="true" value="#{cc.attrs.account.firstName}" />
 
             <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.lastName-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.lastName}" />
+            <p:inputText required="true" value="#{cc.attrs.account.lastName}" />
 
             <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.birthDay-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.birthDay}" />
+            <p:calendar value="#{cc.attrs.account.birthDay}" id="birthDay" showOn="button" />
 
             <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.address.country}" />
+            <p:inputText value="#{cc.attrs.account.address.country}" />
 
             <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.address.city}" />
+            <p:inputText value="#{cc.attrs.account.address.city}" />
 
-            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.pickedWaste-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.address.city}" />
-
-            <h:outputLabel  styleClass="label" value=" #{lang['component.member.profile.participation-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <h:outputText value="#{cc.attrs.account.address.city}" />
 
 
         </h:panelGrid>
+        </h:form>
     </div>
 </cc:implementation>
 

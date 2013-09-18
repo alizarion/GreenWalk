@@ -17,12 +17,21 @@
         <ui:composition template="/template/template.xhtml">
 
             <ui:define name="contentLeft">
+                <gw:header headerLabelId="component.header.members.profile.label-" />
 
-             <gw:memberProfile rendered="#{memberProfileCtrl.account != null}" account="#{memberProfileCtrl.account}" />
+                <gw:memberProfile
+                        rendered="#{memberProfileCtrl.account != null}"
+                        account="#{memberProfileCtrl.account}" />
+                <gw:header headerLabelId="component.header.members.events.label-" />
+                <gw:lastEvents singleEvents="#{memberProfileCtrl.account.singleEventsAsList}"/>
 
             </ui:define>
-            <ui:define name="footerContent">
 
+            <ui:define name="contentRight">
+            </ui:define>
+
+            <ui:define name="footerContent">
+                <div></div>
 
             </ui:define>
 

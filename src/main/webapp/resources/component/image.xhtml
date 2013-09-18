@@ -36,7 +36,7 @@
                     styleClass="photoDisplay"
                     value="/images/dynamic/?file=#{cc.attrs.imageContent.id}&#38;hctrl=#{cc.attrs.imageContent.hashControl}&#38;width=#{cc.attrs.width*2}&#38;height=#{cc.attrs.height*2}" alt="Image Description for "/>
     <p:graphicImage
-                    rendered="#{cc.attrs.width eq 0 or cc.attrs.width lt 0 }"
+                    rendered="#{cc.attrs.width eq 0 or cc.attrs.width lt 0 or cc.attrs.width == null}"
                     styleClass="photoDisplay"
                     value="/images/dynamic/?file=#{cc.attrs.imageContent.id}&#38;hctrl=#{cc.attrs.imageContent.hashControl}" alt="Image Description for "/>
 </cc:implementation>

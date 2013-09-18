@@ -126,6 +126,8 @@ public class Credential implements Serializable{
         this.role = role;
     }
 
+
+
     private  String getEncryptedPassword(String clearTextPassword)
             throws NoSuchAlgorithmException {
         String result = clearTextPassword;

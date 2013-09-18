@@ -112,6 +112,16 @@ public class Account implements Serializable {
             inverseJoinColumns=@JoinColumn(name="account_id"))
     private Set<Account> followers = new HashSet<Account>();
 
+    @OneToMany(mappedBy = "owner",
+            fetch = FetchType.EAGER,
+            targetEntity = Event.class)
+    private Set<SingleEvent> singleEvents;
+
+    @OneToMany(mappedBy = "owner",
+            fetch = FetchType.EAGER,
+            targetEntity = Event.class)
+    private Set<GroupEvent> groupEvents;
+
     @PrePersist
     public void onPrePersist(){
         File file = new File(Helper.getUserDirectoryPath(),
@@ -152,6 +162,27 @@ public class Account implements Serializable {
 
     public Date getBirthDay() {
         return birthDay;
+    }
+
+    public Set<SingleEvent> getSingleEvents() {
+        return singleEvents;
+    }
+
+    public List<SingleEvent> getSingleEventsAsList() {
+        return new ArrayList<SingleEvent>(singleEvents);
+    }
+
+
+    public void setSingleEvents(Set<SingleEvent> singleEvents) {
+        this.singleEvents = singleEvents;
+    }
+
+    public Set<GroupEvent> getGroupEvents() {
+        return groupEvents;
+    }
+
+    public void setGroupEvents(Set<GroupEvent> groupEvents) {
+        this.groupEvents = groupEvents;
     }
 
     public void setBirthDay(Date birthDay) {
@@ -333,6 +364,9 @@ public class Account implements Serializable {
 
     public void setAvatarImageFile(AvatarImageFile avatarImageFile) {
         this.avatarImageFile = avatarImageFile;
+        if(this.avatarImageFile != null){
+            this.avatarImageFile.setAccount(this);
+        }
     }
 
     @PostPersist
@@ -344,20 +378,4 @@ public class Account implements Serializable {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Account)) return false;
-
-        Account account = (Account) o;
-
-        if (!id.equals(account.id)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
 }

@@ -1,0 +1,36 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:gw="http://java.sun.com/jsf/composite/component"
+        contentType="text/html">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="center">
+
+            </ui:define>
+            <ui:define name="contentLeft">
+                <gw:header headerLabelId="component.header.members.profile.label-" />
+                <gw:memberProfileEdit
+                        rendered="#{memberProfileEditCtrl.account != null}"
+                        account="#{memberProfileEditCtrl.account}" />
+
+                <gw:header headerLabelId="component.header.members.credential.label-" />
+
+                <gw:credentialEdit
+                        newPassword="#{memberProfileEditCtrl.newPassword}"
+                        previousPassword="#{memberProfileEditCtrl.previousPassword}"
+                        resetPassword="#{memberProfileEditCtrl.resetPassword()}"/>
+            </ui:define>
+            <ui:define name="contentRight">
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</f:view>

@@ -48,6 +48,12 @@
             <redirect>true</redirect>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>useredit-outcome</from-outcome>
+            <to-view-id>/user/accountEdit.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
     </navigation-rule>
 
 </faces-config>

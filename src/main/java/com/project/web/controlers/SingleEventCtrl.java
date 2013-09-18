@@ -36,6 +36,7 @@ public class SingleEventCtrl implements Serializable {
     SessionAttributeCtrl sessionAttribute;
 
     private List<Waste> wasteList;
+
     private List<WasteGarbage> wasteGarbages;
 
     private WasteGarbage selectedWasteGarbage;
@@ -83,7 +84,7 @@ public class SingleEventCtrl implements Serializable {
         }
 
         ImageContentFile file = new ImageContentFile(event.getFile().getFileName());
-        file.setTemporary(true);
+
         tempImageContent.setImage(file);
         tempImageContent = facade.addNewTemporaryImageContent(tempImageContent);
         tempImageContent.getFile().writeFile(event.getFile().getInputstream());

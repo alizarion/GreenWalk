@@ -21,27 +21,46 @@
 
         </ui:insert>
         <div class="head">
-            <div onclick="window.location.href='#{app['APP_URL']}'" class="logo"></div>
+            <div onclick="window.location.href='#{app['APP_URL']}'"
+                 class="logo">
+            </div>
 
             <div class="menu" >
                 <ol style="display: inline-block">
                     <li class="menuItem">
-                        <h:link value="#{lang['page.template.community.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
+                        <h:link
+                                value="#{lang['page.template.community.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <h:link value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
+                        <h:link
+                                value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <h:link value="#{lang['page.template.tri.memo.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
+                        <h:link
+                                value="#{lang['page.template.tri.memo.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <h:link value="#{lang['page.template.partners.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="community-outcome"/>
+                        <h:link
+                                value="#{lang['page.template.partners.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
                         <h:form>
-                            <p:button  rendered="#{request.userPrincipal == null}" value="#{lang['page.template.login.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="login-outcome" />
-                            <p:button  rendered="#{request.userPrincipal != null}" value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="login-outcome" />
-                            <p:commandButton  rendered="#{request.userPrincipal != null}" value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" action="#{loginCtrl.logout(facesContext)}" />
+                            <p:button
+                                    rendered="#{request.userPrincipal == null}"
+                                    value="#{lang['page.template.login.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                    outcome="login-outcome" />
+                            <p:button
+                                    rendered="#{request.userPrincipal != null}"
+                                    value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                    outcome="useredit-outcome" />
+                            <p:commandButton
+                                    rendered="#{request.userPrincipal != null}"
+                                    value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                    action="#{loginCtrl.logout(facesContext)}" />
                         </h:form>
                     </li>
 
@@ -70,48 +89,47 @@
 
 
         <ui:insert name="footerContent">
-            <script type="text/javascript">
+        </ui:insert>
+        <script type="text/javascript">
 
-                $(function() {
-                    createLightBox()
+            $(function() {
+                createLightBox()
 
+            });
+
+            function createLightBox(){
+                var ratio = Math.round((screen.width * 65)/100);
+                $("a.lightBox").each(function() {
+                    $(this).lightBox({fixedNavigation:true});
+                    return $(this).replaceAttr('hreflang', '[width]', ratio);
                 });
 
-                function createLightBox(){
-                    var ratio = Math.round((screen.width * 65)/100);
-                    $("a.lightBox").each(function() {
-                        $(this).lightBox({fixedNavigation:true});
-                        return $(this).replaceAttr('hreflang', '[width]', ratio);
-                    });
 
+            }
+        </script>
 
-                }
-            </script>
-
-            <h:panelGroup id="google" >
-                <script type="text/javascript">
-                    function hideOnSuccess(xhr, status, args,dialogToHide) {
-                        if (args) {
-                            var isValid = args.isValid;
-                            if (isValid) {
-                                dialogToHide.hide();
-                            }
+        <h:panelGroup id="google" >
+            <script type="text/javascript">
+                function hideOnSuccess(xhr, status, args,dialogToHide) {
+                    if (args) {
+                        var isValid = args.isValid;
+                        if (isValid) {
+                            dialogToHide.hide();
                         }
                     }
-                    var _gaq = _gaq || [];
-                    _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
-                    _gaq.push(['_trackPageview']);
+                }
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
+                _gaq.push(['_trackPageview']);
 
-                    (function() {
-                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                    })();
-                </script>
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
 
-            </h:panelGroup>
-
-        </ui:insert>
+        </h:panelGroup>
 
     </h:body>
 

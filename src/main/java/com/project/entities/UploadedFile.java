@@ -247,8 +247,37 @@ public abstract class UploadedFile implements Serializable{
     }
 
     @PostUpdate
+    public void  postUpdate(){
+        if (!getFileFullPath().exists()){
+            File toFile =this.getFileFullPath();
+            File toDirectory = getFileFullPath().getParentFile();
+            this.temporary = !this.temporary;
+            File fromFile = this.getFileFullPath();
+            if (fromFile != null){
+                if (fromFile.exists()){
+                    if (!toDirectory.exists()){
+                        toDirectory.mkdirs();
+                    }
+                    if (fromFile.renameTo(toFile)){
+                        LOG.info("File moved from : "+
+                                fromFile.getAbsolutePath() +
+                                ", to " +toFile.getAbsolutePath());
+                    }else {
+                        LOG.error("Error in moving file from : "+
+                                fromFile.getAbsolutePath() +
+                                ", to " +toFile.getAbsolutePath());
+                    }
+                }
+            } else {
+
+            }
+            this.temporary = !this.temporary;
+        }
+    }
+  //  @PostPersist
     public void  postPersist(){
         if (!getFileFullPath().exists()){
+            this.temporary = !this.temporary;
             File toFile =this.getFileFullPath();
             File toDirectory = getFileFullPath().getParentFile();
             this.temporary = !this.temporary;

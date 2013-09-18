@@ -34,15 +34,21 @@ public class AvatarImageFile extends UploadedFile  implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
+        this.setTemporary(false);
     }
 
     @Override
     public File getFileFullPath() {
-        return new File(Helper.getUserDirectoryPath()
-                + File.separator +
-                this.account.getId().toString() +
-                File.separator +
-                this.getId().toString());
+        if (getTemporary()){
+            return new File(Helper.getTempDirectoryPath() +
+                    File.separator + getId().toString());
+        }    else {
+            return new File(Helper.getUserDirectoryPath()
+                    + File.separator +
+                    this.account.getId().toString() +
+                    File.separator +
+                    this.getId().toString());
+        }
     }
 
     @Override

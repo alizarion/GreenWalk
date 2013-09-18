@@ -27,8 +27,11 @@
 
 
 <cc:implementation>
-    <h:outputLink styleClass="lightBox"   hreflang="../../../../../../../images/dynamic/?file=#{cc.attrs.imageContent.id}&#38;hctrl=#{cc.attrs.imageContent.hashControl}&#38;width=[width]&#38;height=999999">
+    <h:outputLink styleClass="lightBox"
+                  hreflang="../../../../../../../images/dynamic/?file=#{cc.attrs.imageContent.id}&#38;hctrl=#{cc.attrs.imageContent.hashControl}&#38;width=[width]&#38;height=999999">
          <gw:image
+                 width="100"
+                 height="9999"
                  imageContent="#{cc.attrs.imageContent}"/>
     </h:outputLink>
 
