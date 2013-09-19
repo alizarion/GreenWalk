@@ -21,7 +21,7 @@ public class Address implements Serializable {
             pkColumnName="SEQ_NAME", valueColumnName="SEQ_COUNT")
     @GeneratedValue(strategy=GenerationType.TABLE, generator="Address_SEQ")
     @Column
-    private int id;
+    private Long id;
 
     @Column
     private String Street;
@@ -43,6 +43,14 @@ public class Address implements Serializable {
 
     @OneToOne(optional = true)
     private Account account;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Account getAccount() {
         return account;

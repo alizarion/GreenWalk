@@ -17,7 +17,8 @@
                 <gw:header headerLabelId="component.header.members.profile.label-" />
                 <gw:memberProfileEdit
                         rendered="#{memberProfileEditCtrl.account != null}"
-                        account="#{memberProfileEditCtrl.account}" />
+                        account="#{memberProfileEditCtrl.account}"
+                        saveChanges="#{memberProfileEditCtrl.saveProfileChanges}"/>
 
                 <gw:header headerLabelId="component.header.members.credential.label-" />
 

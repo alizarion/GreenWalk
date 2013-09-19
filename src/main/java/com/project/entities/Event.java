@@ -47,7 +47,7 @@ public abstract class Event {
             orphanRemoval = true,cascade = CascadeType.ALL)
     private Set<Content> contents = new HashSet<Content>();
 
-    @OneToMany(mappedBy="content",
+    @OneToMany(mappedBy="event",
             fetch = FetchType.EAGER,
             orphanRemoval = true,cascade = CascadeType.ALL)
     @OrderBy(value = "creationdate")
@@ -89,9 +89,26 @@ public abstract class Event {
         this.creationDate = creationDate;
     }
 
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Comment> getCommentsAsList() {
+        List<Comment> commentList =  new ArrayList<Comment>(comments);
+        Collections.sort(commentList);
+        return commentList;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
+
 
     public String getDescription() {
         return description;

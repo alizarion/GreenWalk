@@ -142,7 +142,8 @@ public class Account implements Serializable {
     @OneToOne(mappedBy="account", cascade=CascadeType.ALL)
     private Credential credential;
 
-    @OneToOne(mappedBy = "account",optional = true)
+    @OneToOne(mappedBy = "account",optional = true,
+            cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private Address address;
 
 
@@ -348,15 +349,19 @@ public class Account implements Serializable {
 
 
     public Address getAddress() {
+        if (this.address==null){
+            this.address = new Address();
+            this.address.setAccount(this);
+        }
         return address;
     }
 
     public void setAddress(Address address) {
+        if (address!= null){
+            this.address.setAccount(this);
+        }
         this.address = address;
     }
-
-
-
 
     public AvatarImageFile getAvatarImageFile() {
         return avatarImageFile;

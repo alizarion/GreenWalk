@@ -139,5 +139,16 @@ public class MemberProfileEditCtrl implements Serializable {
                     bundle.getString("component.credential.reset.password.success.message-" +
                     sessionAttribute.getSelectedLang().getKey())));
         }
+        this.newPassword = null;
+        this.previousPassword = null;
+    }
+
+    public void saveProfileChanges(){
+        this.account = facade.mergeAccount(this.account);
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        context.addMessage(null, new FacesMessage("Successful",
+                bundle.getString("common.update.account.profile.success.message-" +
+                        sessionAttribute.getSelectedLang().getKey())));
     }
 }

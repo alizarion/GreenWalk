@@ -13,6 +13,11 @@
         <view-id>/profile.jsf</view-id>
     </url-mapping>
 
+    <url-mapping id="comments">
+        <pattern value="/comm/#{eventId}"/>
+        <view-id>/eventComments.jsf</view-id>
+    </url-mapping>
+
 
 
 </pretty-config>

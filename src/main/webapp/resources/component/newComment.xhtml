@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface>
+
+
+    <cc:attribute
+            name="comment"
+            type="com.project.entities.Comment"
+            required="true"/>
+
+    <cc:attribute
+            name="selectedComment"
+            type="com.project.entities.Comment"
+            required="true"/>
+
+
+    <cc:attribute
+            name="sendComment"
+            method-signature="void action()"
+            required="true"/>
+
+</cc:interface>
+
+<cc:implementation>
+
+    <div class="container">
+        <h:form id="commentEditForm" prependId="false">
+            <h:panelGrid columns="2" columnClasses="none,inputtextarea">
+                <gw:avatarDisplay
+                        width="80"
+                        height="80"
+                        account="#{cc.attrs.comment.commentOwner}"/>
+                <p:inputTextarea  style="width: 95%;"
+                                  autoResize="true"
+                                  value="#{cc.attrs.comment.value}" />
+                <h:outputText/>
+                <h:panelGroup>
+                    <h:outputLabel  rendered="#{cc.attrs.selectedComment != null}"
+                            value="#{lang['component.comment.answer.to.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                    #{cc.attrs.selectedComment.commentOwner.lastName}
+                    #{cc.attrs.selectedComment.commentOwner.firstName} " />
+
+                    <h:outputText  rendered="#{cc.attrs.selectedComment != null}"
+                            value="#{cc.attrs.selectedComment.creationdate}">
+                        <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                    </h:outputText>
+
+                    <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                     update="@form"
+                                     style="float: right;"
+                                     oncomplete="window.location.reload()"
+                                     action="#{cc.attrs.sendComment}"/>
+                </h:panelGroup>
+            </h:panelGrid>
+
+        </h:form>
+    </div>
+</cc:implementation>
+
+</html>

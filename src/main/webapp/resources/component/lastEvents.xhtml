@@ -26,40 +26,18 @@
 
 
 <cc:implementation>
-    <ui:repeat value="#{cc.attrs.singleEvents}" var="singleEvent">
-        <div class="container">
-            <h:panelGrid columns="2"  styleClass="eventTable" columnClasses="avatarContainer,eventContent">
-                <gw:avatarDisplay
-                        account="#{singleEvent.owner}"
-                        width="100"
-                        height="100"/>
-                <h:panelGroup>
-                    <div class="eventHeader">
 
-                        <h3>#{singleEvent.owner.firstName} #{singleEvent.owner.lastName} </h3>   #{lang['component.event.header.declare-'.concat(sessionAttributeCtrl.selectedLang.key)]}
-                        <div>
-                            <ui:repeat value="#{singleEvent.garbageAsList}" var="wastes">
-                                <gw:wasteTags waste="#{wastes}"/>
-                            </ui:repeat>
-                        </div>
-                    </div>
-                    <div class="eventDescription">
-                        <p>#{singleEvent.description}</p>
-                    </div>
-                    <div class="eventPhotos">
+    <p:dataGrid var="singleEvent"
+                value="#{cc.attrs.singleEvents}"
+                columns="1"
+                paginator="true"
+                rows="9"
+                paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+        <gw:singleEventDisplay displayCommentLink="true" event="#{singleEvent}"/>
+    </p:dataGrid>
 
-                        <ui:repeat value="#{singleEvent.contentAsList}"  var="imagecontent">
-                            <gw:lightBoxImage imageContent="#{imagecontent.image}" width="100" height="100"/>
-                        </ui:repeat>
+    <p:ajaxStatus  oncomplete="createLightBox();"/>
 
-
-
-                    </div>
-                </h:panelGroup>
-
-            </h:panelGrid>
-        </div>
-    </ui:repeat>
 </cc:implementation>
 
 </html>

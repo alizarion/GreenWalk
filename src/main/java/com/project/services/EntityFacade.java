@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -73,6 +74,16 @@ public class EntityFacade implements Serializable{
 
     public List<Person> findAllPersons(){
         return this.explorer.findAllPersons();
+    }
+
+    public Account getActiveUser(){
+        Account account = null;
+        if(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null){
+            Credential credential = getCredentialByUserName(FacesContext.
+                    getCurrentInstance().getExternalContext().getUserPrincipal().getName());
+            account = credential.getAccount();
+        }
+        return account;
     }
 
 
@@ -155,11 +166,26 @@ public class EntityFacade implements Serializable{
     public void addNewSingleEvent(SingleEvent selectedEvent) {
         this.em.flush();
         this.em.clear();
-     //   selectedEvent.clearBeforePersist();
         this.em.merge(selectedEvent);
+    }
+
+    public Event mergeEvent(Event event) {
+        this.em.flush();
+        this.em.clear();
+        event = this.em.merge(event);
+        this.em.refresh(event);
+        return event;
     }
 
     public List<SingleEvent> findLastSingleEvents() {
         return this.explorer.findLastSingleEvents();
+    }
+
+    public Event findEventById(long id) {
+        return em.find(Event.class,id);
+    }
+
+    public void mergeComment(Comment newComment) {
+        em.merge(newComment);
     }
 }

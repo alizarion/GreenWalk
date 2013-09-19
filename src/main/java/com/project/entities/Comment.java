@@ -7,7 +7,7 @@ import com.project.Helper;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.security.Principal;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Entity
 @Table(catalog = Helper.ENTITIES_CATALOG, name = "comments")
-public class Comment implements Serializable {
+public class Comment implements Serializable, Comparable {
 
     @Id
     @TableGenerator(name="comments_SEQ", table="sequence",  catalog = Helper.ENTITIES_CATALOG,
@@ -43,6 +43,16 @@ public class Comment implements Serializable {
     @JoinColumn(name="event_id")
     private Event event;
 
+
+    @ManyToOne
+    @JoinColumn(name="answerto_id")
+    private Comment answerTo;
+
+    @OneToMany(fetch = FetchType.EAGER,
+            mappedBy = "answerTo",
+            cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    private Set<Comment> answers = new HashSet<Comment>();
+
     @ManyToOne
     @JoinColumn(name="content_id")
     private Content content;
@@ -54,6 +64,27 @@ public class Comment implements Serializable {
 
     public Comment() {
         this.creationdate = new Date();
+    }
+
+    public Comment(Event event) {
+        this.creationdate = new Date();
+        this.event = event;
+    }
+
+    public Comment(Account account) {
+        this.creationdate = new Date();
+        this.commentOwner = account;
+    }
+
+
+
+    public Comment(Event event,Account account) {
+        this.creationdate = new Date();
+        this.event = event;
+        if (this.event != null){
+            this.event.getComments().add(this);
+        }
+        this.commentOwner = account;
     }
 
     public Long getId() {
@@ -72,6 +103,23 @@ public class Comment implements Serializable {
         this.value = value;
     }
 
+    public Set<Comment> getAnswers() {
+        if(this.answers == null){
+            this.answers = new HashSet<Comment>();
+        }
+        return answers;
+    }
+
+    public void setAnswers(Set<Comment> answers) {
+        this.answers = answers;
+    }
+
+    public List<Comment> getAnswersAsList() {
+        List<Comment> comments = new ArrayList<Comment>(answers);
+        Collections.sort(comments);
+        return comments;
+    }
+
     public Boolean getSignaled() {
         return signaled;
     }
@@ -87,6 +135,39 @@ public class Comment implements Serializable {
 
     public Account getCommentOwner() {
         return commentOwner;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public Boolean getHaveAnswer(){
+        return (this.answers.size() >0);
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public void setContent(Content content) {
+        this.content = content;
+    }
+
+    public Comment getAnswerTo() {
+        return answerTo;
+    }
+
+    public void setAnswerTo(Comment answerTo) {
+        this.answerTo = answerTo;
+    }
+
+    public void addAnswer(Comment answer){
+        answer.setAnswerTo(this);
+        this.answers.add(answer);
     }
 
     public void setCommentOwner(Account commentOwner) {
@@ -141,5 +222,19 @@ public class Comment implements Serializable {
         result = 31 * result + (event != null ? event.hashCode() : 0);
         result = 31 * result + (commentOwner != null ? commentOwner.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Comment content1 = (Comment) o;
+        Comment content2 = (Comment) this;
+        Date creationDate1 = content1.getCreationdate();
+        Date creationDate2 =  content2.getCreationdate();
+        if (creationDate1.before(creationDate2) ) {
+            return +1;
+        } else{
+            return -1;
+
+        }
     }
 }

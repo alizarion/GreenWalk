@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="commentlist"
+            type="java.util.List"
+            required="true"/>
+
+    <cc:attribute
+            name="selectedComment"
+            type="com.project.entities.Comment"
+            required="true"/>
+
+
+    <cc:attribute
+            name="toUpdateAction"
+            type="java.lang.String"
+            required="true"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+
+    <p:dataGrid var="comment"
+                value="#{cc.attrs.commentlist}"
+                columns="1"
+                paginator="true"
+                rows="9"
+                paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+        <gw:singleCommentDisplay
+                toUpdateAction="#{cc.attrs.toUpdateAction}"
+                haveAnswer="#{comment.haveAnswer}"
+                selectedComment="#{cc.attrs.selectedComment}"
+                comment="#{comment}"/>
+    </p:dataGrid>
+
+
+
+</cc:implementation>
+
+</html>

@@ -7,6 +7,10 @@ html, body {
     background-image: url('../resources/img/motif_background.png');
 }
 
+html, body .ui-widget {
+    font-family: 'Open Sans', sans-serif;
+}
+
 @font-face {
     font-family: 'Boogaloo';
     font-style: normal;
@@ -27,6 +31,8 @@ a {
     color: black;
     font-size: 16pt;
 }
+
+
 
 ol li{
     list-style: none;
@@ -392,6 +398,42 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
     font-weight: bold;
 }
 
+
+
 html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
     font-weight: normal !important;
 }
+
+.ui-datagrid .ui-widget-header {
+    border: none;
+    background: none;
+    text-shadow: none;
+}
+
+.ui-datagrid .ui-widget-content {
+    border: none;
+    background: none;
+
+}
+
+.ui-datagrid .ui-datagrid-column {
+    padding: 0;
+}
+.ui-datagrid .ui-paginato  {
+    padding: 0;
+}
+
+.ui-growl .ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+    background: #ffffff;
+    color:inherit;
+    text-shadow:  none;
+
+}
+
+.inputtextarea{
+    margin: 10px;
+  width: 100%;
+}
+

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="event"
+            type="com.project.entities.SingleEvent"
+            required="true"/>
+
+    <cc:attribute
+            name="displayCommentLink"
+            type="java.lang.Boolean"
+            required="true"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+    <div class="container">
+        <h:panelGrid columns="2"
+                     styleClass="eventTable"
+                     columnClasses="avatarContainer,eventContent">
+            <gw:avatarDisplay
+                    account="#{cc.attrs.event.owner}"
+                    width="100"
+                    height="100"/>
+            <h:panelGroup>
+                <div class="eventHeader">
+
+                    <h3>#{cc.attrs.event.owner.firstName} #{cc.attrs.event.owner.lastName}</h3>#{lang['component.event.header.declare-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                    <div>
+                        <ui:repeat value="#{cc.attrs.event.garbageAsList}" var="wastes">
+                            <gw:wasteTags waste="#{wastes}"/>
+                        </ui:repeat>
+                    </div>
+                </div>
+                <div class="eventDescription">
+                    <p>#{cc.attrs.event.description}</p>
+                    <h:panelGroup  rendered="#{cc.attrs.displayCommentLink}" style="float: right;">
+                    <a  href="/comm/#{cc.attrs.event.id}">#{fn:length(cc.attrs.event.commentsAsList)} Comment >></a>
+                    </h:panelGroup>
+                </div>
+                <div class="eventPhotos">
+
+                    <ui:repeat value="#{cc.attrs.event.contentAsList}"  var="imagecontent">
+                        <gw:lightBoxImage imageContent="#{imagecontent.image}" width="100" height="100"/>
+                    </ui:repeat>
+
+
+
+
+                </div>
+            </h:panelGroup>
+
+        </h:panelGrid>
+    </div>
+</cc:implementation>
+
+</html>
