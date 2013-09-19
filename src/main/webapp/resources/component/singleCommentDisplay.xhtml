@@ -36,7 +36,7 @@
 
 
 <cc:implementation>
-<div class="container">
+<div style="width: 95%;float: right" class="container">
     <div>
         #{cc.attrs.comment.value}
     </div>
@@ -205,7 +205,7 @@
 
                     </div>
                     <ui:repeat value="#{answer4.answersAsList}" var="answer5">
-                        <div style="width: 75%;float: right" class="container">
+                        <div style="width: 70%;float: right" class="container">
                             <div>
                                 #{answer5.value}
                             </div>
@@ -232,7 +232,149 @@
                             </h:panelGrid>
 
                         </div>
+                        <ui:repeat value="#{answer5.answersAsList}" var="answer6">
+                            <div style="width: 65%;float: right" class="container">
+                                <div>
+                                    #{answer6.value}
+                                </div>
+                                <h:panelGrid columns="3"
+                                             styleClass="eventTable"
+                                             columnClasses="avatarContainer,eventContent">
+                                    <gw:avatarDisplay
+                                            account="#{answer6.commentOwner}"
+                                            width="60"
+                                            height="60"/>
+                                    <h:panelGroup>
+                                        <h:outputText value="#{answer6.creationdate}">
+                                            <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                        </h:outputText>
+                                        #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                                        #{answer6.commentOwner.lastName} #{answer6.commentOwner.firstName}
+                                    </h:panelGroup>
+                                    <p:commandLink rendered="#{facesContext.externalContext.userPrincipal != null}" update="#{cc.attrs.toUpdateAction}"
+                                                   value=" #{lang['component.comment.answer.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}">
+                                        <f:setPropertyActionListener
+                                                value="#{answer6}"
+                                                target="#{cc.attrs.selectedComment}"/>
+                                    </p:commandLink>
+                                </h:panelGrid>
 
+                            </div>
+                            <ui:repeat value="#{answer6.answersAsList}" var="answer7">
+                                <div style="width: 60%;float: right" class="container">
+                                    <div>
+                                        #{answer7.value}
+                                    </div>
+                                    <h:panelGrid columns="3"
+                                                 styleClass="eventTable"
+                                                 columnClasses="avatarContainer,eventContent">
+                                        <gw:avatarDisplay
+                                                account="#{answer7.commentOwner}"
+                                                width="60"
+                                                height="60"/>
+                                        <h:panelGroup>
+                                            <h:outputText value="#{answer7.creationdate}">
+                                                <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                            </h:outputText>
+                                            #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                                            #{answer7.commentOwner.lastName} #{answer7.commentOwner.firstName}
+                                        </h:panelGroup>
+                                        <p:commandLink rendered="#{facesContext.externalContext.userPrincipal != null}" update="#{cc.attrs.toUpdateAction}"
+                                                       value=" #{lang['component.comment.answer.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}">
+                                            <f:setPropertyActionListener
+                                                    value="#{answer7}"
+                                                    target="#{cc.attrs.selectedComment}"/>
+                                        </p:commandLink>
+                                    </h:panelGrid>
+
+                                </div>
+                                <ui:repeat value="#{answer7.answersAsList}" var="answer8">
+                                    <div style="width: 55%;float: right" class="container">
+                                        <div>
+                                            #{answer8.value}
+                                        </div>
+                                        <h:panelGrid columns="3"
+                                                     styleClass="eventTable"
+                                                     columnClasses="avatarContainer,eventContent">
+                                            <gw:avatarDisplay
+                                                    account="#{answer8.commentOwner}"
+                                                    width="60"
+                                                    height="60"/>
+                                            <h:panelGroup>
+                                                <h:outputText value="#{answer8.creationdate}">
+                                                    <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                </h:outputText>
+                                                #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                                                #{answer8.commentOwner.lastName} #{answer8.commentOwner.firstName}
+                                            </h:panelGroup>
+                                            <p:commandLink rendered="#{facesContext.externalContext.userPrincipal != null}" update="#{cc.attrs.toUpdateAction}"
+                                                           value=" #{lang['component.comment.answer.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}">
+                                                <f:setPropertyActionListener
+                                                        value="#{answer8}"
+                                                        target="#{cc.attrs.selectedComment}"/>
+                                            </p:commandLink>
+                                        </h:panelGrid>
+
+                                    </div>
+                                    <ui:repeat value="#{answer8.answersAsList}" var="answer9">
+                                        <div style="width: 50%;float: right" class="container">
+                                            <div>
+                                                #{answer9.value}
+                                            </div>
+                                            <h:panelGrid columns="3"
+                                                         styleClass="eventTable"
+                                                         columnClasses="avatarContainer,eventContent">
+                                                <gw:avatarDisplay
+                                                        account="#{answer9.commentOwner}"
+                                                        width="60"
+                                                        height="60"/>
+                                                <h:panelGroup>
+                                                    <h:outputText value="#{answer9.creationdate}">
+                                                        <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                    </h:outputText>
+                                                    #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                                                    #{answer9.commentOwner.lastName} #{answer9.commentOwner.firstName}
+                                                </h:panelGroup>
+                                                <p:commandLink rendered="#{facesContext.externalContext.userPrincipal != null}" update="#{cc.attrs.toUpdateAction}"
+                                                               value=" #{lang['component.comment.answer.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}">
+                                                    <f:setPropertyActionListener
+                                                            value="#{answer9}"
+                                                            target="#{cc.attrs.selectedComment}"/>
+                                                </p:commandLink>
+                                            </h:panelGrid>
+
+                                        </div>
+                                        <ui:repeat value="#{answer9.answersAsList}" var="answer10">
+                                            <div style="width: 45%;float: right" class="container">
+                                                <div>
+                                                    #{answer10.value}
+                                                </div>
+                                                <h:panelGrid columns="3"
+                                                             styleClass="eventTable"
+                                                             columnClasses="avatarContainer,eventContent">
+                                                    <gw:avatarDisplay
+                                                            account="#{answer10.commentOwner}"
+                                                            width="60"
+                                                            height="60"/>
+                                                    <h:panelGroup>
+                                                        <h:outputText value="#{answer10.creationdate}">
+                                                            <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                        </h:outputText>
+                                                        #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                                                        #{answer10.commentOwner.lastName} #{answer10.commentOwner.firstName}
+                                                    </h:panelGroup>
+
+                                                </h:panelGrid>
+
+                                            </div>
+
+                                        </ui:repeat>
+                                    </ui:repeat>
+                                </ui:repeat>
+                            </ui:repeat>
+
+
+                        </ui:repeat>
                     </ui:repeat>
 
                 </ui:repeat>
