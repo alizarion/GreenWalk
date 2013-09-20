@@ -26,13 +26,11 @@ public class Address implements Serializable {
     @Column
     private String Street;
 
-
     @Column
     private String city;
 
     @Column
     private String country;
-
 
     @Column
     private String zipCode;
@@ -40,9 +38,15 @@ public class Address implements Serializable {
     @Column
     private String number;
 
+    @OneToOne(mappedBy="address", cascade=CascadeType.ALL)
+    private Position position;
 
     @OneToOne(optional = true)
     private Account account;
+
+    public Address() {
+        this.position = new Position();
+    }
 
     public Long getId() {
         return id;
@@ -70,6 +74,14 @@ public class Address implements Serializable {
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public void setZipCode(String zipCode) {

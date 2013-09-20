@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface componentType="GMapEvenListenerCC">
+
+
+    <cc:attribute
+            name="actualLocation"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
+            name="searchQuery"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
+            name="searchActionMethod"
+            method-signature="void action()"
+            required="true"/>
+
+    <cc:attribute
+            name="zoom"
+            type="java.lang.Integer"
+            required="true"/>
+
+    <cc:attribute
+            name="toUpdate"
+            type="java.lang.String"
+            required="true"/>
+
+
+    <cc:attribute
+            name="onMarkerDrag"
+            method-signature="void listener(org.primefaces.event.map.MarkerDragEvent)"
+            required="true"/>
+
+    <cc:attribute
+            name="mapModel"
+            type="org.primefaces.model.map.DefaultMapModel"
+            required="true"/>
+
+</cc:interface>
+
+<cc:implementation>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"
+            type="text/javascript"/>
+    <script type="text/javascript">
+        $(function(){
+            findMe();
+        });
+
+        function findMe() {
+
+            navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        console.log( jQuery(".hiddenInput input:first"));
+                        jQuery(".hiddenInput input:first")[0].value = position.coords.latitude+ ', '+ position.coords.longitude;
+
+                        remotemaupdater();
+                    },
+                    function(error) {
+                        alert(error.message);
+                    },
+                    {
+                        enableHighAccuracy: true
+                    });
+
+        }
+    </script>
+    <div class="container">
+        <h:form id="gmapForm" prependId="false" onkeypress="if (event.keyCode == 13) { remotesearch(); return false; }">
+            <p:remoteCommand name="remotemaupdater"  process="input1,@this" update="mapGroup" />
+             <h:panelGroup styleClass="hiddenInput">
+            <h:inputHidden  id="input1" value="#{cc.attrs.actualLocation}" />
+             </h:panelGroup>
+            <p:inputText  type="search"
+                          id="search"
+
+                          styleClass="searchInput"
+                          value="#{cc.attrs.searchQuery}"/>
+
+            <p:watermark
+                    value="#{lang['form.map.location.input.search.watermark-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                    for="search" />
+
+            <p:remoteCommand
+                    name="remotesearch"
+                    action="#{cc.attrs.searchActionMethod}" update="mapGroup,#{cc.attrs.toUpdate}" />
+             <div style="clear: both;"></div>
+            <h:panelGroup id="mapGroup">
+                <p:gmap center="#{cc.attrs.mapModel.markers[0].latlng.lat}, #{cc.attrs.mapModel.markers[0].latlng.lng}"
+                        zoom="#{cc.attrs.zoom}"
+                        type="ROADMAP"  style="width:100%;height:17em;"
+                        model="#{cc.attrs.mapModel}"
+                        mapTypeControl="true" navigationControl="false"
+                        widgetVar="gmap">
+                    <p:ajax event="markerDrag" listener="#{cc.onMarkerDrag}" update="#{cc.attrs.toUpdate}" />
+                </p:gmap>
+            </h:panelGroup>
+
+        </h:form>
+    </div>
+</cc:implementation>
+
+</html>

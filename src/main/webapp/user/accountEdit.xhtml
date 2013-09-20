@@ -18,6 +18,7 @@
                 <gw:memberProfileEdit
                         rendered="#{memberProfileEditCtrl.account != null}"
                         account="#{memberProfileEditCtrl.account}"
+                        fileUploadListener="#{memberProfileEditCtrl.fileUploadListenerImageContent}"
                         saveChanges="#{memberProfileEditCtrl.saveProfileChanges}"/>
 
                 <gw:header headerLabelId="component.header.members.credential.label-" />

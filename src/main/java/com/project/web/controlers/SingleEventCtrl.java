@@ -50,13 +50,8 @@ public class SingleEventCtrl implements Serializable {
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.selectedEvent = new SingleEvent();
-        if(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null){
-            Credential credential = this.facade.getCredentialByUserName(FacesContext.
-                    getCurrentInstance().getExternalContext().getUserPrincipal().getName());
-            this.userAccount = credential.getAccount();
-            this.selectedEvent.setOwner(this.userAccount);
-        }
-
+        this.userAccount = facade.getActiveUser();
+        this.selectedEvent.setOwner(this.userAccount);
         this.wasteList = this.facade.getAllAvailableWastes();
     }
 

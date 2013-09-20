@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="event"
+            type="com.project.entities.GroupEvent"
+            required="true"/>
+
+    <cc:attribute
+            name="saveChanges"
+            method-signature="void action()"
+            required="true"/>
+
+
+</cc:interface>
+
+<cc:implementation>
+
+    <div class="container">
+        <h:form id="groupEventEditForm" prependId="false">
+        <h:panelGrid columns="2">
+            <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street.number-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText  value="#{cc.attrs.event.address.number}" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true" value="#{cc.attrs.event.address.street}" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['common.label.address.zipcode-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true" value="#{cc.attrs.event.address.zipCode}" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true" value="#{cc.attrs.event.address.city}" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true" value="#{cc.attrs.event.address.country}" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:calendar  required="true" value="#{cc.attrs.event.eventDate}" pattern="MM/dd/yyyy HH:mm" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputTextarea value="#{cc.attrs.event.description}" style="width: 95%;" autoResize="true"/>
+
+            <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                             update="@form,:growlMsg"
+                             action="#{cc.attrs.saveChanges}"/>
+
+
+        </h:panelGrid>
+        </h:form>
+    </div>
+</cc:implementation>
+
+</html>

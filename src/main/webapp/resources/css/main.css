@@ -437,3 +437,11 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
   width: 100%;
 }
 
+
+.searchInput{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 10px !important;
+    width: 100%;
+    margin-bottom: 10px !important;
+}

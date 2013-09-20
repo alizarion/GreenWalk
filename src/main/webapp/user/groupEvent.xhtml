@@ -1,0 +1,40 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:gw="http://java.sun.com/jsf/composite/component"
+        contentType="text/html">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="center">
+
+            </ui:define>
+            <ui:define name="contentLeft">
+                <gw:groupEventForm
+                        id="groupEventForm"
+                        saveChanges="#{groupEventCtrl.searchPosition}"
+                        event="#{groupEventCtrl.event}"/>
+
+            </ui:define>
+            <ui:define name="contentRight">
+                <gw:gmapLocation
+                        id="gmapLocation"
+                        mapModel="#{groupEventCtrl.draggableModel}"
+                        actualLocation="#{groupEventCtrl.actualLocation}"
+                        zoom="#{groupEventCtrl.mapZoom}"
+                        toUpdate=":groupEventForm:groupEventEditForm"
+                        searchQuery="#{groupEventCtrl.searchQuery}"
+                        searchActionMethod="#{groupEventCtrl.searchPosition}"
+                        onMarkerDrag="#{groupEventCtrl.onMarkerDrag}"
+                        />
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</f:view>

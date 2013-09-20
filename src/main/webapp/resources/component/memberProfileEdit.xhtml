@@ -11,7 +11,7 @@
 
       xmlns:f="http://java.sun.com/jsf/core">
 
-<cc:interface>
+<cc:interface componentType="FileUploadListenerCC">
 
     <cc:attribute
             name="account"
@@ -21,6 +21,11 @@
     <cc:attribute
             name="saveChanges"
             method-signature="void action()"
+            required="true"/>
+
+    <cc:attribute
+            name="fileUploadListener"
+            method-signature="void listener(org.primefaces.event.FileUploadEvent)"
             required="true"/>
 
 </cc:interface>
@@ -36,7 +41,7 @@
                     height="100"
                     account="#{cc.attrs.account}"/>
 
-            <p:fileUpload fileUploadListener="#{memberProfileEditCtrl.fileUploadListenerImageContent}"
+            <p:fileUpload fileUploadListener="#{cc.fileUploadListener}"
                           dragDropSupport="true"
                           auto="true"
                           process="@this"
