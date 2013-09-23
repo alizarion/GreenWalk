@@ -17,8 +17,20 @@
             <ui:define name="contentLeft">
                 <gw:groupEventForm
                         id="groupEventForm"
-                        saveChanges="#{groupEventCtrl.searchPosition}"
+                        saveChanges="#{groupEventCtrl.submitGroupEvent}"
+                        maxDate="#{groupEventCtrl.nextYear}"
+                        minDate="#{groupEventCtrl.today}"
                         event="#{groupEventCtrl.event}"/>
+
+                <gw:header headerLabelId="common.participants.members.list.label-" />
+                <div class="container">
+                    <gw:participantsList participants="#{groupEventCtrl.event.confirmedSubscribersAsList}"/>
+                </div>
+
+                <gw:requestedMembersList completeMembers="#{groupEventCtrl.completeMembers}"
+                                         selectedMember="#{groupEventCtrl.selectedMember}"
+                                         currentEvent="#{groupEventCtrl.event}" />
+
 
             </ui:define>
             <ui:define name="contentRight">

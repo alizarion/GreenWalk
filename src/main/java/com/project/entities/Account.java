@@ -33,6 +33,13 @@ import java.util.*;
                         + " from Account compte "
                         + " where "
                         + "compte.lastNotificationMailDate < :date or compte.lastNotificationMailDate  = null"),
+        @NamedQuery(name= Account.FIND_ACCOUNT_BY_KEYWORD,
+                hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                query="select compte"
+                        + " from Account compte "
+                        + " where "
+                        + "compte.lastName like :query or compte.firstName like :query or compte.credential.userName "
+                        + "like :query or compte.address.city like :query order by compte.lastName"),
         @NamedQuery(name= Account.FIND_ACCOUNT_BY_EMAIL,
                 query="select compte"
                         + " from Account compte "
@@ -45,6 +52,7 @@ public class Account implements Serializable {
     public static final String FIND_ACCOUNT_BY_NAME ="FIND_ACCOUNT_BY_NAME";
     public static final String FIND_ACCOUNT_BY_EMAIL ="FIND_ACCOUNT_BY_EMAIL";
     public static final String FIND_LAST_CREATED ="FIND_LAST_CREATED";
+    public static final String FIND_ACCOUNT_BY_KEYWORD ="FIND_ACCOUNT_BY_KEYWORD";
     public static final String FIND_ALL_NOT_NOTIFIED ="FIND_ALL_NOT_NOTIFIED";
 
     @Id
@@ -121,6 +129,10 @@ public class Account implements Serializable {
             fetch = FetchType.EAGER,
             targetEntity = Event.class)
     private Set<GroupEvent> groupEvents;
+
+    @OneToMany(mappedBy = "account",
+            fetch = FetchType.EAGER)
+    private Set<GroupEventSubscriber> subscribedEvents = new HashSet<GroupEventSubscriber>();
 
     @PrePersist
     public void onPrePersist(){
@@ -270,6 +282,14 @@ public class Account implements Serializable {
         this.indexed = indexed;
     }
 
+    public Set<GroupEventSubscriber> getSubscribedEvents() {
+        return subscribedEvents;
+    }
+
+    public void setSubscribedEvents(Set<GroupEventSubscriber> subscribedEvents) {
+        this.subscribedEvents = subscribedEvents;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -383,4 +403,66 @@ public class Account implements Serializable {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Account account = (Account) o;
+
+        if (address != null ? !address.equals(account.address) :
+                account.address != null) return false;
+        if (birthDay != null ? !birthDay.equals(account.birthDay) :
+                account.birthDay != null) return false;
+        if (commentEnabled != null ? !commentEnabled.equals(account.commentEnabled)
+                : account.commentEnabled != null)
+            return false;
+        if (creationDate != null ? !creationDate.equals(account.creationDate) :
+                account.creationDate != null)
+            return false;
+        if (credential != null ? !credential.equals(account.credential) :
+                account.credential != null) return false;
+        if (emailAddress != null ? !emailAddress.equals(account.emailAddress) :
+                account.emailAddress != null)
+            return false;
+        if (firstName != null ? !firstName.equals(account.firstName) :
+                account.firstName != null) return false;
+        if (id != null ? !id.equals(account.id) : account.id != null) return false;
+        if (indexed != null ? !indexed.equals(account.indexed) :
+                account.indexed != null) return false;
+        if (lastName != null ? !lastName.equals(account.lastName) :
+                account.lastName != null) return false;
+        if (lastNotificationMailDate != null ? !lastNotificationMailDate.equals(account.lastNotificationMailDate) :
+                account.lastNotificationMailDate != null)
+            return false;
+        if (likeEnabled != null ? !likeEnabled.equals(account.likeEnabled) :
+                account.likeEnabled != null) return false;
+        if (localisation != null ? !localisation.equals(account.localisation) :
+                account.localisation != null)
+            return false;
+        if (phoneNumber != null ? !phoneNumber.equals(account.phoneNumber) :
+                account.phoneNumber != null) return false;
+        if (profession != null ? !profession.equals(account.profession) :
+                account.profession != null) return false;
+        if (sexe != account.sexe) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (birthDay != null ? birthDay.hashCode() : 0);
+        result = 31 * result + (emailAddress != null ? emailAddress.hashCode() : 0);
+        result = 31 * result + (sexe != null ? sexe.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (indexed != null ? indexed.hashCode() : 0);
+        result = 31 * result + (lastNotificationMailDate != null ? lastNotificationMailDate.hashCode() : 0);
+        result = 31 * result + (commentEnabled != null ? commentEnabled.hashCode() : 0);
+        result = 31 * result + (likeEnabled != null ? likeEnabled.hashCode() : 0);
+        result = 31 * result + (profession != null ? profession.hashCode() : 0);
+        return result;
+    }
 }

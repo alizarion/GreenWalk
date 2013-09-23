@@ -68,5 +68,16 @@ public class Explorer {
             return events;
         } catch (NoResultException e){
             return null;
-        }    }
+        }
+    }
+
+    public List<Account> findAccountByKeyWord(String query) {
+        try{
+            List<Account> accounts = new ArrayList<Account>(em.createNamedQuery(
+                    Account.FIND_ACCOUNT_BY_KEYWORD).setParameter("query", "%"+query+"%").getResultList());
+            return accounts;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
 }

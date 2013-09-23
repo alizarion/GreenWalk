@@ -71,6 +71,10 @@ public class EntityFacade implements Serializable{
         this.em.find(Person.class,id);
     }
 
+    public Account findAccountById(Long id){
+      return   this.em.find(Account.class,id);
+    }
+
 
     public List<Person> findAllPersons(){
         return this.explorer.findAllPersons();
@@ -187,5 +191,13 @@ public class EntityFacade implements Serializable{
 
     public void mergeComment(Comment newComment) {
         em.merge(newComment);
+    }
+
+    public List<Account> searchMembers(String query) {
+        return this.explorer.findAccountByKeyWord(query);
+    }
+
+    public void submitGroupEvent(GroupEvent event) {
+        this.em.merge(event);
     }
 }

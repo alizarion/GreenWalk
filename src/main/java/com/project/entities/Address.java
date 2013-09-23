@@ -45,7 +45,7 @@ public class Address implements Serializable {
     private Account account;
 
     public Address() {
-        this.position = new Position();
+        this.position = new Position(this);
     }
 
     public Long getId() {
@@ -77,6 +77,9 @@ public class Address implements Serializable {
     }
 
     public Position getPosition() {
+        if (this.position == null){
+            this.position = new Position(this);
+        }
         return position;
     }
 
@@ -110,5 +113,41 @@ public class Address implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return  number +
+                " " + Street + ' ' +
+                city + ' ' +
+                country + ' ' +
+                zipCode + ' ' ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Address address = (Address) o;
+
+        if (Street != null ? !Street.equals(address.Street) : address.Street != null) return false;
+        if (city != null ? !city.equals(address.city) : address.city != null) return false;
+        if (country != null ? !country.equals(address.country) : address.country != null) return false;
+        if (id != null ? !id.equals(address.id) : address.id != null) return false;
+        if (number != null ? !number.equals(address.number) : address.number != null) return false;
+        if (zipCode != null ? !zipCode.equals(address.zipCode) : address.zipCode != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (Street != null ? Street.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        return result;
     }
 }

@@ -6,6 +6,7 @@ import com.project.services.EntityFacade;
 import org.apache.commons.lang.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -21,9 +22,7 @@ import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author selim@openlinux.fr.
@@ -50,6 +49,12 @@ public class GroupEventCtrl implements Serializable {
 
     private GroupEvent event;
 
+    private Account selectedMember;
+
+    private Date today;
+
+    private Date  nextYear;
+
 
     @PostConstruct
     private void postInit(){
@@ -62,7 +67,12 @@ public class GroupEventCtrl implements Serializable {
         for(Marker marker : draggableModel.getMarkers()) {
             marker.setDraggable(true);
         }
-        this.event = new GroupEvent();
+        this.event = new GroupEvent(this.userAccount);
+        Calendar todayCalentdar = Calendar.getInstance();
+        this.today =  new Date();
+        todayCalentdar = Calendar.getInstance();
+        todayCalentdar.add(Calendar.YEAR, 1);
+        this.nextYear =  todayCalentdar.getTime();
     }
 
     public Account getUserAccount() {
@@ -134,6 +144,30 @@ public class GroupEventCtrl implements Serializable {
     }
 
 
+    public Account getSelectedMember() {
+        return selectedMember;
+    }
+
+    public void setSelectedMember(Account selectedMember) {
+        this.event.getSubscribers().add(new GroupEventSubscriber(this.getEvent(),selectedMember));
+        this.event.getSubscribers();
+    }
+
+    public Date getToday() {
+        return today;
+    }
+
+    public void setToday(Date today) {
+        this.today = today;
+    }
+
+    public Date getNextYear() {
+        return nextYear;
+    }
+
+    public void setNextYear(Date nextYear) {
+        this.nextYear = nextYear;
+    }
 
     public void onMarkerDrag(MarkerDragEvent event) {
         this.event.setAddress(AddressByLongLatHelper.getLongitudeLatitude(event.getMarker().getLatlng()));
@@ -144,6 +178,21 @@ public class GroupEventCtrl implements Serializable {
             marker.setLatlng(this.actualLocation);
 
         }
+    }
+
+    public String submitGroupEvent(){
+        this.facade.submitGroupEvent(this.event);
+        return "success-group-event-outcome";
+    }
+
+    public void handleMemberSelected(SelectEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected:" + event.getObject().toString(), null);
+
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public List<Account>  completeMembers(String query){
+        return facade.searchMembers(query);
     }
 
 }

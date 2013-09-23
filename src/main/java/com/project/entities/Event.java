@@ -145,5 +145,32 @@ public abstract class Event {
             content.setEvent(this);
             this.contents.add(content);
         }
-    };
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (creationDate != null ? !creationDate.equals(event.creationDate) :
+                event.creationDate != null) return false;
+        if (description != null ? !description.equals(event.description) :
+                event.description != null) return false;
+        if (id != null ? !id.equals(event.id) : event.id != null) return false;
+        if (title != null ? !title.equals(event.title) : event.title != null) return false;
+        if (type != null ? !type.equals(event.type) : event.type != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
+    }
 }

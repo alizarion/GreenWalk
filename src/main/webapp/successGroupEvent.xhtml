@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view locale="fr">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+
+            <ui:define name="center">
+                <f:metadata>
+                    <f:viewParam
+                            name="from"
+                            value="#{loginCtrl.from}"/>
+
+                </f:metadata>
+                <div style="margin-right:auto;margin-left:auto;width: 300px;height: 400px;margin-top: 200px;">
+                     <h1>success </h1>
+                </div>
+
+
+            </ui:define>
+            <ui:define name="footerContent">
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+
+</f:view>
+</html>
+

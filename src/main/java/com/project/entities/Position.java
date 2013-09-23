@@ -33,8 +33,12 @@ public class Position implements Serializable {
     @Column
     private Double longitude;
 
+    public Position() {
+    }
 
-
+    public Position(Address address) {
+        this.address = address;
+    }
 
     public Long getId() {
         return id;
@@ -67,6 +71,8 @@ public class Position implements Serializable {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
+
 
     public LatLng getAsLatLng(){
         if (this.latitude != null && this.longitude != null){

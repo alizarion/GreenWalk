@@ -1,9 +1,7 @@
 package com.project.entities;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author selim@openlinux.fr.
@@ -14,18 +12,33 @@ public class GroupEvent extends Event {
 
 
     @OneToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST},
-            optional = false)
+            optional = true)
     private Address address;
 
-    @ManyToMany
-    private Set<Account> subscribers = new HashSet<Account>();
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},
+            fetch = FetchType.EAGER)
+    private Set<GroupEventSubscriber> subscribers = new HashSet<GroupEventSubscriber>();
 
     @Column
     private Date eventDate;
 
+
+    @Column
+    private Integer expectedParticipants;
+
     public GroupEvent() {
         this.address = new Address();
+        this.expectedParticipants = 1;
+        this.subscribers.add(new GroupEventSubscriber(this,getOwner()));
     }
+
+    public GroupEvent(Account owner) {
+        this.address = new Address();
+        this.expectedParticipants = 1;
+        setOwner(owner);
+        this.subscribers.add(new GroupEventSubscriber(this,getOwner(),true));
+    }
+
 
     public Address getAddress() {
         return address;
@@ -35,11 +48,32 @@ public class GroupEvent extends Event {
         this.address = address;
     }
 
-    public Set<Account> getSubscribers() {
+    public Set<GroupEventSubscriber> getSubscribers() {
         return subscribers;
     }
 
-    public void setSubscribers(Set<Account> subscribers) {
+    public List<GroupEventSubscriber> getConfirmedSubscribersAsList() {
+        List<GroupEventSubscriber> resultList = new ArrayList<GroupEventSubscriber>();
+        for (GroupEventSubscriber groupEventSubscriber :this.subscribers){
+            if (groupEventSubscriber.getConfirmed()){
+                resultList.add(groupEventSubscriber);
+            }
+        }
+        return resultList;
+    }
+
+    public List<GroupEventSubscriber> getUnConfirmedSubscribersAsList() {
+        List<GroupEventSubscriber> resultList = new ArrayList<GroupEventSubscriber>();
+        for (GroupEventSubscriber groupEventSubscriber :this.subscribers){
+            if (!groupEventSubscriber.getConfirmed()){
+                resultList.add(groupEventSubscriber);
+            }
+        }
+        return resultList;
+    }
+
+
+    public void setSubscribers(Set<GroupEventSubscriber> subscribers) {
         this.subscribers = subscribers;
     }
 
@@ -51,6 +85,14 @@ public class GroupEvent extends Event {
         this.eventDate = eventDate;
     }
 
+    public Integer getExpectedParticipants() {
+        return expectedParticipants;
+    }
+
+    public void setExpectedParticipants(Integer expectedParticipants) {
+        this.expectedParticipants = expectedParticipants;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -58,15 +100,12 @@ public class GroupEvent extends Event {
         GroupEvent that = (GroupEvent) o;
 
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (subscribers != null ? !subscribers.equals(that.subscribers) : that.subscribers != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = address != null ? address.hashCode() : 0;
-        result = 31 * result + (subscribers != null ? subscribers.hashCode() : 0);
-        return result;
+       return super.hashCode();
     }
 }

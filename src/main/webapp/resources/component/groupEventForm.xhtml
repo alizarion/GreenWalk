@@ -19,6 +19,16 @@
             required="true"/>
 
     <cc:attribute
+        name="maxDate"
+        type="java.util.Date"
+        required="true"/>
+
+    <cc:attribute
+            name="minDate"
+            type="java.util.Date"
+            required="true"/>
+
+    <cc:attribute
             name="saveChanges"
             method-signature="void action()"
             required="true"/>
@@ -47,7 +57,15 @@
             <p:inputText required="true" value="#{cc.attrs.event.address.country}" />
 
             <h:outputLabel styleClass="label" value=" #{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <p:calendar  required="true" value="#{cc.attrs.event.eventDate}" pattern="MM/dd/yyyy HH:mm" />
+            <p:calendar  required="true" value="#{cc.attrs.event.eventDate}"
+                         mindate="#{cc.attrs.minDate}"
+                         maxdate="#{cc.attrs.maxDate}"
+                         pattern="MM/dd/yyyy HH:mm" />
+
+            <h:outputLabel styleClass="label" value=" #{lang['form.group.event.preregistred.count.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText validatorMessage="#{lang['common.numeric.value.validator.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}" value="#{cc.attrs.event.expectedParticipants}" >
+                <f:validateLength minimum="0" maximum="9000" />
+            </p:inputText>
 
             <h:outputLabel styleClass="label" value=" #{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
             <p:inputTextarea value="#{cc.attrs.event.description}" style="width: 95%;" autoResize="true"/>

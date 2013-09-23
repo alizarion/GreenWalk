@@ -35,11 +35,13 @@
         <h:form id="commentEditForm" prependId="false">
             <h:panelGrid columns="2" columnClasses="none,inputtextarea">
                 <gw:avatarDisplay
+                        onSelectOpenProfile="true"
                         width="80"
                         height="80"
                         account="#{cc.attrs.comment.commentOwner}"/>
                 <p:inputTextarea  style="width: 95%;"
                                   autoResize="true"
+                                  id="commentValue"
                                   value="#{cc.attrs.comment.value}" />
                 <h:outputText/>
                 <h:panelGroup>
@@ -55,6 +57,7 @@
 
                     <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                      update="@form"
+                                     process="commentValue,@this"
                                      style="float: right;"
                                      oncomplete="window.location.reload()"
                                      action="#{cc.attrs.sendComment}"/>

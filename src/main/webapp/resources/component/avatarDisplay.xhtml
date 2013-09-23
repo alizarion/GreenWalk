@@ -27,11 +27,18 @@
             type="java.lang.String"
             required="true"/>
 
+    <cc:attribute
+            name="onSelectOpenProfile"
+            type="java.lang.Boolean"
+            required="true"/>
+
 </cc:interface>
 
 
 <cc:implementation>
-    <div onclick="window.location.href='/profile/#{cc.attrs.account.credential.userName}'" title="#{cc.attrs.account.firstName} #{cc.attrs.account.lastName}" style="width: #{cc.attrs.width}px; " class="avatar">
+    <div onclick="#{cc.attrs.onSelectOpenProfile ? 'window.location.href=/profile/'.concat(cc.attrs.account.credential.userName) : ''}"
+         title="#{cc.attrs.account.firstName} #{cc.attrs.account.lastName}"
+         style="width: #{cc.attrs.width}px; " class="avatar">
         <p:graphicImage
                 width="#{cc.attrs.width}"
                 rendered="#{cc.attrs.account.avatarImageFile == null and cc.attrs.account.sexe == 'M'}"
@@ -46,7 +53,7 @@
                 rendered="#{cc.attrs.account.avatarImageFile != null}"
                 imageContent="#{cc.attrs.account.avatarImageFile}"/>
     </div>
-    <div style="clear: both"></div>
+
 </cc:implementation>
 
 </html>

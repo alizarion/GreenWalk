@@ -177,7 +177,7 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     width: 1024px;
-    height: 500px;
+    min-height: 500px;
 }
 
 #contentLeft {
@@ -347,7 +347,7 @@ html body .registerContent .ui-inputfield, .ui-widget-content .ui-inputfield, .u
 
 .avatar{
     background: transparent; /* background */
-
+    display: inline-block;
     border-radius: 50%; /* border-radius is equal to 50 percent of a general width, actually 25 pixels, here and a circle was got(there is also with prefix - moz and - o) */
 }
 .avatar:hover {
@@ -444,4 +444,14 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
     margin-top: 10px !important;
     width: 100%;
     margin-bottom: 10px !important;
+}
+
+body .ui-autocomplete-items td, tr{
+    border: none !important;
+}
+
+.footerContainer{
+    height: 200px;
+    width: 100%;
+
 }
