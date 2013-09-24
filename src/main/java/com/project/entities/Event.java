@@ -114,6 +114,17 @@ public abstract class Event {
         return description;
     }
 
+    public String getDescriptionShort() {
+        if (description.length()>15){
+            return description.substring(0,15);
+        } else {
+            return this.description;
+        }
+
+
+    }
+
+
     public void setDescription(String description) {
         this.description = description;
     }

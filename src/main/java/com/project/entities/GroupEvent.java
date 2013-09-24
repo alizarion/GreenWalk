@@ -8,7 +8,11 @@ import java.util.*;
  */
 @Entity
 @DiscriminatorValue(value = "GROUP")
+@NamedQuery(name= GroupEvent.FIND_ALL,
+        query="SELECT ge FROM GroupEvent ge order by ge.creationDate desc ")
 public class GroupEvent extends Event {
+
+    public final static String FIND_ALL = "GroupEvent.FIND_ALL";
 
 
     @OneToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST},
@@ -51,6 +55,8 @@ public class GroupEvent extends Event {
     public Set<GroupEventSubscriber> getSubscribers() {
         return subscribers;
     }
+
+
 
     public List<GroupEventSubscriber> getConfirmedSubscribersAsList() {
         List<GroupEventSubscriber> resultList = new ArrayList<GroupEventSubscriber>();
@@ -106,6 +112,6 @@ public class GroupEvent extends Event {
 
     @Override
     public int hashCode() {
-       return super.hashCode();
+        return super.hashCode();
     }
 }

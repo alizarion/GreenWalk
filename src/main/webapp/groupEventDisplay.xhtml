@@ -17,14 +17,6 @@
         <ui:composition template="/template/template.xhtml">
 
             <ui:define name="contentLeft">
-               <ui:
-                <gw:singleEventDisplay
-                        rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.SingleEvent'}"
-                        displayCommentLink="false"
-                        event="#{eventCommentCtrl.event}"/>
-
-
-
                 <gw:groupEventDisplay
                         rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
                         displayCommentLink="false"   event="#{eventCommentCtrl.event}"/>
@@ -44,10 +36,10 @@
 
             <ui:define name="contentRight">
 
-                    <gw:gmapPositionDisplay
-                            rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
-                            address="#{eventCommentCtrl.event.address}"
-                            height="17em" width="100%"  zoom="12" />
+                <gw:gmapPositionDisplay
+                        rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
+                        address="#{eventCommentCtrl.event.address}"
+                        height="17em" width="100%"  zoom="12" />
 
             </ui:define>
 

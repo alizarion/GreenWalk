@@ -2,31 +2,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:cc="http://java.sun.com/jsf/composite"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <cc:interface>
 
     <cc:attribute
-            name="facebook"
-            type="java.lang.Boolean"
-            required="false"/>
+            name="nextPickupsList"
+            type="java.util.List"
+            required="true"/>
 
 </cc:interface>
 
 
 <cc:implementation>
-         <div id="nextPickup">
-             <br/>
-             <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                       outcome="groupevent-outcome"/>
+    <div id="nextPickup" class="container">
+        <br/>
+        <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                  outcome="groupevent-outcome"/>
 
-         </div>
+        <ui:repeat value="#{cc.attrs.nextPickupsList}" var="groupEvent">
+
+            <div>
+                <div>
+                    <h:outputText value="#{groupEvent.eventDate}">
+                        <f:convertDateTime type="date"  pattern="E d MMM yyyy HH:mm"  />
+                    </h:outputText>
+
+                    <h:outputText value="  #{groupEvent.address.city} (#{groupEvent.address.country} )" />
+                </div>
+                <h:outputText value="#{groupEvent.descriptionShort} " />
+                <a  target="_blank" href="/group-pick-up/#{groupEvent.id}">...more</a>
+
+            </div>
+
+        </ui:repeat>
+
+    </div>
 
 </cc:implementation>
 

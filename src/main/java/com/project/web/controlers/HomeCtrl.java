@@ -1,5 +1,6 @@
 package com.project.web.controlers;
 
+import com.project.entities.GroupEvent;
 import com.project.entities.SingleEvent;
 import com.project.services.EntityFacade;
 
@@ -24,15 +25,25 @@ public class HomeCtrl implements Serializable {
 
     private List<SingleEvent> singleEvents;
 
+    private List<GroupEvent> groupEvents;
+
     @PostConstruct
     private void postInit(){
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.singleEvents = facade.findLastSingleEvents();
+        this.groupEvents = facade.findLastGroupEvents();
+
     }
 
 
     public List<SingleEvent> getSingleEvents() {
         return singleEvents;
     }
+
+    public List<GroupEvent> getGroupEvents() {
+        return groupEvents;
+    }
+
+
 }

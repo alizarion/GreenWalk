@@ -71,6 +71,19 @@ public class Explorer {
         }
     }
 
+
+    public List<GroupEvent> findLastGroupEvents() {
+        try{
+            List<GroupEvent> events = new ArrayList<GroupEvent>(em.createNamedQuery(
+                    GroupEvent.FIND_ALL).
+                    getResultList());
+            return events;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+
     public List<Account> findAccountByKeyWord(String query) {
         try{
             List<Account> accounts = new ArrayList<Account>(em.createNamedQuery(

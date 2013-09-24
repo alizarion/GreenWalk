@@ -185,6 +185,11 @@ public class EntityFacade implements Serializable{
         return this.explorer.findLastSingleEvents();
     }
 
+    public List<GroupEvent> findLastGroupEvents() {
+           return this.explorer.findLastGroupEvents();
+       }
+
+
     public Event findEventById(long id) {
         return em.find(Event.class,id);
     }

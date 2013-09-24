@@ -13,10 +13,17 @@
         <view-id>/profile.jsf</view-id>
     </url-mapping>
 
-    <url-mapping id="comments">
-        <pattern value="/comm/#{eventId}"/>
-        <view-id>/eventComments.jsf</view-id>
+    <url-mapping id="signeEventComments">
+        <pattern value="/picked-up/#{eventId}"/>
+        <view-id>/singleEventDisplay.jsf</view-id>
     </url-mapping>
+
+
+    <url-mapping id="groupEventComments">
+        <pattern value="/group-pick-up/#{eventId}"/>
+        <view-id>/groupEventDisplay.jsf</view-id>
+    </url-mapping>
+
 
 
 
