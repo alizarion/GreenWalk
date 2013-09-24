@@ -3,6 +3,7 @@ package com.project.services;
 import com.project.comingsoon.MailingList;
 import com.project.dao.Explorer;
 import com.project.entities.*;
+import com.project.entities.notifications.Notification;
 import com.project.services.mail.MailSender;
 import com.project.services.mail.RegisterEmail;
 import com.project.services.mail.SMTPEmailProvider;
@@ -72,7 +73,7 @@ public class EntityFacade implements Serializable{
     }
 
     public Account findAccountById(Long id){
-      return   this.em.find(Account.class,id);
+        return   this.em.find(Account.class,id);
     }
 
 
@@ -186,8 +187,8 @@ public class EntityFacade implements Serializable{
     }
 
     public List<GroupEvent> findLastGroupEvents() {
-           return this.explorer.findLastGroupEvents();
-       }
+        return this.explorer.findLastGroupEvents();
+    }
 
 
     public Event findEventById(long id) {
@@ -195,6 +196,7 @@ public class EntityFacade implements Serializable{
     }
 
     public void mergeComment(Comment newComment) {
+        notify(newComment.pushNotifications());
         em.merge(newComment);
     }
 
@@ -203,6 +205,13 @@ public class EntityFacade implements Serializable{
     }
 
     public void submitGroupEvent(GroupEvent event) {
+        notify(event.pushNotifications());
         this.em.merge(event);
+    }
+
+    public void notify(List<Notification> notifications){
+        for (Notification notification : notifications){
+            this.em.merge(notification);
+        }
     }
 }

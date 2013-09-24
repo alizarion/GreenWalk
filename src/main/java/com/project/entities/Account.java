@@ -1,6 +1,7 @@
 package com.project.entities;
 
 import com.project.Helper;
+import com.project.entities.notifications.Notification;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import javax.persistence.*;
@@ -94,6 +95,9 @@ public class Account implements Serializable {
     @Column
     private Date lastNotificationMailDate;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Notification> notifications= new HashSet<Notification>();
+
     @Column(name="commentenabled")
     private Boolean commentEnabled;
 
@@ -176,6 +180,8 @@ public class Account implements Serializable {
     public Date getBirthDay() {
         return birthDay;
     }
+
+
 
     public Set<SingleEvent> getSingleEvents() {
         return singleEvents;
@@ -465,4 +471,6 @@ public class Account implements Serializable {
         result = 31 * result + (profession != null ? profession.hashCode() : 0);
         return result;
     }
+
+
 }

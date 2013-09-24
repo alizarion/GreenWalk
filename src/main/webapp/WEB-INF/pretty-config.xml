@@ -24,6 +24,11 @@
         <view-id>/groupEventDisplay.jsf</view-id>
     </url-mapping>
 
+    <url-mapping id="groupEventEdit">
+        <pattern value="/user/group-pick-up-edit/#{eventId}"/>
+        <view-id>/user/groupEvent.jsf</view-id>
+    </url-mapping>
+
 
 
 

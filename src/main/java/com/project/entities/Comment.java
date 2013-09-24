@@ -3,6 +3,9 @@ package com.project.entities;
 
 
 import com.project.Helper;
+import com.project.entities.notifications.CommentNotification;
+import com.project.entities.notifications.Notification;
+import com.project.entities.notifications.Notified;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +21,7 @@ import java.util.*;
  */
 @Entity
 @Table(catalog = Helper.ENTITIES_CATALOG, name = "comments")
-public class Comment implements Serializable, Comparable {
+public class Comment implements Serializable, Comparable,Notified {
 
     @Id
     @TableGenerator(name="comments_SEQ", table="sequence",  catalog = Helper.ENTITIES_CATALOG,
@@ -34,15 +37,12 @@ public class Comment implements Serializable, Comparable {
     @OrderColumn
     private Date creationdate;
 
-
     @Column
     private Boolean signaled;
-
 
     @ManyToOne
     @JoinColumn(name="event_id")
     private Event event;
-
 
     @ManyToOne
     @JoinColumn(name="answerto_id")
@@ -75,8 +75,6 @@ public class Comment implements Serializable, Comparable {
         this.creationdate = new Date();
         this.commentOwner = account;
     }
-
-
 
     public Comment(Event event,Account account) {
         this.creationdate = new Date();
@@ -167,6 +165,7 @@ public class Comment implements Serializable, Comparable {
 
     public void addAnswer(Comment answer){
         answer.setAnswerTo(this);
+
         this.answers.add(answer);
     }
 
@@ -183,15 +182,6 @@ public class Comment implements Serializable, Comparable {
             return false;
         }
         return false;
-    }
-
-    @PrePersist
-    public void onPrePersist(){
-        /* CommentNotification notification = new CommentNotification();
-   notification.setComment(this);
-   notification.setDestinateAccount(this.getContent().getSubCategory().getCategory().getAccount());
-   this.notification = notification;
-   this.lastmodificationdate = new Date();  */
     }
 
     @Override
@@ -237,4 +227,29 @@ public class Comment implements Serializable, Comparable {
 
         }
     }
+
+
+    @Override
+    public List<Notification>  pushNotifications() {
+        List<Notification> notifications = new ArrayList<Notification>();
+        if (this.getAnswerTo() != null){
+            Comment answerto =this.getAnswerTo();
+            notifications.add(new CommentNotification(this,
+                    answerto.getCommentOwner()));
+
+            while (answerto.getEvent() == null &&
+                    answerto.getAnswerTo() != null ){
+                answerto =answerto.getAnswerTo();
+            }
+
+            notifications.add(new CommentNotification(this,
+                    answerto.getCommentOwner()));
+        } else {
+            notifications.add(new CommentNotification(this,
+                    getEvent().getOwner()));
+        }
+      return notifications;
+
+    }
+
 }

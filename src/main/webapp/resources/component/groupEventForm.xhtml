@@ -30,7 +30,7 @@
 
     <cc:attribute
             name="saveChanges"
-            method-signature="void action()"
+            method-signature="java.lang.String action()"
             required="true"/>
 
 
@@ -72,6 +72,7 @@
 
             <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                              update="@form,:growlMsg"
+                             ajax="false"
                              action="#{cc.attrs.saveChanges}"/>
 
 

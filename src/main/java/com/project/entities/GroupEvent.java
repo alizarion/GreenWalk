@@ -1,5 +1,9 @@
 package com.project.entities;
 
+import com.project.entities.notifications.GroupEventNotification;
+import com.project.entities.notifications.Notification;
+import com.project.entities.notifications.Notified;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -10,7 +14,7 @@ import java.util.*;
 @DiscriminatorValue(value = "GROUP")
 @NamedQuery(name= GroupEvent.FIND_ALL,
         query="SELECT ge FROM GroupEvent ge order by ge.creationDate desc ")
-public class GroupEvent extends Event {
+public class GroupEvent extends Event implements Notified {
 
     public final static String FIND_ALL = "GroupEvent.FIND_ALL";
 
@@ -113,5 +117,18 @@ public class GroupEvent extends Event {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    @Override
+
+    public List<Notification> pushNotifications() {
+        List<Notification> notifications = new ArrayList<Notification>();
+        for(GroupEventSubscriber subscriber :this.subscribers){
+            if (subscriber.getConfirmed()){
+                notifications.add(new GroupEventNotification(this, subscriber.getAccount()));
+            }
+        }
+
+      return  notifications;
     }
 }

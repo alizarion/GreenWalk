@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -62,12 +63,20 @@ public class GroupEventCtrl implements Serializable {
                 EntityFacade.EF_NAME, this.facade);
         this.userAccount = facade.getActiveUser();
         this.draggableModel = new DefaultMapModel();
+        HttpServletRequest request  =  (HttpServletRequest) FacesContext.
+                getCurrentInstance().getExternalContext().getRequest();
+        String eventId = (String) request.getAttribute("eventId");
         this.actualLocation = new LatLng(36.879466, 30.667648);
+        if (eventId != null){
+            this.event = (GroupEvent) facade.findEventById(Long.parseLong(eventId));
+            this.actualLocation = this.event.getAddress().getPosition().getAsLatLng();
+        }  else {
+            this.event = new GroupEvent(this.userAccount);
+        }
         draggableModel.addOverlay(new Marker(this.actualLocation, "default"));
         for(Marker marker : draggableModel.getMarkers()) {
             marker.setDraggable(true);
         }
-        this.event = new GroupEvent(this.userAccount);
         Calendar todayCalentdar = Calendar.getInstance();
         this.today =  new Date();
         todayCalentdar = Calendar.getInstance();

@@ -27,10 +27,10 @@ public class GroupEventSubscriber {
     @Column
     private Date subscribingDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private GroupEvent groupEvent;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Account account;
 
     @Column

@@ -36,7 +36,7 @@ public abstract class Event {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description",length = 2048)
     private String description;
 
     @Column(updatable = false, insertable = false)
@@ -115,8 +115,9 @@ public abstract class Event {
     }
 
     public String getDescriptionShort() {
-        if (description.length()>15){
-            return description.substring(0,15);
+        if (description.length()>30){
+            String subDescription =  description.substring(0,30);
+            return subDescription.substring(0,subDescription.lastIndexOf(' '));
         } else {
             return this.description;
         }
