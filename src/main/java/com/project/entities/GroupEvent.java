@@ -1,8 +1,6 @@
 package com.project.entities;
 
-import com.project.entities.notifications.GroupEventNotification;
-import com.project.entities.notifications.Notification;
-import com.project.entities.notifications.Notified;
+import com.project.entities.notifications.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -30,6 +28,11 @@ public class GroupEvent extends Event implements Notified {
     @Column
     private Date eventDate;
 
+    @Transient
+    private Set<Account> invitedMember = new HashSet<Account>();
+
+    @Transient
+    private Boolean newSubscriber = false;
 
     @Column
     private Integer expectedParticipants;
@@ -53,6 +56,11 @@ public class GroupEvent extends Event implements Notified {
     }
 
     public void setAddress(Address address) {
+        if (this.address!= null){
+            if (!this.address.equals(address)){
+                super.setEventUpdated(true);
+            }
+        }
         this.address = address;
     }
 
@@ -60,7 +68,22 @@ public class GroupEvent extends Event implements Notified {
         return subscribers;
     }
 
-
+    public void addSubscriber(GroupEventSubscriber eventSubscriber){
+        for (GroupEventSubscriber subscriber : this.subscribers){
+            if (subscriber.equals(eventSubscriber)){
+                if (!subscriber.getConfirmed()) {
+                    subscriber.setConfirmed(eventSubscriber.getConfirmed());
+                    this.newSubscriber= true;
+                    return;
+                }
+            }
+        }
+        this.subscribers.add(eventSubscriber);
+        if (!eventSubscriber.getConfirmed()){
+            this.invitedMember.add(eventSubscriber.getAccount());
+        }
+        this.newSubscriber= true;
+    }
 
     public List<GroupEventSubscriber> getConfirmedSubscribersAsList() {
         List<GroupEventSubscriber> resultList = new ArrayList<GroupEventSubscriber>();
@@ -92,7 +115,13 @@ public class GroupEvent extends Event implements Notified {
     }
 
     public void setEventDate(Date eventDate) {
+        if (this.eventDate!= null && eventDate != null){
+            if (!(this.eventDate.getTime() ==eventDate.getTime())){
+                super.setEventUpdated(true);
+            }
+        }
         this.eventDate = eventDate;
+
     }
 
     public Integer getExpectedParticipants() {
@@ -101,6 +130,28 @@ public class GroupEvent extends Event implements Notified {
 
     public void setExpectedParticipants(Integer expectedParticipants) {
         this.expectedParticipants = expectedParticipants;
+    }
+
+    public Boolean getNewSubscriber() {
+        return newSubscriber;
+    }
+
+    public Set<Account> getInvitedMember() {
+        return invitedMember;
+    }
+
+    public void setInvitedMember(Set<Account> invitedMember) {
+        this.invitedMember = invitedMember;
+    }
+
+    public void setNewSubscriber(Boolean newSubscriber) {
+        this.newSubscriber = newSubscriber;
+    }
+
+    public  void restoreTransientAttributes(GroupEvent event){
+        this.newSubscriber = event.getNewSubscriber();
+        super.setEventUpdated(super.getEventUpdated());
+        this.invitedMember = event.getInvitedMember();
     }
 
     @Override
@@ -120,17 +171,25 @@ public class GroupEvent extends Event implements Notified {
     }
 
     @Override
-
     public List<Notification> pushNotifications() {
         List<Notification> notifications = new ArrayList<Notification>();
-        for(GroupEventSubscriber subscriber :this.subscribers){
-            if (subscriber.getConfirmed()){
-                if (!subscriber.getAccount().equals(getOwner())){
-                    notifications.add(new GroupEventNotification(this, subscriber.getAccount()));
+        if (super.getEventUpdated()){
+            for(GroupEventSubscriber subscriber :this.subscribers){
+                if (subscriber.getConfirmed()){
+                    if (!subscriber.getAccount().equals(getOwner())){
+                        notifications.add(new GroupEventUpdatedNotification(
+                                this, subscriber.getAccount()));
+                    }
                 }
             }
         }
+        if (this.newSubscriber){
+            notifications.add(new GroupEventSubscriptionNotification(this, getOwner()));
+        }
 
+        for (Account member: invitedMember){
+            notifications.add(new GroupEventInvitationNotification(this, member));
+        }
         return  notifications;
     }
 }

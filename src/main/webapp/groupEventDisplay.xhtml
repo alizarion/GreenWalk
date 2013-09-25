@@ -18,27 +18,29 @@
 
             <ui:define name="contentLeft">
                 <gw:groupEventDisplay
-                        rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
-                        displayCommentLink="false"   event="#{eventCommentCtrl.event}"/>
+                        displayCommentLink="false"
+                        subscribe="#{groupEventDisplayCtrl.subscribe}"
+                        canSubscribe="#{groupEventDisplayCtrl.canSubscribe}"
+                        event="#{groupEventDisplayCtrl.event}"/>
 
                 <gw:header headerLabelId="common.comment.header.label-" />
                 <gw:commentList
                         toUpdateAction=":newCommentContainer:commentEditForm"
-                        commentlist="#{eventCommentCtrl.event.commentsAsList}"
-                        selectedComment="#{eventCommentCtrl.selectedComment}"/>
-                <gw:newComment rendered="#{eventCommentCtrl.newComment != null}"
+                        commentlist="#{groupEventDisplayCtrl.event.commentsAsList}"
+                        selectedComment="#{groupEventDisplayCtrl.selectedComment}"/>
+                <gw:newComment rendered="#{groupEventDisplayCtrl.newComment != null}"
                                id="newCommentContainer"
-                               comment="#{eventCommentCtrl.newComment}"
-                               selectedComment="#{eventCommentCtrl.selectedComment}"
-                               sendComment="#{eventCommentCtrl.submitComment}"/>
+                               comment="#{groupEventDisplayCtrl.newComment}"
+                               selectedComment="#{groupEventDisplayCtrl.selectedComment}"
+                               sendComment="#{groupEventDisplayCtrl.submitComment}"/>
 
             </ui:define>
 
             <ui:define name="contentRight">
 
                 <gw:gmapPositionDisplay
-                        rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
-                        address="#{eventCommentCtrl.event.address}"
+                        rendered="#{groupEventDisplayCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
+                        address="#{groupEventDisplayCtrl.event.address}"
                         height="17em" width="100%"  zoom="12" />
 
             </ui:define>

@@ -158,7 +158,7 @@ public class GroupEventCtrl implements Serializable {
     }
 
     public void setSelectedMember(Account selectedMember) {
-        this.event.getSubscribers().add(new GroupEventSubscriber(this.getEvent(),selectedMember));
+        this.event.addSubscriber(new GroupEventSubscriber(this.getEvent(),selectedMember));
         this.event.getSubscribers();
     }
 

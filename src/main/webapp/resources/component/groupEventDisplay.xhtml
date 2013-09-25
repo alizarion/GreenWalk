@@ -22,6 +22,17 @@
             type="java.lang.Boolean"
             required="true"/>
 
+    <cc:attribute
+            name="subscribe"
+            method-signature="void action()"
+            required="true"/>
+
+    <cc:attribute
+            name="canSubscribe"
+            type="java.lang.Boolean"
+            required="true"/>
+
+
 </cc:interface>
 
 
@@ -65,9 +76,15 @@
                     </ui:repeat>
                 </div>
                 <div>
+                    <h:form>
                     <gw:header headerLabelId="common.participants.members.list.label-" />
+                    <p:commandButton value="#{lang['form.group.event.button.subscribe-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                     rendered="#{cc.attrs.canSubscribe}"
+                         action="#{cc.attrs.subscribe}"  update="@form" />
+
                     <div style="clear: both"></div>
                     <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
+                    </h:form>
                 </div>
 
             </h:panelGroup>

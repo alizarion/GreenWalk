@@ -174,13 +174,7 @@ public class EntityFacade implements Serializable{
         this.em.merge(selectedEvent);
     }
 
-    public Event mergeEvent(Event event) {
-        this.em.flush();
-        this.em.clear();
-        event = this.em.merge(event);
-        this.em.refresh(event);
-        return event;
-    }
+
 
     public List<SingleEvent> findLastSingleEvents() {
         return this.explorer.findLastSingleEvents();
@@ -205,13 +199,17 @@ public class EntityFacade implements Serializable{
     }
 
     public void submitGroupEvent(GroupEvent event) {
-        event =  this.em.merge(event);
+        GroupEvent mergedEvent = this.em.merge(event);
+        mergedEvent.restoreTransientAttributes(event);
         notify(event.pushNotifications());
 
     }
 
     public void notify(List<Notification> notifications){
         for (Notification notification : notifications){
+            //TODO remove on production
+            LOG.info("Pushing " + notification.getClass() +" to " + notification.
+                    getAccountListener().getCredential().getUserName());
             this.em.merge(notification);
         }
     }

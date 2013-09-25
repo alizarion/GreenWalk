@@ -53,14 +53,22 @@
                                     rendered="#{request.userPrincipal == null}"
                                     value="#{lang['page.template.login.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                     outcome="login-outcome" />
-                            <p:button
-                                    rendered="#{request.userPrincipal != null}"
-                                    value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                    outcome="useredit-outcome" />
-                            <p:commandButton
-                                    rendered="#{request.userPrincipal != null}"
-                                    value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                    action="#{loginCtrl.logout(facesContext)}" />
+                            <p:commandButton id="dynaButton"
+                                             rendered="#{request.userPrincipal != null}"
+                                             value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                             type="button"/>
+                            <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom"
+                                    rendered="#{request.userPrincipal != null}">
+                                <p:menuitem
+                                        value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                        outcome="useredit-outcome"
+                                        icon="ui-icon-disk" />
+                                <p:menuitem value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                            action="#{loginCtrl.logout(facesContext)}" icon="ui-icon-arrowrefresh-1-w"/>
+
+                            </p:menu>
+
+
                         </h:form>
                     </li>
 

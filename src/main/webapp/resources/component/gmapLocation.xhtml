@@ -20,6 +20,10 @@
             name="searchQuery"
             type="java.lang.String"
             required="true"/>
+    <cc:attribute
+            name="getActualLocation"
+            type="java.lang.Boolean"
+            required="true"/>
 
     <cc:attribute
             name="searchActionMethod"
@@ -52,35 +56,37 @@
 <cc:implementation>
     <script src="http://maps.google.com/maps/api/js?sensor=true"
             type="text/javascript"/>
-    <script type="text/javascript">
-        $(function(){
-            findMe();
-        });
+    <h:panelGroup rendered="#{cc.attrs.getActualLocation}">
+        <script type="text/javascript">
+            $(function(){
+                findMe();
+            });
 
-        function findMe() {
+            function findMe() {
 
-            navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        console.log( jQuery(".hiddenInput input:first"));
-                        jQuery(".hiddenInput input:first")[0].value = position.coords.latitude+ ', '+ position.coords.longitude;
+                navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            console.log( jQuery(".hiddenInput input:first"));
+                            jQuery(".hiddenInput input:first")[0].value = position.coords.latitude+ ', '+ position.coords.longitude;
 
-                        remotemaupdater();
-                    },
-                    function(error) {
-                        alert(error.message);
-                    },
-                    {
-                        enableHighAccuracy: true
-                    });
+                            remotemaupdater();
+                        },
+                        function(error) {
+                            alert(error.message);
+                        },
+                        {
+                            enableHighAccuracy: true
+                        });
 
-        }
-    </script>
+            }
+        </script>
+    </h:panelGroup>
     <div class="container">
         <h:form id="gmapForm" prependId="false" onkeypress="if (event.keyCode == 13) { remotesearch(); return false; }">
             <p:remoteCommand name="remotemaupdater"  process="input1,@this" update="mapGroup" />
-             <h:panelGroup styleClass="hiddenInput">
-            <h:inputHidden  id="input1" value="#{cc.attrs.actualLocation}" />
-             </h:panelGroup>
+            <h:panelGroup styleClass="hiddenInput">
+                <h:inputHidden  id="input1" value="#{cc.attrs.actualLocation}" />
+            </h:panelGroup>
             <p:inputText  type="search"
                           id="search"
 
@@ -94,7 +100,7 @@
             <p:remoteCommand
                     name="remotesearch"
                     action="#{cc.attrs.searchActionMethod}" update="mapGroup,#{cc.attrs.toUpdate}" />
-             <div style="clear: both;"></div>
+            <div style="clear: both;"></div>
             <h:panelGroup id="mapGroup">
                 <p:gmap center="#{cc.attrs.mapModel.markers[0].latlng.lat}, #{cc.attrs.mapModel.markers[0].latlng.lng}"
                         zoom="#{cc.attrs.zoom}"

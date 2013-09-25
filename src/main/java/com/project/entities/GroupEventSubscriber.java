@@ -44,7 +44,7 @@ public class GroupEventSubscriber {
         this.subscribingDate = new Date();
         this.groupEvent = groupEvent;
         this.account = account;
-        this.confirmed = true;
+        this.confirmed = confirmed;
     }
 
 
@@ -108,8 +108,7 @@ public class GroupEventSubscriber {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (groupEvent != null ? groupEvent.hashCode() : 0);
+        int result =  (groupEvent != null ? groupEvent.hashCode() : 0);
         result = 31 * result + (account != null ? account.hashCode() : 0);
         return result;
     }

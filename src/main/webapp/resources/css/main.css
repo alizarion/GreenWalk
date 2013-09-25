@@ -25,10 +25,10 @@ html, body .ui-widget {
     src: local('Open Sans'), local('OpenSans'), url("http://#{app['APP_DOMAIN']}/resources/css/OpenSans.woff") format('woff');
 }
 
-a {
+body a {
     text-decoration: none;
-    font-family: Arial regular;
-    color: black;
+    font-family: 'Boogaloo',regular;
+    font-weight: normal;
     font-size: 16pt;
 }
 
@@ -434,7 +434,7 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 
 .inputtextarea{
     margin: 10px;
-  width: 100%;
+    width: 100%;
 }
 
 
@@ -453,5 +453,17 @@ body .ui-autocomplete-items td, tr{
 .footerContainer{
     height: 200px;
     width: 100%;
+}
 
+body .ui-menu, .ui-menu .ui-menu-child {
+    background-image: none !important;
+    background-color: greenyellow!important;
+    font-family: 'Boogaloo',regular;
+    border: none!important;
+}
+body .ui-menu, .ui-menu .ui-menu-child .ui-state-hover .ui-state-focus {
+    background-image: none !important;
+    background-color: greenyellow!important;
+    font-family: 'Boogaloo',regular;
+    border: none!important;
 }

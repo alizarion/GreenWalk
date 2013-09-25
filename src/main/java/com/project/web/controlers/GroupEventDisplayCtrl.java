@@ -5,18 +5,12 @@ import com.project.services.EntityFacade;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ConversationScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,9 +21,9 @@ import java.util.ResourceBundle;
  */
 @ManagedBean
 @ViewScoped
-public class EventCommentCtrl implements Serializable {
+public class GroupEventDisplayCtrl implements Serializable {
 
-    private Event event ;
+    private GroupEvent event ;
 
     @EJB
     EntityFacade facade;
@@ -41,7 +35,7 @@ public class EventCommentCtrl implements Serializable {
 
     private Comment selectedComment;
 
-    private Boolean canSubscribe = false;
+    private Boolean canSubscribe = true;
 
     private Account user;
 
@@ -53,19 +47,27 @@ public class EventCommentCtrl implements Serializable {
         HttpServletRequest request  =  (HttpServletRequest) FacesContext.
                 getCurrentInstance().getExternalContext().getRequest();
         String eventId = (String) request.getAttribute("eventId");
-        this.event = facade.findEventById(Long.parseLong(eventId));
+        this.event = (GroupEvent) facade.findEventById(Long.parseLong(eventId));
         this.user = facade.getActiveUser();
         if(this.user != null){
             this.newComment = new Comment(this.user);
-            if (this.event instanceof  GroupEvent){
-
+            for (GroupEventSubscriber subscriber : this.event.getConfirmedSubscribersAsList()){
+                if (subscriber.getAccount().equals(this.user)){
+                    canSubscribe = false;
+                }
             }
-
+        } else {
+            canSubscribe = false;
         }
-
-
     }
 
+    public Boolean getCanSubscribe() {
+        return canSubscribe;
+    }
+
+    public void setCanSubscribe(Boolean canSubscribe) {
+        this.canSubscribe = canSubscribe;
+    }
 
     public Comment getSelectedComment() {
         return selectedComment;
@@ -75,11 +77,11 @@ public class EventCommentCtrl implements Serializable {
         this.selectedComment = selectedComment;
     }
 
-    public Event getEvent() {
+    public GroupEvent getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(GroupEvent event) {
         this.event = event;
     }
 
@@ -89,6 +91,13 @@ public class EventCommentCtrl implements Serializable {
 
     public void setNewComment(Comment newComment) {
         this.newComment = newComment;
+    }
+
+    public void subscribe(){
+        GroupEventSubscriber  subscriber = new GroupEventSubscriber(this.event,this.user,true);
+        this.event.addSubscriber(subscriber);
+        facade.submitGroupEvent(this.event);
+        canSubscribe = false;
     }
 
     public void submitComment(){

@@ -53,6 +53,9 @@ public abstract class Event {
     @OrderBy(value = "creationdate")
     private Set<Comment> comments = new HashSet<Comment>();
 
+    @Transient
+    private Boolean eventUpdated = false;
+
     protected Event() {
         this.creationDate = new Date();
     }
@@ -114,10 +117,22 @@ public abstract class Event {
         return description;
     }
 
+    public Boolean getEventUpdated() {
+        return eventUpdated;
+    }
+
+    public void setEventUpdated(Boolean eventUpdated) {
+        this.eventUpdated = eventUpdated;
+    }
+
     public String getDescriptionShort() {
         if (description.length()>30){
             String subDescription =  description.substring(0,30);
-            return subDescription.substring(0,subDescription.lastIndexOf(' '));
+            if (subDescription.contains(" ")){
+                return subDescription.substring(0,subDescription.lastIndexOf(' '));
+            } else {
+                return  subDescription;
+            }
         } else {
             return this.description;
         }
@@ -127,6 +142,11 @@ public abstract class Event {
 
 
     public void setDescription(String description) {
+        if (this.description!= null){
+            if(!this.description.equals(description)){
+                this.eventUpdated = true;
+            }
+        }
         this.description = description;
     }
 
@@ -185,4 +205,6 @@ public abstract class Event {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
+
+
 }

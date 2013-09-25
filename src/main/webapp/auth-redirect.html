@@ -4,9 +4,37 @@
         <meta name="Language" content="fr"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Green Walk</title>
-        <meta http-equiv="Refresh" content="0;url=/login.jsf" />
+        <!--meta http-equiv="Refresh" content="0;url=/login.jsf?" /-->
     </head>
-    <body>
+    <body onload="window.location.href= '/login.jsf?' +window.location.search.substring(1)" >
+    <!--script >
+
+
+        var QueryString = function () {
+            // This function is anonymous, is executed immediately and
+            // the return value is assigned to QueryString!
+            var query_string = {};
+            var query = window.location.search.substring(1);
+            console.log(query);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                // If first entry with this name
+                if (typeof query_string[pair[0]] === "undefined") {
+                    query_string[pair[0]] = pair[1];
+                    // If second entry with this name
+                } else if (typeof query_string[pair[0]] === "string") {
+                    var arr = [ query_string[pair[0]], pair[1] ];
+                    query_string[pair[0]] = arr;
+                    // If third or later entry with this name
+                } else {
+                    query_string[pair[0]].push(pair[1]);
+                }
+            }
+            return query_string;
+        } ();
+        console.log(QueryString);
+    </script-->
         <p>Authentification required...</p>
     </body>
 </html>

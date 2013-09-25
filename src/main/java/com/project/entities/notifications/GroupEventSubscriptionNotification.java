@@ -2,7 +2,6 @@ package com.project.entities.notifications;
 
 import com.project.entities.Account;
 import com.project.entities.GroupEvent;
-import com.project.entities.notifications.Notification;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,8 +15,8 @@ import java.util.ResourceBundle;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@DiscriminatorValue(value = "GroupEventNotification")
-public class GroupEventNotification extends Notification implements Serializable {
+@DiscriminatorValue(value = "GroupEventSubscriptionNotification")
+public class GroupEventSubscriptionNotification extends Notification implements Serializable {
 
     public static final String NOTIFICATION_LABEL = "notification-label-comment-FR";
     public static final String FIND_ACCOUNT_COMMENT_NOTIFICATION = "FIND_ACCOUNT_COMMENT_NOTIFICATION";
@@ -29,17 +28,17 @@ public class GroupEventNotification extends Notification implements Serializable
     private GroupEvent groupEvent;
 
 
-    public GroupEventNotification() {
+    public GroupEventSubscriptionNotification() {
         super();
     }
 
-    public GroupEventNotification(GroupEvent groupEvent, Account account) {
+    public GroupEventSubscriptionNotification(GroupEvent groupEvent, Account account) {
         super();
         super.setAccountListener(account);
         this.groupEvent = groupEvent;
     }
 
-    public GroupEventNotification(GroupEvent groupEvent) {
+    public GroupEventSubscriptionNotification(GroupEvent groupEvent) {
         super();
         this.groupEvent = groupEvent;
     }
@@ -66,10 +65,10 @@ public class GroupEventNotification extends Notification implements Serializable
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GroupEventNotification)) return false;
+        if (!(o instanceof GroupEventSubscriptionNotification)) return false;
         if (!super.equals(o)) return false;
 
-        GroupEventNotification that = (GroupEventNotification) o;
+        GroupEventSubscriptionNotification that = (GroupEventSubscriptionNotification) o;
 
         if (groupEvent != null ? !groupEvent.equals(that.groupEvent) : that.groupEvent != null) return false;
 

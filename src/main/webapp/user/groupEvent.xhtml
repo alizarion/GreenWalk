@@ -24,12 +24,14 @@
 
                 <gw:header headerLabelId="common.participants.members.list.label-" />
                 <div class="container">
-                    <gw:participantsList participants="#{groupEventCtrl.event.confirmedSubscribersAsList}"/>
+                    <gw:participantsList
+                            participants="#{groupEventCtrl.event.confirmedSubscribersAsList}"/>
                 </div>
 
-                <gw:requestedMembersList completeMembers="#{groupEventCtrl.completeMembers}"
-                                         selectedMember="#{groupEventCtrl.selectedMember}"
-                                         currentEvent="#{groupEventCtrl.event}" />
+                <gw:requestedMembersList
+                        completeMembers="#{groupEventCtrl.completeMembers}"
+                        selectedMember="#{groupEventCtrl.selectedMember}"
+                        currentEvent="#{groupEventCtrl.event}" />
 
 
             </ui:define>
@@ -39,6 +41,7 @@
                         mapModel="#{groupEventCtrl.draggableModel}"
                         actualLocation="#{groupEventCtrl.actualLocation}"
                         zoom="#{groupEventCtrl.mapZoom}"
+                        getActualLocation="#{groupEventCtrl.event.id == null}"
                         toUpdate=":groupEventForm:groupEventEditForm"
                         searchQuery="#{groupEventCtrl.searchQuery}"
                         searchActionMethod="#{groupEventCtrl.searchPosition}"

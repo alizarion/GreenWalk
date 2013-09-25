@@ -21,7 +21,9 @@
     <div id="nextPickup" class="container">
         <br/>
         <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                  outcome="groupevent-outcome"/>
+                  outcome="groupevent-outcome">
+            <f:param name="goTo"  value="groupevent-outcome" />
+                </p:button>
 
         <ui:repeat value="#{cc.attrs.nextPickupsList}" var="groupEvent">
 
