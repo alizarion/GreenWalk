@@ -234,21 +234,27 @@ public class Comment implements Serializable, Comparable,Notified {
         List<Notification> notifications = new ArrayList<Notification>();
         if (this.getAnswerTo() != null){
             Comment answerto =this.getAnswerTo();
-            notifications.add(new CommentNotification(this,
-                    answerto.getCommentOwner()));
+            if (!commentOwner.equals(answerto.getCommentOwner())){
+                notifications.add(new CommentNotification(this,
+                        answerto.getCommentOwner()));
+            }
 
             while (answerto.getEvent() == null &&
                     answerto.getAnswerTo() != null ){
                 answerto =answerto.getAnswerTo();
             }
 
-            notifications.add(new CommentNotification(this,
-                    answerto.getCommentOwner()));
+            if (!commentOwner.equals(answerto.getCommentOwner())){
+                notifications.add(new CommentNotification(this,
+                        answerto.getCommentOwner()));
+            }
         } else {
-            notifications.add(new CommentNotification(this,
-                    getEvent().getOwner()));
+            if (!commentOwner.equals(getEvent().getOwner())){
+                notifications.add(new CommentNotification(this,
+                        getEvent().getOwner()));
+            }
         }
-      return notifications;
+        return notifications;
 
     }
 

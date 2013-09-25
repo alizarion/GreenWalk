@@ -125,10 +125,12 @@ public class GroupEvent extends Event implements Notified {
         List<Notification> notifications = new ArrayList<Notification>();
         for(GroupEventSubscriber subscriber :this.subscribers){
             if (subscriber.getConfirmed()){
-                notifications.add(new GroupEventNotification(this, subscriber.getAccount()));
+                if (!subscriber.getAccount().equals(getOwner())){
+                    notifications.add(new GroupEventNotification(this, subscriber.getAccount()));
+                }
             }
         }
 
-      return  notifications;
+        return  notifications;
     }
 }
