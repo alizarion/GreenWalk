@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>com.project.web</groupId>
+    <groupId>com.geenwalk.web</groupId>
     <artifactId>GreenWalk</artifactId>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
@@ -135,12 +135,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces-mobile</artifactId>
             <version>0.9.3</version>
 
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>com.sun.faces</groupId>

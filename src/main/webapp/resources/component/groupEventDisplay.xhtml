@@ -56,7 +56,7 @@
 
                         <h:outputLabel styleClass="label" value="#{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
                         <h:outputText value="#{cc.attrs.event.eventDate}">
-                            <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                         </h:outputText>
 
                     </h:panelGrid>

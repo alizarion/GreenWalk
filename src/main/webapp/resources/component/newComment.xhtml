@@ -52,7 +52,7 @@
 
                     <h:outputText  rendered="#{cc.attrs.selectedComment != null}"
                             value="#{cc.attrs.selectedComment.creationdate}">
-                        <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                     </h:outputText>
 
                     <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"

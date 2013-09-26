@@ -66,6 +66,13 @@
             <redirect>true</redirect>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>next-missions-outcome</from-outcome>
+            <to-view-id>/nextMissions.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+
 
     </navigation-rule>
 

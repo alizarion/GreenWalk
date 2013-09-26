@@ -50,7 +50,7 @@
                 height="60"/>
         <h:panelGroup>
             <h:outputText value="#{cc.attrs.comment.creationdate}">
-                <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
             </h:outputText>
             #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
             #{cc.attrs.comment.commentOwner.lastName} #{cc.attrs.comment.commentOwner.firstName}
@@ -79,7 +79,7 @@
                     height="60"/>
             <h:panelGroup>
                 <h:outputText value="#{answer.creationdate}">
-                    <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                    <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                 </h:outputText>
                 #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                 #{answer.commentOwner.lastName} #{answer.commentOwner.firstName}
@@ -109,7 +109,7 @@
                         height="60"/>
                 <h:panelGroup>
                     <h:outputText value="#{answer1.creationdate}">
-                        <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"   pattern="d MMM yyyy HH:mm"  />
                     </h:outputText>
                     #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                     #{answer1.commentOwner.lastName} #{answer1.commentOwner.firstName}
@@ -138,7 +138,7 @@
                             height="60"/>
                     <h:panelGroup>
                         <h:outputText value="#{answer2.creationdate}">
-                            <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"   pattern="d MMM yyyy HH:mm"  />
                         </h:outputText>
                         #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                         #{answer2.commentOwner.lastName} #{answer2.commentOwner.firstName}
@@ -167,7 +167,7 @@
                                 height="60"/>
                         <h:panelGroup>
                             <h:outputText value="#{answer3.creationdate}">
-                                <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                             </h:outputText>
                             #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                             #{answer3.commentOwner.lastName} #{answer3.commentOwner.firstName}
@@ -196,7 +196,7 @@
                                     height="60"/>
                             <h:panelGroup>
                                 <h:outputText value="#{answer4.creationdate}">
-                                    <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                    <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"   pattern="d MMM yyyy HH:mm"  />
                                 </h:outputText>
                                 #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                 #{answer4.commentOwner.lastName} #{answer4.commentOwner.firstName}
@@ -225,7 +225,7 @@
                                         height="60"/>
                                 <h:panelGroup>
                                     <h:outputText value="#{answer5.creationdate}">
-                                        <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                                     </h:outputText>
                                     #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                     #{answer5.commentOwner.lastName} #{answer5.commentOwner.firstName}
@@ -254,7 +254,7 @@
                                             height="60"/>
                                     <h:panelGroup>
                                         <h:outputText value="#{answer6.creationdate}">
-                                            <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                                         </h:outputText>
                                         #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                         #{answer6.commentOwner.lastName} #{answer6.commentOwner.firstName}
@@ -283,7 +283,7 @@
                                                 height="60"/>
                                         <h:panelGroup>
                                             <h:outputText value="#{answer7.creationdate}">
-                                                <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                                             </h:outputText>
                                             #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                             #{answer7.commentOwner.lastName} #{answer7.commentOwner.firstName}
@@ -312,7 +312,7 @@
                                                     height="60"/>
                                             <h:panelGroup>
                                                 <h:outputText value="#{answer8.creationdate}">
-                                                    <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                    <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                                                 </h:outputText>
                                                 #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                                 #{answer8.commentOwner.lastName} #{answer8.commentOwner.firstName}
@@ -341,7 +341,7 @@
                                                         height="60"/>
                                                 <h:panelGroup>
                                                     <h:outputText value="#{answer9.creationdate}">
-                                                        <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                                                     </h:outputText>
                                                     #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                                     #{answer9.commentOwner.lastName} #{answer9.commentOwner.firstName}
@@ -370,7 +370,7 @@
                                                             height="60"/>
                                                     <h:panelGroup>
                                                         <h:outputText value="#{answer10.creationdate}">
-                                                            <f:convertDateTime type="date"  pattern="d MMM yyyy HH:mm"  />
+                                                            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
                                                         </h:outputText>
                                                         #{lang['component.comment.owner.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                                         #{answer10.commentOwner.lastName} #{answer10.commentOwner.firstName}

@@ -64,6 +64,14 @@ public class GroupEvent extends Event implements Notified {
         this.address = address;
     }
 
+    public Boolean getEndedEvent(){
+        if(this.eventDate.getTime()<(new Date()).getTime()){
+            return true;
+        }  else {
+            return false;
+        }
+    }
+
     public Set<GroupEventSubscriber> getSubscribers() {
         return subscribers;
     }

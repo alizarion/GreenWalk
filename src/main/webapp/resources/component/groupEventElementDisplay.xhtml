@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="event"
+            type="com.project.entities.GroupEvent"
+            required="true"/>
+
+    <cc:attribute
+            name="isOwnerEvent"
+            type="java.lang.Boolean"
+            required="false"/>
+    <cc:attribute
+            name="withHeaders"
+            type="java.lang.Boolean"
+            required="true"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+
+    <h:panelGroup rendered="#{cc.attrs.withHeaders}" styleClass="groupElementContainer">
+
+        <span class="eventDateColumn">
+            <h:outputText
+                value="#{lang['common.label.date.time-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+        </span>
+
+         <span class="eventLocationColumn">
+                <h:outputText
+                        value="#{lang['common.label.group.event.location-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+        </span>
+
+         <span class="eventShortDescriptionColumn">
+             <h:outputText
+                    value="#{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+        </span>
+
+
+        <span class="eventOrganiserColumn">
+             <h:outputText
+                     value="#{lang['common.label.group.event.organiser-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+        </span>
+
+    </h:panelGroup>
+
+    <div class="groupElementContainer">
+
+        <span class="eventDateColumn">
+                 <h:outputText value="#{cc.attrs.event.eventDate}" >
+                     <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
+                 </h:outputText>
+        </span>
+
+
+           <span class="eventLocationColumn">
+                  <h:outputText  value="#{cc.attrs.event.address}" />
+        </span>
+           <span class="eventShortDescriptionColumn">
+              <h:outputText value="#{cc.attrs.event.descriptionShort}" />
+            <a  target="_blank" href="/group-pick-up/#{cc.attrs.event.id}">...more</a>
+        </span>
+
+         <span class="eventOrganiserColumn">
+            <h:outputText id="member"
+                          styleClass="memberName"
+                          style="float: left"
+                          value="#{cc.attrs.event.owner.lastName} #{cc.attrs.event.owner.firstName}" />
+              <p:overlayPanel id="avatarPanel#{cc.attrs.event.owner.id}" for="member" my="left top" hideEffect="fade">
+                  <gw:avatarDisplay height="40" onSelectOpenProfile="#{false}" account="#{cc.attrs.event.owner}" width="40" />
+              </p:overlayPanel>
+        </span>
+
+
+    </div>
+
+</cc:implementation>
+
+</html>

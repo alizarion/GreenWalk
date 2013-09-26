@@ -30,7 +30,7 @@
             <div>
                 <div>
                     <h:outputText value="#{groupEvent.eventDate}">
-                        <f:convertDateTime type="date"  pattern="E d MMM yyyy HH:mm"  />
+                        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="E d MMM yyyy HH:mm"  />
                     </h:outputText>
 
                     <h:outputText value="  #{groupEvent.address.city} (#{groupEvent.address.country} )" />

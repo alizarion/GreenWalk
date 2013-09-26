@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="tabViewWrapperList"
+            type="java.util.List"
+            required="true"/>
+
+
+</cc:interface>
+
+
+<cc:implementation>
+    <p:tabView id="tabView" value="#{cc.attrs.tabViewWrapperList}" var="tabViewWrapper">
+        <p:tab id="tab" title="#{tabViewWrapper.tabTitle}" >
+
+            <p:dataGrid var="groupEvent"
+                        value="#{tabViewWrapper.eventList}"
+                        columns="1"
+                        paginator="true"
+                        rowIndexVar="index"
+                        rows="9"
+                        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+                <gw:groupEventElementDisplay  isOwnerEvent="#{tabViewWrapper.editable}" withHeaders="#{index==0}" event="#{groupEvent}"/>
+            </p:dataGrid>
+        </p:tab>
+
+    </p:tabView>
+
+
+
+</cc:implementation>
+
+</html>
