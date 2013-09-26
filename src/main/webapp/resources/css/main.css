@@ -29,7 +29,7 @@ body a {
     text-decoration: none;
     font-family: 'Boogaloo',regular;
     font-weight: normal;
-    font-size: 16pt;
+    color: #4f4f4f;
 }
 
 
@@ -461,7 +461,7 @@ body .ui-menu, .ui-menu .ui-menu-child {
     font-family: 'Boogaloo',regular;
     border: none!important;
 }
-body .ui-menu, .ui-menu .ui-menu-child .ui-state-hover .ui-state-focus {
+body .ui-menu  .ui-state-hover  {
     background-image: none !important;
     background-color: greenyellow!important;
     font-family: 'Boogaloo',regular;
