@@ -12,17 +12,18 @@
     <h:body>
         <ui:composition template="/template/template.xhtml">
             <ui:define name="center">
-                <div class="center">
-                    <div class="counterText">
-                        <div class="counterText1">
-                            <p style="margin:0;font-size: 40pt;">
-                                Together,
-                            </p>
-
+                <div class="center" >
+                    <div  class="verticalAlignement visual-block"  >
+                        <gw:garbage />
+                        <div style="width: 390px;float: left;height: 430px;display: inline-block;">
+                            <p class="titleHomeText1">together,</p>
+                            <p class="titleHomeText2">we have freed the nature of
+                                <span class="titleHomeNumber">20,000</span>
+                                kinds of waste</p>
+                            <p:button  style="float: right;" value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                      outcome="singleform-outcome" />
                         </div>
-
                     </div>
-                    <div class="counter"></div>
                 </div>
             </ui:define>
             <ui:define name="contentLeft">
@@ -31,11 +32,10 @@
                     <div class="commentAndEventHead">
                         <h1>#{lang['last.events-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
 
-                        <p:button value="#{lang['page.home.add.singleEvent-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                  outcome="singleform-outcome" />
+
                     </div>
                 </h:panelGroup>
-                <br/>
+
                 <gw:lastEvents singleEvents="#{homeCtrl.singleEvents}"/>
 
             </ui:define>
@@ -45,7 +45,7 @@
                 <gw:gwSocial facebook="#{true}"
                              twitter="#{true}"
                              gplus="#{true}"/>
-                <br/>
+
                 <gw:nextPickups nextPickupsList="#{homeCtrl.groupEvents}" />
 
 

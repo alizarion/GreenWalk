@@ -29,7 +29,14 @@
                 <ol style="display: inline-block">
                     <li class="menuItem">
                         <h:link
-                                value="#{lang['page.template.community.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                               styleClass="homeButton"
+                                outcome="community-outcome">
+                              <div  class="homeButton"></div>
+                                </h:link>
+                    </li>
+                    <li class="menuItem">
+                        <h:link
+                                value="#{lang['common.menu.label.about.us-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                 outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
@@ -39,13 +46,23 @@
                     </li>
                     <li class="menuItem">
                         <h:link
+                                value="#{lang['page.template.local.action.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link
                                 value="#{lang['page.template.tri.memo.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                 outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
                         <h:link
                                 value="#{lang['page.template.partners.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                outcome="community-outcome"/>
+                                outcome="next-missions-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link
+                                value="#{lang['page.template.declare.picked.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="next-missions-outcome"/>
                     </li>
                     <li class="menuItem">
                         <h:form>

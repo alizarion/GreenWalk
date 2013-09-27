@@ -9,8 +9,8 @@ package com.project.entities;
  */
 public enum OtherWasteType {
 
-    TEXTILE("TEXTILE"),
-    ELECTRONIC("ELECTRONIC");
+    TEXTILE("textile"),
+    ELECTRONIC("electronic");
 
     private String keyLabel;
 

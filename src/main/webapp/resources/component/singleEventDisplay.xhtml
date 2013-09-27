@@ -38,7 +38,7 @@
             <h:panelGroup>
                 <div class="eventHeader">
 
-                    <h3>#{cc.attrs.event.owner.firstName} #{cc.attrs.event.owner.lastName}</h3>#{lang['component.event.header.declare-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                    <h3>#{cc.attrs.event.owner.firstName} #{cc.attrs.event.owner.lastName}</h3> #{lang['component.event.header.declare-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                     <div>
                         <ui:repeat value="#{cc.attrs.event.garbageAsList}" var="wastes">
                             <gw:wasteTags waste="#{wastes}"/>

@@ -9,7 +9,7 @@ package com.project.entities;
  */
 public enum PutrescibleWasteType {
 
-    FOOD("FOOD");
+    FOOD("food");
 
     private String keyLabel;
 

@@ -9,12 +9,12 @@ package com.project.entities;
  */
 public enum RecyclableWasteType {
 
-    ALU("ALU"),
-    CARDBOARD("CARDBOARD"),
-    GLASS("GLASS"),
-    PAPER("PAPER"),
-    PLASTICS("PLASTICS"),
-    STEEL("STEEL");
+    ALU("aluminium"),
+    CARDBOARD("cardboard"),
+    GLASS("glass"),
+    PAPER("paper"),
+    PLASTICS("plastic"),
+    STEEL("steel");
 
     private String keyLabel;
 

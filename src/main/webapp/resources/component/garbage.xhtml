@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="wastes"
+            type="java.util.List"
+            required="false"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+    <h:outputScript library="garbage" name="mouse.js"/>
+    <h:outputScript library="garbage" name="Box2dWeb-2.1.a.3.js"/>
+    <h:outputScript library="garbage" name="box2d.js"/>
+    <h:outputScript library="garbage" name="loader.js"/>
+    <h:outputScript library="garbage" name="entities.js"/>
+
+    <h:outputStylesheet library="css" name="main.css" />
+
+    <script type="text/javascript">
+
+    </script>
+    <div  id="garbagecontainer">
+        <canvas id="garbageCanvas"
+                width="557"
+                height="430"
+                class="garbagelayer"/>
+        <div id="loadingscreen" class="garbagelayer">
+            <div id="loadingmessage"></div>
+        </div>
+    </div>
+    <h:outputScript library="garbage" name="garbage.js"/>
+    <!--canvas id="debugcanvas" width="1000" height="430" style="border: solid 1px #000000"></canvas-->
+</cc:implementation>
+
+</html>
