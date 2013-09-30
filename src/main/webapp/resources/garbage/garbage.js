@@ -40,15 +40,20 @@ var garbage = {
         {type:"waste",value:323, name:"plastic-bag",x:220,y:-700,calories:590},
         {type:"waste",value:323, name:"wood-composite",x:220,y:-600,calories:590},
         {type:"waste",value:323, name:"textile",x:220,y:-500,calories:590},
+        {type:"waste",value:323, name:" bottle-glass",x:220,y:-100,calories:590},
         {type:"waste",value:323, name:"bottle-plastic",x:220,y:-100,calories:590},
+        {type:"waste",value:323, name:"jars",x:220,y:-100,calories:590},
         {type:"waste",value:323, name:"food-cardboard", x:280,y:0,calories:420}],
     init: function(){
 
-        loader.init();
+
         garbage.canvas = $('#garbageCanvas')[0];
         garbage.context = garbage.canvas.getContext('2d');
+        garbage.context.drawImage(garbage.background,0,0);
+
+        $('#garbageCanvas').show();
+        loader.init();
         //console.log(garbage.context);
-        console.log('fgdgsd');
         mouse.init();
         box2d.init();
         for (var i = garbage.entities.length-1; i >= 0; i--){
@@ -91,7 +96,7 @@ var garbage = {
     sleeping: false,
     drawAllBodies:function(){
 
-      box2d.world.DrawDebugData();
+        box2d.world.DrawDebugData();
         //intérer sur les corp et les dessiner
         var awakeBodiesCount = 0 ;
         for(var body = box2d.world.GetBodyList();body; body = body.GetNext()){

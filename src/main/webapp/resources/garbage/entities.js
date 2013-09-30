@@ -2,77 +2,91 @@ var entities = {
     definitions : {
         "food-cardboard":{
             shape: "circle",
-            radius :45,
+            radius :40,
             density:1,
             friction :0.5,
             restitution :0.4
         },
         "electronic":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         },
         "tin":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         },
         "paper":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         },
         "menager-plastic":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         } ,
         "bottle-plastic":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         } ,
+        "bottle-glass":{
+            shape:"circle",
+            radius:40,
+            density:2.0,
+            friction:0.5,
+            restitution:0.4
+        },
+        "jars":{
+            shape:"circle",
+            radius:40,
+            density:2.0,
+            friction:0.5,
+            restitution:0.4
+        },
         "other":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         } ,
         "packaging-hazardous-materials":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         } ,
         "plastic-bag":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         } ,
         "textile":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4
         },
         "wood-composite":{
             shape:"circle",
-            radius:45,
+            radius:40,
             density:2.0,
             friction:0.5,
             restitution:0.4

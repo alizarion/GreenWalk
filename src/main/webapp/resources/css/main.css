@@ -180,7 +180,8 @@ a:hover {
 }
 
 .titleHomeText1{
-    margin: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
     font-family: 'Boogaloo',regular;
     font-size: 53px;
     text-transform:uppercase;
@@ -188,19 +189,22 @@ a:hover {
     color: #00323f;
 }
 .titleHomeNumber{
-    margin: 5px;
+    margin-top:2px;
+    margin-bottom: 2px;
     font-family: 'Boogaloo',regular;
     font-size: 73px;
     display: inline-block ;
     color: #ffffff;
 }
+
+
 .titleHomeText2{
-    margin: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
     font-family: 'Boogaloo',regular;
     text-transform:uppercase;
     font-size: 32px;
     display: inline-block;
-
     color: #00323f;
 }
 
@@ -615,7 +619,7 @@ body .ui-menu  .ui-state-hover  {
     height:430px;
     display: inline-block;
     float: left;
-    /*background: url("../resources/img/garbage/garbage_home.png"); */
+    background: url("../resources/img/garbage/garbage_home.png");
 
 }
 
@@ -625,7 +629,6 @@ body .ui-menu  .ui-state-hover  {
 }
 
 #loadingscreen {
-    background:rgba(100,100,100,0.3);
 }
 
 #loadingmessage {
