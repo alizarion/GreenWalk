@@ -17,21 +17,49 @@
             type="java.lang.Boolean"
             required="false"/>
     <cc:attribute
-                name="gplus"
-                type="java.lang.Boolean"
-                required="false"/>
+            name="gplus"
+            type="java.lang.Boolean"
+            required="false"/>
     <cc:attribute
-                name="twitter"
-                type="java.lang.Boolean"
-                required="false"/>
+            name="twitter"
+            type="java.lang.Boolean"
+            required="false"/>
 
 </cc:interface>
 
 
 <cc:implementation>
-         <div class="container"  style="background-color: #ffffff;">
+    <script type="text/javascript">
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){
+            js=d.createElement(s);
+            js.id=id;
+            js.src="//platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js,fjs);}
+        }(document,"script","twitter-wjs");
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <div class="container"  style="background-color: #ffffff;">
+        <h3>Make known our mission around you:</h3>
+        <div class="social-buttons ui-field-contain ui-body ui-br">
+            <div  class="fb-like facebook-like" data-send="false" data-layout="box_count" data-width="450" data-show-faces="true"></div>
 
-         </div>
+            <div class="g-plusone" data-size="tall"></div>
+
+            <a  href="https://twitter.com/share" class="twitter-share twitter-share-button" data-url="http://ingresswatch.com"  data-count="vertical"  data-text="IngressWatch : collaboration and management tools for ingress strategries">Tweet</a>
+            <a href="https://plus.google.com/104642560018605407751" rel="publisher">Google+</a>
+        </div>
+    </div>
 
 </cc:implementation>
 

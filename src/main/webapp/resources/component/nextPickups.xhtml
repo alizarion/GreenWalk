@@ -20,30 +20,37 @@
 <cc:implementation>
     <div class="container" style="background-color: #ffffff;">
 
-        <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                  outcome="groupevent-outcome">
-            <f:param name="goTo"  value="groupevent-outcome" />
-                </p:button>
+        <div style="margin: 10px;">
 
-        <ui:repeat value="#{cc.attrs.nextPickupsList}" var="groupEvent">
+            <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                      outcome="groupevent-outcome">
+                <f:param name="goTo"  value="groupevent-outcome" />
+            </p:button>
+            <h3>#{lang['common.label.next.collective.cleaning-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h3>
+            <ui:repeat value="#{cc.attrs.nextPickupsList}" var="groupEvent">
 
-            <div>
                 <div>
-                    <h:outputText value="#{groupEvent.eventDate}">
-                        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="E d MMM yyyy HH:mm"  />
-                    </h:outputText>
+                    <div>
+                        <h:outputText value="#{groupEvent.eventDate}">
+                            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="E d MMM yyyy "  />
+                        </h:outputText>
 
-                    <h:outputText value="  #{groupEvent.address.city} (#{groupEvent.address.country} )" />
+                        <h:outputText value=" #{groupEvent.address.city} (#{groupEvent.address.country})" />
+                    </div>
+                    <h:outputText value="#{groupEvent.descriptionShort} " />
+                    <a  target="_blank" href="/group-pick-up/#{groupEvent.id}"> ...#{lang['common.label.description.read.more-'.concat(sessionAttributeCtrl.selectedLang.key)]}</a>
+
                 </div>
-                <h:outputText value="#{groupEvent.descriptionShort} " />
-                <a  target="_blank" href="/group-pick-up/#{groupEvent.id}">...more</a>
+                <br/>
+            </ui:repeat>
 
-            </div>
+            <h:link  outcome="next-missions-outcome" >
+                <h3 style="text-decoration: underline;">
+                    #{lang['common.link.view.all.collective.cleaning-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                </h3></h:link>
 
-        </ui:repeat>
-
+        </div>
     </div>
-
 </cc:implementation>
 
 </html>

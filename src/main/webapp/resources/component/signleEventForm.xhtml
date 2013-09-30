@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 
       xmlns:f="http://java.sun.com/jsf/core">
@@ -41,7 +42,7 @@
                  <ui:repeat
                          value="#{cc.attrs.wasteList}"
                          var="wasteGarbage"   >
-                    <span> #{wasteGarbage.quantity}  #{wasteGarbage.waste.labelProperty}</span>
+                   <gw:wasteDisplay displayQuatity="#{true}" wasteGarbageObject="#{wasteGarbage}"/>
                  </ui:repeat>
 
              </h:panelGroup>

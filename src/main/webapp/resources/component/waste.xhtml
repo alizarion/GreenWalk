@@ -31,24 +31,32 @@
             type="java.lang.String"
             required="true"/>
     <cc:attribute
-               name="update"
-               type="java.lang.String"
-               required="false"/>
+            name="update"
+            type="java.lang.String"
+            required="false"/>
 
 </cc:interface>
 
 
 <cc:implementation>
+
     <p:commandLink   action="#{cc.attrs.createGarbageMethodAction}"
                      update="#{cc.attrs.update}"
                      oncomplete="#{cc.attrs.onWasteSelectionCompleted}" >
+        <div style="display: inline-block;height: auto;text-align: center;float: left;">
          <span title="#{cc.attrs.wasteObject.labelProperty}"  class="wasteContainer">
-              #{cc.attrs.wasteObject.labelProperty}
+             <h:graphicImage value="/resources/img/garbage/picto_#{cc.attrs.wasteObject.labelProperty}.png"/>
+
          </span>
+              <span style="display: block;width: 80px;">
+             #{lang['common.label.waste.type.'.concat(cc.attrs.wasteObject.labelProperty).concat('-').concat(sessionAttributeCtrl.selectedLang.key)]}
+              </span>
+        </div>
         <f:setPropertyActionListener
                 value="#{cc.attrs.wasteObject}"
                 target="#{cc.attrs.targetWasteObject}"/>
     </p:commandLink>
+
 </cc:implementation>
 
 </html>

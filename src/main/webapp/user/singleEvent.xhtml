@@ -3,7 +3,8 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:cc="http://java.sun.com/jsf/composite/component"
+        xmlns:gw="http://java.sun.com/jsf/composite/component"
+
         contentType="text/html">
 
     <h:head>
@@ -22,8 +23,10 @@
                     <h:panelGroup id="wasteQuatityGroup">
                         <h:form  id="wasteQuatityForm">
                             <h:panelGrid columns="3">
-                                <h:outputLabel value="#{lang['form.singleEvent.garbage.quantity.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                                               for="quatityValue"/>
+                                <gw:wasteDisplay
+                                        displayQuatity="#{false}"
+                                        wasteGarbageObject="#{singleEventCtrl.selectedWasteGarbage}"
+                                        />
                                 <p:inputText id="quatityValue"
                                              required="true"
                                              requiredMessage="#{lang['form.singleEvent.garbage.quantity.required.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
@@ -31,8 +34,7 @@
                                 </p:inputText>
                                 <p:message for="quatityValue"
                                            id="quatityValueMsg"/>
-                                <cc:waste wasteObject="#{singleEventCtrl.selectedWasteGarbage.waste}"
-                                          onWasteSelectionCompleted="console.log('#{singleEventCtrl.selectedWasteGarbage.waste.labelProperty}')"/>
+                                <h:outputText/>
                                 <p:commandButton value="#{lang['form.singleEvent.garbage.quantity.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                                  action="#{singleEventCtrl.addGarbageToEvent}"
                                                  update=":singleEventComponent:singleEventForm:wastesGroup"
@@ -42,28 +44,35 @@
                     </h:panelGroup>
 
                 </p:dialog>
-                <ui:repeat value="#{singleEventCtrl.wasteList}" var="waste">
-                    <cc:waste wasteObject="#{waste}"
-                              onWasteSelectionCompleted="wasteQuatityWidget.show()"
-                              update=":wasteQuatityGroup"
-                              createGarbageMethodAction="#{singleEventCtrl.addGarbage()}"
-                              targetWasteObject="#{singleEventCtrl.selectedWaste}"/>
-                </ui:repeat>
+                <h2>#{lang['common.title.declare.that.you.picked-'.concat(sessionAttributeCtrl.selectedLang.key)]},</h2>
+                <h2>#{lang['common.title.picked.up.type-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
+                <h:form>
+                    <ui:repeat value="#{singleEventCtrl.wasteList}" var="waste">
+                        <gw:waste wasteObject="#{waste}"
+                                  onWasteSelectionCompleted="wasteQuatityWidget.show()"
+                                  update=":wasteQuatityGroup"
+                                  createGarbageMethodAction="#{singleEventCtrl.addGarbage()}"
+                                  targetWasteObject="#{singleEventCtrl.selectedWaste}"/>
+                    </ui:repeat>
 
 
 
+                </h:form>
 
+
+                <h2>#{lang['common.title.your.last.single.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
+                <gw:lastEvents singleEvents="#{singleEventCtrl.userAccount.singleEventsAsList}"/>
 
             </ui:define>
             <ui:define name="contentRight">
                 <div class="container">
-                <cc:signleEventForm
-                        id="singleEventComponent"
-                        wasteList="#{singleEventCtrl.selectedEvent.garbageAsList}"
-                        rendered="#{singleEventCtrl.selectedEvent !=  null}"
-                        submitEvent="#{singleEventCtrl.submitEvent}"
-                        singleEventObject="#{singleEventCtrl.selectedEvent}"
-                        handleFileUpload="#{singleEventCtrl.handleFileUpload}"/>
+                    <gw:signleEventForm
+                            id="singleEventComponent"
+                            wasteList="#{singleEventCtrl.selectedEvent.garbageAsList}"
+                            rendered="#{singleEventCtrl.selectedEvent !=  null}"
+                            submitEvent="#{singleEventCtrl.submitEvent}"
+                            singleEventObject="#{singleEventCtrl.selectedEvent}"
+                            handleFileUpload="#{singleEventCtrl.handleFileUpload}"/>
                 </div>
             </ui:define>
 

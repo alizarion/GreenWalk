@@ -4,12 +4,12 @@ html, body {
     width : 100%;
     height : 100%;
     font-size: 13px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', light;
     background-image: url('../resources/img/motif_background.png');
 }
 
 html, body .ui-widget {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', light;
     font-size: 13px;
 }
 
@@ -183,7 +183,7 @@ a:hover {
     margin-top: 2px;
     margin-bottom: 2px;
     font-family: 'Boogaloo',regular;
-    font-size: 53px;
+    font-size: 50px;
     text-transform:uppercase;
     display: inline-block ;
     color: #00323f;
@@ -199,14 +199,14 @@ a:hover {
 
 
 .titleHomeText2{
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin: 0;
     font-family: 'Boogaloo',regular;
     text-transform:uppercase;
-    font-size: 32px;
+    font-size: 30px;
     display: inline-block;
     color: #00323f;
 }
+
 
 .counter{
     top: 30px;
@@ -233,7 +233,7 @@ a:hover {
 }
 
 #commentAndEvent{
-    margin-top: 40px;
+    margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
     width: 950px;
@@ -270,8 +270,10 @@ a:hover {
 .wasteContainer {
     width: 80px;
     height: 80px;
-    border-radius: 10px;
+    margin: 10px;
+    border-radius: 50%;
     display: inline-block;
+    text-align: center;
     background-color: #ffffff;
 }
 
@@ -279,13 +281,6 @@ a:hover {
     box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
 }
 
-
-.container {
-    background-color: whitesmoke;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
-}
 
 #nextPickup{
     width: 100%;
@@ -310,6 +305,7 @@ a:hover {
     border: solid 1px #EAEAEA;
     padding: 10px;
     margin-top: 15px;
+   /* box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);  */
 }
 
 html body .registerContent  .StaticForm li{
@@ -327,6 +323,21 @@ html body .StaticForm li.ui-orderlist-item  {
     padding: 5px 0;
     text-shadow: 0 1px rgba(255, 255, 255, 0.9);
     width: 100%;
+}
+
+body h3{
+    color: #00323f;
+    font-size: 14px;
+    font-family: 'Open Sans';
+}
+
+
+
+
+.social-buttons {
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 html body .StaticForm li {
@@ -434,6 +445,8 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 .eventTable{
     width: 100%;
 }
+
+
 .avatarContainer{
     width: 10%;
     vertical-align:top;
@@ -443,6 +456,7 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
     margin: 0;
     display: inline-block;
 }
+
 .photoDisplay{
     margin-left: 10px;
 }
@@ -560,6 +574,15 @@ body #commentAndEvent h1{
     color: #009E9D;
 }
 
+
+body h2{
+    font-family: 'Boogaloo',regular;
+    font-size: 25px;
+    font-weight: normal;
+    color: #009E9D;
+}
+
+
 .ui-growl .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
@@ -642,3 +665,70 @@ body .ui-menu  .ui-state-hover  {
 
 
 /* garbage animation end*/
+.wasteLabelContainer{
+    font-family: 'Boogaloo';
+    font-size: 16px;
+    display: inline-block;
+    color: #00323f;
+}
+
+.wasteTag{
+    background: url("../resources/img/wastes.png") no-repeat center;
+    width: 20px;
+    height: 30px;
+    margin-bottom: -5px;
+    display: inline-block;
+    background-size: 200px 72px;
+}
+
+.bottle-glass-icon {
+    background-position: 3px -12px;
+}
+
+.bottle-plastic-icon {
+    background-position: 3px -43px;
+}
+
+.electronic-icon {
+    background-position: -87px -43px;
+}
+
+.food-cardboard-icon {
+    background-position: -149px -12px;
+}
+
+.jars-icon {
+    background-position: -118px -12px;
+}
+
+.menager-plastic-icon {
+    background-position: -149px -43px;
+}
+
+.other-icon {
+    background-position: -87px -12px;
+}
+
+.packaging-hazardous-materials-icon{
+    background-position:-58px  -43px;
+}
+
+.paper-icon{
+    background-position: -118px -43px;
+}
+
+.plastic-bag-icon{
+    background-position:-57px  -12px;
+}
+
+.textile-icon{
+    background-position:-27px   -43px;
+}
+
+.tin-icon{
+    background-position: -118px -12px;
+}
+
+.wood-composite-icon{
+    background-position: -180px -12px;
+}

@@ -14,6 +14,7 @@ public enum RecyclableWasteType {
     GLASS("glass"),
     PAPER("paper"),
     PLASTICS("plastic"),
+    WOOD("wood"),
     STEEL("steel");
 
     private String keyLabel;

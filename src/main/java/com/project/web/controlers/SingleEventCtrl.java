@@ -113,6 +113,14 @@ public class SingleEventCtrl implements Serializable {
         return selectedWaste;
     }
 
+    public Account getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(Account userAccount) {
+        this.userAccount = userAccount;
+    }
+
     public void setSelectedWaste(Waste selectedWaste) {
         this.selectedWaste = selectedWaste;
     }
