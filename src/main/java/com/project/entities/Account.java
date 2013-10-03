@@ -124,15 +124,17 @@ public class Account implements Serializable {
             inverseJoinColumns=@JoinColumn(name="account_id"))
     private Set<Account> followers = new HashSet<Account>();
 
-    @OneToMany(mappedBy = "owner",
-            fetch = FetchType.EAGER,
-            targetEntity = Event.class)
-    private Set<SingleEvent> singleEvents;
+    @OneToMany(mappedBy = "singleEventOwner",
+            fetch = FetchType.EAGER)
+    @OrderBy("creationDate desc ")
+    private Set<SingleEvent> singleEvents =
+            new HashSet<SingleEvent>();
 
-    @OneToMany(mappedBy = "owner",
-            fetch = FetchType.EAGER,
-            targetEntity = Event.class)
-    private Set<GroupEvent> groupEvents;
+    @OneToMany(mappedBy = "groupEventOwner",
+            fetch = FetchType.EAGER)
+    @OrderBy("creationDate desc ")
+    private Set<GroupEvent> groupEvents =
+            new HashSet<GroupEvent>();
 
     @OneToMany(mappedBy = "account",
             fetch = FetchType.EAGER)

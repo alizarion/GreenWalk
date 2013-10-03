@@ -16,13 +16,13 @@
     <h:body>
         <ui:composition template="/template/template.xhtml">
 
-            <ui:define name="contentLeft">
+            <ui:define name="center">
+                <div class="groupEventList" >
                 <gw:groupEventList
                         tabViewWrapperList="#{homeCtrl.groupEventTabViewWrappers}"/>
+                </div>
             </ui:define>
 
-            <ui:define name="contentRight">
-            </ui:define>
 
             <ui:define name="footerContent">
                 <div></div>

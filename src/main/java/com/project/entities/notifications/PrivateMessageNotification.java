@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 @DiscriminatorValue(value = "PrivateMessageNotification")
 public class PrivateMessageNotification extends Notification implements Serializable {
 
-    public static final String NOTIFICATION_LABEL = "notification-label-comment-FR";
+    public static final String NOTIFICATION_LABEL = "common.notifications.private.message";
     public static final String FIND_ACCOUNT_COMMENT_NOTIFICATION = "FIND_ACCOUNT_COMMENT_NOTIFICATION";
     public static final String COUNT_ACCOUNT_COMMENT_NOTIFICATION = "COUNT_ACCOUNT_COMMENT_NOTIFICATION";
 
@@ -62,12 +62,23 @@ public class PrivateMessageNotification extends Notification implements Serializ
         return this.privateConversation.getSender();
     }
 
+
     public String getNotificationLabel(){
-        final ResourceBundle resourceBundle =
-                    ResourceBundle.getBundle("msg");
-        return resourceBundle.getString(NOTIFICATION_LABEL);
+
+        return NOTIFICATION_LABEL;
     }
 
+    @Override
+    public String getNotificationOutcome() {
+        //TODO : not implemented yet
+        return null;
+    }
+
+    @Override
+    public String getNotificationOutcomeParam() {
+        //TODO : not implemented yet
+        return null;
+    }
 
 
     @Override

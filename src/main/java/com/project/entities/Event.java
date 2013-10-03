@@ -1,6 +1,7 @@
 package com.project.entities;
 
 import com.project.Helper;
+import org.hibernate.annotations.DiscriminatorOptions;
 
 import javax.persistence.*;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.*;
 @NamedQuery(name= Event.FIND_ALL,
         query="SELECT e FROM Event e order by e.creationDate  desc ")
 @DiscriminatorColumn(name = "type")
+@DiscriminatorOptions(force=true)
 public abstract class Event {
 
     public final static String FIND_ALL = "Event.FIND_ALL";
@@ -28,6 +30,7 @@ public abstract class Event {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Account owner;
 
     @Column
@@ -136,9 +139,21 @@ public abstract class Event {
         } else {
             return this.description;
         }
-
-
     }
+
+    public String getTitleShort() {
+        if (title.length()>30){
+            String subDescription =  title.substring(0,30);
+            if (subDescription.contains(" ")){
+                return subDescription.substring(0,subDescription.lastIndexOf(' '));
+            } else {
+                return  subDescription;
+            }
+        } else {
+            return this.title;
+        }
+    }
+
 
 
     public void setDescription(String description) {

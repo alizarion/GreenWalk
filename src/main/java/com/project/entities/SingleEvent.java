@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue(value = "SINGLE")
 @NamedQuery(name= SingleEvent.FIND_ALL,
-        query="SELECT se FROM SingleEvent se order by se.creationDate desc ")
+        query="SELECT se FROM SingleEvent se  order by se.creationDate desc  ")
 public class SingleEvent extends Event {
 
     public final static String FIND_ALL = "SingleEvent.FIND_ALL";
@@ -25,7 +25,15 @@ public class SingleEvent extends Event {
             inverseJoinColumns=@JoinColumn(name="waste_id"))
     private Set<WasteGarbage> wastes = new HashSet<WasteGarbage>();
 
-    public Set<WasteGarbage> getWastes() {
+    @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(updatable = false,insertable = false,name = "owner_id")
+    private Account singleEventOwner;
+
+
+    @Column(updatable = false, insertable = false)
+    private String type;
+
+    public Set<WasteGarbage> getWastes(){
         return wastes;
     }
 

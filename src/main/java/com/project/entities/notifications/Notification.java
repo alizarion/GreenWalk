@@ -21,7 +21,8 @@ import java.util.Date;
         @NamedQuery(name= Notification.FIND_AGENT_NOTIFICATION,
                 hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
                 query="select notification "
-                        + " from Notification notification where  notification.accountListener = :accountId "),
+                        + " from Notification notification where  notification.accountListener = :accountId and" +
+                        " notification.viewed = false"),
         @NamedQuery(name= Notification.COUNT_AGENT_RATING_NOTIFICATION,
                 hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
                 query="select count(notification.id) "
@@ -94,6 +95,10 @@ public abstract class Notification implements Serializable, Cloneable {
 
 
     public abstract String getNotificationLabel();
+
+    public abstract String getNotificationOutcome();
+
+    public abstract String getNotificationOutcomeParam();
 
     public void setViewed(Boolean viewed) {
         this.viewed = viewed;

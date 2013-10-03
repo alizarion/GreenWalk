@@ -82,7 +82,9 @@ body .ui-button .fileupload-buttonbar{
     border-radius: 10px!important;
 }
 
-a img {border: none; }
+a img {
+    border: none;
+}
 .menuItem {
     position: relative;
     display: -moz-inline-box;
@@ -95,6 +97,33 @@ a img {border: none; }
     vertical-align: top;
 
 }
+
+.accountMenu .menuItem {
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.accountMenu .menuItem  a{
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-bottom: 5px;
+    font-weight: normal;
+
+}
+.accountMenu .menuItem:after{
+    content: "|";
+    color: #000000;
+
+}
+
+.accountMenu .menuItem a:hover{
+    color: #ffffff;
+}
+
+.accountMenu .menuItem:last-child:after{
+    content: "";
+}
+
 
 body .ui-datagrid .ui-paginator-top {
     border-bottom: 0px none;
@@ -153,6 +182,21 @@ a:hover {
     border-bottom: 1px solid #888;
     position: relative;
     box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+}
+
+
+.menuhead  {
+    width: 100%;
+    z-index: 100;
+    height: 50px;
+
+    position: fixed;
+    top:0;
+}
+
+.accountMenu{
+    background-color: #b4e01d ;
+
 }
 
 .logo {
@@ -305,7 +349,7 @@ a:hover {
     border: solid 1px #EAEAEA;
     padding: 10px;
     margin-top: 15px;
-   /* box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);  */
+    /* box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);  */
 }
 
 html body .registerContent  .StaticForm li{
@@ -731,4 +775,18 @@ body .ui-menu  .ui-state-hover  {
 
 .wood-composite-icon{
     background-position: -180px -12px;
+}
+
+body .ui-tabs .ui-tabs-nav{
+    background: transparent;
+}
+
+body .groupEventList .ui-widget-content {
+    background: transparent;
+}
+
+.groupEventList{
+    width: 950px;
+    margin-left: auto;
+    margin-right: auto;
 }

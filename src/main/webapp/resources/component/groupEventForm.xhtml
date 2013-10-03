@@ -41,6 +41,10 @@
     <div class="container">
         <h:form id="groupEventEditForm" prependId="false">
         <h:panelGrid columns="2">
+
+            <h:outputLabel styleClass="label" value=" #{lang['common.label.group.event.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true"  value="#{cc.attrs.event.title}" />
+
             <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street.number-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
             <p:inputText  value="#{cc.attrs.event.address.number}" />
 
@@ -78,6 +82,7 @@
 
         </h:panelGrid>
         </h:form>
+
     </div>
 </cc:implementation>
 

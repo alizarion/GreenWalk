@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import com.project.entities.*;
+import com.project.entities.notifications.Notification;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -89,6 +90,16 @@ public class Explorer {
             List<Account> accounts = new ArrayList<Account>(em.createNamedQuery(
                     Account.FIND_ACCOUNT_BY_KEYWORD).setParameter("query", "%"+query+"%").getResultList());
             return accounts;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public List<Notification> getUserNotifications(Account account){
+        try{
+            List<Notification> notifications = new ArrayList<Notification>(em.createNamedQuery(
+                    Notification.FIND_AGENT_NOTIFICATION).setParameter("accountId", account).getResultList());
+            return notifications;
         } catch (NoResultException e){
             return null;
         }

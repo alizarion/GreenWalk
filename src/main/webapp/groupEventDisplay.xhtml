@@ -16,7 +16,7 @@
     <h:body>
         <ui:composition template="/template/template.xhtml">
 
-            <ui:define name="contentLeft">
+            <ui:define name="center">
                 <gw:groupEventDisplay
                         displayCommentLink="false"
                         subscribe="#{groupEventDisplayCtrl.subscribe}"
@@ -34,9 +34,7 @@
                                selectedComment="#{groupEventDisplayCtrl.selectedComment}"
                                sendComment="#{groupEventDisplayCtrl.submitComment}"/>
 
-            </ui:define>
 
-            <ui:define name="contentRight">
 
                 <gw:gmapPositionDisplay
                         rendered="#{groupEventDisplayCtrl.event.class.name == 'com.project.entities.GroupEvent'}"

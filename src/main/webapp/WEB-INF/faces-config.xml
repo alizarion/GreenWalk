@@ -48,6 +48,14 @@
             <redirect>true</redirect>
         </navigation-case>
 
+
+        <navigation-case>
+            <from-outcome>singleevent-outcome</from-outcome>
+            <to-view-id>/singleEventDisplay.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+
         <navigation-case>
             <from-outcome>useredit-outcome</from-outcome>
             <to-view-id>/user/accountEdit.xhtml</to-view-id>
@@ -57,6 +65,12 @@
         <navigation-case>
             <from-outcome>groupevent-outcome</from-outcome>
             <to-view-id>/user/groupEvent.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>groupeventdisplay-outcome</from-outcome>
+            <to-view-id>/groupEventDisplay.xhtml</to-view-id>
             <redirect>true</redirect>
         </navigation-case>
 

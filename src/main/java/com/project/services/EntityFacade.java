@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -213,4 +214,13 @@ public class EntityFacade implements Serializable{
             this.em.merge(notification);
         }
     }
+
+    public List<Notification> getActiveAccountNotifications(){
+        if (getActiveUser()!= null) {
+            return explorer.getUserNotifications(getActiveUser());
+        }else {
+            return new ArrayList<Notification>();
+        }
+    }
+
 }

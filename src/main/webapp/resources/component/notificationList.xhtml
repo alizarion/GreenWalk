@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="notifications"
+            type="java.util.List"
+            required="true"/>
+
+</cc:interface>
+
+
+<cc:implementation>
+
+
+<ui:repeat value="#{cc.attrs.notifications}" var="notification">
+    <h:outputText value="#{notification.creationDate}">
+        <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="E d MMM "  />
+    </h:outputText>
+
+    <h:link outcome="#{notification.notificationOutcome}"
+            value=" #{notification.notificationFrom.lastName}  #{notification.notificationFrom.firstName}  #{lang[notification.notificationLabel.concat('-').concat(sessionAttributeCtrl.selectedLang.key)]}">
+        <f:param value="#{notification.notificationOutcomeParam}" name="eventId"/>
+    </h:link>
+    <br/>
+</ui:repeat>
+
+
+</cc:implementation>
+
+</html>

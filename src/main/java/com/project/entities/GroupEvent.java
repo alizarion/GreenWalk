@@ -11,7 +11,7 @@ import java.util.*;
 @Entity
 @DiscriminatorValue(value = "GROUP")
 @NamedQuery(name= GroupEvent.FIND_ALL,
-        query="SELECT ge FROM GroupEvent ge order by ge.creationDate desc ")
+        query="SELECT ge FROM GroupEvent ge  order by ge.creationDate desc ")
 public class GroupEvent extends Event implements Notified {
 
     public final static String FIND_ALL = "GroupEvent.FIND_ALL";
@@ -27,6 +27,10 @@ public class GroupEvent extends Event implements Notified {
 
     @Column
     private Date eventDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(updatable = false,insertable = false,name = "owner_id")
+    private Account groupEventOwner;
 
     @Transient
     private Set<Account> invitedMember = new HashSet<Account>();

@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:f="http://java.sun.com/jsf/core">
 <f:view locale="fr">
     <h:head>
@@ -20,6 +22,53 @@
 
 
         </ui:insert>
+
+        <h:panelGroup  rendered="#{request.userPrincipal != null}" styleClass="menuhead">
+            <div class="menu accountMenu">
+                <ol style="display: inline-block">
+
+                    <li class="menuItem">
+                        <h:link
+                                value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="useredit-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link
+                                value="#{lang['page.template.my.subscribed.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="next-missions-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link
+                                value="#{lang['page.template.my.create.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <h:link
+                                value="#{lang['page.template.my.last.declaration-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                outcome="community-outcome"/>
+                    </li>
+                    <li class="menuItem">
+                        <p:commandLink
+                                id="notifications"
+                                value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.notifications)})"
+                                />
+                        <p:overlayPanel id="chartPanel"  appendToBody="true" for="notifications" hideEffect="fade">
+                            <gw:notificationList
+                                    notifications="#{notificationCenterCtrl.notifications}"/>
+                        </p:overlayPanel>
+                    </li>
+                    <li class="menuItem">
+                        <h:form>
+                            <h:commandLink
+                                    action="#{loginCtrl.logout(facesContext)}"
+                                    icon="ui-icon-arrowrefresh-1-w"
+                                    value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                        </h:form>
+
+                    </li>
+                </ol>
+            </div>
+        </h:panelGroup>
         <div class="head">
             <div onclick="window.location.href='#{app['APP_URL']}'"
                  class="logo">
@@ -29,10 +78,10 @@
                 <ol style="display: inline-block">
                     <li class="menuItem">
                         <h:link
-                               styleClass="homeButton"
+                                styleClass="homeButton"
                                 outcome="community-outcome">
-                              <div  class="homeButton"></div>
-                                </h:link>
+                            <div  class="homeButton"></div>
+                        </h:link>
                     </li>
                     <li class="menuItem">
                         <h:link

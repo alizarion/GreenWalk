@@ -66,6 +66,14 @@ public class Comment implements Serializable, Comparable,Notified {
         this.creationdate = new Date();
     }
 
+    public Event getCommentedEvent(){
+        Comment comment = this;
+        while(comment.event == null && comment.answerTo != null){
+            comment = comment.answerTo;
+        }
+        return  comment.event;
+    }
+
     public Comment(Event event) {
         this.creationdate = new Date();
         this.event = event;

@@ -44,18 +44,11 @@
 
             </ui:define>
             <ui:define name="contentRight">
-
-                <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+k                <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
                 <gw:gwSocial facebook="#{true}"
                              twitter="#{true}"
                              gplus="#{true}"/>
-
                 <gw:nextPickups nextPickupsList="#{homeCtrl.groupEvents}" />
-
-
-
-
-
             </ui:define>
 
         </ui:composition>
