@@ -48,10 +48,12 @@
                                 outcome="community-outcome"/>
                     </li>
                     <li class="menuItem">
-                        <p:commandLink
-                                id="notifications"
-                                value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.notifications)})"
-                                />
+                        <a href="#">
+                            <h:outputText
+                                    id="notifications"
+                                    value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.notifications)})"
+                                    />
+                        </a>
                         <p:overlayPanel id="chartPanel"  appendToBody="true" for="notifications" hideEffect="fade">
                             <gw:notificationList
                                     notifications="#{notificationCenterCtrl.notifications}"/>
@@ -142,9 +144,13 @@
             <ui:insert name="footerContent">
             </ui:insert>
         </div>
-        <p:growl id="growlMsg" showDetail="true">
+
+        <p:growl  widgetVar="growl" id="growlMsg" showDetail="true">
 
         </p:growl>
+        <h:form prependId="false">
+            <p:remoteCommand name="growlRemoteUpdater"  update=":growlMsg"/>
+        </h:form>
         <script type="text/javascript">
 
             $(function() {

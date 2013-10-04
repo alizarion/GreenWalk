@@ -91,6 +91,14 @@ public class EventCommentCtrl implements Serializable {
         this.newComment = newComment;
     }
 
+    public SingleEvent getSingleEvent(){
+        if (this.event instanceof SingleEvent){
+            return (SingleEvent) this.event;
+        }  else {
+            return null;
+        }
+    }
+
     public void submitComment(){
         if (this.selectedComment!= null){
             this.selectedComment.addAnswer(this.newComment);

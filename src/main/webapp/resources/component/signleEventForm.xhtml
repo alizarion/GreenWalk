@@ -14,9 +14,9 @@
 <cc:interface>
 
     <cc:attribute
-                name="wasteList"
-                type="java.util.List"
-                required="false"/>
+            name="wasteList"
+            type="java.util.List"
+            required="false"/>
 
     <cc:attribute
             name="singleEventObject"
@@ -27,9 +27,9 @@
             method-signature="void action()"
             required="false"/>
     <cc:attribute
-                name="submitEvent"
-                method-signature="void action()"
-                required="false"/>
+            name="submitEvent"
+            method-signature="void action()"
+            required="false"/>
 
 </cc:interface>
 
@@ -39,13 +39,13 @@
 
     <h:form id="singleEventForm"  prependId="false">
         <h:panelGroup id="wastesGroup">
-                 <ui:repeat
-                         value="#{cc.attrs.wasteList}"
-                         var="wasteGarbage"   >
-                   <gw:wasteDisplay displayQuatity="#{true}" wasteGarbageObject="#{wasteGarbage}"/>
-                 </ui:repeat>
+            <ui:repeat
+                    value="#{cc.attrs.wasteList}"
+                    var="wasteGarbage"   >
+                <gw:wasteDisplay displayQuatity="#{true}" wasteGarbageObject="#{wasteGarbage}"/>
+            </ui:repeat>
 
-             </h:panelGroup>
+        </h:panelGroup>
 
         <h:panelGroup id="gallerieGroup">
             <ui:repeat
@@ -62,7 +62,6 @@
                            value="#{lang['form.singleEvent.description.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
             <p:inputTextarea id="description"
                              requiredMessage="#{lang['form.singleEvent.description.required.message'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                             required="true"
                              autoResize="false"
                              value="#{cc.attrs.singleEventObject.description}"/>
             <p:message for="description"  />
@@ -81,12 +80,27 @@
                       sizeLimit="10000000"
                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
-         <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                          oncomplete="window.location.reload()"
-                          action="#{cc.attrs.submitEvent}" />
+        <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                         oncomplete="reloadOnSuccess(xhr, status, args)"
+                         update=":growlMsg"
+                         action="#{cc.attrs.submitEvent}" />
+
 
     </h:form>
 
+    <script type="text/javascript">
+        function reloadOnSuccess(xhr, status, args) {
+            if (args) {
+                var isValid = args.isValid;
+                if (isValid) {
+                    window.location.reload() ;
+                } else {
+
+                }
+            }
+        }
+
+    </script>
 </cc:implementation>
 
 </html>

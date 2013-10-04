@@ -27,28 +27,19 @@ var positionIterations = 3;
 }());
 
 var garbage = {
+    width : 557,
+    height : 430,
 // Start initializing objects, preloading assets and display start screen
-    entities:[{type:"ground", name:"wood", x:500,y:400,width:10000,height:20,isStatic:true},
+    entities: [{type:"ground", name:"wood", x:500,y:400,width:10000,height:20,isStatic:true},
         {type:"ground", name:"wood", x:350,y:-1000,width:40,height:10000,isStatic:true},
-        {type:"ground", name:"wood", x:20,y:-1000,width:40,height:10000,isStatic:true},
-        {type:"waste",value:323, name:"menager-plastic",x:220,y:-1300,calories:590},
-        {type:"waste",value:323, name:"electronic",x:220,y:-1200,calories:590},
-        {type:"waste",value:323, name:"tin",x:220,y:-1100,calories:590},
-        {type:"waste",value:323, name:"paper",x:220,y:-1000,calories:590},
-        {type:"waste",value:323, name:"other",x:220,y:-900,calories:590},
-        {type:"waste",value:323, name:"packaging-hazardous-materials",x:220,y:-800,calories:590},
-        {type:"waste",value:323, name:"plastic-bag",x:220,y:-700,calories:590},
-        {type:"waste",value:323, name:"wood-composite",x:220,y:-600,calories:590},
-        {type:"waste",value:323, name:"textile",x:220,y:-500,calories:590},
-        {type:"waste",value:323, name:" bottle-glass",x:220,y:-100,calories:590},
-        {type:"waste",value:323, name:"bottle-plastic",x:220,y:-100,calories:590},
-        {type:"waste",value:323, name:"jars",x:220,y:-100,calories:590},
-        {type:"waste",value:323, name:"food-cardboard", x:280,y:0,calories:420}],
+        {type:"ground", name:"wood", x:20,y:-1000,width:40,height:10000,isStatic:true}]
+    ,
     init: function(){
 
 
         garbage.canvas = $('#garbageCanvas')[0];
         garbage.context = garbage.canvas.getContext('2d');
+        garbage.context.scale(garbage.width/557, garbage.height/430);
         garbage.context.drawImage(garbage.background,0,0);
 
         $('#garbageCanvas').show();
@@ -77,7 +68,7 @@ var garbage = {
         var currentTime = new Date().getTime();
         var timeStep;
         if(garbage.lastUpdatedTime){
-            timeStep = (currentTime - garbage.lastUpdatedTime) /100;
+            timeStep = (currentTime - garbage.lastUpdatedTime) /60;
             box2d.step(timeStep);
         }
         garbage.lastUpdatedTime = currentTime;
@@ -94,28 +85,43 @@ var garbage = {
 
     },
     sleeping: false,
+    pushEntities:function(newEntity){
+        for(var body = box2d.world.GetBodyList();body; body = body.GetNext()){
+            var entity = body.GetUserData();
+            if(entity){
+                if(entity.name == newEntity.name){
+                    box2d.world.DestroyBody(body);
+                }
+            }
+        }
+        garbage.entities.push(newEntity);
+        entities.create(newEntity);
+        garbage.sleeping=false;
+        garbage.animate();
+    },
     drawAllBodies:function(){
 
         box2d.world.DrawDebugData();
         //intérer sur les corp et les dessiner
         var awakeBodiesCount = 0 ;
+        var bodyCount = 0 ;
         for(var body = box2d.world.GetBodyList();body; body = body.GetNext()){
-            if(!body.IsAwake()){
-                awakeBodiesCount++;
-            }
             var entity = body.GetUserData();
-
             if(entity){
-                var entityX = body.GetPosition().x*box2d.scale;
+                if(entity.type=='waste'){
+                    bodyCount++;
+                    if(!body.IsAwake()){
+                        awakeBodiesCount++;
+                    }
+                }
                 entities.draw(entity,body.GetPosition(),body.GetAngle());
+
             }
         }
-        if(awakeBodiesCount >= box2d.world.GetBodyCount()-1){
+
+        if(awakeBodiesCount >=bodyCount){
             garbage.sleeping = true;
         }
     }
-}
 
-$(window).load(function() {
-    garbage.init();
-});
+}

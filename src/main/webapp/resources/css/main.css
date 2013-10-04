@@ -110,6 +110,8 @@ a img {
     font-weight: normal;
 
 }
+
+
 .accountMenu .menuItem:after{
     content: "|";
     color: #000000;
@@ -675,18 +677,17 @@ body .ui-menu  .ui-state-hover  {
 
 
 .garbagelayer {
-    width:557px;
-    height:430px;
+
     position:absolute;
     display:none;
 }
 
 #garbagecontainer {
-    width:557px;
-    height:430px;
+
     display: inline-block;
     float: left;
-    background: url("../resources/img/garbage/garbage_home.png");
+    background-size: 100% 100%;
+    background-image: url("../resources/img/garbage/garbage_home.png");
 
 }
 

@@ -155,7 +155,7 @@ var entities = {
     },
     //dessiner dans le canvas garbage les entité en fonction de leurs position et angle
     draw: function(entity,position,angle){
-
+        // console.log('draw');
         garbage.context.translate(position.x*box2d.scale-garbage.offsetLeft,position.y*box2d.scale);
         garbage.context.rotate(angle);
 
@@ -170,17 +170,17 @@ var entities = {
                 if (entity.shape=="circle"){
                     garbage.context.drawImage(entity.sprite,0,0,entity.sprite.width,entity.sprite.height,
                         -entity.radius-1,-entity.radius-1,entity.radius*2+2,entity.radius*2+2);
-                    garbage.context.font        = "Boogaloo regular";
+                    garbage.context.font = "17pt Boogaloo regular";
                     garbage.context.strokeStyle = "#00323f";
                     garbage.context.textAlign  = 'center';
-                    garbage.context.strokeText(entity.value,0,20);
+                    garbage.context.fillText(entity.value,0,25);
                 } else if (entity.shape=="rectangle"){
                     garbage.context.drawImage(entity.sprite,0,0,entity.sprite.width,entity.sprite.height,
                         -entity.width/2-1,-entity.height/2-1,entity.width+2,entity.height+2);
-                    garbage.context.font        = "Boogaloo regular";
+                    garbage.context.font = "17pt Boogaloo regular";
                     garbage.context.strokeStyle = "#00323f";
                     garbage.context.textAlign  = 'center';
-                    garbage.context.strokeText(entity.value,0,20);
+                    garbage.context.fillText(entity.value,0,25);
                 }
                 break;
             case "hero":

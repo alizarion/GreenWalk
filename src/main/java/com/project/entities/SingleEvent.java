@@ -3,10 +3,7 @@ package com.project.entities;
 import com.project.Helper;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author selim@openlinux.fr.
@@ -41,6 +38,26 @@ public class SingleEvent extends Event {
     public List<WasteGarbage> getGarbageAsList() {
         return new ArrayList<WasteGarbage>(this.wastes);
     }
+
+
+    public String getGarbageAsJSObjectList(){
+        StringBuilder stringBuilder = new StringBuilder();
+       boolean first = true;
+        Iterator<WasteGarbage> iterator = this.getGarbageAsList().iterator();
+
+        while (iterator.hasNext()){
+            WasteGarbage current = iterator.next();
+            if(first){
+                stringBuilder.append(current.toString());
+                first = false;
+            } else {
+                stringBuilder.append(',').append(current.toString());
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
 
 
     public void setWastes(Set<WasteGarbage> wastes) {

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @author selim@openlinux.fr.
@@ -42,6 +43,8 @@ public class SingleEventCtrl implements Serializable {
     private WasteGarbage selectedWasteGarbage;
 
     private Account userAccount;
+
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("lang");
 
     private Waste selectedWaste;
 
@@ -131,7 +134,7 @@ public class SingleEventCtrl implements Serializable {
 
     public void addGarbageToEvent(){
         this.selectedEvent.addNewGarbage(this.selectedWasteGarbage);
-        this.selectedWasteGarbage = null;
+      //  this.selectedWasteGarbage = null;
         final RequestContext requestContext =
                 RequestContext.getCurrentInstance();
         requestContext.addCallbackParam("isValid", true);
@@ -148,7 +151,20 @@ public class SingleEventCtrl implements Serializable {
 
     public void submitEvent(){
         this.selectedEvent.addAllContents(new HashSet<Content>(this.imageContents));
-        facade.addNewSingleEvent(this.selectedEvent);
+        final RequestContext requestContext =
+                RequestContext.getCurrentInstance();
+        if (this.selectedEvent.getGarbageAsList().size()==0){
+            FacesMessage msg =
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error",
+                            resourceBundle.getString("form.single.event.error.no.wastes-"+
+                                    sessionAttribute.getSelectedLang().getKey()));
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            requestContext.addCallbackParam("isValid", false);
+        }  else {
+            facade.addNewSingleEvent(this.selectedEvent);
+            requestContext.addCallbackParam("isValid", true);
+        }
+
 
     }
 }

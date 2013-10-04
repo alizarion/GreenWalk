@@ -71,6 +71,13 @@ public class WasteGarbage  {
     }
 
     @Override
+    public String toString() {
+        return "{type:'waste',value:" + this.quantity +", name:'"+
+                this.waste.getLabelProperty()+"',x:"+((Math.random()*150)+10) +
+                ",y:-"+(Math.random()*600) +"}";
+    }
+
+    @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (quantity != null ? quantity.hashCode() : 0);

@@ -14,7 +14,18 @@
             <ui:define name="center">
                 <div class="center" >
                     <div  class="verticalAlignement visual-block"  >
-                        <gw:garbage />
+                        <gw:garbage width="557" height="430" startWastes="{type:'waste',value:323, name:'menager-plastic',x:220,y:-1300,calories:590},
+                {type:'waste',value:323, name:'electronic',x:220,y:-1200,calories:590},
+                {type:'waste',value:323, name:'tin',x:220,y:-1100,calories:590},
+                {type:'waste',value:323, name:'paper',x:220,y:-1000,calories:590},
+                {type:'waste',value:323, name:'other',x:220,y:-900,calories:590},
+                {type:'waste',value:323, name:'packaging-hazardous-materials',x:220,y:-800,calories:590},
+                {type:'waste',value:323, name:'plastic-bag',x:220,y:-700,calories:590},
+                {type:'waste',value:323, name:'wood-composite',x:220,y:-600,calories:590},
+                {type:'waste',value:323, name:'textile',x:220,y:-500,calories:590},
+                {type:'waste',value:323, name:' bottle-glass',x:220,y:-100,calories:590},
+                {type:'waste',value:323, name:'bottle-plastic',x:220,y:-100,calories:590},
+                {type:'waste',value:323, name:'jars',x:220,y:-100,calories:590}"/>
                         <div style="width: 390px;float: left;height: 430px;display: inline-block;">
                             <p class="titleHomeText1">together,</p>
                             <p class="titleHomeText2">we have freed the nature of
@@ -44,7 +55,7 @@
 
             </ui:define>
             <ui:define name="contentRight">
-k                <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+             <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
                 <gw:gwSocial facebook="#{true}"
                              twitter="#{true}"
                              gplus="#{true}"/>

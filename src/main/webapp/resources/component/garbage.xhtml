@@ -16,6 +16,19 @@
             name="wastes"
             type="java.util.List"
             required="false"/>
+    <cc:attribute
+            name="width"
+            type="java.lang.String"
+            required="true"/>
+    <cc:attribute
+            name="height"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
+            name="startWastes"
+            type="java.lang.String"
+            required="false"/>
 
 </cc:interface>
 
@@ -30,19 +43,26 @@
 
     <h:outputStylesheet library="css" name="main.css" />
 
-    <script type="text/javascript">
 
-    </script>
-    <div  id="garbagecontainer">
+    <div  style="width: #{cc.attrs.width}px;height:#{cc.attrs.height}px;" id="garbagecontainer">
         <canvas id="garbageCanvas"
-                width="557"
-                height="430"
+                width="#{cc.attrs.width}"
+                height="#{cc.attrs.height}"
                 class="garbagelayer"/>
         <div id="loadingscreen" class="garbagelayer">
             <div id="loadingmessage"></div>
         </div>
     </div>
     <h:outputScript library="garbage" name="garbage.js"/>
+    <script type="text/javascript">
+     //   garbage.pushEntities( {type:'waste',value:Math.round(((Math.random()*150)+10)), name:'food-cardboard', x:(Math.random()*200),y:0,calories:420});
+        $(window).load(function() {
+            garbage.width = '#{cc.attrs.width}';
+            garbage.height = '#{cc.attrs.height}';
+          garbage.entities.push(#{cc.attrs.startWastes});
+            garbage.init();
+        });
+    </script>
     <!--canvas id="debugcanvas" width="1000" height="430" style="border: solid 1px #000000"></canvas-->
 </cc:implementation>
 
