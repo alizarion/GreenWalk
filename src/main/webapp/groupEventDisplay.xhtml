@@ -17,13 +17,28 @@
         <ui:composition template="/template/template.xhtml">
 
             <ui:define name="center">
-                <gw:groupEventDisplay
-                        displayCommentLink="false"
-                        subscribe="#{groupEventDisplayCtrl.subscribe}"
-                        canSubscribe="#{groupEventDisplayCtrl.canSubscribe}"
-                        event="#{groupEventDisplayCtrl.event}"/>
+                <div class="greenCenter">
+                    <div class="centerMargin" style="width: 860px;">
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem  value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                         outcome="next-missions-outcome" />
+                            <p:menuitem value="#{groupEventDisplayCtrl.event.title}" url="#" />
 
-                <gw:header headerLabelId="common.comment.header.label-" />
+                        </p:breadCrumb>
+                    </div>
+                </div>
+
+                <div class="whiteCenterBackground">
+                    <gw:groupEventDisplay
+                            displayCommentLink="false"
+                            subscribe="#{groupEventDisplayCtrl.subscribe}"
+                            canSubscribe="#{groupEventDisplayCtrl.canSubscribe}"
+                            event="#{groupEventDisplayCtrl.event}"/>
+
+                </div>
+            </ui:define>
+            <ui:define name="contentLeft">
                 <gw:commentList
                         toUpdateAction=":newCommentContainer:commentEditForm"
                         commentlist="#{groupEventDisplayCtrl.event.commentsAsList}"
@@ -33,14 +48,6 @@
                                comment="#{groupEventDisplayCtrl.newComment}"
                                selectedComment="#{groupEventDisplayCtrl.selectedComment}"
                                sendComment="#{groupEventDisplayCtrl.submitComment}"/>
-
-
-
-                <gw:gmapPositionDisplay
-                        rendered="#{groupEventDisplayCtrl.event.class.name == 'com.project.entities.GroupEvent'}"
-                        address="#{groupEventDisplayCtrl.event.address}"
-                        height="17em" width="100%"  zoom="12" />
-
             </ui:define>
 
             <ui:define name="footerContent">

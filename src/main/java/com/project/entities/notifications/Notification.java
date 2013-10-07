@@ -2,6 +2,7 @@ package com.project.entities.notifications;
 
 import com.project.Helper;
 import com.project.entities.Account;
+import org.hibernate.annotations.DiscriminatorOptions;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,6 +35,7 @@ import java.util.Date;
                         + " from Notification notification where  notification.accountListener = :accountId " +
                         "and  notification.type = 'CommentNotification'")  })
 @DiscriminatorColumn(name = "type")
+@DiscriminatorOptions(force=true)
 public abstract class Notification implements Serializable, Cloneable {
 
     public final static String FIND_AGENT_NOTIFICATION = "FIND_ACCOUNT_NOTIFICATION" ;

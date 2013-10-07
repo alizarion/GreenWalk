@@ -37,59 +37,97 @@
 
 
 <cc:implementation>
-    <div class="container">
+    <div class="centerMargin" style="width: 860px;margin-bottom: 20px;" >
+        <h1 class="titleHomeText2">
+            #{lang['common.label.group.event.header-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+        </h1>
+        <br/>
         <h:panelGrid columns="2"
                      styleClass="eventTable"
-                     columnClasses="avatarContainer,eventContent">
-            <gw:avatarDisplay
-                    onSelectOpenProfile="true"
-                    account="#{cc.attrs.event.owner}"
-                    width="100"
-                    height="100"/>
+                     columnClasses="groupEventDisplayLeftColumn,groupEventDisplayRightColumn">
             <h:panelGroup>
-                <div class="eventHeader">
-
-                    <h3>#{cc.attrs.event.owner.firstName} #{cc.attrs.event.owner.lastName}</h3>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel styleClass="label" value="#{lang['common.address.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                        <h:outputText value="#{cc.attrs.event.address}" />
-
-                        <h:outputLabel styleClass="label" value="#{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                        <h:outputText value="#{cc.attrs.event.eventDate}">
-                            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
-                        </h:outputText>
-
-                    </h:panelGrid>
-
-                </div>
-
-
-                <div class="eventDescription">
-                    <p>#{cc.attrs.event.description}</p>
-                    <h:panelGroup  rendered="#{cc.attrs.displayCommentLink}" style="float: right;">
-                        <a  href="/comm/#{cc.attrs.event.id}">#{fn:length(cc.attrs.event.commentsAsList)} Comment >></a>
-                    </h:panelGroup>
-                </div>
-                <div class="eventPhotos">
-                    <ui:repeat value="#{cc.attrs.event.contentAsList}"  var="imagecontent">
-                        <gw:lightBoxImage imageContent="#{imagecontent.image}" width="100" height="100"/>
-                    </ui:repeat>
-                </div>
-                <div>
-                    <h:form>
-                    <gw:header headerLabelId="common.participants.members.list.label-" />
+                <h2 class="titleHomeText3">
+                    <h:outputText value="#{cc.attrs.event.eventDate}">
+                        <f:convertDateTime type="date"
+                                           locale="#{sessionAttributeCtrl.selectedLang.key}"
+                                           pattern="EEEE, d MMMM yyyy HH:mm"  />
+                    </h:outputText>
+                </h2>
+                <br/>
+                <h2 class="titleHomeText4">
+                    <h:outputText value="#{cc.attrs.event.title}"/>
+                </h2>
+                <h:form>
                     <p:commandButton value="#{lang['form.group.event.button.subscribe-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                      rendered="#{cc.attrs.canSubscribe}"
-                         action="#{cc.attrs.subscribe}"  update="@form" />
-
-                    <div style="clear: both"></div>
-                    <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
-                    </h:form>
+                                     action="#{cc.attrs.subscribe}"  update="@form" />
+                </h:form>
+                <br/>
+                <h3 class="titleHomeText5">
+                    #{lang['common.label.group.event.description.header-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
+                </h3>
+                <div style="width: 100%;">
+                    <p>#{cc.attrs.event.description}</p>
                 </div>
+                <h3 class="titleHomeText5">
+                    #{lang['common.label.group.event.already.participate.header-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                </h3>
+                <div style="clear: both"></div>
+                <br/>
+                <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
+
+            </h:panelGroup>
+            <h:panelGroup>
+                <h3 class="titleHomeText5">
+                    #{lang['common.label.group.event.practical.header-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
+                </h3>
+                <h:panelGrid columns="3">
+                    <gw:avatarDisplay
+                            height="30"
+                            width="30"
+                            account="#{cc.attrs.event.owner}"
+                            onSelectOpenProfile="true"/>
+                    <h:panelGroup>
+                        #{lang['common.label.group.event.organized.by.header-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
+                        <br/>
+                        <a target="_blank" href="/profile/#{cc.attrs.event.owner.credential.userName}">#{cc.attrs.event.owner.firstName} #{cc.attrs.event.owner.lastName}</a>
+                    </h:panelGroup>
+                </h:panelGrid>
+                <br/>
+
+                <div>
+                    <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street.number-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <h:outputText  value="#{cc.attrs.event.address.number}" />
+                </div>
+                <div>
+                    <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <h:outputText   value="#{cc.attrs.event.address.street}" />
+                </div>
+                <div>
+                    <h:outputLabel styleClass="label" value=" #{lang['common.label.address.zipcode-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <h:outputText   value="#{cc.attrs.event.address.zipCode}" />
+                </div>
+                <div>
+                    <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <h:outputText   value="#{cc.attrs.event.address.city}" />
+                </div>
+                <div>
+                    <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <h:outputText  value="#{cc.attrs.event.address.country}" />
+                </div>
+
+                <br/>
+                <gw:gmapPositionDisplay
+                        rendered="#{cc.attrs.event.class.name == 'com.project.entities.GroupEvent'}"
+                        address="#{cc.attrs.event.address}"
+                        height="17em" width="100%"  zoom="12" />
+
 
             </h:panelGroup>
 
         </h:panelGrid>
+        <br/>
+        <br/>
     </div>
 </cc:implementation>
 

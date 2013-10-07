@@ -219,6 +219,15 @@ a:hover {
     z-index: 3;
     background-image: url('../resources/img/motif_background_green.jpg');
 }
+.greenCenter{
+    width: 100%;
+    position: relative;
+    padding: 5px;
+    z-index: 3;
+    background-image: url('../resources/img/motif_background_green.jpg');
+}
+
+
 
 .verticalAlignement{
     margin-left: auto;
@@ -252,7 +261,48 @@ a:hover {
     display: inline-block;
     color: #00323f;
 }
+.titleHomeText3{
+    margin: 0;
+    font-family: 'Boogaloo',regular;
+    font-size: 23px;
+    display: inline-block;
+    color: #00323f;
+}
 
+.titleHomeText4{
+    margin: 0;
+    font-family: 'Open Sans';
+    font-size: 23px;
+    display: inline-block;
+    color: #00323f;
+
+}
+p {
+    font-family: 'Open Sans', light;
+}
+
+.groupEventDisplayLeftColumn{
+    width:65%;
+    border-right:solid 1px  #009E9D ;
+    vertical-align: top;
+}
+
+.groupEventDisplayRightColumn{
+    width:30%;
+    vertical-align: top;
+    padding-left: 15px;
+
+}
+
+.titleHomeText5{
+    margin: 0;
+    font-family: 'Boogaloo',regular;
+    font-size: 20px;
+    font-weight: normal;
+
+    display: inline-block;
+    color: #009E9D;
+}
 
 .counter{
     top: 30px;
@@ -343,6 +393,20 @@ a:hover {
     margin-right: auto!important;
 }
 
+body .greenCenter .ui-menuitem-text {
+    color:#ffffff ;
+    text-transform:uppercase  !important;
+
+}
+
+
+
+body .greenCenter .ui-menuitem-text:hover{
+    color:#00323f ;
+}
+body  .greenCenter .ui-widget-header .ui-icon{
+    background-image: url("../resources/img/ui-icons_ffffff_256x240.png");
+}
 .container {
     width: 95%;
     height:auto;
@@ -520,6 +584,8 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 
 .label{
     font-weight: bold;
+    font-family: 'Boogaloo',regular;
+    font-size: 17px;
 }
 
 .groupElementContainer {
@@ -619,6 +685,7 @@ body #commentAndEvent h1{
     font-weight: normal;
     color: #009E9D;
 }
+
 
 
 body h2{
@@ -750,8 +817,8 @@ body .ui-menu  .ui-state-hover  {
     background-position: -149px -43px;
 }
 
-.other-icon {
-    background-position: -87px -12px;
+.-icon {
+    botherackground-position: -87px -12px;
 }
 
 .packaging-hazardous-materials-icon{
@@ -790,4 +857,9 @@ body .groupEventList .ui-widget-content {
     width: 950px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.whiteCenterBackground{
+    background-color: #ffffff;width: 100%;
+    padding-top: 25px;
 }
