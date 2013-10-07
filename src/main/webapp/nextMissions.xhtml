@@ -33,6 +33,8 @@
                     <f:viewParam  converter="viewParamDateConverter"
                                   name="#{filterCtrl.filter.fromDateParam}"
                                   value="#{filterCtrl.filter.fromDate}"/>
+
+                    <f:event type="preRenderView" listener="#{filterCtrl.updateMapModel}" />
                 </f:metadata>
             </ui:define>
             <ui:define name="center">

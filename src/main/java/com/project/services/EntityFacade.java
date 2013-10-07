@@ -7,6 +7,7 @@ import com.project.entities.notifications.Notification;
 import com.project.services.mail.MailSender;
 import com.project.services.mail.RegisterEmail;
 import com.project.services.mail.SMTPEmailProvider;
+import com.project.web.GroupEventFilter;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -234,5 +235,9 @@ public class EntityFacade implements Serializable{
 
     public List<String> getCityAdresses(String query) {
         return this.explorer.findAdressByCity(query);
+    }
+
+    public List<GroupEvent> getGroupEventByFilter(GroupEventFilter filter) {
+        return this.explorer.findGroupEventsByFilter(filter);
     }
 }

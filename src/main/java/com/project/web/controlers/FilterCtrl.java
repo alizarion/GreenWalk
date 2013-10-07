@@ -78,15 +78,16 @@ public class FilterCtrl implements Serializable {
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.singleEvents = facade.findLastSingleEvents();
-        this.groupEvents = facade.findLastGroupEvents();
+
+    }
+
+    public void updateMapModel(){
+        this.groupEvents = facade.getGroupEventByFilter(this.filter);
         getCurrent();
         getThisMonth();
         getThisMonth1();
         getThisMonth2();
-        updateMapModel();
-    }
-
-    private void updateMapModel(){
+        this.groupEvents = facade.getGroupEventByFilter(this.filter);
         this.mapModel = new DefaultMapModel();
         for (GroupEvent groupEvent: this.groupEvents){
             new SimpleDateFormat("MM/dd/yyyy HH:mm",

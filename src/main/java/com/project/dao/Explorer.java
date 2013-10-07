@@ -2,9 +2,12 @@ package com.project.dao;
 
 import com.project.entities.*;
 import com.project.entities.notifications.Notification;
+import com.project.web.GroupEventFilter;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +123,23 @@ public class Explorer {
             List<String>  addresses = new ArrayList<String>(em.createNamedQuery(
                     Address.FIND_ADDRESS_BY_CITY).setParameter("cityQuery", query+"%").getResultList());
             return addresses;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public List<GroupEvent> findGroupEventsByFilter(GroupEventFilter filter) {
+        try{
+           Query query = em.createNamedQuery(
+                   GroupEvent.FIND_BY_FILTER);
+            query.setParameter("afterDate",filter.getFromDate());
+            query.setParameter("beforeDate",filter.getToDate());
+            query.setParameter("city", StringUtils.isNotEmpty(filter.getCity()) ?
+                    "%"+filter.getCity()+"%" : null);
+            query.setParameter("country", StringUtils.isNotEmpty(filter.getCountry()) ?
+                    "%"+filter.getCountry()+"%" : null);
+            List<GroupEvent> events = query.getResultList();
+            return events;
         } catch (NoResultException e){
             return null;
         }

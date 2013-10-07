@@ -12,11 +12,20 @@ import java.util.*;
  */
 @Entity
 @DiscriminatorValue(value = "GROUP")
+@NamedQueries({
 @NamedQuery(name= GroupEvent.FIND_ALL,
-        query="SELECT ge FROM GroupEvent ge  order by ge.creationDate desc ")
+        query="SELECT ge FROM GroupEvent ge  order by ge.creationDate desc "),
+        @NamedQuery(name= GroupEvent.FIND_BY_FILTER,
+                query="SELECT ge FROM GroupEvent ge where (:city is null or ge.address.city like :city) " +
+                        "and ( :country IS NULL or ge.address.country like  :country) " +
+                        "and (:afterDate is null or ge.eventDate >= :afterDate) and " +
+                        "(:beforeDate is null or ge.eventDate <= :beforeDate )" +
+                        " order by ge.creationDate desc ")})
+
 public class GroupEvent extends Event implements Notified {
 
     public final static String FIND_ALL = "GroupEvent.FIND_ALL";
+    public final static String FIND_BY_FILTER = "GroupEvent.FIND_BY_FILTER";
 
 
     @OneToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST},
