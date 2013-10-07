@@ -15,11 +15,58 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/template.xhtml">
+            <ui:define name="header">
+                <f:metadata>
+                    <f:viewParam
+                            name="#{filterCtrl.filter.cityParam}"
+                            value="#{filterCtrl.filter.city}"/>
+                    <f:viewParam
+                            name="#{filterCtrl.filter.countryParam}"
+                            value="#{filterCtrl.filter.country}"/>
 
+                    <f:viewParam
+                            name="#{filterCtrl.filter.latLngParam}"
+                            value="#{filterCtrl.filter.addressPosition}"/>
+                    <f:viewParam  converter="viewParamDateConverter"
+                                  name="#{filterCtrl.filter.toDateParam}"
+                                  value="#{filterCtrl.filter.toDate}"/>
+                    <f:viewParam  converter="viewParamDateConverter"
+                                  name="#{filterCtrl.filter.fromDateParam}"
+                                  value="#{filterCtrl.filter.fromDate}"/>
+                </f:metadata>
+            </ui:define>
             <ui:define name="center">
-                <div class="groupEventList" >
-                <gw:groupEventList
-                        tabViewWrapperList="#{homeCtrl.groupEventTabViewWrappers}"/>
+                <div class="greenCenter">
+                    <div class="centerMargin" style="width: 860px;">
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem  value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                         outcome="next-missions-outcome" />
+                        </p:breadCrumb>
+                    </div>
+                </div>
+                <div class="whiteCenterBackground">
+                    <gw:groupEventFilter filter="#{filterCtrl.filter}"
+                                         completeCity="#{filterCtrl.completeCity}"
+                                         applyFilter="#{filterCtrl.applyFilter}"
+                                         completeCountry="#{filterCtrl.completeCountry}"/>
+                    <gw:gmapGroupEventList actualLocation="#{filterCtrl}"
+                                           getActualLocation="#{filterCtrl.actualLocation}"
+                                           mapModel="#{filterCtrl.mapModel}"
+                                           selectedMarker="#{filterCtrl.selectedMarker}"
+                                           onMarkerSelect="#{filterCtrl.onMarkerSelect}"
+                                           zoom="#{filterCtrl.mapZoom}"  />
+
+                </div>
+            </ui:define>
+
+            <ui:define name="contentLeft">
+                <h1 class="titleHomeText5">
+                    #{lang['common.label.find.group.event.next.mission.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
+                </h1>
+                <div class="groupEventList">
+                    <gw:groupEventList
+                            tabViewWrapperList="#{filterCtrl.groupEventTabViewWrappers}"/>
                 </div>
             </ui:define>
 

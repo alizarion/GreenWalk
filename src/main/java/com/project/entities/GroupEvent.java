@@ -1,8 +1,10 @@
 package com.project.entities;
 
 import com.project.entities.notifications.*;
+import org.apache.commons.lang.LocaleUtils;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -105,6 +107,13 @@ public class GroupEvent extends Event implements Notified {
             }
         }
         return resultList;
+    }
+
+    public String getOverlayDescription(String localeKey){
+      return   new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm",
+                LocaleUtils.toLocale(localeKey)).format(this.eventDate) + " : "+ this.getTitleShort() + "<br/>"+
+                "<a target='_blank' href='../group-pick-up/"+super.getId() +"'>"+
+              this.getDescriptionShort()+"..more</a>";
     }
 
     public List<GroupEventSubscriber> getUnConfirmedSubscribersAsList() {

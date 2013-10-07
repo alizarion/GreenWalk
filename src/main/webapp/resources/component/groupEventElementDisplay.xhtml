@@ -32,25 +32,25 @@
 
 <cc:implementation>
 
-    <h:panelGroup rendered="#{cc.attrs.withHeaders}" styleClass="groupElementContainer">
+    <h:panelGroup rendered="#{cc.attrs.withHeaders}" styleClass="groupElementContainer headerRow">
 
-        <span class="eventDateColumn">
+        <span class="eventDateColumn columnHeader rightHeaderBorders" >
             <h:outputText
                 value="#{lang['common.label.date.time-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
 
-         <span class="eventLocationColumn">
+         <span class="eventLocationColumn columnHeader rightHeaderBorders">
                 <h:outputText
                         value="#{lang['common.label.group.event.location-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
 
-         <span class="eventShortDescriptionColumn">
+         <span class="eventShortDescriptionColumn columnHeader rightHeaderBorders">
              <h:outputText
                     value="#{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
 
 
-        <span class="eventOrganiserColumn">
+        <span class="eventOrganiserColumn columnHeader">
              <h:outputText
                      value="#{lang['common.label.group.event.organiser-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>

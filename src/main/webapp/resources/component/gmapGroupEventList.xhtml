@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface >
+
+    <cc:attribute
+            name="onMarkerSelect"
+            method-signature="void listener(org.primefaces.event.map.OverlaySelectEvent)"
+            required="true"/>
+
+    <cc:attribute
+            name="actualLocation"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
+            name="getActualLocation"
+            type="java.lang.Boolean"
+            required="true"/>
+
+    <cc:attribute
+            name="zoom"
+            type="java.lang.Integer"
+            required="true"/>
+
+    <cc:attribute
+            name="mapModel"
+            type="org.primefaces.model.map.DefaultMapModel"
+            required="true"/>
+
+    <cc:attribute
+            name="selectedMarker"
+            type="org.primefaces.model.map.Marker"
+            required="true"/>
+</cc:interface>
+
+<cc:implementation>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"
+            type="text/javascript"/>
+    <h:panelGroup rendered="#{cc.attrs.getActualLocation}">
+
+    </h:panelGroup>
+
+    <h:form id="gmapForm" prependId="false" >
+        <p:remoteCommand name="remotemaupdater"  process="input1,@this" update="mapGroup" />
+        <h:panelGroup styleClass="hiddenInput">
+            <h:inputHidden  id="input1" value="#{cc.attrs.actualLocation}" />
+        </h:panelGroup>
+
+        <div style="clear: both;"></div>
+        <h:panelGroup id="mapGroup">
+            <p:gmap center="#{cc.attrs.mapModel.markers[0].latlng.lat}, #{cc.attrs.mapModel.markers[0].latlng.lng}"
+                    zoom="#{cc.attrs.zoom}"
+                    type="ROADMAP"  style="width:100%;height:17em;"
+                    model="#{cc.attrs.mapModel}"
+                    mapTypeControl="true" navigationControl="false"
+                    widgetVar="gmap">
+                <p:ajax event="overlaySelect" listener="#{filterCtrl.onMarkerSelect}" />
+                <p:gmapInfoWindow>
+                    <p:outputPanel style="text-align:center;display:block;margin:auto:">
+                        <h:outputText escape="false" value="#{cc.attrs.selectedMarker.title}" />
+                        <br/>
+                        <h:outputText escape="false" value="#{cc.attrs.selectedMarker.data}" />
+                    </p:outputPanel>
+
+                </p:gmapInfoWindow>
+            </p:gmap>
+        </h:panelGroup>
+
+    </h:form>
+
+</cc:implementation>
+
+</html>

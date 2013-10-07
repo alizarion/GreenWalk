@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface >
+
+    <cc:attribute
+            name="address"
+            type="com.project.entities.Address"
+            required="true"/>
+
+    <cc:attribute
+            name="zoom"
+            type="java.lang.Integer"
+            required="true"/>
+
+    <cc:attribute
+            name="width"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
+            name="height"
+            type="java.lang.String"
+            required="true"/>
+
+</cc:interface>
+
+<cc:implementation>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"
+            type="text/javascript"/>
+
+    <p:gmap center="#{cc.attrs.address.position.asLatLng.lat}, #{cc.attrs.address.position.asLatLng.lng}"
+            zoom="#{cc.attrs.zoom}"
+            type="ROADMAP"  style="width:#{cc.attrs.width};height:#{cc.attrs.height};"
+            mapTypeControl="true" navigationControl="false"
+            widgetVar="gmap">
+    </p:gmap>
+    <script type="text/javascript">
+        $(function(){
+            addMarker();
+        });
+
+        function addMarker() {
+            var map = gmap.getMap();
+            latlng = new google.maps.LatLng('#{cc.attrs.address.position.asLatLng.lat}',
+                    '#{cc.attrs.address.position.asLatLng.lng}');
+
+
+            // Create infoWindow
+            var infoWindow = new google.maps.InfoWindow({
+                content: "#{cc.attrs.address}"
+            });
+
+            map.setCenter(latlng);
+
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                infoWindow : infoWindow
+            });
+            marker.setMap(map);
+            infoWindow.open(map, marker);
+        }
+    </script>
+</cc:implementation>
+
+</html>

@@ -1,5 +1,7 @@
 package com.project;
 
+import org.primefaces.model.map.LatLng;
+
 import java.io.File;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -41,6 +43,17 @@ public  class Helper {
     public static File getTempDirectoryPath(){
         ResourceBundle bundle = ResourceBundle.getBundle("app");
         return new File(getRootDirectoryPath(),bundle.getString("TEMP_DIRECTORY"));
+    }
+
+    public static LatLng getLatLngFromSeparatedString(String latlng){
+       if (latlng!= null){
+           if (latlng.contains(",")){
+               String [] latLngTab =  latlng.split(",");
+               LatLng latLng =  new LatLng(Double.parseDouble(latLngTab[0]),Double.parseDouble(latLngTab[1]));
+               return latLng;
+           }
+       }
+       return null;
     }
 
     public static String getRandomHash(){

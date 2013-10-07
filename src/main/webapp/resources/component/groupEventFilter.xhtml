@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface componentType="GroupEventFilterCC">
+
+    <cc:attribute
+            name="filter"
+            type="com.project.web.GroupEventFilter"
+            required="true"/>
+
+
+
+    <cc:attribute
+            name="completeCity"
+            method-signature="void action(String)"
+            required="true"/>
+
+    <cc:attribute
+            name="completeCountry"
+            method-signature="void action(String)"
+            required="true"/>
+    <cc:attribute
+            name="applyFilter"
+            method-signature="void action()"
+            required="true"/>
+
+
+</cc:interface>
+
+<cc:implementation>
+    <div class="centerMargin" style="width: 860px;margin-bottom: 20px;">
+        <div style="display: inline-block;">
+            <h1 class="titleHomeText2">
+                <h:outputText escape="false"
+                              value="#{lang['common.label.find.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+            </h1>
+            <div style="clear: both;"></div>
+            <h2 class="titleHomeText3">
+                <h:outputText escape="false"
+                              value="#{lang['common.label.find.group.event.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+
+            </h2>
+
+        </div>
+        <div style="display: inline-block;clear: both;">
+            <h:graphicImage style="float: right" value="/resources/img/cat-eyes.png"  />
+        </div>
+        <h:form id="filterForm" prependId="false">
+            <h:panelGrid style="vertical-align: bottom;" columns="5">
+                <h:panelGroup>
+                    <h:outputLabel
+                            styleClass="filterLabel"
+                            value="#{lang['common.label.find.group.search.in.other.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} :"/>
+                    <br/>
+                    <p:autoComplete id="countrysearch"
+                                    completeMethod="#{cc.attrs.completeCountry}"
+                                    value="#{cc.attrs.filter.country}">
+                    </p:autoComplete>
+                    <p:watermark
+                            for="countrysearch"
+                            value="#{lang['common.watermark.find.group.country-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:outputLabel
+                            styleClass="filterLabel"
+                            value="#{lang['common.label.find.group.search.in.other.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} :"/>
+                    <br/>
+                    <p:autoComplete  id="citysearch"
+                                     completeMethod="#{cc.attrs.completeCity}"
+                                     value="#{cc.attrs.filter.city}">
+                    </p:autoComplete>
+                    <p:watermark
+                            for="citysearch"
+                            value="#{lang['common.watermark.find.group.city-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:outputLabel
+                            styleClass="filterLabel"
+                            value="#{lang['common.label.find.group.search.by.date.after-'.concat(sessionAttributeCtrl.selectedLang.key)]} :"/>
+                    <br/>
+                    <p:calendar pattern="dd/MM/yyyy"
+                                value="#{cc.attrs.filter.fromDate}"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:outputLabel
+                            styleClass="filterLabel"
+                            value="#{lang['common.label.find.group.search.by.date.before-'.concat(sessionAttributeCtrl.selectedLang.key)]} :"/>
+                    <br/>
+                    <p:calendar
+                            pattern="dd/MM/yyyy"
+                            value="#{cc.attrs.filter.toDate}"/>
+                </h:panelGroup>
+
+                <h:panelGroup >
+                    <p:commandButton
+                            style="margin-bottom: -10px;"
+                            value="#{lang['common.action.find.group.search-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                            process="@form,@this"
+                            action="#{cc.attrs.applyFilter}"/>
+                </h:panelGroup>
+
+            </h:panelGrid>
+        </h:form>
+    </div>
+
+</cc:implementation>
+
+</html>

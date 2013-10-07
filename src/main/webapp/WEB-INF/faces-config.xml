@@ -83,7 +83,7 @@
         <navigation-case>
             <from-outcome>next-missions-outcome</from-outcome>
             <to-view-id>/nextMissions.xhtml</to-view-id>
-            <redirect>true</redirect>
+            <redirect include-view-params="true">true</redirect>
         </navigation-case>
 
 

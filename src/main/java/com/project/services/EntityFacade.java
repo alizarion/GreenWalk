@@ -77,6 +77,11 @@ public class EntityFacade implements Serializable{
         return   this.em.find(Account.class, id);
     }
 
+    public Address findAddressById(Long id){
+        return   this.em.find(Address.class, id);
+    }
+
+
 
     public List<Person> findAllPersons(){
         return this.explorer.findAllPersons();
@@ -223,4 +228,11 @@ public class EntityFacade implements Serializable{
         }
     }
 
+    public List<String> getCountryAdresses(String query) {
+        return this.explorer.findAdressByCountry(query);
+    }
+
+    public List<String> getCityAdresses(String query) {
+        return this.explorer.findAdressByCity(query);
+    }
 }

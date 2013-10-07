@@ -590,9 +590,15 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 
 .groupElementContainer {
     width: 100%;
-    height: auto;
-    display: block;
 
+    display: block;
+    clear: both;
+}
+
+.headerRow {
+    display: block;
+    height: 35px;
+    border-bottom:  #009e9d 1px solid;
 }
 
 .eventDateColumn{
@@ -616,7 +622,7 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
     margin: 5px;
 }
 .eventOrganiserColumn{
-    width: 60px;
+    width: 70px;
     display: inline-block;
     float: left;
     margin: 5px;
@@ -854,7 +860,7 @@ body .groupEventList .ui-widget-content {
 }
 
 .groupEventList{
-    width: 950px;
+    width: 670px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -862,4 +868,38 @@ body .groupEventList .ui-widget-content {
 .whiteCenterBackground{
     background-color: #ffffff;width: 100%;
     padding-top: 25px;
+}
+
+.ui-tabs-panels{
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: solid 1px #EAEAEA;
+}
+
+.groupEventList .ui-tabs-top,.ui-widget-content {
+    border: none;
+}
+
+.groupEventList  .ui-corner-top{
+    font-family: 'Boogaloo',regular;
+    color: #00323f;
+}
+
+.columnHeader {
+    color:  #009e9d!important;
+    font-family: 'Boogaloo',regular;
+    font-size: 15px;
+    text-transform: uppercase;
+
+
+}
+
+.filterLabel{
+
+    font-size: 11px;
+
+}
+
+.rightHeaderBorders{
+    border-right:  #009e9d 1px solid;
 }

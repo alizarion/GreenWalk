@@ -14,7 +14,22 @@ import java.io.Serializable;
  */
 @Entity
 @Table(catalog = Helper.ENTITIES_CATALOG,name = "address")
+@NamedQueries({
+        @NamedQuery(name= Address.FIND_ADDRESS_BY_COUNTRY,
+                hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                query="select distinct address.country  "
+                        + " from Address address where  address.country like :countryQuery" +
+                        " group by address.country"),
+        @NamedQuery(name= Address.FIND_ADDRESS_BY_CITY,
+                hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                query="select distinct  address.city "
+                        + " from Address address where   address.city like :cityQuery " +
+                        " group by address.city")})
 public class Address implements Serializable {
+
+    public final static String FIND_ADDRESS_BY_COUNTRY = "FIND_ADDRESS_BY_COUNTRY" ;
+    public final static String FIND_ADDRESS_BY_CITY = "FIND_ADDRESS_BY_CITY" ;
+
 
     @Id
     @TableGenerator(name="Address_SEQ", table="sequence", catalog = Helper.ENTITIES_CATALOG,

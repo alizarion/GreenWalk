@@ -104,4 +104,24 @@ public class Explorer {
             return null;
         }
     }
+
+    public List<String> findAdressByCountry(String query) {
+        try{
+            List<String>  addresses = new ArrayList<String>(em.createNamedQuery(
+                    Address.FIND_ADDRESS_BY_COUNTRY).setParameter("countryQuery", query+"%").getResultList());
+            return addresses;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public List<String> findAdressByCity(String query) {
+        try{
+            List<String>  addresses = new ArrayList<String>(em.createNamedQuery(
+                    Address.FIND_ADDRESS_BY_CITY).setParameter("cityQuery", query+"%").getResultList());
+            return addresses;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
 }

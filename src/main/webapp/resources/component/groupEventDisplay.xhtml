@@ -37,7 +37,12 @@
 
 
 <cc:implementation>
-    <div class="centerMargin" style="width: 860px;margin-bottom: 20px;" >
+    <gw:gmapPositionDisplay
+            rendered="#{cc.attrs.event.class.name == 'com.project.entities.GroupEvent'}"
+            address="#{cc.attrs.event.address}"
+            height="17em" width="100%"  zoom="12" />
+
+    <div class="centerMargin" style="width: 860px;margin-bottom: 20px;margin-top: 20px;" >
         <h1 class="titleHomeText2">
             #{lang['common.label.group.event.header-'.concat(sessionAttributeCtrl.selectedLang.key)]}
         </h1>
@@ -117,10 +122,6 @@
                 </div>
 
                 <br/>
-                <gw:gmapPositionDisplay
-                        rendered="#{cc.attrs.event.class.name == 'com.project.entities.GroupEvent'}"
-                        address="#{cc.attrs.event.address}"
-                        height="17em" width="100%"  zoom="12" />
 
 
             </h:panelGroup>
