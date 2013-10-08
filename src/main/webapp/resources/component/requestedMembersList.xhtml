@@ -36,22 +36,15 @@
 <cc:implementation>
 
     <gw:header headerLabelId="common.participants.members.list.label-" />
-    <div class="container">
     <gw:membersSearch
             updateAfterSelect=":#{cc.clientId}:unconfirmedList"
             completeMembers="#{cc.attrs.completeMembers}"
             selectedMember="#{cc.attrs.selectedMember}"/>
 
-
-        <!--creer un composant debut-->
-
-
-
         <!--creer un composant fin-->
         <h:panelGroup id="unconfirmedList">
             <gw:participantsList participants="#{cc.attrs.currentEvent.unConfirmedSubscribersAsList}"/>
         </h:panelGroup>
-    </div>
 
 </cc:implementation>
 

@@ -12,41 +12,51 @@
     <h:body>
         <ui:composition template="/template/template.xhtml">
             <ui:define name="center">
+                <div class="greenCenter">
+                    <div class="centerMargin" style="width: 860px;">
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem  value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                         outcome="next-missions-outcome" />
+                            <p:menuitem value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}" outcome="groupevent-outcome" />
 
-            </ui:define>
-            <ui:define name="contentLeft">
-                <gw:groupEventForm
-                        id="groupEventForm"
-                        saveChanges="#{groupEventCtrl.submitGroupEvent}"
-                        maxDate="#{groupEventCtrl.nextYear}"
-                        minDate="#{groupEventCtrl.today}"
-                        event="#{groupEventCtrl.event}"/>
+                        </p:breadCrumb>
+                    </div>
+                </div>
+                <div class="whiteCenterBackground">
 
-                <gw:header headerLabelId="common.participants.members.list.label-" />
-                <div class="container">
-                    <gw:participantsList
-                            participants="#{groupEventCtrl.event.confirmedSubscribersAsList}"/>
+                    <gw:gmapLocation
+                            id="gmapLocation"
+                            mapModel="#{groupEventCtrl.draggableModel}"
+                            actualLocation="#{groupEventCtrl.actualLocation}"
+                            zoom="#{groupEventCtrl.mapZoom}"
+                            getActualLocation="#{groupEventCtrl.event.id == null}"
+                            toUpdate=":groupEventForm:groupEventEditForm"
+                            searchQuery="#{groupEventCtrl.searchQuery}"
+                            searchActionMethod="#{groupEventCtrl.searchPosition}"
+                            onMarkerDrag="#{groupEventCtrl.onMarkerDrag}" />
+                    <div class="centerMargin whiteContainer" >
+                        <gw:groupEventForm
+                                id="groupEventForm"
+                                completeMembers="#{groupEventCtrl.completeMembers}"
+                                selectedMember="#{groupEventCtrl.selectedMember}"
+                                saveChanges="#{groupEventCtrl.submitGroupEvent}"
+                                maxDate="#{groupEventCtrl.nextYear}"
+                                minDate="#{groupEventCtrl.today}"
+                                event="#{groupEventCtrl.event}"/>
+
+
+                    </div>
                 </div>
 
-                <gw:requestedMembersList
-                        completeMembers="#{groupEventCtrl.completeMembers}"
-                        selectedMember="#{groupEventCtrl.selectedMember}"
-                        currentEvent="#{groupEventCtrl.event}" />
+            </ui:define>
+
+            <ui:define name="contentLeft">
 
 
             </ui:define>
             <ui:define name="contentRight">
-                <gw:gmapLocation
-                        id="gmapLocation"
-                        mapModel="#{groupEventCtrl.draggableModel}"
-                        actualLocation="#{groupEventCtrl.actualLocation}"
-                        zoom="#{groupEventCtrl.mapZoom}"
-                        getActualLocation="#{groupEventCtrl.event.id == null}"
-                        toUpdate=":groupEventForm:groupEventEditForm"
-                        searchQuery="#{groupEventCtrl.searchQuery}"
-                        searchActionMethod="#{groupEventCtrl.searchPosition}"
-                        onMarkerDrag="#{groupEventCtrl.onMarkerDrag}"
-                        />
+
             </ui:define>
 
         </ui:composition>

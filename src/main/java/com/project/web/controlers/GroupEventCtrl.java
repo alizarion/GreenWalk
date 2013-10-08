@@ -54,6 +54,8 @@ public class GroupEventCtrl implements Serializable {
 
     private Date today;
 
+    ResourceBundle bundle = ResourceBundle.getBundle("lang");
+
     private Date  nextYear;
 
 
@@ -73,10 +75,15 @@ public class GroupEventCtrl implements Serializable {
         }  else {
             this.event = new GroupEvent(this.userAccount);
         }
-        draggableModel.addOverlay(new Marker(this.actualLocation, "default"));
+        draggableModel.addOverlay(new Marker(this.actualLocation, bundle.getString(
+                "common.group.event.map.cursor.howto-"+
+                        sessionAttribute.getSelectedLang().getKey())+ bundle.getString(
+                "common.group.event.map.cursor.howto-"+
+                        sessionAttribute.getSelectedLang().getKey())));
         for(Marker marker : draggableModel.getMarkers()) {
             marker.setDraggable(true);
         }
+
         Calendar todayCalentdar = Calendar.getInstance();
         this.today =  new Date();
         todayCalentdar = Calendar.getInstance();
@@ -158,8 +165,10 @@ public class GroupEventCtrl implements Serializable {
     }
 
     public void setSelectedMember(Account selectedMember) {
-        this.event.addSubscriber(new GroupEventSubscriber(this.getEvent(),selectedMember));
-        this.event.getSubscribers();
+        if (selectedMember!= null){
+            this.event.addSubscriber(new GroupEventSubscriber(this.getEvent(),selectedMember));
+            this.event.getSubscribers();
+        }
     }
 
     public Date getToday() {

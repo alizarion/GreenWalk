@@ -21,192 +21,227 @@
 
 <h:body>
 
-    <ui:insert name="viewparam">
-    </ui:insert>
+<ui:insert name="viewparam">
+</ui:insert>
 
-    <h:panelGroup  rendered="#{request.userPrincipal != null}" styleClass="menuhead">
-        <div class="menu accountMenu">
-            <ol style="display: inline-block">
+<h:panelGroup  rendered="#{request.userPrincipal != null}" styleClass="menuhead">
+    <div class="menu accountMenu">
+        <ol style="display: inline-block">
 
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="useredit-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.my.subscribed.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="next-missions-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.my.create.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="community-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.my.last.declaration-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="community-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <a href="#">
-                        <h:outputText
-                                id="notifications"
-                                value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.notifications)})"
-                                />
-                    </a>
-                    <p:overlayPanel id="chartPanel"   style="position: fixed;" appendToBody="true" for="notifications" hideEffect="fade">
-                        <gw:notificationList
-                                notifications="#{notificationCenterCtrl.notifications}"/>
-                    </p:overlayPanel>
-                </li>
-                <li class="menuItem">
-                    <h:form>
-                        <h:commandLink
-                                action="#{loginCtrl.logout(facesContext)}"
-                                icon="ui-icon-arrowrefresh-1-w"
-                                value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
-                    </h:form>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.my.account.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="useredit-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.my.subscribed.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="next-missions-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.my.create.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="community-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.my.last.declaration-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="community-outcome"/>
+            </li>
+            <li class="menuItem">
+                <a href="#">
+                    <h:outputText
+                            id="notifications"
+                            value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.notifications)})"
+                            />
+                </a>
+                <p:overlayPanel id="chartPanel"   style="position: fixed;" appendToBody="true" for="notifications" hideEffect="fade">
+                    <gw:notificationList
+                            notifications="#{notificationCenterCtrl.notifications}"/>
+                </p:overlayPanel>
+            </li>
+            <li class="menuItem">
+                <h:form>
+                    <h:commandLink
+                            action="#{loginCtrl.logout(facesContext)}"
+                            icon="ui-icon-arrowrefresh-1-w"
+                            value="#{lang['page.template.logout.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                </h:form>
 
-                </li>
-            </ol>
-        </div>
-    </h:panelGroup>
-    <div class="head">
-        <div onclick="window.location.href='#{app['APP_URL']}'"
-             class="logo">
-        </div>
-
-        <div class="menu" >
-            <ol style="display: inline-block">
-                <li class="menuItem">
-                    <h:link
-                            styleClass="homeButton"
-                            outcome="community-outcome">
-                        <div  class="homeButton"></div>
-                    </h:link>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['common.menu.label.about.us-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="community-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="next-missions-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.local.action.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="community-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.tri.memo.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="community-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.partners.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="next-missions-outcome"/>
-                </li>
-                <li class="menuItem">
-                    <h:link
-                            value="#{lang['page.template.declare.picked.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                            outcome="next-missions-outcome"/>
-                </li>
-
-
-            </ol>
-        </div>
+            </li>
+        </ol>
+    </div>
+</h:panelGroup>
+<div class="head">
+    <div onclick="window.location.href='#{app['APP_URL']}'"
+         class="logo">
     </div>
 
-    <ui:insert name="center">
+    <div class="menu" >
+        <ol style="display: inline-block">
+            <li class="menuItem">
+                <h:link
+                        styleClass="homeButton"
+                        outcome="community-outcome">
+                    <div  class="homeButton"></div>
+                </h:link>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['common.menu.label.about.us-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="community-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="next-missions-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.local.action.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="community-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.tri.memo.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="community-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.partners.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="next-missions-outcome"/>
+            </li>
+            <li class="menuItem">
+                <h:link
+                        value="#{lang['page.template.declare.picked.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="next-missions-outcome"/>
+            </li>
 
 
-    </ui:insert>
-
-
-    <div id="commentAndEvent">
-        <div id="contentLeft">
-            <ui:insert name="contentLeft">
-            </ui:insert>
-        </div>
-
-        <div id="contentRight">
-            <ui:insert name="contentRight">
-            </ui:insert>
-        </div>
+        </ol>
     </div>
+</div>
 
-    <div style="clear: both;"></div>
-    <div class="footerContainer">
-        <div class="centerMargin" style="width: 950px;">
-            <div class="container" style="width: 27%;height: 150px;display: inline-block;margin-left:auto;margin-right: auto; " >
+<ui:insert name="center">
 
-            </div>
 
-            <div class="container" style="width: 27%;height: 150px;display: inline-block;margin-left:auto;margin-right: auto;margin-left: 35px;">
+</ui:insert>
 
-            </div>
 
-            <div class="container" style="width: 27%;height: 150px;display: inline-block;margin-left:auto;margin-right: auto;margin-left: 35px;">
-
-            </div>
-
-        </div>
-        <ui:insert name="footerContent">
-
+<div id="commentAndEvent">
+    <div id="contentLeft">
+        <ui:insert name="contentLeft">
         </ui:insert>
     </div>
 
-    <p:growl  widgetVar="growl" id="growlMsg" showDetail="true">
+    <div id="contentRight">
+        <ui:insert name="contentRight">
+        </ui:insert>
+    </div>
+</div>
 
-    </p:growl>
-    <h:form prependId="false">
-        <p:remoteCommand name="growlRemoteUpdater"  update=":growlMsg"/>
-    </h:form>
-    <script type="text/javascript">
+<div style="clear: both;"></div>
+<div class="footerContainer">
+    <div class="centerMargin" style="width: 950px;padding: 30px">
+        <div class="container footerContent"  >
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:graphicImage value="/resources/img/alert.png"  />
+                    <h:commandLink
+                            value="#{lang['common.footers.group.event.notification-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                </h:panelGrid>
+            </h:form>
 
-        $(function() {
-            createLightBox();
+        </div>
 
+        <div class="container footerContent" style="margin-left: 35px;">
+            <h:panelGrid columns="5">
+                <h:outputText value="#{lang['common.footers.social.networks.links-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                <h:outputLink target="_blank" value="http://facebook.com" >
+                    <h:panelGroup styleClass="facebookLink">
+
+                    </h:panelGroup>
+                </h:outputLink>
+                <h:outputLink target="_blank" value="http://twitter.com" >
+                    <h:panelGroup styleClass="twitterLink">
+
+                    </h:panelGroup>
+                </h:outputLink>
+                <h:outputLink target="_blank" value="http://pinterest.com" >
+                    <h:panelGroup styleClass="pinterestLink">
+
+                    </h:panelGroup>
+                </h:outputLink>
+                <h:outputLink target="_blank" value="http://gplus.com" >
+                    <h:panelGroup styleClass="googleplusLink">
+
+                    </h:panelGroup>
+                </h:outputLink>
+            </h:panelGrid>
+        </div>
+
+        <div class="container footerContent" style="margin-left: 35px;">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:graphicImage value="/resources/img/recomander.png"  />
+                    <h:commandLink
+                            value="#{lang['common.footers.recommend.greenwalk-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+
+    </div>
+    <ui:insert name="footerContent">
+
+    </ui:insert>
+</div>
+
+<p:growl  widgetVar="growl" id="growlMsg" showDetail="true">
+
+</p:growl>
+<h:form prependId="false">
+    <p:remoteCommand name="growlRemoteUpdater"  update=":growlMsg"/>
+</h:form>
+<script type="text/javascript">
+
+    $(function() {
+        createLightBox();
+
+    });
+
+    function createLightBox(){
+        var ratio = Math.round((screen.width * 65)/100);
+        $("a.lightBox").each(function() {
+            $(this).lightBox({fixedNavigation:true});
+            return $(this).replaceAttr('hreflang', '[width]', ratio);
         });
 
-        function createLightBox(){
-            var ratio = Math.round((screen.width * 65)/100);
-            $("a.lightBox").each(function() {
-                $(this).lightBox({fixedNavigation:true});
-                return $(this).replaceAttr('hreflang', '[width]', ratio);
-            });
 
+    }
+</script>
 
-        }
-    </script>
-
-    <h:panelGroup id="google" >
-        <script type="text/javascript">
-            function hideOnSuccess(xhr, status, args,dialogToHide) {
-                if (args) {
-                    var isValid = args.isValid;
-                    if (isValid) {
-                        dialogToHide.hide();
-                    }
+<h:panelGroup id="google" >
+    <script type="text/javascript">
+        function hideOnSuccess(xhr, status, args,dialogToHide) {
+            if (args) {
+                var isValid = args.isValid;
+                if (isValid) {
+                    dialogToHide.hide();
                 }
             }
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
-            _gaq.push(['_trackPageview']);
+        }
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', "#{app['GOOGLE_ANALYTICS_UA']}"]);
+        _gaq.push(['_trackPageview']);
 
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 
-    </h:panelGroup>
+</h:panelGroup>
 
 </h:body>
 

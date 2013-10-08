@@ -45,6 +45,11 @@ ol, ul, li {
 
 }
 
+.whiteContainer{
+    width: 860px;
+    margin-bottom: 20px;
+}
+
 .menu {
     text-align: center;
     margin-bottom: 0;
@@ -583,7 +588,7 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 }
 
 .label{
-    font-weight: bold;
+    font-weight: normal;
     font-family: 'Boogaloo',regular;
     font-size: 17px;
 }
@@ -735,6 +740,15 @@ body .ui-autocomplete-items td, tr{
     margin-top: 20px;
     clear: both;
     background-image: url("/resources/img/blue_background.png");
+}
+
+.footerContent{
+    width: 27%;
+    height: 80px;
+    display: inline-block;
+    margin-left:auto;
+    margin-right: auto;
+    background-color: #ffffff;
 }
 
 body .ui-menu, .ui-menu .ui-menu-child {
@@ -913,4 +927,37 @@ body .groupEventList .ui-widget-content {
 
 .rightHeaderBorders{
     border-right:  #009e9d 1px solid;
+}
+
+.facebookLink{
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("/resources/img/socials.png");
+    background-position: 0px 0px;
+}
+
+.twitterLink{
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("/resources/img/socials.png");
+    background-position: 85px 0px;
+}
+
+.pinterestLink{
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("/resources/img/socials.png");
+    background-position: 58px 0px;
+}
+
+
+.googleplusLink{
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url("/resources/img/socials.png");
+    background-position: 30px 0px;
 }

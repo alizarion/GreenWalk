@@ -81,15 +81,21 @@
             }
         </script>
     </h:panelGroup>
-    <div class="container">
-        <h:form id="gmapForm" prependId="false" onkeypress="if (event.keyCode == 13) { remotesearch(); return false; }">
+    <h:form id="gmapForm" prependId="false" onkeypress="if (event.keyCode == 13) { remotesearch(); return false; }">
+        <div class="centerMargin" style="width: 860px;margin-bottom: 20px;">
             <p:remoteCommand name="remotemaupdater"  process="input1,@this" update="mapGroup" />
             <h:panelGroup styleClass="hiddenInput">
                 <h:inputHidden  id="input1" value="#{cc.attrs.actualLocation}" />
             </h:panelGroup>
+            <h1 class="titleHomeText3">
+                #{lang['common.group.event.place.label.title-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+            </h1>
+            <br/>
+            <h:outputText  styleClass="filterLabel"
+                value="#{lang['common.group.event.place.label.howto-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+
             <p:inputText  type="search"
                           id="search"
-
                           styleClass="searchInput"
                           value="#{cc.attrs.searchQuery}"/>
 
@@ -100,20 +106,21 @@
             <p:remoteCommand
                     name="remotesearch"
                     action="#{cc.attrs.searchActionMethod}" update="mapGroup,#{cc.attrs.toUpdate}" />
-            <div style="clear: both;"></div>
-            <h:panelGroup id="mapGroup">
-                <p:gmap center="#{cc.attrs.mapModel.markers[0].latlng.lat}, #{cc.attrs.mapModel.markers[0].latlng.lng}"
-                        zoom="#{cc.attrs.zoom}"
-                        type="ROADMAP"  style="width:100%;height:17em;"
-                        model="#{cc.attrs.mapModel}"
-                        mapTypeControl="true" navigationControl="false"
-                        widgetVar="gmap">
-                    <p:ajax event="markerDrag" listener="#{cc.onMarkerDrag}" update="#{cc.attrs.toUpdate}" />
-                </p:gmap>
-            </h:panelGroup>
-
-        </h:form>
-    </div>
+        </div>
+        <div style="clear: both;"></div>
+        <h:panelGroup id="mapGroup">
+            <p:gmap center="#{cc.attrs.mapModel.markers[0].latlng.lat}, #{cc.attrs.mapModel.markers[0].latlng.lng}"
+                    zoom="#{cc.attrs.zoom}"
+                    type="ROADMAP"  style="width:100%;height:17em;"
+                    model="#{cc.attrs.mapModel}"
+                    mapTypeControl="true" navigationControl="false"
+                    widgetVar="gmap">
+                <p:ajax event="markerDrag" listener="#{cc.onMarkerDrag}" update="#{cc.attrs.toUpdate}" />
+            </p:gmap>
+        </h:panelGroup>
+         <h:outputText class="centerMargin filterLabel" style="width:380px;margin-bottom: 20px;"
+                       value="#{lang['common.group.event.map.cursor.howto-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+    </h:form>
 </cc:implementation>
 
 </html>
