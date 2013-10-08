@@ -22,8 +22,10 @@
                         rendered="#{eventCommentCtrl.event.class.name == 'com.project.entities.SingleEvent'}"
                         displayCommentLink="false"
                         event="#{eventCommentCtrl.event}"/>
+                <h2 class="groupEventListHeader">
+                    #{lang['common.comment.header.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
+                </h2>
 
-                <gw:header headerLabelId="common.comment.header.label-" />
                 <gw:commentList
                         toUpdateAction=":newCommentContainer:commentEditForm"
                         commentlist="#{eventCommentCtrl.event.commentsAsList}"

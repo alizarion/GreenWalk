@@ -732,6 +732,9 @@ body .ui-autocomplete-items td, tr{
 .footerContainer{
     height: 200px;
     width: 100%;
+    margin-top: 20px;
+    clear: both;
+    background-image: url("/resources/img/blue_background.png");
 }
 
 body .ui-menu, .ui-menu .ui-menu-child {
@@ -867,7 +870,6 @@ body .groupEventList .ui-widget-content {
 
 .whiteCenterBackground{
     background-color: #ffffff;width: 100%;
-    padding-top: 25px;
 }
 
 .ui-tabs-panels{
@@ -886,6 +888,15 @@ body .groupEventList .ui-widget-content {
 }
 
 .columnHeader {
+    color:  #009e9d!important;
+    font-family: 'Boogaloo',regular;
+    font-size: 15px;
+    text-transform: uppercase;
+
+
+}
+
+ h2 .groupEventListHeader {
     color:  #009e9d!important;
     font-family: 'Boogaloo',regular;
     font-size: 15px;

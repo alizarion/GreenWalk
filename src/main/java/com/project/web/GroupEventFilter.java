@@ -1,7 +1,7 @@
 package com.project.web;
 
 import com.project.Helper;
-import com.project.entities.Address;
+import org.apache.commons.lang.StringUtils;
 import org.primefaces.model.map.LatLng;
 
 import java.text.DateFormat;
@@ -67,11 +67,19 @@ public class GroupEventFilter {
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        if(!StringUtils.isEmpty(country)){
+            this.country = country;
+        }   else {
+            this.country = null;
+        }
     }
 
     public void setCity(String city) {
-        this.city = city;
+        if(!StringUtils.isEmpty(city)){
+            this.city = city;
+        }  else {
+            this.city = null;
+        }
     }
 
     public void setPosition(LatLng position) {
@@ -119,7 +127,7 @@ public class GroupEventFilter {
             return this.position.getLat() + ","
                     + this.position.getLng() ;
         }
-        return "";
+        return null;
     }
 
 

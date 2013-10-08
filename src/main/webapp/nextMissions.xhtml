@@ -63,12 +63,20 @@
             </ui:define>
 
             <ui:define name="contentLeft">
-                <h1 class="titleHomeText5">
+                <h2 class="groupEventListHeader">
                     #{lang['common.label.find.group.event.next.mission.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
-                </h1>
+                </h2>
                 <div class="groupEventList">
                     <gw:groupEventList
                             tabViewWrapperList="#{filterCtrl.groupEventTabViewWrappers}"/>
+                </div>
+            </ui:define>
+            <ui:define name="contentRight">
+                <div style="margin-top: 110px;">
+                    <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                              outcome="groupevent-outcome">
+                        <f:param name="goTo"  value="groupevent-outcome" />
+                    </p:button>
                 </div>
             </ui:define>
 
