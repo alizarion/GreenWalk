@@ -8,6 +8,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.StateChangeEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -149,13 +150,15 @@ public class GroupEventCtrl implements Serializable {
     }
 
     public void searchPosition(){
-        this.event.setAddress(AddressByLongLatHelper.getRequestPosition(this.searchQuery));
-        if (this.event.getAddress().getPosition().getAsLatLng()!= null){
-            this.actualLocation = this.event.getAddress().getPosition().getAsLatLng();
-        }
-        for(Marker marker : draggableModel.getMarkers()) {
-            marker.setLatlng(this.actualLocation);
+        if ( this.event.getAddress().isQueryable()){
+            this.event.setPartialAddress(AddressByLongLatHelper.getRequestPosition(this.event.getAddress().toString()));
+            if (this.event.getAddress().getPosition().getAsLatLng()!= null){
+                this.actualLocation = this.event.getAddress().getPosition().getAsLatLng();
+            }
+            for(Marker marker : draggableModel.getMarkers()) {
+                marker.setLatlng(this.actualLocation);
 
+            }
         }
     }
 
@@ -196,6 +199,11 @@ public class GroupEventCtrl implements Serializable {
             marker.setLatlng(this.actualLocation);
 
         }
+    }
+
+
+    public void onStateChange(StateChangeEvent event) {
+        this.mapZoom = event.getZoomLevel();
     }
 
     public String submitGroupEvent(){

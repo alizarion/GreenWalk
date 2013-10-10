@@ -298,14 +298,14 @@ p {
 }
 
 .groupEventDisplayLeftColumn{
-    width:50%;
+    width:70%;
     vertical-align: top;
 }
 
 .groupEventDisplayRightColumn{
     width:50%;
     vertical-align: top;
-    margin-left: 20px;
+    padding-left: 20px;
     border-left:solid 1px  #009E9D ;
 
 }
@@ -623,7 +623,8 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
     font-weight: normal;
     font-family: 'Open Sans', light;
     font-size: 15px;
-    margin-bottom: 10px;
+    display: block;
+    margin-top: 20px;
 }
 
 .groupElementContainer {
@@ -999,6 +1000,21 @@ h2 .groupEventListHeader {
     width: 100%;
 }
 
+.groupEventFormContainer{
+    width: 100%;
+}
+
+.groupEventFormContainer .groupEventFormInputSpaces{
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.groupEventFormContainer .groupEventFormSubInputSpaces input{
+    margin-top: 10px;
+    display: inline-block;
+}
+
 .dateStartCalendar input{
+
     width: 90%;
 }

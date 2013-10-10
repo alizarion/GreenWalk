@@ -30,6 +30,7 @@
                             mapModel="#{groupEventCtrl.draggableModel}"
                             actualLocation="#{groupEventCtrl.actualLocation}"
                             zoom="#{groupEventCtrl.mapZoom}"
+                            onStateChange="#{groupEventCtrl.onStateChange}"
                             getActualLocation="#{groupEventCtrl.event.id == null}"
                             toUpdate=":groupEventForm:groupEventEditForm"
                             searchQuery="#{groupEventCtrl.searchQuery}"
@@ -42,7 +43,9 @@
                             completeMembers="#{groupEventCtrl.completeMembers}"
                             selectedMember="#{groupEventCtrl.selectedMember}"
                             saveChanges="#{groupEventCtrl.submitGroupEvent}"
+                            onMapUpdate="disableScroll();"
                             maxDate="#{groupEventCtrl.nextYear}"
+                            checkAddress="#{groupEventCtrl.searchPosition}"
                             minDate="#{groupEventCtrl.today}"
                             event="#{groupEventCtrl.event}"/>
 

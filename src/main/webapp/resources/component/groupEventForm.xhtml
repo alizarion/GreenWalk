@@ -24,6 +24,11 @@
             required="true"/>
 
     <cc:attribute
+            name="onMapUpdate"
+            type="java.lang.String"
+            required="true"/>
+
+    <cc:attribute
             name="minDate"
             type="java.util.Date"
             required="true"/>
@@ -43,50 +48,101 @@
             type="com.project.entities.Account"
             required="true"/>
 
-
+    <cc:attribute
+            name="checkAddress"
+            method-signature="void action()"
+            required="true"/>
 </cc:interface>
 
 <cc:implementation>
 
     <h:form id="groupEventEditForm" prependId="false">
-        <h:panelGrid columns="1"
-                     styleClass="eventTable">
-            <h2 class="groupEventTitle2">
-                #{lang['common.group.event.place.label.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}
-            </h2>
-            <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <p:inputText required="true" style="width: 100%;"  value="#{cc.attrs.event.title}" />
-            <h:outputLabel styleClass="label2" value=" #{lang['common.label.address.street-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-            <p:inputText required="true" style="width: 100%;" value="#{cc.attrs.event.address.street}" />
-            <div style="width: 100%;display:block;height: 50px;">
-                <h:panelGroup style="width: 40%;display: inline-block;float: left;">
+        <div class="groupEventFormContainer">
+            <div>
+                <h2 class="groupEventTitle2">
+                    #{lang['common.group.event.place.label.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+                </h2>
+            </div>
+            <div>
+                <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                <p:inputText required="true" styleClass="groupEventFormInputSpaces" style="width: 100%;"  value="#{cc.attrs.event.title}" >
+                    <p:ajax event="blur"/>
+                </p:inputText>
+            </div>
+            <div class="geoAddress">
+                <h:outputLabel styleClass="label2" value=" #{lang['common.label.address.street-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                <p:inputText
+                             styleClass="groupEventFormInputSpaces"
+                             style="width: 100%;"
+                             value="#{cc.attrs.event.address.street}" >
+                    <p:ajax event="blur"
+                            process="@(.geoAddress :input)"
+                            listener="#{cc.attrs.checkAddress}"
+                            oncomplete="#{cc.attrs.onMapUpdate}"
+                            update="@(.draggableMap)" />
+                </p:inputText>
+            </div>
+            <div style="width: 100%;display:block;">
+                <h:panelGroup style="width:40%;display: inline-block;float: left;" styleClass="geoAddress">
                     <h:outputLabel styleClass="label2"  value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <p:inputText required="true"   style="width: 100%;" value="#{cc.attrs.event.address.country}" />
+                    <p:inputText
+                                 styleClass="groupEventFormInputSpaces "
+                                 style="width: 80%;"
+                                 value="#{cc.attrs.event.address.country}" >
+                        <p:ajax event="blur"
+                                process="@(.geoAddress :input)"
+                                listener="#{cc.attrs.checkAddress}"
+                                oncomplete="#{cc.attrs.onMapUpdate}"
+                                update="@(.draggableMap)" />
+                    </p:inputText>
                 </h:panelGroup>
-                <h:panelGroup style="width: 40%;display: inline-block;float: left;">
-                    <h:outputLabel styleClass="label2" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <p:inputText required="true" style="width: 100%;" value="#{cc.attrs.event.address.city}" />
+                <h:panelGroup style="width: 40%;display: inline-block;float: left;" styleClass="geoAddress">
+                    <h:outputLabel styleClass="label2 " value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <p:inputText
+                                 styleClass="groupEventFormInputSpaces "
+                                 style="width: 80%;"
+                                 value="#{cc.attrs.event.address.city}" >
+                        <p:ajax event="blur"
+                                process="@(.geoAddress :input)"
+                                listener="#{cc.attrs.checkAddress}"
+                                oncomplete="#{cc.attrs.onMapUpdate}"
+                                update="@(.draggableMap)" />
+                    </p:inputText>
                 </h:panelGroup>
-                <h:panelGroup style="width: 10%;display: inline-block;float: left;">
+                <h:panelGroup style="width: 20%;display: inline-block;float: left;" styleClass="geoAddress">
                     <h:outputLabel styleClass="label2" value=" #{lang['common.label.address.zipcode-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <p:inputText required="true"  style="width: 100%;" value="#{cc.attrs.event.address.zipCode}" />
+                    <p:inputText
+                                 styleClass="groupEventFormInputSpaces"
+                                 style="width: 100%;"
+                                 value="#{cc.attrs.event.address.zipCode}" >
+                        <p:ajax event="blur"
+                                process="@(.geoAddress :input)"
+                                listener="#{cc.attrs.checkAddress}"
+                                oncomplete="#{cc.attrs.onMapUpdate}"
+                                update="@(.draggableMap)" />
+                    </p:inputText>
                 </h:panelGroup>
 
             </div>
 
             <h:panelGrid  style="width: 100%;" columns="2">
-                <h:panelGroup style="width: 50%;">
+                <h:panelGroup style="width: 50%;" >
                     <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <br/>
-                    <p:calendar styleClass="dateStartCalendar" style="width: 80%;" required="true" value="#{cc.attrs.event.eventDate}"
+                    <p:calendar styleClass="dateStartCalendar groupEventFormInputSpaces"
+                                style="width: 80%;"
+                                required="true"
+                                value="#{cc.attrs.event.eventDate}"
                                 mindate="#{cc.attrs.minDate}"
                                 maxdate="#{cc.attrs.maxDate}"
-                                pattern="MM/dd/yyyy HH:mm" />
+                                pattern="MM/dd/yyyy HH:mm" >
+                        <p:ajax event="blur" process="@this" update="dateEventEnd"/>
+                    </p:calendar>
                 </h:panelGroup>
-                <h:panelGroup style="width: 50%;">
-                    <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <br/>
-                    <p:calendar styleClass="dateEndCalendar" required="true" value="#{cc.attrs.event.eventDate}"
+                <h:panelGroup id="dateEventEnd" style="width: 50%;">
+                    <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.end.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <p:calendar styleClass="dateEndCalendar groupEventFormInputSpaces"
+                                required="true"
+                                value="#{cc.attrs.event.eventDateEnd}"
                                 mindate="#{cc.attrs.minDate}"
                                 maxdate="#{cc.attrs.maxDate}"
                                 pattern="MM/dd/yyyy HH:mm" />
@@ -97,36 +153,41 @@
                           escape="false"
                           value="#{lang['common.group.event.description.title-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
 
-            <p:inputTextarea value="#{cc.attrs.event.description}" style="width: 100%;" autoResize="true"/>
+            <p:inputTextarea value="#{cc.attrs.event.description}" style="width: 100%;" styleClass="groupEventFormInputSpaces" autoResize="true">
+                <p:ajax event="blur"/>
+            </p:inputTextarea>
 
 
-            <h2 class="groupEventTitle2">
+            <h2 style="margin-top: 20px;" class="groupEventTitle2">
                 #{lang['common.group.event.participants.invitation-'.concat(sessionAttributeCtrl.selectedLang.key)]}
             </h2>
 
-
-            <h:panelGrid  style="width: 100%;vertical-align: bottom;" columns="2">
-                <h:panelGroup style="width: 50%;">
+            <div style="width: 100%">
+                <div style="width: 40%;display: inline-block;float: left;">
                     <h:outputLabel styleClass="label2" value=" #{lang['form.group.event.preregistred.count.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <br/>
                     <h:outputText class="filterLabel"
                                   escape="false"
                                   value="#{lang['common.group.event.participants.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
-                    <br/>
-                    <p:inputText style="width: 90%;" validatorMessage="#{lang['common.numeric.value.validator.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}" value="#{cc.attrs.event.expectedParticipants}" >
+                    <p:inputText style="width: 90%;"  styleClass="groupEventFormInputSpaces" validatorMessage="#{lang['common.numeric.value.validator.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}" value="#{cc.attrs.event.expectedParticipants}" >
                         <f:validateLength minimum="0" maximum="9000" />
                     </p:inputText>
-                </h:panelGroup>
-                <h:panelGroup style="width: 50%;">
+                    <h:panelGroup styleClass="groupEventFormInputSpaces">
+                        <h:outputLabel
+                                styleClass="label2"
+                                value=" #{lang['common.group.event.confirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                        <br/>
+                        <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
+                    </h:panelGroup>
+
+                </div>
+                <div style="width:60%;display: inline-block;float: left;height: 111px;">
                     <h:outputLabel
                             styleClass="label2"
                             value=" #{lang['common.group.event.send.invitation-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <br/>
                     <h:outputText class="filterLabel"
                                   escape="false"
                                   value="#{lang['common.group.event.participants.invitation.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
-                    <br/>
-                    <p:autoComplete styleClass="dateEndCalendar" value="#{cc.attrs.selectedMember}"
+                    <p:autoComplete styleClass="dateEndCalendar groupEventFormSubInputSpaces" value="#{cc.attrs.selectedMember}"
                                     id="membersSearch"
                                     completeMethod="#{cc.attrs.completeMembers}"
                                     var="members"
@@ -150,30 +211,27 @@
                     <p:watermark
                             value="#{lang['form.members.search.watermark-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                             for="membersSearch" />
-                </h:panelGroup>
-                <h:panelGroup >
-                    <h:outputLabel
-                            styleClass="label2"
-                            value=" #{lang['common.group.event.confirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <br/>
-                    <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
-                </h:panelGroup>
+                    <h:panelGroup
+                            style="padding-left: 10px;"
+                            styleClass="leftborder groupEventFormInputSpaces"
+                            rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}">
+                        <h:outputLabel
+                                rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}"
+                                styleClass="label2"
+                                value=" #{lang['common.group.event.unconfirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                        <br/>
+                        <gw:participantsList participants="#{cc.attrs.event.unConfirmedSubscribersAsList}"/>
+                    </h:panelGroup>
+                </div>
+            </div>
 
-                <h:panelGroup
-                        styleClass="leftborder"
-                        rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}">
-                    <h:outputLabel
-                            rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}"
-                            styleClass="label2"
-                            value=" #{lang['common.group.event.unconfirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                    <br/>
-                    <gw:participantsList participants="#{cc.attrs.event.unConfirmedSubscribersAsList}"/>
-                </h:panelGroup>
-            </h:panelGrid>
 
-        </h:panelGrid>
-        <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+        </div>
+        <div style="clear: both;"></div>
+        <p:commandButton value="#{lang['common.button.group.event.submit-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                         process="@form"
                          update="@form,:growlMsg"
+                         style="margin-top: 30px;"
                          ajax="false"
                          action="#{cc.attrs.saveChanges}"/>
     </h:form>

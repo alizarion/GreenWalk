@@ -1,6 +1,7 @@
 package com.project.entities;
 
 import com.project.Helper;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -130,13 +131,38 @@ public class Address implements Serializable {
         this.country = country;
     }
 
+    public Boolean isQueryable(){
+        if (StringUtils.isNotEmpty(this.Street)){
+            if (StringUtils.isNotEmpty(this.country) ||
+                    StringUtils.isNotEmpty(this.city)||
+                    StringUtils.isNotEmpty(this.zipCode) ){
+                return true;
+            }  else {
+                return false;
+            }
+        } else {
+            int notEmptyOne = 0;
+            notEmptyOne = notEmptyOne +
+                    (StringUtils.isNotEmpty(this.country) ? 1:0);
+            notEmptyOne = notEmptyOne +
+                    (StringUtils.isNotEmpty(this.city) ? 1:0);
+            notEmptyOne = notEmptyOne +
+                    (StringUtils.isNotEmpty(this.zipCode) ? 1:0);
+            if (notEmptyOne >=2){
+                return true;
+            }  else {
+                return false;
+            }
+        }
+    }
+
     @Override
     public String toString() {
-        return  number +
-                " " + Street + ' ' +
-                city + ' ' +
-                country + ' ' +
-                zipCode + ' ' ;
+        return  (number!= null? number :StringUtils.EMPTY) +
+                " " + (Street!= null? Street :StringUtils.EMPTY) + ' ' +
+                (city!= null? city :StringUtils.EMPTY)  + ' ' +
+                (country != null? country :StringUtils.EMPTY) + ' ' +
+                (zipCode != null? zipCode :StringUtils.EMPTY)  ;
     }
 
     @Override

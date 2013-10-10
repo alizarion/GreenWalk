@@ -2,6 +2,7 @@ package com.project.entities;
 
 import com.project.entities.notifications.*;
 import org.apache.commons.lang.LocaleUtils;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -13,8 +14,8 @@ import java.util.*;
 @Entity
 @DiscriminatorValue(value = "GROUP")
 @NamedQueries({
-@NamedQuery(name= GroupEvent.FIND_ALL,
-        query="SELECT ge FROM GroupEvent ge  order by ge.creationDate desc "),
+        @NamedQuery(name= GroupEvent.FIND_ALL,
+                query="SELECT ge FROM GroupEvent ge  order by ge.creationDate desc "),
         @NamedQuery(name= GroupEvent.FIND_BY_FILTER,
                 query="SELECT ge FROM GroupEvent ge where (:city is null or ge.address.city like :city) " +
                         "and ( :country IS NULL or ge.address.country like  :country) " +
@@ -38,6 +39,9 @@ public class GroupEvent extends Event implements Notified {
 
     @Column
     private Date eventDate;
+
+    @Column
+    private Date eventDateEnd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(updatable = false,insertable = false,name = "owner_id")
@@ -79,6 +83,28 @@ public class GroupEvent extends Event implements Notified {
         this.address = address;
     }
 
+    public void setPartialAddress(Address address) {
+        if (this.address!= null){
+            if (!this.address.equals(address)){
+                super.setEventUpdated(true);
+                if (StringUtils.isNotEmpty(address.getCountry())){
+                    this.address.setCountry(address.getCountry());
+                }
+                if (StringUtils.isNotEmpty(address.getCity())){
+
+                    this.address.setCity(address.getCity());
+                }
+                if (StringUtils.isNotEmpty(address.getZipCode())){
+                    this.address.setZipCode(address.getZipCode());
+                }
+                if (address.getPosition().getAsLatLng()!= null){
+                    this.address.setPosition(address.getPosition());
+                }
+            }
+        }
+    }
+
+
     public Boolean getEndedEvent(){
         if(this.eventDate.getTime()<(new Date()).getTime()){
             return true;
@@ -119,10 +145,10 @@ public class GroupEvent extends Event implements Notified {
     }
 
     public String getOverlayDescription(String localeKey){
-      return   new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm",
+        return   new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm",
                 LocaleUtils.toLocale(localeKey)).format(this.eventDate) + " : "+ this.getTitleShort() + "<br/>"+
                 "<a target='_blank' href='../group-pick-up/"+super.getId() +"'>"+
-              this.getDescriptionShort()+"..more</a>";
+                this.getDescriptionShort()+"..more</a>";
     }
 
     public List<GroupEventSubscriber> getUnConfirmedSubscribersAsList() {
@@ -150,8 +176,21 @@ public class GroupEvent extends Event implements Notified {
                 super.setEventUpdated(true);
             }
         }
-        this.eventDate = eventDate;
+        if (eventDate != null){
+            this.eventDate = eventDate;
+            if (this.eventDateEnd== null){
+                this.eventDateEnd  = eventDate;
+            }
+        }
+    }
 
+    public void setEventDateEnd(Date eventDateEnd) {
+        if (this.eventDateEnd != null && eventDateEnd != null){
+            if (!(this.eventDateEnd.getTime() == eventDateEnd.getTime())){
+                super.setEventUpdated(true);
+            }
+        }
+        this.eventDateEnd = eventDateEnd;
     }
 
     public Integer getExpectedParticipants() {
@@ -173,6 +212,12 @@ public class GroupEvent extends Event implements Notified {
     public void setInvitedMember(Set<Account> invitedMember) {
         this.invitedMember = invitedMember;
     }
+
+    public Date getEventDateEnd() {
+        return eventDateEnd;
+    }
+
+
 
     public void setNewSubscriber(Boolean newSubscriber) {
         this.newSubscriber = newSubscriber;
