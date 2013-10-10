@@ -35,18 +35,19 @@
                             searchQuery="#{groupEventCtrl.searchQuery}"
                             searchActionMethod="#{groupEventCtrl.searchPosition}"
                             onMarkerDrag="#{groupEventCtrl.onMarkerDrag}" />
-                    <div class="centerMargin whiteContainer" >
-                        <gw:groupEventForm
-                                id="groupEventForm"
-                                completeMembers="#{groupEventCtrl.completeMembers}"
-                                selectedMember="#{groupEventCtrl.selectedMember}"
-                                saveChanges="#{groupEventCtrl.submitGroupEvent}"
-                                maxDate="#{groupEventCtrl.nextYear}"
-                                minDate="#{groupEventCtrl.today}"
-                                event="#{groupEventCtrl.event}"/>
+                </div>
+                <div class="centerMargin whiteContainer" >
+                    <gw:groupEventForm
+                            id="groupEventForm"
+                            completeMembers="#{groupEventCtrl.completeMembers}"
+                            selectedMember="#{groupEventCtrl.selectedMember}"
+                            saveChanges="#{groupEventCtrl.submitGroupEvent}"
+                            maxDate="#{groupEventCtrl.nextYear}"
+                            minDate="#{groupEventCtrl.today}"
+                            event="#{groupEventCtrl.event}"/>
 
 
-                    </div>
+
                 </div>
 
             </ui:define>

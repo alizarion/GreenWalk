@@ -49,118 +49,128 @@
 <cc:implementation>
 
     <h:form id="groupEventEditForm" prependId="false">
-        <h:panelGrid columns="2"
-                     styleClass="eventTable"
-                     columnClasses="groupEventDisplayLeftColumn,groupEventDisplayRightColumn">
-            <h:panelGrid >
+        <h:panelGrid columns="1"
+                     styleClass="eventTable">
+            <h2 class="groupEventTitle2">
+                #{lang['common.group.event.place.label.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+            </h2>
+            <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true" style="width: 100%;"  value="#{cc.attrs.event.title}" />
+            <h:outputLabel styleClass="label2" value=" #{lang['common.label.address.street-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+            <p:inputText required="true" style="width: 100%;" value="#{cc.attrs.event.address.street}" />
+            <div style="width: 100%;display:block;height: 50px;">
+                <h:panelGroup style="width: 40%;display: inline-block;float: left;">
+                    <h:outputLabel styleClass="label2"  value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <p:inputText required="true"   style="width: 100%;" value="#{cc.attrs.event.address.country}" />
+                </h:panelGroup>
+                <h:panelGroup style="width: 40%;display: inline-block;float: left;">
+                    <h:outputLabel styleClass="label2" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <p:inputText required="true" style="width: 100%;" value="#{cc.attrs.event.address.city}" />
+                </h:panelGroup>
+                <h:panelGroup style="width: 10%;display: inline-block;float: left;">
+                    <h:outputLabel styleClass="label2" value=" #{lang['common.label.address.zipcode-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <p:inputText required="true"  style="width: 100%;" value="#{cc.attrs.event.address.zipCode}" />
+                </h:panelGroup>
 
-                <h:outputLabel styleClass="titleHomeText5" value=" #{lang['common.label.group.event.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:inputText required="true"  value="#{cc.attrs.event.title}" />
-                <h:outputLabel styleClass="titleHomeText5" value=" #{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:calendar  required="true" value="#{cc.attrs.event.eventDate}"
-                             mindate="#{cc.attrs.minDate}"
-                             maxdate="#{cc.attrs.maxDate}"
-                             pattern="MM/dd/yyyy HH:mm" />
-                <h:outputLabel styleClass="titleHomeText5"  escape="false" value="#{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]} :"/>
-                <h:outputText class="filterLabel"
-                              escape="false"
-                              value="#{lang['common.group.event.description.title-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+            </div>
 
-                <p:inputTextarea value="#{cc.attrs.event.description}" style="width: 500px;" autoResize="true"/>
-
-
-                <h:outputLabel
-                        styleClass="titleHomeText3"
-                        value=" #{lang['common.group.event.participants.invitation-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
-
-
-
-                <h:outputLabel styleClass="titleHomeText5" value=" #{lang['form.group.event.preregistred.count.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <h:outputText class="filterLabel"
-                              escape="false"
-                              value="#{lang['common.group.event.participants.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
-                <p:inputText validatorMessage="#{lang['common.numeric.value.validator.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}" value="#{cc.attrs.event.expectedParticipants}" >
-                    <f:validateLength minimum="0" maximum="9000" />
-                </p:inputText>
-
-                <h:outputLabel
-                        styleClass="titleHomeText5"
-                        value=" #{lang['common.group.event.send.invitation-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <h:outputText class="filterLabel"
-                              escape="false"
-                              value="#{lang['common.group.event.participants.invitation.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
-
-                <p:autoComplete value="#{cc.attrs.selectedMember}"
-                                id="membersSearch"
-                                completeMethod="#{cc.attrs.completeMembers}"
-                                var="members"
-                                itemLabel="#{members.id}"
-                                itemValue="#{members}"
-                                converter="AccountConverter"
-                                forceSelection="true">
-                    <p:ajax event="itemSelect"  update="@form"/>
-
-                    <p:column>
-                        <gw:avatarDisplay
-                                onSelectOpenProfile="false"
-                                height="50" width="50" account="#{members}"/>
-                    </p:column>
-
-                    <p:column>
-                        #{members.lastName} #{members.firstName}
-                    </p:column>
-
-                </p:autoComplete>
-                <p:watermark
-                        value="#{lang['form.members.search.watermark-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                        for="membersSearch" />
-
-                <h:outputLabel
-                        rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}"
-                        styleClass="titleHomeText5"
-                        value=" #{lang['common.group.event.unconfirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <gw:participantsList participants="#{cc.attrs.event.unConfirmedSubscribersAsList}"/>
-
-                <h:outputLabel
-                        styleClass="titleHomeText5"
-                        value=" #{lang['common.group.event.confirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
-
-
-
+            <h:panelGrid  style="width: 100%;" columns="2">
+                <h:panelGroup style="width: 50%;">
+                    <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <br/>
+                    <p:calendar styleClass="dateStartCalendar" style="width: 80%;" required="true" value="#{cc.attrs.event.eventDate}"
+                                mindate="#{cc.attrs.minDate}"
+                                maxdate="#{cc.attrs.maxDate}"
+                                pattern="MM/dd/yyyy HH:mm" />
+                </h:panelGroup>
+                <h:panelGroup style="width: 50%;">
+                    <h:outputLabel styleClass="label2" value="#{lang['common.label.group.event.start.date-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <br/>
+                    <p:calendar styleClass="dateEndCalendar" required="true" value="#{cc.attrs.event.eventDate}"
+                                mindate="#{cc.attrs.minDate}"
+                                maxdate="#{cc.attrs.maxDate}"
+                                pattern="MM/dd/yyyy HH:mm" />
+                </h:panelGroup>
             </h:panelGrid>
-            <h:panelGrid>
-                <h3 class="titleHomeText5">
-                    #{lang['common.label.group.event.practical.header-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
-                </h3>
-                <h:panelGrid columns="3">
-                    <gw:avatarDisplay
-                            height="30"
-                            width="30"
-                            account="#{cc.attrs.event.owner}"
-                            onSelectOpenProfile="true"/>
-                    <h:panelGroup>
-                        #{lang['common.label.group.event.organized.by.header-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
-                        <br/>
-                        <a target="_blank" href="/profile/#{cc.attrs.event.owner.credential.userName}">#{cc.attrs.event.owner.firstName} #{cc.attrs.event.owner.lastName}</a>
-                    </h:panelGroup>
-                </h:panelGrid>
-                <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street.number-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:inputText  value="#{cc.attrs.event.address.number}" />
+            <h:outputLabel styleClass="label2"  escape="false" value="#{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]} :"/>
+            <h:outputText class="filterLabel"
+                          escape="false"
+                          value="#{lang['common.group.event.description.title-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
 
-                <h:outputLabel styleClass="label" value=" #{lang['common.label.address.street-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:inputText required="true" value="#{cc.attrs.event.address.street}" />
+            <p:inputTextarea value="#{cc.attrs.event.description}" style="width: 100%;" autoResize="true"/>
 
-                <h:outputLabel styleClass="label" value=" #{lang['common.label.address.zipcode-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:inputText required="true" value="#{cc.attrs.event.address.zipCode}" />
 
-                <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.city-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:inputText required="true" value="#{cc.attrs.event.address.city}" />
+            <h2 class="groupEventTitle2">
+                #{lang['common.group.event.participants.invitation-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+            </h2>
 
-                <h:outputLabel styleClass="label" value=" #{lang['component.member.profile.country-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
-                <p:inputText required="true" value="#{cc.attrs.event.address.country}" />
 
+            <h:panelGrid  style="width: 100%;vertical-align: bottom;" columns="2">
+                <h:panelGroup style="width: 50%;">
+                    <h:outputLabel styleClass="label2" value=" #{lang['form.group.event.preregistred.count.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <br/>
+                    <h:outputText class="filterLabel"
+                                  escape="false"
+                                  value="#{lang['common.group.event.participants.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                    <br/>
+                    <p:inputText style="width: 90%;" validatorMessage="#{lang['common.numeric.value.validator.message-'.concat(sessionAttributeCtrl.selectedLang.key)]}" value="#{cc.attrs.event.expectedParticipants}" >
+                        <f:validateLength minimum="0" maximum="9000" />
+                    </p:inputText>
+                </h:panelGroup>
+                <h:panelGroup style="width: 50%;">
+                    <h:outputLabel
+                            styleClass="label2"
+                            value=" #{lang['common.group.event.send.invitation-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <br/>
+                    <h:outputText class="filterLabel"
+                                  escape="false"
+                                  value="#{lang['common.group.event.participants.invitation.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                    <br/>
+                    <p:autoComplete styleClass="dateEndCalendar" value="#{cc.attrs.selectedMember}"
+                                    id="membersSearch"
+                                    completeMethod="#{cc.attrs.completeMembers}"
+                                    var="members"
+                                    itemLabel="#{members.id}"
+                                    itemValue="#{members}"
+                                    converter="AccountConverter"
+                                    forceSelection="true">
+                        <p:ajax event="itemSelect"  update="@form"/>
+
+                        <p:column>
+                            <gw:avatarDisplay
+                                    onSelectOpenProfile="false"
+                                    height="50" width="50" account="#{members}"/>
+                        </p:column>
+
+                        <p:column>
+                            #{members.lastName} #{members.firstName}
+                        </p:column>
+
+                    </p:autoComplete>
+                    <p:watermark
+                            value="#{lang['form.members.search.watermark-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                            for="membersSearch" />
+                </h:panelGroup>
+                <h:panelGroup >
+                    <h:outputLabel
+                            styleClass="label2"
+                            value=" #{lang['common.group.event.confirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <br/>
+                    <gw:participantsList participants="#{cc.attrs.event.confirmedSubscribersAsList}"/>
+                </h:panelGroup>
+
+                <h:panelGroup
+                        styleClass="leftborder"
+                        rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}">
+                    <h:outputLabel
+                            rendered="#{fn:length(cc.attrs.event.unConfirmedSubscribersAsList)>0}"
+                            styleClass="label2"
+                            value=" #{lang['common.group.event.unconfirmed.members-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
+                    <br/>
+                    <gw:participantsList participants="#{cc.attrs.event.unConfirmedSubscribersAsList}"/>
+                </h:panelGroup>
             </h:panelGrid>
+
         </h:panelGrid>
         <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                          update="@form,:growlMsg"

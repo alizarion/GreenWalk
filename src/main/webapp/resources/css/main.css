@@ -248,6 +248,16 @@ a:hover {
     display: inline-block ;
     color: #00323f;
 }
+
+.titleGroupEvent{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: 'Boogaloo',regular;
+    font-size: 40px;
+    text-transform:uppercase;
+    display: inline-block ;
+    color: #00323f;
+}
 .titleHomeNumber{
     margin-top:2px;
     margin-bottom: 2px;
@@ -274,6 +284,7 @@ a:hover {
     color: #00323f;
 }
 
+
 .titleHomeText4{
     margin: 0;
     font-family: 'Open Sans';
@@ -287,15 +298,20 @@ p {
 }
 
 .groupEventDisplayLeftColumn{
-    width:65%;
-    border-right:solid 1px  #009E9D ;
+    width:50%;
     vertical-align: top;
 }
 
 .groupEventDisplayRightColumn{
-    width:30%;
+    width:50%;
     vertical-align: top;
-    padding-left: 15px;
+    margin-left: 20px;
+    border-left:solid 1px  #009E9D ;
+
+}
+
+.leftborder{
+    border-left:solid 1px  #009E9D ;
 
 }
 
@@ -303,6 +319,16 @@ p {
     margin: 0;
     font-family: 'Boogaloo',regular;
     font-size: 20px;
+    font-weight: normal;
+
+    display: inline-block;
+    color: #009E9D;
+}
+.groupEventTitle2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Boogaloo',regular;
+    font-size: 30px;
     font-weight: normal;
 
     display: inline-block;
@@ -591,6 +617,13 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
     font-weight: normal;
     font-family: 'Boogaloo',regular;
     font-size: 17px;
+}
+
+.label2{
+    font-weight: normal;
+    font-family: 'Open Sans', light;
+    font-size: 15px;
+    margin-bottom: 10px;
 }
 
 .groupElementContainer {
@@ -910,7 +943,7 @@ body .groupEventList .ui-widget-content {
 
 }
 
- h2 .groupEventListHeader {
+h2 .groupEventListHeader {
     color:  #009e9d!important;
     font-family: 'Boogaloo',regular;
     font-size: 15px;
@@ -960,4 +993,12 @@ body .groupEventList .ui-widget-content {
     height: 30px;
     background-image: url("/resources/img/socials.png");
     background-position: 30px 0px;
+}
+
+.dateEndCalendar input{
+    width: 100%;
+}
+
+.dateStartCalendar input{
+    width: 90%;
 }

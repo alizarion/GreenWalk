@@ -48,6 +48,7 @@
 
     </h:panelGroup>
 
+
     <h:form id="gmapForm" prependId="false" >
         <p:remoteCommand name="remotemaupdater"  process="input1,@this" update="mapGroup" />
         <h:panelGroup styleClass="hiddenInput">
@@ -75,7 +76,17 @@
         </h:panelGroup>
 
     </h:form>
+    <script type="text/javascript">
+        $(function(){
+            disableScroll();
 
+        });
+
+        function disableScroll(){
+            var map = gmap.getMap();
+            map.setOptions({'scrollwheel': false});
+        }
+    </script>
 </cc:implementation>
 
 </html>

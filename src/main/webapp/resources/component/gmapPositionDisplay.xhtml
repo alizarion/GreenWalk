@@ -49,6 +49,7 @@
 
         function addMarker() {
             var map = gmap.getMap();
+            map.setOptions({'scrollwheel': false});
             latlng = new google.maps.LatLng('#{cc.attrs.address.position.asLatLng.lat}',
                     '#{cc.attrs.address.position.asLatLng.lng}');
 
