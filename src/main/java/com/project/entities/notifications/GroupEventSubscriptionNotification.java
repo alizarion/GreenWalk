@@ -27,6 +27,8 @@ public class GroupEventSubscriptionNotification extends Notification implements 
     @JoinColumn(name = "group_event_id")
     private GroupEvent groupEvent;
 
+    @Column(updatable = false, insertable = false)
+    private String type;
 
     public GroupEventSubscriptionNotification() {
         super();

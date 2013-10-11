@@ -22,8 +22,8 @@ import java.util.Date;
         @NamedQuery(name= Notification.FIND_AGENT_NOTIFICATION,
                 hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
                 query="select notification "
-                        + " from Notification notification where  notification.accountListener = :accountId and" +
-                        " notification.viewed = false"),
+                        + " from Notification notification where  notification.accountListener = :accountId " +
+                        " order by notification.creationDate  desc"),
         @NamedQuery(name= Notification.COUNT_AGENT_RATING_NOTIFICATION,
                 hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
                 query="select count(notification.id) "
@@ -35,7 +35,6 @@ import java.util.Date;
                         + " from Notification notification where  notification.accountListener = :accountId " +
                         "and  notification.type = 'CommentNotification'")  })
 @DiscriminatorColumn(name = "type")
-@DiscriminatorOptions(force=true)
 public abstract class Notification implements Serializable, Cloneable {
 
     public final static String FIND_AGENT_NOTIFICATION = "FIND_ACCOUNT_NOTIFICATION" ;
@@ -141,7 +140,6 @@ public abstract class Notification implements Serializable, Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof Notification)) return false;
 
         Notification that = (Notification) o;

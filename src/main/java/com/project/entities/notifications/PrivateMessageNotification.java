@@ -3,10 +3,7 @@ package com.project.entities.notifications;
 import com.project.entities.Account;
 import com.project.entities.PrivateConversation;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
@@ -30,6 +27,8 @@ public class PrivateMessageNotification extends Notification implements Serializ
     @JoinColumn(name = "pc_id")
     private PrivateConversation privateConversation;
 
+    @Column(updatable = false, insertable = false)
+    private String type;
 
     public PrivateMessageNotification() {
         super();

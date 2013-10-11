@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @ManagedBean
-@ViewScoped
+@ConversationScoped
 public class NotificationCenterCtrl implements Serializable {
 
     @EJB
@@ -51,8 +52,23 @@ public class NotificationCenterCtrl implements Serializable {
         return notifications;
     }
 
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
+
+    public void consumeAllLoggedUserNotifications(){
+        Account loggedUser  = this.facade.getActiveUser();
+        loggedUser.consumeAllNotifications();
+        this.facade.mergeAccount(loggedUser);
+    }
+
+
+
+    public List<Notification> getUnViewedNotifications() {
+        List<Notification> unViewedNotifications = new ArrayList<Notification>();
+        for (Notification notification:this.notifications ){
+            if (!notification.getViewed()){
+                unViewedNotifications.add(notification);
+            }
+        }
+        return unViewedNotifications;
     }
 
     public Notification getSelectedNotification() {

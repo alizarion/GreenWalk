@@ -35,23 +35,30 @@
 </cc:interface>
 
 <cc:implementation>
-    <div class="centerMargin" style="width: 860px;margin-bottom: 20px;">
-        <div style="display: inline-block;">
-            <h1 class="titleHomeText2">
+    <div class="centerMargin centerContainer" style="margin-bottom: 20px;">
+        <div style="display: inline-block;margin-bottom: 20px;float:left;">
+            <h1 class="titleGroupEvent">
                 <h:outputText escape="false"
                               value="#{lang['common.label.find.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
             </h1>
+
             <div style="clear: both;"></div>
             <h2 class="titleHomeText3">
-                <h:outputText escape="false"
-                              value="#{lang['common.label.find.group.event.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+                <h:outputText
+                        escape="false"
+                        value="#{lang['common.label.find.group.event.subtitle-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
 
             </h2>
-
         </div>
-        <div style="display: inline-block;clear: both;">
+        <div style="display: inline-block;float:left;padding-top: 20px;margin-left: 30px; ">
             <h:graphicImage style="float: right" value="/resources/img/cat-eyes.png"  />
+            <br/>
+            <p:button  style="float: right;" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                       outcome="groupevent-outcome">
+                <f:param name="goTo"  value="groupevent-outcome" />
+            </p:button>
         </div>
+
         <h:form id="filterForm" prependId="false">
             <h:panelGrid style="vertical-align: bottom;" columns="5">
                 <h:panelGroup>

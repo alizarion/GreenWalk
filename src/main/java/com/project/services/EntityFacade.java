@@ -140,7 +140,6 @@ public class EntityFacade implements Serializable{
     }
 
     public Account mergeAccount(Account account){
-
         return em.merge(account);
     }
 

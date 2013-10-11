@@ -59,6 +59,12 @@ public abstract class Event {
     @Transient
     private Boolean eventUpdated = false;
 
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @JoinTable(catalog = Helper.ENTITIES_CATALOG, name="events_wastes",
+            joinColumns=@JoinColumn(name="event_id"),
+            inverseJoinColumns=@JoinColumn(name="waste_id"))
+    private Set<WasteGarbage> wastes = new HashSet<WasteGarbage>();
+
     protected Event() {
         this.creationDate = new Date();
     }
@@ -104,6 +110,35 @@ public abstract class Event {
         this.comments = comments;
     }
 
+    public void addNewGarbage(WasteGarbage  wasteGarbage){
+        for (WasteGarbage garbage : this.wastes){
+            if (garbage.equals(wasteGarbage)){
+                garbage.setQuantity(garbage.getQuantity()
+                        + wasteGarbage.getQuantity());
+                return;
+            }
+        }
+        this.wastes.add(wasteGarbage);
+    }
+
+    public String getGarbageAsJSObjectList(){
+        StringBuilder stringBuilder = new StringBuilder();
+        boolean first = true;
+        Iterator<WasteGarbage> iterator = this.getGarbageAsList().iterator();
+
+        while (iterator.hasNext()){
+            WasteGarbage current = iterator.next();
+            if(first){
+                stringBuilder.append(current.toString());
+                first = false;
+            } else {
+                stringBuilder.append(',').append(current.toString());
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
     public List<Comment> getCommentsAsList() {
         List<Comment> commentList =  new ArrayList<Comment>(comments);
         Collections.sort(commentList);
@@ -114,6 +149,10 @@ public abstract class Event {
         this.title = title;
     }
 
+
+    public List<WasteGarbage> getGarbageAsList() {
+        return new ArrayList<WasteGarbage>(this.wastes);
+    }
 
 
     public String getDescription() {
@@ -126,6 +165,14 @@ public abstract class Event {
 
     public void setEventUpdated(Boolean eventUpdated) {
         this.eventUpdated = eventUpdated;
+    }
+
+    public Set<WasteGarbage> getWastes() {
+        return wastes;
+    }
+
+    public void setWastes(Set<WasteGarbage> wastes) {
+        this.wastes = wastes;
     }
 
     public String getDescriptionShort() {

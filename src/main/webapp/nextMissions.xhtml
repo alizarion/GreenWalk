@@ -39,7 +39,7 @@
             </ui:define>
             <ui:define name="center">
                 <div class="greenCenter">
-                    <div class="centerMargin" style="width: 860px;">
+                    <div class="centerMargin centerContainer" >
                         <p:breadCrumb>
                             <p:menuitem value="Categories" url="/" />
                             <p:menuitem  value="#{lang['page.template.next.missions.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
@@ -60,23 +60,14 @@
                                            zoom="#{filterCtrl.mapZoom}"  />
 
                 </div>
-            </ui:define>
-
-            <ui:define name="contentLeft">
-                <h2 class="groupEventListHeader">
-                    #{lang['common.label.find.group.event.next.mission.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
-                </h2>
-                <div class="groupEventList">
-                    <gw:groupEventList
-                            tabViewWrapperList="#{filterCtrl.groupEventTabViewWrappers}"/>
-                </div>
-            </ui:define>
-            <ui:define name="contentRight">
-                <div style="margin-top: 110px;">
-                    <p:button styleClass="centerMargin" value="#{lang['common.button.launch.group.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                              outcome="groupevent-outcome">
-                        <f:param name="goTo"  value="groupevent-outcome" />
-                    </p:button>
+                <div class="centerMargin centerContainer">
+                    <h2 class="groupEventListHeader">
+                        #{lang['common.label.find.group.event.next.mission.label-'.concat(sessionAttributeCtrl.selectedLang.key)]} :
+                    </h2>
+                    <div class="groupEventList">
+                        <gw:groupEventList
+                                tabViewWrapperList="#{filterCtrl.groupEventTabViewWrappers}"/>
+                    </div>
                 </div>
             </ui:define>
 

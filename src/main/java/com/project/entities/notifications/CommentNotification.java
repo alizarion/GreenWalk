@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  */
 @Entity
 @DiscriminatorValue(value = "CommentNotification")
-public class CommentNotification extends Notification implements Serializable {
+public class  CommentNotification extends Notification implements Serializable {
 
     public static final String NOTIFICATION_LABEL = "common.notifications.has.comment";
     public static final String FIND_ACCOUNT_COMMENT_NOTIFICATION = "FIND_ACCOUNT_COMMENT_NOTIFICATION";
@@ -27,6 +27,8 @@ public class CommentNotification extends Notification implements Serializable {
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
+    @Column(updatable = false, insertable = false)
+    private String type;
 
     public CommentNotification() {
         super();

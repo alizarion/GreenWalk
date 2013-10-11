@@ -27,6 +27,8 @@ public class GroupEventInvitationNotification extends Notification implements Se
     @JoinColumn(name = "group_event_id")
     private GroupEvent groupEvent;
 
+    @Column(updatable = false, insertable = false)
+    private String type;
 
     public GroupEventInvitationNotification() {
         super();
@@ -74,7 +76,6 @@ public class GroupEventInvitationNotification extends Notification implements Se
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof GroupEventInvitationNotification)) return false;
         if (!super.equals(o)) return false;
 
@@ -88,7 +89,6 @@ public class GroupEventInvitationNotification extends Notification implements Se
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (groupEvent != null ? groupEvent.hashCode() : 0);
         return result;
     }
 }

@@ -95,7 +95,7 @@ public class Account implements Serializable {
     @Column
     private Date lastNotificationMailDate;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "accountListener")
     private Set<Notification> notifications= new HashSet<Notification>();
 
     @Column(name="commentenabled")
@@ -177,6 +177,12 @@ public class Account implements Serializable {
 
     public String getFirstNameHtml() {
         return StringEscapeUtils.escapeHtml(firstName).replaceAll("'", "").replaceAll("\"", "");
+    }
+
+    public void consumeAllNotifications(){
+        for (Notification notification :this.notifications){
+            notification.setViewed(true);
+        }
     }
 
     public Date getBirthDay() {

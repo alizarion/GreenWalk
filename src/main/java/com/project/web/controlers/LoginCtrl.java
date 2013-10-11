@@ -2,6 +2,7 @@ package com.project.web.controlers;
 
 
 
+import com.project.entities.Account;
 import com.project.services.EntityFacade;
 import org.apache.log4j.Logger;
 import org.primefaces.component.commandbutton.CommandButton;
@@ -149,4 +150,6 @@ public class LoginCtrl  implements Serializable {
                 redirect("/home");
 
     }
+
+
 }

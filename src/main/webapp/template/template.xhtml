@@ -24,9 +24,9 @@
 <ui:insert name="viewparam">
 </ui:insert>
 
-<h:panelGroup  rendered="#{request.userPrincipal != null}" styleClass="menuhead">
+<h:panelGroup id="accountBar" rendered="#{request.userPrincipal != null}" styleClass="menuhead">
     <div class="menu accountMenu">
-        <ol style="display: inline-block">
+        <ol style="display: inline-block;height: 30px;">
 
             <li class="menuItem">
                 <h:link
@@ -49,13 +49,13 @@
                         outcome="community-outcome"/>
             </li>
             <li class="menuItem">
-                <a href="#">
-                    <h:outputText
+                <h:form id="notificationsForm">
+                    <h:commandLink
                             id="notifications"
-                            value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.notifications)})"
-                            />
-                </a>
-                <p:overlayPanel id="chartPanel"   style="position: fixed;" appendToBody="true" for="notifications" hideEffect="fade">
+                            value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.unViewedNotifications)})"
+                            action="#{notificationCenterCtrl.consumeAllLoggedUserNotifications}" update=":accountBar"/>
+                </h:form>
+                <p:overlayPanel id="chartPanel"   style="position: fixed;" appendToBody="true" for=":notificationsForm:notifications" hideEffect="fade">
                     <gw:notificationList
                             notifications="#{notificationCenterCtrl.notifications}"/>
                 </p:overlayPanel>
@@ -72,7 +72,21 @@
         </ol>
     </div>
 </h:panelGroup>
+<div class="centerContainer centerMargin">
+    <div style="height: 68px;width: 140px;float: right;">
+        <h:panelGroup rendered="#{request.userPrincipal == null}">
+            <h:link style="display: inline-block;margin-top:30px;" outcome="register-outcome" >
+                #{lang['login.registration.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h:link>
+            <div style="float: right;display:inline-block;height: 68px;width: 58px;background-image: url('/resources/img/login.png'); background-repeat: no-repeat;">
+                <h:link style="display: inline-block;margin-top:30px;margin-left: 12px;" outcome="login-outcome" >
+                    #{lang['page.template.login.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h:link>
+            </div>
+        </h:panelGroup>
+    </div>
+</div>
+<div style="clear: both;"></div>
 <div class="head">
+
     <div onclick="window.location.href='#{app['APP_URL']}'"
          class="logo">
     </div>
@@ -142,7 +156,7 @@
 
 <div style="clear: both;"></div>
 <div class="footerContainer">
-    <div class="centerMargin" style="width: 950px;padding: 30px">
+    <div class="centerMargin centerContainer" style="padding: 30px">
         <div class="container footerContent"  >
             <h:form>
                 <h:panelGrid columns="2">

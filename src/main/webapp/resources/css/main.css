@@ -45,8 +45,13 @@ ol, ul, li {
 
 }
 
-.whiteContainer{
+
+.centerBlockContainer{
     width: 860px;
+}
+
+.whiteContainer{
+
     margin-bottom: 20px;
 }
 
@@ -59,7 +64,7 @@ ol, ul, li {
     content: "";
 }
 .menu ol{
-    width: 950px ;
+    width: 800px ;
     text-transform:uppercase;
 }
 
@@ -68,7 +73,7 @@ body .ui-button {
     background-color: #b4e01d;
     color: #000000;
     font-family: 'Open Sans' regular;
-    font-size: 15px;
+    font-size: 13px;
     border: none!important;
     box-shadow: 2px 2px 2px 2px 2px #AAA!important;
     border-radius: 10px!important;
@@ -94,26 +99,27 @@ a img {
     position: relative;
     display: -moz-inline-box;
     display: inline-block;
-    line-height: 50px;
+    line-height: 30px;
     font-family: 'Open Sans' light;
-    font-size: 15px;
+    font-size: 12px;
     color: #000000;
     padding: 0;
     vertical-align: top;
 
 }
 
-.accountMenu .menuItem {
-    font-size: 12px;
-    line-height: 30px;
-}
 
-.accountMenu .menuItem  a{
+.accountMenu .menuItem > a{
     margin-left: 5px;
     margin-right: 5px;
+    display: inline-block;
     padding-bottom: 5px;
     font-weight: normal;
 
+}
+
+.accountMenu .menuItem form{
+display: inline-block;
 }
 
 
@@ -188,7 +194,7 @@ a:hover {
     height: 200px;
     border-bottom: 1px solid #888;
     position: relative;
-    box-shadow:0 4px 6px rgba(34, 25, 25, 0.5);
+    box-shadow:0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -207,13 +213,16 @@ a:hover {
 }
 
 .logo {
-    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     width: 351px;
     height: 157px;
     background-image: url("../resources/img/logo_greenwalk.png");
     background-repeat: no-repeat;
+}
+
+.centerContainer{
+    width: 750px;
 }
 
 .center{
@@ -243,7 +252,7 @@ a:hover {
     margin-top: 2px;
     margin-bottom: 2px;
     font-family: 'Boogaloo',regular;
-    font-size: 50px;
+    font-size: 40px;
     text-transform:uppercase;
     display: inline-block ;
     color: #00323f;
@@ -253,7 +262,7 @@ a:hover {
     margin-top: 20px;
     margin-bottom: 10px;
     font-family: 'Boogaloo',regular;
-    font-size: 40px;
+    font-size: 30px;
     text-transform:uppercase;
     display: inline-block ;
     color: #00323f;
@@ -262,7 +271,7 @@ a:hover {
     margin-top:2px;
     margin-bottom: 2px;
     font-family: 'Boogaloo',regular;
-    font-size: 73px;
+    font-size: 53px;
     display: inline-block ;
     color: #ffffff;
 }
@@ -272,14 +281,14 @@ a:hover {
     margin: 0;
     font-family: 'Boogaloo',regular;
     text-transform:uppercase;
-    font-size: 30px;
+    font-size: 20px;
     display: inline-block;
     color: #00323f;
 }
 .titleHomeText3{
     margin: 0;
     font-family: 'Boogaloo',regular;
-    font-size: 23px;
+    font-size: 19px;
     display: inline-block;
     color: #00323f;
 }
@@ -363,7 +372,7 @@ p {
     margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
-    width: 950px;
+    width: 760px;
     min-height: 500px;
 }
 
@@ -637,11 +646,13 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 .headerRow {
     display: block;
     height: 35px;
+    margin-bottom: 20px;
     border-bottom:  #009e9d 1px solid;
 }
 
 .eventDateColumn{
-    width: 100px;
+    width: 9%;
+    min-width: 110px;
     display: inline-block;
     float: left;
     margin: 5px;
@@ -649,19 +660,22 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 
 
 .eventLocationColumn{
-    width: 200px;
+    width: 33%;
+    min-width: 220px;
     display: inline-block;
     float: left;
     margin: 5px;
 }
 .eventShortDescriptionColumn{
-    width: 200px;
+    width: 32%;
+    min-width: 220px;
     display: inline-block;
     float: left;
     margin: 5px;
 }
 .eventOrganiserColumn{
-    width: 70px;
+    width: 9%;
+    min-width: 80px;
     display: inline-block;
     float: left;
     margin: 5px;
@@ -773,7 +787,7 @@ body .ui-autocomplete-items td, tr{
     width: 100%;
     margin-top: 20px;
     clear: both;
-    background-image: url("/resources/img/blue_background.png");
+    background-image: url('/resources/img/motif_background_green.jpg');
 }
 
 .footerContent{
@@ -816,7 +830,7 @@ body .ui-menu  .ui-state-hover  {
 }
 
 .visual-block{
-    width: 950px;
+    width: 760px;
     padding-top: 50px;
 }
 
@@ -911,7 +925,7 @@ body .groupEventList .ui-widget-content {
 }
 
 .groupEventList{
-    width: 670px;
+
     margin-left: auto;
     margin-right: auto;
 }
@@ -939,6 +953,7 @@ body .groupEventList .ui-widget-content {
     color:  #009e9d!important;
     font-family: 'Boogaloo',regular;
     font-size: 15px;
+    margin-top: 10px;
     text-transform: uppercase;
 
 
@@ -1015,6 +1030,18 @@ h2 .groupEventListHeader {
 }
 
 .dateStartCalendar input{
-
     width: 90%;
+}
+
+.groupEventList .ui-state-default,
+.groupEventList .ui-widget-content .ui-state-default,
+.groupEventList .ui-widget-header .ui-state-default{
+   background-image: none;
+    background-color: #FCFCFC;
+}
+
+.groupEventList .ui-state-active,
+.groupEventList .ui-widget-content .ui-state-active,
+.groupEventList  .ui-widget-header .ui-state-active {
+    background-color: #ffffff;
 }

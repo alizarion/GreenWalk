@@ -90,13 +90,15 @@ public class FilterCtrl implements Serializable {
         this.groupEvents = facade.getGroupEventByFilter(this.filter);
         this.mapModel = new DefaultMapModel();
         for (GroupEvent groupEvent: this.groupEvents){
-            new SimpleDateFormat("MM/dd/yyyy HH:mm",
-                    LocaleUtils.toLocale(sessionAttribute.getSelectedLang().
-                            getKey())).format(groupEvent.getEventDate());
-            mapModel.addOverlay(new Marker(groupEvent.getAddress().
-                    getPosition().getAsLatLng(),
-                    groupEvent.getOverlayDescription(
-                            sessionAttribute.getSelectedLang().getKey())));
+            if (groupEvent.getAddress().getPosition().getAsLatLng() != null){
+                new SimpleDateFormat("MM/dd/yyyy HH:mm",
+                        LocaleUtils.toLocale(sessionAttribute.getSelectedLang().
+                                getKey())).format(groupEvent.getEventDate());
+                mapModel.addOverlay(new Marker(groupEvent.getAddress().
+                        getPosition().getAsLatLng(),
+                        groupEvent.getOverlayDescription(
+                                sessionAttribute.getSelectedLang().getKey())));
+            }
         }
     }
 

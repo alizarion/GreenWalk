@@ -27,6 +27,8 @@ public class GroupEventUpdatedNotification extends Notification implements Seria
     @JoinColumn(name = "group_event_id")
     private GroupEvent groupEvent;
 
+    @Column(updatable = false, insertable = false)
+    private String type;
 
     public GroupEventUpdatedNotification() {
         super();
