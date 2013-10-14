@@ -6,6 +6,7 @@ import com.project.entities.Event;
 import com.project.entities.GroupEvent;
 import com.project.entities.notifications.Notification;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -28,8 +29,10 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @ManagedBean
-@ConversationScoped
+@ViewScoped
 public class NotificationCenterCtrl implements Serializable {
+
+    private final static Logger LOG = Logger.getLogger(NotificationCenterCtrl.class);
 
     @EJB
     EntityFacade facade;
@@ -43,6 +46,7 @@ public class NotificationCenterCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("NotificationCenterCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.notifications = facade.getActiveAccountNotifications();

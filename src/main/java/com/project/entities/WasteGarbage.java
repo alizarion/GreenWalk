@@ -10,7 +10,14 @@ import java.util.Date;
  */
 @Entity
 @Table(schema= Helper.ENTITIES_CATALOG, name="garbage")
+@NamedQueries({
+        @NamedQuery(name= WasteGarbage.ALL_GARBAGES,
+                hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                query="select wg "
+                        + " from WasteGarbage wg ")})
 public class WasteGarbage  {
+
+    public static final String ALL_GARBAGES= "ALL_GARBAGES";
 
     @Id
     @TableGenerator(name="WasteGarbage_SEQ", table="sequence", catalog = Helper.ENTITIES_CATALOG,
@@ -25,6 +32,9 @@ public class WasteGarbage  {
     @ManyToOne
     private Waste waste;
 
+    @ManyToOne
+    private Account wasteDeclaring;
+
     public WasteGarbage( ) {
     }
 
@@ -33,6 +43,12 @@ public class WasteGarbage  {
         this.quantity = 1L;
     }
 
+
+    public WasteGarbage(Waste waste,Account wasteDeclaring) {
+        this.waste = waste;
+        this.wasteDeclaring = wasteDeclaring;
+        this.quantity = 1L;
+    }
 
     public Waste getWaste() {
         return waste;
@@ -56,6 +72,14 @@ public class WasteGarbage  {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Account getWasteDeclaring() {
+        return wasteDeclaring;
+    }
+
+    public void setWasteDeclaring(Account wasteDeclaring) {
+        this.wasteDeclaring = wasteDeclaring;
     }
 
     @Override

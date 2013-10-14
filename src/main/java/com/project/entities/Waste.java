@@ -43,7 +43,7 @@ public abstract class Waste {
     private String labelProperty;
 
     @ManyToMany
-    private Set<SingleEvent> event = new HashSet<SingleEvent>();
+    private Set<Event> event = new HashSet<Event>();
 
     public Long getId() {
         return id;
@@ -69,11 +69,11 @@ public abstract class Waste {
         this.approximateWeight = approximateWeight;
     }
 
-    public Set<SingleEvent> getEvent() {
+    public Set<Event> getEvent() {
         return event;
     }
 
-    public void setEvent(Set<SingleEvent> event) {
+    public void setEvent(Set<Event> event) {
         this.event = event;
     }
 

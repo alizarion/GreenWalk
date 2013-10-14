@@ -5,9 +5,12 @@ import com.project.entities.SingleEvent;
 import com.project.services.EntityFacade;
 import com.project.services.wrappers.GroupEventTabViewWrapper;
 import org.apache.commons.lang.LocaleUtils;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,13 +21,18 @@ import java.util.*;
 /**
  * @author selim@openlinux.fr.
  */
-@Named
-@ConversationScoped
+@ManagedBean
+@ViewScoped
 public class HomeCtrl implements Serializable {
 
 
     @Inject
     EntityFacade facade;
+
+    private final static Logger LOG = Logger.getLogger(HomeCtrl.class);
+
+
+
 
     private List<SingleEvent> singleEvents;
 
@@ -41,11 +49,13 @@ public class HomeCtrl implements Serializable {
     private Date currentDate = new Date();
     private Date month1;
     private Date month2;
+
     @Inject
     SessionAttributeCtrl sessionAttribute;
 
     @PostConstruct
     private void postInit(){
+        LOG.info("HomeCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.singleEvents = facade.findLastSingleEvents();

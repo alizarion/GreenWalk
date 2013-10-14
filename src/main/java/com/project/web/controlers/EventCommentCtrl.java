@@ -2,21 +2,16 @@ package com.project.web.controlers;
 
 import com.project.entities.*;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ConversationScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,6 +23,9 @@ import java.util.ResourceBundle;
 @ManagedBean
 @ViewScoped
 public class EventCommentCtrl implements Serializable {
+
+    private final static Logger LOG = Logger.getLogger(EventCommentCtrl.class);
+
 
     private Event event ;
 
@@ -47,6 +45,8 @@ public class EventCommentCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("EventCommentCtrl : PostConstruct");
+
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
 

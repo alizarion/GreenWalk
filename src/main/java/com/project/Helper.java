@@ -1,10 +1,14 @@
 package com.project;
 
+import com.project.entities.GroupEvent;
+import com.project.entities.WasteGarbage;
 import org.primefaces.model.map.LatLng;
 
 import java.io.File;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -36,9 +40,9 @@ public  class Helper {
     }
 
     public  static String getMailTemplatePathDirectory(){
-           ResourceBundle bundle = ResourceBundle.getBundle("app");
-           return  bundle.getString("MAIL_TEMPLATE_DIRECTORY");
-       }
+        ResourceBundle bundle = ResourceBundle.getBundle("app");
+        return  bundle.getString("MAIL_TEMPLATE_DIRECTORY");
+    }
 
     public static File getTempDirectoryPath(){
         ResourceBundle bundle = ResourceBundle.getBundle("app");
@@ -46,19 +50,29 @@ public  class Helper {
     }
 
     public static LatLng getLatLngFromSeparatedString(String latlng){
-       if (latlng!= null){
-           if (latlng.contains(",")){
-               String [] latLngTab =  latlng.split(",");
-               LatLng latLng =  new LatLng(Double.parseDouble(latLngTab[0]),Double.parseDouble(latLngTab[1]));
-               return latLng;
-           }
-       }
-       return null;
+        if (latlng!= null){
+            if (latlng.contains(",")){
+                String [] latLngTab =  latlng.split(",");
+                LatLng latLng =  new LatLng(Double.parseDouble(latLngTab[0]),Double.parseDouble(latLngTab[1]));
+                return latLng;
+            }
+        }
+        return null;
     }
 
     public static String getRandomHash(){
         SecureRandom random = new SecureRandom();
         return new BigInteger(130, random).toString(32);
     }
+
+    public static  String garbageToJSObjectList(List<WasteGarbage> wasteGarbages){
+        GroupEvent eventtmp = new GroupEvent();
+        for (WasteGarbage wasteGarbage: wasteGarbages){
+            eventtmp.addNewGarbage(wasteGarbage);
+        }
+
+        return eventtmp.getGarbageAsJSObjectList();
+    }
+
 
 }

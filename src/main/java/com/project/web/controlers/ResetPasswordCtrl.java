@@ -9,6 +9,7 @@ import com.project.services.mail.MailSender;
 import com.project.services.mail.Mailer;
 import com.project.services.mail.ResetPasswordEmail;
 import com.project.services.mail.SMTPEmailProvider;
+import org.apache.log4j.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +32,8 @@ import java.util.Date;
 @ViewScoped
 public class ResetPasswordCtrl implements Serializable{
 
+    private final static Logger LOG = Logger.getLogger(ResetPasswordCtrl.class);
+
 
     private String email;
 
@@ -46,6 +49,7 @@ public class ResetPasswordCtrl implements Serializable{
 
 
     public void resetPassword() throws NamingException, MessagingException, NoSuchAlgorithmException, IOException {
+        LOG.info("ResetPasswordCtrl : PostConstruct");
         Account account = facade.findAccountByEmail(email);
         if(account !=null){
             String newPass = Helper.getRandomHash();

@@ -2,9 +2,13 @@ package com.project.web.controlers;
 
 import com.project.entities.Account;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
+import org.primefaces.event.map.OverlaySelectEvent;
+import org.primefaces.model.map.Marker;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -12,15 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: selim.bensenouci
- * Date: 17/09/13
- * Time: 14:48
- * To change this template use File | Settings | File Templates.
+  * @author selim@openlinux.fr
  */
-@Named
+@ManagedBean
 @ViewScoped
 public class MemberProfileCtrl implements Serializable {
+
+    private final static Logger LOG = Logger.getLogger(MemberProfileCtrl.class);
 
 
     @EJB
@@ -28,16 +30,20 @@ public class MemberProfileCtrl implements Serializable {
 
     private Account account;
 
+    private Marker selectedMarker;
+
+    private Integer mapZoom = 4;
+
 
     @PostConstruct
     public void postInit(){
+        LOG.info("MemberProfileCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         HttpServletRequest request  =  (HttpServletRequest) FacesContext.
                 getCurrentInstance().getExternalContext().getRequest();
         String username = (String) request.getAttribute("username");
-
-        this.account = facade.findAccountByName(username);
+        this.account = facade.findAccountProfileByName(username);
     }
 
 
@@ -45,7 +51,27 @@ public class MemberProfileCtrl implements Serializable {
         return account;
     }
 
+    public Marker getSelectedMarker() {
+        return selectedMarker;
+    }
+
+    public void setSelectedMarker(Marker selectedMarker) {
+        this.selectedMarker = selectedMarker;
+    }
+
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public void onMarkerSelect(OverlaySelectEvent event) {
+        this.selectedMarker = (Marker) event.getOverlay();
+    }
+
+    public Integer getMapZoom() {
+        return mapZoom;
+    }
+
+    public void setMapZoom(Integer mapZoom) {
+        this.mapZoom = mapZoom;
     }
 }

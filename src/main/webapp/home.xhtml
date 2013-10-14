@@ -14,22 +14,11 @@
             <ui:define name="center">
                 <div class="center" >
                     <div  class="verticalAlignement visual-block"  >
-                        <gw:garbage width="457" height="352" startWastes="{type:'waste',value:323, name:'menager-plastic',x:220,y:-1300,calories:590},
-                {type:'waste',value:323, name:'electronic',x:220,y:-1200,calories:590},
-                {type:'waste',value:323, name:'tin',x:220,y:-1100,calories:590},
-                {type:'waste',value:323, name:'paper',x:220,y:-1000,calories:590},
-                {type:'waste',value:323, name:'other',x:220,y:-900,calories:590},
-                {type:'waste',value:323, name:'packaging-hazardous-materials',x:220,y:-800,calories:590},
-                {type:'waste',value:323, name:'plastic-bag',x:220,y:-700,calories:590},
-                {type:'waste',value:323, name:'wood-composite',x:220,y:-600,calories:590},
-                {type:'waste',value:323, name:'textile',x:220,y:-500,calories:590},
-                {type:'waste',value:323, name:' bottle-glass',x:220,y:-100,calories:590},
-                {type:'waste',value:323, name:'bottle-plastic',x:220,y:-100,calories:590},
-                {type:'waste',value:323, name:'jars',x:220,y:-100,calories:590}"/>
+                        <gw:garbage width="457" height="352" startWastes="#{sessionAttributeCtrl.collectedWasteJSObjects}"/>
                         <div style="width: 290px;float: left;height:330px;display: inline-block;">
                             <p class="titleHomeText1">together,</p>
                             <p class="titleHomeText2">we have freed the nature of
-                                <span style="float: left;" class="titleHomeNumber">200</span>
+                                <span style="float: left;" class="titleHomeNumber">#{sessionAttributeCtrl.totalWastesCount}</span>
                                <span style="float: left;display: inline-block;margin-bottom: 0;height: 60px">
                                     <span style="display: block;">kinds of waste</span>
                                <h:graphicImage style="display: inline-block" value="../resources/img/underline_wave.png" />

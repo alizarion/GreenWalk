@@ -7,6 +7,7 @@ import com.project.services.EntityFacade;
 import com.project.services.wrappers.GroupEventTabViewWrapper;
 import com.project.web.GroupEventFilter;
 import org.apache.commons.lang.LocaleUtils;
+import org.apache.log4j.Logger;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -34,6 +35,9 @@ public class FilterCtrl implements Serializable {
 
     @Inject
     EntityFacade facade;
+
+    private final static Logger LOG = Logger.getLogger(FilterCtrl.class);
+
 
     private List<SingleEvent> singleEvents;
 
@@ -75,19 +79,22 @@ public class FilterCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("FilterCtrl : PostConstruct");
+
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
-        this.singleEvents = facade.findLastSingleEvents();
+     //   this.singleEvents = facade.findLastSingleEvents();
 
     }
 
     public void updateMapModel(){
+        LOG.info("FilterCtrl : updateMapModel");
         this.groupEvents = facade.getGroupEventByFilter(this.filter);
         getCurrent();
         getThisMonth();
         getThisMonth1();
         getThisMonth2();
-        this.groupEvents = facade.getGroupEventByFilter(this.filter);
+      //  this.groupEvents = facade.getGroupEventByFilter(this.filter);
         this.mapModel = new DefaultMapModel();
         for (GroupEvent groupEvent: this.groupEvents){
             if (groupEvent.getAddress().getPosition().getAsLatLng() != null){
@@ -202,12 +209,10 @@ public class FilterCtrl implements Serializable {
     }
 
     public MapModel getMapModel() {
-
         return mapModel;
     }
 
     public void setMapModel(MapModel mapModel) {
-
         this.mapModel = mapModel;
     }
 

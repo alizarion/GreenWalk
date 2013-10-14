@@ -135,7 +135,6 @@ public abstract class Event {
                 stringBuilder.append(',').append(current.toString());
             }
         }
-
         return stringBuilder.toString();
     }
 

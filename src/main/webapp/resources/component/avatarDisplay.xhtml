@@ -36,7 +36,8 @@
 
 
 <cc:implementation>
-    <div onclick="#{cc.attrs.onSelectOpenProfile ? 'window.location.href=/profile/'.concat(cc.attrs.account.credential.userName) : ''}"
+    <h:outputLink target="_blank" value="#{'/profile/'.concat(cc.attrs.account.credential.userName)}">
+    <div
          title="#{cc.attrs.account.firstName} #{cc.attrs.account.lastName}"
          style="width: #{cc.attrs.width}px; " class="avatar">
         <p:graphicImage
@@ -53,7 +54,7 @@
                 rendered="#{cc.attrs.account.avatarImageFile != null}"
                 imageContent="#{cc.attrs.account.avatarImageFile}"/>
     </div>
-
+     </h:outputLink>
 </cc:implementation>
 
 </html>

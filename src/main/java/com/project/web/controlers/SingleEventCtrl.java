@@ -2,6 +2,7 @@ package com.project.web.controlers;
 
 import com.project.entities.*;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 @ManagedBean
 @ViewScoped
 public class SingleEventCtrl implements Serializable {
+
+    private final static Logger LOG = Logger.getLogger(SingleEventCtrl.class);
 
     @Inject
     EntityFacade facade;
@@ -50,10 +53,11 @@ public class SingleEventCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("SingleEventCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.selectedEvent = new SingleEvent();
-        this.userAccount = facade.getActiveUser();
+        this.userAccount = facade.findActiveUserWithSigneEventList();
         this.selectedEvent.setOwner(this.userAccount);
         this.wasteList = this.facade.getAllAvailableWastes();
     }
@@ -129,7 +133,7 @@ public class SingleEventCtrl implements Serializable {
     }
 
     public void addGarbage(){
-        this.selectedWasteGarbage = new WasteGarbage(this.selectedWaste);
+        this.selectedWasteGarbage = new WasteGarbage(this.selectedWaste,this.userAccount);
     }
 
     public void addGarbageToEvent(){

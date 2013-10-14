@@ -2,6 +2,7 @@ package com.project.web.controlers;
 
 import com.project.entities.*;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -31,6 +32,9 @@ public class GroupEventDisplayCtrl implements Serializable {
     @Inject
     SessionAttributeCtrl sessionAttribute;
 
+    private final static Logger LOG = Logger.getLogger(GroupEventDisplayCtrl.class);
+
+
     private Comment newComment;
 
     private Comment selectedComment;
@@ -41,6 +45,8 @@ public class GroupEventDisplayCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("GroupEventDisplayCtrl : PostConstruct");
+
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
 

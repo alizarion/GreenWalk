@@ -56,18 +56,18 @@
             </ui:repeat>
 
         </h:panelGroup>
-        <h:panelGrid columns="3">
+        <h:panelGroup >
 
-            <h:outputLabel for="description"
-                           value="#{lang['form.singleEvent.description.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+
             <p:inputTextarea id="description"
                              requiredMessage="#{lang['form.singleEvent.description.required.message'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                              autoResize="false"
                              value="#{cc.attrs.singleEventObject.description}"/>
+            <p:watermark for="description"   value="#{lang['form.singleEvent.description.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}..."/>
             <p:message for="description"  />
 
 
-        </h:panelGrid>
+        </h:panelGroup>
 
         <p:fileUpload fileUploadListener="#{singleEventCtrl.fileUploadListenerImageContent}"
                       dragDropSupport="true"

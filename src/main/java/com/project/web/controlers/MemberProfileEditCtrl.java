@@ -5,6 +5,7 @@ import com.project.entities.AvatarImageFile;
 
 import com.project.entities.Credential;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 
@@ -35,6 +36,7 @@ import java.util.ResourceBundle;
 @ViewScoped
 public class MemberProfileEditCtrl implements Serializable {
 
+    private final static Logger LOG = Logger.getLogger(MemberProfileEditCtrl.class);
 
     @EJB
     EntityFacade facade;
@@ -52,6 +54,7 @@ public class MemberProfileEditCtrl implements Serializable {
 
     @PostConstruct
     public void postInit(){
+        LOG.info("MemberProfileEditCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         HttpServletRequest request  =  (HttpServletRequest) FacesContext.

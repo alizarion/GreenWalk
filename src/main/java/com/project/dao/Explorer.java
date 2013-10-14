@@ -63,6 +63,18 @@ public class Explorer {
         }
     }
 
+    public List<WasteGarbage> getPickedUpGarbages(){
+        try{
+            List<WasteGarbage> wasteGarbages =
+                    new ArrayList<WasteGarbage>(em.createNamedQuery(
+                    WasteGarbage.ALL_GARBAGES).
+                    getResultList());
+            return wasteGarbages;
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
 
     public List<SingleEvent> findLastSingleEvents() {
         try{
@@ -101,7 +113,7 @@ public class Explorer {
     public List<Notification> getUserNotifications(Account account){
         try{
             List<Notification> notifications = new ArrayList<Notification>(em.createNamedQuery(
-                    Notification.FIND_AGENT_NOTIFICATION).setParameter("accountId", account).getResultList());
+                    Notification.FIND_AGENT_NOTIFICATION).setParameter("accountId", account).setMaxResults(20).getResultList());
             return notifications;
         } catch (NoResultException e){
             return null;

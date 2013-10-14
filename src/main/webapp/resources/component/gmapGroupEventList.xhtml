@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:cc="http://java.sun.com/jsf/composite">
 
-<cc:interface >
+<cc:interface componentType="GMapEvenListenerCC">
 
     <cc:attribute
             name="onMarkerSelect"
@@ -63,7 +63,7 @@
                     model="#{cc.attrs.mapModel}"
                     mapTypeControl="true" navigationControl="false"
                     widgetVar="gmap">
-                <p:ajax event="overlaySelect" listener="#{filterCtrl.onMarkerSelect}" />
+                <p:ajax event="overlaySelect" listener="#{cc.onMarkerSelect}" />
                 <p:gmapInfoWindow>
                     <p:outputPanel style="text-align:center;display:block;margin:auto:">
                         <h:outputText escape="false" value="#{cc.attrs.selectedMarker.title}" />

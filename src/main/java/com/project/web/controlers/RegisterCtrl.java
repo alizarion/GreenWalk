@@ -3,6 +3,7 @@ package com.project.web.controlers;
 import com.project.entities.Account;
 import com.project.entities.SexeEnum;
 import com.project.services.EntityFacade;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -29,6 +30,9 @@ public class RegisterCtrl implements Serializable {
 
     private Account account = new Account();
 
+    private final static Logger LOG = Logger.getLogger(RegisterCtrl.class);
+
+
     private String sexe;
 
     private Boolean legales;
@@ -41,6 +45,7 @@ public class RegisterCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("RegisterCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
     }

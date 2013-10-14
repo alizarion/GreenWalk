@@ -15,25 +15,43 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/template.xhtml">
+            <ui:define name="center">
+                <div class="greenCenter">
+                    <div class="centerMargin centerBlockContainer" >
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem value="#{memberProfileCtrl.account.firstName} #{memberProfileCtrl.account.lastName}" url="#"/>
 
+                        </p:breadCrumb>
+                    </div>
+                </div>
+            </ui:define>
             <ui:define name="contentLeft">
-                <gw:header headerLabelId="component.header.members.profile.label-" />
-
                 <gw:memberProfile
                         rendered="#{memberProfileCtrl.account != null}"
                         account="#{memberProfileCtrl.account}" />
-                <gw:header headerLabelId="component.header.members.events.label-" />
+                <h2 class="groupEventListHeader">#{lang['common.profile.display.member.action.area-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
+                <gw:gmapGroupEventList  actualLocation=""
+                                       getActualLocation="#{null}"
+                                       mapModel="#{memberProfileCtrl.account.lastActionAreasMap}"
+                                       selectedMarker="#{memberProfileCtrl.selectedMarker}"
+                                       onMarkerSelect="#{memberProfileCtrl.onMarkerSelect}"
+                                       zoom="#{memberProfileCtrl.mapZoom}"  />
+                <h2 class="groupEventListHeader">#{lang['component.header.members.events.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
+
                 <gw:lastEvents singleEvents="#{memberProfileCtrl.account.singleEventsAsList}"/>
 
             </ui:define>
 
             <ui:define name="contentRight">
+                <div style="margin-top: 30px;">
+                <gw:garbage
+                        width="300"
+                        height="231"
+                        startWastes="#{memberProfileCtrl.account.allMemberGarbageAsJSObjectList}"/>
+                </div>
             </ui:define>
 
-            <ui:define name="footerContent">
-                <div></div>
-
-            </ui:define>
 
         </ui:composition>
     </h:body>

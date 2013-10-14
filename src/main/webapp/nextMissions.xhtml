@@ -7,37 +7,36 @@
       xmlns:gw="http://java.sun.com/jsf/composite/component"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<f:view locale="fr">
+<f:view   locale="fr">
 
     <h:head>
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
+        <f:metadata>
+            <f:viewParam
+                    name="#{filterCtrl.filter.cityParam}"
+                    value="#{filterCtrl.filter.city}"/>
+            <f:viewParam
+                    name="#{filterCtrl.filter.countryParam}"
+                    value="#{filterCtrl.filter.country}"/>
+
+            <f:viewParam
+                    name="#{filterCtrl.filter.latLngParam}"
+                    value="#{filterCtrl.filter.addressPosition}"/>
+            <f:viewParam  converter="viewParamDateConverter"
+                          name="#{filterCtrl.filter.toDateParam}"
+                          value="#{filterCtrl.filter.toDate}"/>
+            <f:viewParam  converter="viewParamDateConverter"
+                          name="#{filterCtrl.filter.fromDateParam}"
+                          value="#{filterCtrl.filter.fromDate}"/>
+        </f:metadata>
 
     </h:head>
     <h:body>
         <ui:composition template="/template/template.xhtml">
-            <ui:define name="header">
-                <f:metadata>
-                    <f:viewParam
-                            name="#{filterCtrl.filter.cityParam}"
-                            value="#{filterCtrl.filter.city}"/>
-                    <f:viewParam
-                            name="#{filterCtrl.filter.countryParam}"
-                            value="#{filterCtrl.filter.country}"/>
 
-                    <f:viewParam
-                            name="#{filterCtrl.filter.latLngParam}"
-                            value="#{filterCtrl.filter.addressPosition}"/>
-                    <f:viewParam  converter="viewParamDateConverter"
-                                  name="#{filterCtrl.filter.toDateParam}"
-                                  value="#{filterCtrl.filter.toDate}"/>
-                    <f:viewParam  converter="viewParamDateConverter"
-                                  name="#{filterCtrl.filter.fromDateParam}"
-                                  value="#{filterCtrl.filter.fromDate}"/>
-
-                    <f:event type="preRenderView" listener="#{filterCtrl.updateMapModel}" />
-                </f:metadata>
-            </ui:define>
             <ui:define name="center">
+                <f:event type="preRenderView"
+                         listener="#{filterCtrl.updateMapModel}" />
                 <div class="greenCenter">
                     <div class="centerMargin centerContainer" >
                         <p:breadCrumb>

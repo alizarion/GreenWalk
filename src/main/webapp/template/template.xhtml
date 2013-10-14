@@ -50,10 +50,10 @@
             </li>
             <li class="menuItem">
                 <h:form id="notificationsForm">
-                    <h:commandLink
+                    <p:commandLink
                             id="notifications"
                             value="#{lang['page.template.my.notifications-'.concat(sessionAttributeCtrl.selectedLang.key)]} (#{fn:length(notificationCenterCtrl.unViewedNotifications)})"
-                            action="#{notificationCenterCtrl.consumeAllLoggedUserNotifications}" update=":accountBar"/>
+                            action="#{notificationCenterCtrl.consumeAllLoggedUserNotifications}" />
                 </h:form>
                 <p:overlayPanel id="chartPanel"   style="position: fixed;" appendToBody="true" for=":notificationsForm:notifications" hideEffect="fade">
                     <gw:notificationList
@@ -206,7 +206,7 @@
 
     </div>
     <ui:insert name="footerContent">
-
+        <ui:debug hotkey="x"/>
     </ui:insert>
 </div>
 

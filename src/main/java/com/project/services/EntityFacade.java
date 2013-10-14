@@ -139,6 +139,14 @@ public class EntityFacade implements Serializable{
         return this.explorer.findAccountByName(name);
     }
 
+    public Account findAccountProfileByName(String name){
+        Account account= this.explorer.findAccountByName(name);
+        account.getAllMemberGarbageAsJSObjectList();
+        account.getLastActionAreasMap();
+        account.loadSingleEventEagerly();
+        return account;
+    }
+
     public Account mergeAccount(Account account){
         return em.merge(account);
     }
@@ -238,5 +246,17 @@ public class EntityFacade implements Serializable{
 
     public List<GroupEvent> getGroupEventByFilter(GroupEventFilter filter) {
         return this.explorer.findGroupEventsByFilter(filter);
+    }
+
+    public List<WasteGarbage> findAllGarbages() {
+        return this.explorer.getPickedUpGarbages();
+    }
+
+
+    public Account findActiveUserWithSigneEventList() {
+        Account account = this.getActiveUser() ;
+         //loader single events;
+        account.loadSingleEventEagerly();
+        return account;
     }
 }

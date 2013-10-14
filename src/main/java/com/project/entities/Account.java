@@ -3,6 +3,9 @@ package com.project.entities;
 import com.project.Helper;
 import com.project.entities.notifications.Notification;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import javax.persistence.*;
 import java.io.File;
@@ -95,7 +98,9 @@ public class Account implements Serializable {
     @Column
     private Date lastNotificationMailDate;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "accountListener")
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "accountListener")
     private Set<Notification> notifications= new HashSet<Notification>();
 
     @Column(name="commentenabled")
@@ -125,20 +130,25 @@ public class Account implements Serializable {
     private Set<Account> followers = new HashSet<Account>();
 
     @OneToMany(mappedBy = "singleEventOwner",
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @OrderBy("creationDate desc ")
     private Set<SingleEvent> singleEvents =
             new HashSet<SingleEvent>();
 
     @OneToMany(mappedBy = "groupEventOwner",
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @OrderBy("creationDate desc ")
     private Set<GroupEvent> groupEvents =
             new HashSet<GroupEvent>();
 
     @OneToMany(mappedBy = "account",
-            fetch = FetchType.EAGER)
-    private Set<GroupEventSubscriber> subscribedEvents = new HashSet<GroupEventSubscriber>();
+            fetch = FetchType.LAZY)
+    private Set<GroupEventSubscriber> subscribedEvents =
+            new HashSet<GroupEventSubscriber>();
+
+    @OneToMany(mappedBy = "wasteDeclaring",
+            fetch = FetchType.LAZY)
+    private Set<WasteGarbage> wasteGarbages = new HashSet<WasteGarbage>();
 
     @PrePersist
     public void onPrePersist(){
@@ -287,7 +297,6 @@ public class Account implements Serializable {
         this.creationDate = creationDate;
     }
 
-
     public Boolean getIndexed() {
         return indexed;
     }
@@ -332,6 +341,26 @@ public class Account implements Serializable {
         }
     }
 
+    public MapModel getLastActionAreasMap(){
+        MapModel mapModel = new DefaultMapModel();
+        for(GroupEvent groupEvent :  this.groupEvents){
+            if (groupEvent.getAddress().getPosition().getAsLatLng() != null){
+                mapModel.addOverlay(new Marker(groupEvent.getAddress().
+                        getPosition().getAsLatLng(),
+                        groupEvent.getTitle()));
+            }
+        }
+        for(GroupEventSubscriber subscriber : this.subscribedEvents){
+            if (subscriber.getGroupEvent().
+                    getAddress().getPosition().getAsLatLng() != null)
+                mapModel.addOverlay(new Marker(subscriber.getGroupEvent().
+                        getAddress().getPosition().getAsLatLng(),
+                        subscriber.getGroupEvent().getTitle()));
+        }
+
+        return mapModel;
+    }
+
     public Long getId() {
         return id;
     }
@@ -373,6 +402,13 @@ public class Account implements Serializable {
         this.profession = profession;
     }
 
+
+    public void loadSingleEventEagerly(){
+        for (SingleEvent singleEvent : this.singleEvents){
+            singleEvent.getId();
+        }
+    }
+
     public Credential getCredential() {
         return credential;
     }
@@ -406,6 +442,14 @@ public class Account implements Serializable {
         if(this.avatarImageFile != null){
             this.avatarImageFile.setAccount(this);
         }
+    }
+
+    public String getAllMemberGarbageAsJSObjectList(){
+       GroupEvent eventtmp= new GroupEvent();
+      for ( WasteGarbage wasteGarbage : this.wasteGarbages ){
+          eventtmp.addNewGarbage(wasteGarbage);
+      }
+        return eventtmp.getGarbageAsJSObjectList();
     }
 
     @PostPersist

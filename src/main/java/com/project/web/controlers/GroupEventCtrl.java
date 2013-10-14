@@ -4,6 +4,7 @@ import com.project.entities.*;
 import com.project.services.AddressByLongLatHelper;
 import com.project.services.EntityFacade;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
@@ -39,6 +40,9 @@ public class GroupEventCtrl implements Serializable {
     @Inject
     SessionAttributeCtrl sessionAttribute;
 
+    private final static Logger LOG = Logger.getLogger(GroupEventCtrl.class);
+
+
     private Account userAccount;
 
     private MapModel draggableModel;
@@ -62,6 +66,8 @@ public class GroupEventCtrl implements Serializable {
 
     @PostConstruct
     private void postInit(){
+        LOG.info("GroupEventCtrl : PostConstruct");
+
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
         this.userAccount = facade.getActiveUser();
