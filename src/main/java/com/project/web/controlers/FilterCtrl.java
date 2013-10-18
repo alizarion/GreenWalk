@@ -15,12 +15,10 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -66,7 +64,7 @@ public class FilterCtrl implements Serializable {
 
     private Address actualLocationAdress;
 
-    private Integer mapZoom = 13;
+    private Integer mapZoom = 4;
 
     private LatLng actualLocation;
 

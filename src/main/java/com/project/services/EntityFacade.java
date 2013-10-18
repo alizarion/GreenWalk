@@ -48,6 +48,7 @@ public class EntityFacade implements Serializable{
     }
 
 
+
     /**
      * Method to merge person with the PersistantContext
      * @param person to merge
@@ -255,8 +256,12 @@ public class EntityFacade implements Serializable{
 
     public Account findActiveUserWithSigneEventList() {
         Account account = this.getActiveUser() ;
-         //loader single events;
+        //loader single events;
         account.loadSingleEventEagerly();
         return account;
+    }
+
+    public PrivateConversation findConversationById(Long aLong){
+        return em.find(PrivateConversation.class,aLong);
     }
 }

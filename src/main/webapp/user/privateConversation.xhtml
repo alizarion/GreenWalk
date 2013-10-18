@@ -1,0 +1,34 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+
+        xmlns:gw="http://java.sun.com/jsf/composite/component"
+        contentType="text/html">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="center">
+                <div class="greenCenter">
+                    <div class="centerMargin centerBlockContainer" >
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem  value="#{lang['common.profile.private.conversation.list-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                         outcome="private-conversation-outcome" />
+                        </p:breadCrumb>
+                    </div>
+                </div>
+                <div class="whiteCenterBackground">
+
+                </div>
+            </ui:define>
+
+
+        </ui:composition>
+
+    </h:body>
+</f:view>

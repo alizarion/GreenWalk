@@ -48,6 +48,14 @@ public class PrivateMessage {
         this.id = id;
     }
 
+    public PrivateConversation getPrivateConversation() {
+        return privateConversation;
+    }
+
+    public void setPrivateConversation(PrivateConversation privateConversation) {
+        this.privateConversation = privateConversation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

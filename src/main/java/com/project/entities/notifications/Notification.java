@@ -35,6 +35,7 @@ import java.util.Date;
                         + " from Notification notification where  notification.accountListener = :accountId " +
                         "and  notification.type = 'CommentNotification'")  })
 @DiscriminatorColumn(name = "type")
+@DiscriminatorOptions(force=true)
 public abstract class Notification implements Serializable, Cloneable {
 
     public final static String FIND_AGENT_NOTIFICATION = "FIND_ACCOUNT_NOTIFICATION" ;

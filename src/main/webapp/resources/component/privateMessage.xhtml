@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="privateMessage"
+            type="com.project.entities.PrivateMessage"
+            required="true"/>
+
+
+
+</cc:interface>
+
+
+<cc:implementation>
+    <h:panelGroup
+            rendered="#{cc.attrs.privateMessage.privateConversation.sender.id == entityFacade.activeUser.id}"
+            style="display: inline-block;float:left;">
+        <gw:avatarDisplay
+                account="#{cc.attrs.privateMessage.privateConversation.sender}"
+                onSelectOpenProfile="#{true}"
+                height="60"
+                width="60"/>
+    </h:panelGroup>
+    <h:panelGroup
+            rendered="#{cc.attrs.privateMessage.privateConversation.sender.id == entityFacade.activeUser.id}"
+            style="display: inline-block;float:right;">
+        <gw:avatarDisplay
+                account="#{cc.attrs.privateMessage.privateConversation.sender}"
+                onSelectOpenProfile="#{true}"
+                height="60"
+                width="60"/>
+    </h:panelGroup>
+    <div class="container">
+          #{cc.attrs.privateMessage.message}
+    </div>
+</cc:implementation>
+
+</html>

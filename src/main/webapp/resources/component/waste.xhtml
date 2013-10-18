@@ -42,8 +42,9 @@
 
     <p:commandLink   action="#{cc.attrs.createGarbageMethodAction}"
                      update="#{cc.attrs.update}"
+                     style="float: left;"
                      oncomplete="#{cc.attrs.onWasteSelectionCompleted}" >
-        <div style="display: inline-block;height: auto;text-align: center;float: left;">
+        <div style="display: inline-block;height: auto;text-align: center;float: left; min-height: 136px;">
          <span title="#{cc.attrs.wasteObject.labelProperty}"  class="wasteContainer">
              <h:graphicImage value="/resources/img/garbage/picto_#{cc.attrs.wasteObject.labelProperty}.png"/>
 

@@ -29,10 +29,10 @@ public class PrivateConversation implements Notified {
     @Column(name="conversation_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Account sender;
 
-    @OneToOne
+    @ManyToOne
     private Account receiver;
 
     @OneToMany
