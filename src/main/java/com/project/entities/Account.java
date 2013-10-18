@@ -129,6 +129,16 @@ public class Account implements Serializable {
             inverseJoinColumns=@JoinColumn(name="account_id"))
     private Set<Account> followers = new HashSet<Account>();
 
+    @OneToMany(mappedBy ="receiver",
+            fetch = FetchType.LAZY)
+    private Set<PrivateMessage> receivedMessages =
+            new HashSet<PrivateMessage>();
+
+    @OneToMany(mappedBy = "sender",
+            fetch = FetchType.LAZY)
+    private Set<PrivateMessage> sentMessages =
+            new HashSet<PrivateMessage>();
+
     @OneToMany(mappedBy = "singleEventOwner",
             fetch = FetchType.LAZY)
     @OrderBy("creationDate desc ")
@@ -199,7 +209,21 @@ public class Account implements Serializable {
         return birthDay;
     }
 
+    public Set<PrivateMessage> getSentMessages() {
+        return sentMessages;
+    }
 
+    public void setSentMessages(Set<PrivateMessage> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public Set<PrivateMessage> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(Set<PrivateMessage> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
 
     public Set<SingleEvent> getSingleEvents() {
         return singleEvents;
@@ -301,6 +325,22 @@ public class Account implements Serializable {
         return indexed;
     }
 
+    public List<PrivateMessage> getConversationWith(Account account){
+        List<PrivateMessage> privateMessageList = new ArrayList<PrivateMessage>();
+        for(PrivateMessage privateMessage: this.receivedMessages){
+               if (privateMessage.getSender().equals(account)){
+                   privateMessageList.add(privateMessage);
+               }
+        }
+        for(PrivateMessage privateMessage: this.sentMessages){
+            if (privateMessage.getReceiver().equals(account)){
+                privateMessageList.add(privateMessage);
+            }
+        }
+        Collections.sort(privateMessageList);
+        return privateMessageList;
+    }
+
     public void setIndexed(Boolean indexed) {
         this.indexed = indexed;
     }
@@ -338,6 +378,15 @@ public class Account implements Serializable {
 
         for (Account account: this.followers){
             account.getEmailAddress();
+        }
+    }
+
+    public void loadConversations(){
+        for(PrivateMessage privateMessage : this.receivedMessages){
+            privateMessage.getId();
+        }
+        for(PrivateMessage privateMessage : this.sentMessages){
+            privateMessage.getId();
         }
     }
 

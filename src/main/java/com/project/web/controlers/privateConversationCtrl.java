@@ -1,7 +1,7 @@
 package com.project.web.controlers;
 
 import com.project.entities.Account;
-import com.project.entities.PrivateConversation;
+import com.project.entities.PrivateMessage;
 import com.project.services.EntityFacade;
 import org.apache.log4j.Logger;
 
@@ -12,15 +12,16 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author selim@openlinux.fr.
  */
 @ManagedBean
 @ViewScoped
-public class privateConversationCtrl implements Serializable {
+public class PrivateConversationCtrl implements Serializable  {
 
-    private final static Logger LOG = Logger.getLogger(privateConversationCtrl.class);
+    private final static Logger LOG = Logger.getLogger(PrivateConversationCtrl.class);
 
     @Inject
     EntityFacade facade;
@@ -29,32 +30,48 @@ public class privateConversationCtrl implements Serializable {
     @Inject
     SessionAttributeCtrl sessionAttribute;
 
-    private PrivateConversation privateConversation;
+    private Account converseWith;
 
-    private Account account;
+    private Account currentUser;
+
+    private PrivateMessage privateMessage = new PrivateMessage();
 
     @PostConstruct
     private void postInit(){
         LOG.info("privateConversationCtrl : PostConstruct");
         FacesContext.getCurrentInstance().getViewRoot().getAttributes().put(
                 EntityFacade.EF_NAME, this.facade);
-        this.account = facade.getActiveUser();
+        this.currentUser = facade.loadAccountPrivateMessages(facade.getActiveUser());
         HttpServletRequest request  =  (HttpServletRequest) FacesContext.
                 getCurrentInstance().getExternalContext().getRequest();
-        String convId = (String) request.getAttribute("convId");
-       this.privateConversation = facade.findConversationById(Long.parseLong(convId));
-        if (privateConversation != null){
-            for (PrivateConversation privateConv : this.account.)
-        }
-
-
+        String convId = (String) request.getAttribute("conversId");
+        this.converseWith = facade.findAccountById(Long.parseLong(convId));
+        this.privateMessage.setSender(this.currentUser);
+        this.privateMessage.setReceiver(this.converseWith);
     }
 
-    public PrivateConversation getPrivateConversation() {
-        return privateConversation;
+    public List<PrivateMessage>  getConversation(){
+        return  this.currentUser.getConversationWith(converseWith);
     }
 
-    public void setPrivateConversation(PrivateConversation privateConversation) {
-        this.privateConversation = privateConversation;
+    public Account getConverseWith() {
+        return converseWith;
+    }
+
+    public Account getCurrentUser() {
+        return currentUser;
+    }
+
+    public PrivateMessage getPrivateMessage() {
+        return privateMessage;
+    }
+
+    public void setPrivateMessage(PrivateMessage privateMessage) {
+        this.privateMessage = privateMessage;
+    }
+
+    public void sendPrivateMessage(){
+      facade.sendPrivateMessage(this.privateMessage);
+
     }
 }

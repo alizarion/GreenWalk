@@ -261,7 +261,15 @@ public class EntityFacade implements Serializable{
         return account;
     }
 
-    public PrivateConversation findConversationById(Long aLong){
-        return em.find(PrivateConversation.class,aLong);
+    public void sendPrivateMessage(PrivateMessage privateMessage) {
+        privateMessage = this.em.merge(privateMessage);
+        privateMessage.pushNotifications();
+
+    }
+
+    public Account loadAccountPrivateMessages(Account activeUser) {
+        activeUser = em.merge(activeUser);
+        activeUser.loadConversations();
+        return activeUser;
     }
 }

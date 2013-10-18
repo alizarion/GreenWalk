@@ -1,5 +1,7 @@
 package com.project.entities.notifications;
 
+import com.project.entities.PrivateMessage;
+
 import javax.persistence.PrePersist;
 import java.util.List;
 

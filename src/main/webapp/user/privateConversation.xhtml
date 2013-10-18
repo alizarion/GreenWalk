@@ -19,16 +19,24 @@
                             <p:menuitem value="Categories" url="/" />
                             <p:menuitem  value="#{lang['common.profile.private.conversation.list-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                                          outcome="private-conversation-outcome" />
+                            <p:menuitem  value="#{privateConversationCtrl.privateMessage.receiver.firstName} #{privateConversationCtrl.privateMessage.receiver.lastName}"
+                                        url="#" />
                         </p:breadCrumb>
                     </div>
                 </div>
                 <div class="whiteCenterBackground">
-
+                    <ui:repeat
+                            value="#{privateConversationCtrl.conversation}"
+                            var="message">
+                        <gw:privateMessage privateMessage="#{message}"
+                                           currentUser="#{privateConversationCtrl.currentUser}"/>
+                    </ui:repeat>
+                    <div style="clear: both"></div>
+                    <gw:privateMessageForm
+                            privateMessage="#{privateConversationCtrl.privateMessage}"
+                            sendMessage="#{privateConversationCtrl.sendPrivateMessage}" />
                 </div>
             </ui:define>
-
-
         </ui:composition>
-
     </h:body>
 </f:view>

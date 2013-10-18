@@ -32,6 +32,7 @@
         <class>com.project.entities.RecyclableWaste</class>
         <class>com.project.entities.PutrescibleWaste</class>
         <class>com.project.entities.OtherWaste</class>
+        <class>com.project.entities.PrivateMessage</class>
         <class>com.project.entities.WasteGarbage</class>
         <class>com.project.entities.VideoContentFile</class>
         <class>com.project.entities.GroupEventSubscriber</class>

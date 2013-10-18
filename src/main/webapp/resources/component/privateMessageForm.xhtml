@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<cc:interface>
+
+    <cc:attribute
+            name="privateMessage"
+            type="com.project.entities.PrivateMessage"
+            required="true"/>
+
+    <cc:attribute
+            name="sendMessage"
+            method-signature="void action()"
+            required="true"/>
+
+</cc:interface>
+
+<cc:implementation>
+
+    <div class="container">
+        <h:form id="pmEditForm" prependId="false">
+            <h:panelGrid columns="2" columnClasses="none,inputtextarea">
+                <gw:avatarDisplay
+                        onSelectOpenProfile="true"
+                        width="80"
+                        height="80"
+                        account="#{cc.attrs.privateMessage.sender}"/>
+                <p:inputTextarea  style="width: 95%;"
+                                  autoResize="true"
+                                  id="commentValue"
+                                  value="#{cc.attrs.privateMessage.message}" />
+                <h:outputText/>
+                <h:panelGroup>
+                    <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                                     update="@form"
+                                     process="commentValue,@this"
+                                     style="float: right;"
+                                     oncomplete="window.location.reload()"
+                                     action="#{cc.attrs.sendMessage}"/>
+                </h:panelGroup>
+            </h:panelGrid>
+
+        </h:form>
+    </div>
+</cc:implementation>
+
+</html>

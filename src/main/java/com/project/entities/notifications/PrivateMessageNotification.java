@@ -1,11 +1,10 @@
 package com.project.entities.notifications;
 
 import com.project.entities.Account;
-import com.project.entities.PrivateConversation;
+import com.project.entities.PrivateMessage;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,7 +24,7 @@ public class PrivateMessageNotification extends Notification implements Serializ
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "pc_id")
-    private PrivateConversation privateConversation;
+    private PrivateMessage privateMessage;
 
     @Column(updatable = false, insertable = false)
     private String type;
@@ -34,33 +33,32 @@ public class PrivateMessageNotification extends Notification implements Serializ
         super();
     }
 
+    @Override
+    public Account getNotificationFrom() {
+       return this.privateMessage.getSender();
+    }
+
     public PrivateMessageNotification(
-            PrivateConversation privateConversation, Account account) {
+            PrivateMessage privateConversation, Account account) {
         super();
         super.setAccountListener(account);
-        this.privateConversation = privateConversation;
+        this.privateMessage = privateConversation;
     }
 
     public PrivateMessageNotification(
-            PrivateConversation privateConversation) {
+            PrivateMessage privateConversation) {
         super();
-        this.privateConversation = privateConversation;
+        this.privateMessage = privateConversation;
     }
 
 
-    public PrivateConversation getPrivateConversation() {
-        return privateConversation;
+    public PrivateMessage getPrivateMessage() {
+        return privateMessage;
     }
 
-    public void setPrivateConversation(
-            PrivateConversation privateConversation) {
-        this.privateConversation = privateConversation;
+    public void setPrivateMessage(PrivateMessage privateMessage) {
+        this.privateMessage = privateMessage;
     }
-
-    public Account getNotificationFrom(){
-        return this.privateConversation.getSender();
-    }
-
 
     public String getNotificationLabel(){
 
@@ -82,15 +80,19 @@ public class PrivateMessageNotification extends Notification implements Serializ
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PrivateMessageNotification)) return false;
+
+        if (o == null || getClass() !=
+                o.getClass()) return false;
         if (!super.equals(o)) return false;
 
         PrivateMessageNotification that = (PrivateMessageNotification) o;
 
-        if (privateConversation != null ? !privateConversation.equals(
-                that.privateConversation) :
-                that.privateConversation != null) return false;
+        if (privateMessage != null ?
+                !privateMessage.equals(that.privateMessage) :
+                that.privateMessage != null)
+            return false;
+        if (type != null ? !type.equals(that.type) :
+                that.type != null) return false;
 
         return true;
     }
@@ -98,8 +100,8 @@ public class PrivateMessageNotification extends Notification implements Serializ
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (privateConversation != null ?
-                privateConversation.hashCode() : 0);
+        result = 31 * result + (privateMessage != null ? privateMessage.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 }

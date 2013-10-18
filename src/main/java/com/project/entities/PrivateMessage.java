@@ -1,9 +1,12 @@
 package com.project.entities;
 
 import com.project.Helper;
+import com.project.entities.notifications.Notification;
+import com.project.entities.notifications.Notified;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Table(catalog = Helper.ENTITIES_CATALOG, name = "private_message")
-public class PrivateMessage {
+public class PrivateMessage implements Notified, Comparable<PrivateMessage>  {
 
     @Id
     @TableGenerator(name="PrivateMessage_SEQ", table="sequence",  catalog = Helper.ENTITIES_CATALOG,
@@ -23,11 +26,17 @@ public class PrivateMessage {
     @Column(name="message_id")
     private Long id;
 
-    @ManyToOne
-    private PrivateConversation privateConversation;
 
     @Column
     private Date creationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "message_sender")
+    private Account sender;
+
+    @ManyToOne
+    @JoinColumn(name = "message_receiver")
+    private Account receiver;
 
     @Column(length = 2048)
     private String message;
@@ -48,12 +57,28 @@ public class PrivateMessage {
         this.id = id;
     }
 
-    public PrivateConversation getPrivateConversation() {
-        return privateConversation;
+    public Account getSender() {
+        return sender;
     }
 
-    public void setPrivateConversation(PrivateConversation privateConversation) {
-        this.privateConversation = privateConversation;
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setSender(Account sender) {
+        this.sender = sender;
+    }
+
+    public Account getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Account receiver) {
+        this.receiver = receiver;
     }
 
     @Override
@@ -63,17 +88,32 @@ public class PrivateMessage {
         PrivateMessage that = (PrivateMessage) o;
 
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
-        if (privateConversation != null ? !privateConversation.equals(
-                that.privateConversation) : that.privateConversation != null)
-            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = privateConversation != null ? privateConversation.hashCode() : 0;
-        result = 31 * result + (message != null ? message.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+
         return result;
+    }
+
+    @Override
+    public List<Notification> pushNotifications() {
+        return null;
+    }
+
+    @Override
+    public int compareTo(PrivateMessage o) {
+        Date date1 = this.creationDate;
+        Date date2 = o.getCreationDate();
+        if (date1.after(date2)){
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 }
