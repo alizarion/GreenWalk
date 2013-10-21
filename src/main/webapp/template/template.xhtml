@@ -224,6 +224,8 @@
         createLightBox();
         imagesHover();
         loadSocial();
+        facebook(document, 'script', 'facebook-jssdk');
+        twitter(document,"script","twitter-wjs");
 
     });
 
@@ -236,22 +238,23 @@
         });
 
     }
-
-    function loadSocial(){
-         console.log('loadSocial');
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){
+    function facebook(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+    function twitter(d,s,id)
+    {var js,fjs=d.getElementsByTagName(s)[0];
             js=d.createElement(s);
             js.id=id;
             js.src="//platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js,fjs);}
-        }(document,"script","twitter-wjs");
+            fjs.parentNode.insertBefore(js,fjs);
+    }
+    function loadSocial(){
+        facebook(document, 'script', 'facebook-jssdk');
+        twitter(document,"script","twitter-wjs");
         (function() {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
             po.src = 'https://apis.google.com/js/plusone.js';
