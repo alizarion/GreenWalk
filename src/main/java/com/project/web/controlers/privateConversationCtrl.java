@@ -44,10 +44,12 @@ public class PrivateConversationCtrl implements Serializable  {
         this.currentUser = facade.loadAccountPrivateMessages(facade.getActiveUser());
         HttpServletRequest request  =  (HttpServletRequest) FacesContext.
                 getCurrentInstance().getExternalContext().getRequest();
-        String convId = (String) request.getAttribute("conversId");
-        this.converseWith = facade.findAccountById(Long.parseLong(convId));
-        this.privateMessage.setSender(this.currentUser);
-        this.privateMessage.setReceiver(this.converseWith);
+        String convId = (String) request.getAttribute("eventId");
+        if(convId!= null){
+            this.converseWith = facade.findAccountById(Long.parseLong(convId));
+            this.privateMessage.setSender(this.currentUser);
+            this.privateMessage.setReceiver(this.converseWith);
+        }
     }
 
     public List<PrivateMessage>  getConversation(){
@@ -71,7 +73,7 @@ public class PrivateConversationCtrl implements Serializable  {
     }
 
     public void sendPrivateMessage(){
-      facade.sendPrivateMessage(this.privateMessage);
+        facade.sendPrivateMessage(this.privateMessage);
 
     }
 }

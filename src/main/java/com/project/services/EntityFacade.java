@@ -215,8 +215,8 @@ public class EntityFacade implements Serializable{
 
     public void submitGroupEvent(GroupEvent event) {
         GroupEvent mergedEvent = this.em.merge(event);
-        mergedEvent.restoreTransientAttributes(event);
-        notify(event.pushNotifications());
+       // mergedEvent.restoreTransientAttributes(event);
+        notify(mergedEvent.pushNotifications());
 
     }
 
@@ -263,8 +263,18 @@ public class EntityFacade implements Serializable{
 
     public void sendPrivateMessage(PrivateMessage privateMessage) {
         privateMessage = this.em.merge(privateMessage);
-        privateMessage.pushNotifications();
+        notify(privateMessage.pushNotifications());
+    }
 
+    public Account loadAccountWithLinkedEventGroups(Account account){
+        account = em.merge(account);
+        for (GroupEvent event: account.getGroupEvents()){
+            event.getId();
+        }
+        for (GroupEventSubscriber subscriber: account.getSubscribedEvents()){
+            subscriber.getGroupEvent().getId();
+        }
+        return account;
     }
 
     public Account loadAccountPrivateMessages(Account activeUser) {

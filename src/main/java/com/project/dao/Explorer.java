@@ -91,7 +91,7 @@ public class Explorer {
     public List<GroupEvent> findLastGroupEvents() {
         try{
             List<GroupEvent> events = new ArrayList<GroupEvent>(em.createNamedQuery(
-                    GroupEvent.FIND_ALL).
+                    GroupEvent.FIND_ALL).setMaxResults(20).
                     getResultList());
             return events;
         } catch (NoResultException e){

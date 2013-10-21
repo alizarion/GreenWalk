@@ -233,6 +233,17 @@ public class Account implements Serializable {
         return new ArrayList<SingleEvent>(singleEvents);
     }
 
+    public List<Account> getCorrespondingAccounts(){
+        Set<Account>  accounts = new HashSet<Account>();
+        for(PrivateMessage privateMessage : this.receivedMessages){
+            accounts.add(privateMessage.getSender());
+        }
+        for(PrivateMessage privateMessage : this.sentMessages){
+            accounts.add(privateMessage.getReceiver());
+        }
+        return new ArrayList<Account>(accounts);
+    }
+
 
     public void setSingleEvents(Set<SingleEvent> singleEvents) {
         this.singleEvents = singleEvents;
@@ -328,9 +339,9 @@ public class Account implements Serializable {
     public List<PrivateMessage> getConversationWith(Account account){
         List<PrivateMessage> privateMessageList = new ArrayList<PrivateMessage>();
         for(PrivateMessage privateMessage: this.receivedMessages){
-               if (privateMessage.getSender().equals(account)){
-                   privateMessageList.add(privateMessage);
-               }
+            if (privateMessage.getSender().equals(account)){
+                privateMessageList.add(privateMessage);
+            }
         }
         for(PrivateMessage privateMessage: this.sentMessages){
             if (privateMessage.getReceiver().equals(account)){
@@ -494,10 +505,10 @@ public class Account implements Serializable {
     }
 
     public String getAllMemberGarbageAsJSObjectList(){
-       GroupEvent eventtmp= new GroupEvent();
-      for ( WasteGarbage wasteGarbage : this.wasteGarbages ){
-          eventtmp.addNewGarbage(wasteGarbage);
-      }
+        GroupEvent eventtmp= new GroupEvent();
+        for ( WasteGarbage wasteGarbage : this.wasteGarbages ){
+            eventtmp.addNewGarbage(wasteGarbage);
+        }
         return eventtmp.getGarbageAsJSObjectList();
     }
 

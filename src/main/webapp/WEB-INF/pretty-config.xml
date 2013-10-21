@@ -26,7 +26,7 @@
 
 
     <url-mapping id="privateConversation">
-        <pattern value="/user/conversation/#{conversId}"/>
+        <pattern value="/user/conversation/#{eventId}"/>
         <view-id>/user/privateConversation.jsf</view-id>
     </url-mapping>
 

@@ -17,6 +17,11 @@
             name="account"
             type="com.project.entities.Account"
             required="true"/>
+
+    <cc:attribute
+              name="showPMButton"
+              type="java.lang.Boolean"
+              required="true"/>
 </cc:interface>
 
 <cc:implementation>
@@ -37,6 +42,10 @@
             <h:outputText value="#{cc.attrs.account.creationDate}" >
                 <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
             </h:outputText>
+            <br/>
+            <p:button  rendered="#{cc.attrs.showPMButton}" outcome="private-conversation-outcome"  value="#{lang['common.profile.private.message.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}">
+                <f:param value="#{cc.attrs.account.id}" name="eventId"/>
+            </p:button>
 
         </h:panelGroup>
     </h:panelGrid>

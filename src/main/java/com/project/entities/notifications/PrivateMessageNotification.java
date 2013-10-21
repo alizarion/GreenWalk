@@ -67,14 +67,13 @@ public class PrivateMessageNotification extends Notification implements Serializ
 
     @Override
     public String getNotificationOutcome() {
-        //TODO : not implemented yet
-        return null;
+        return "private-message-outcome";
     }
 
     @Override
     public String getNotificationOutcomeParam() {
         //TODO : not implemented yet
-        return null;
+        return this.getNotificationFrom().getId().toString();
     }
 
 

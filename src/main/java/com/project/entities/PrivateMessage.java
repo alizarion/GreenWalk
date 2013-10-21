@@ -3,8 +3,10 @@ package com.project.entities;
 import com.project.Helper;
 import com.project.entities.notifications.Notification;
 import com.project.entities.notifications.Notified;
+import com.project.entities.notifications.PrivateMessageNotification;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +42,10 @@ public class PrivateMessage implements Notified, Comparable<PrivateMessage>  {
 
     @Column(length = 2048)
     private String message;
+
+    public PrivateMessage() {
+        this.creationDate = new Date();
+    }
 
     public String getMessage() {
         return message;
@@ -102,7 +108,9 @@ public class PrivateMessage implements Notified, Comparable<PrivateMessage>  {
 
     @Override
     public List<Notification> pushNotifications() {
-        return null;
+        List<Notification> notifications = new ArrayList<Notification>();
+        notifications.add(new PrivateMessageNotification(this,getReceiver()));
+        return notifications;
     }
 
     @Override

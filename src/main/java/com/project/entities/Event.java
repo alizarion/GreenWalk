@@ -242,7 +242,6 @@ public abstract class Event {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
 
         Event event = (Event) o;
 
@@ -252,7 +251,6 @@ public abstract class Event {
                 event.description != null) return false;
         if (id != null ? !id.equals(event.id) : event.id != null) return false;
         if (title != null ? !title.equals(event.title) : event.title != null) return false;
-        if (type != null ? !type.equals(event.type) : event.type != null) return false;
 
         return true;
     }

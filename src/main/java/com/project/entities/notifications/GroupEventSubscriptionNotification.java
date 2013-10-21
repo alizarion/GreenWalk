@@ -23,7 +23,7 @@ public class GroupEventSubscriptionNotification extends Notification implements 
     public static final String COUNT_ACCOUNT_COMMENT_NOTIFICATION = "COUNT_ACCOUNT_COMMENT_NOTIFICATION";
 
 
-    @ManyToOne(optional = true,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToOne(optional = true)
     @JoinColumn(name = "group_event_id")
     private GroupEvent groupEvent;
 

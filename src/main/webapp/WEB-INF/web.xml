@@ -121,6 +121,11 @@
         <session-timeout>600</session-timeout>
     </session-config>
 
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6Ldt4dYSAAAAABfVpYKQAmg95sA5iKXWmXduYln5</param-value>
+    </context-param>
+
     <!-- productionParam -->
     <persistence-context-ref>
         <persistence-context-ref-name>persistence/em</persistence-context-ref-name>

@@ -28,15 +28,16 @@
             </ui:define>
             <ui:define name="contentLeft">
                 <gw:memberProfile
+                        showPMButton="#{!(memberProfileCtrl.account.id == memberProfileCtrl.currentAccount.id)}"
                         rendered="#{memberProfileCtrl.account != null}"
                         account="#{memberProfileCtrl.account}" />
                 <h2 class="groupEventListHeader">#{lang['common.profile.display.member.action.area-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
                 <gw:gmapGroupEventList  actualLocation=""
-                                       getActualLocation="#{null}"
-                                       mapModel="#{memberProfileCtrl.account.lastActionAreasMap}"
-                                       selectedMarker="#{memberProfileCtrl.selectedMarker}"
-                                       onMarkerSelect="#{memberProfileCtrl.onMarkerSelect}"
-                                       zoom="#{memberProfileCtrl.mapZoom}"  />
+                                        getActualLocation="#{null}"
+                                        mapModel="#{memberProfileCtrl.account.lastActionAreasMap}"
+                                        selectedMarker="#{memberProfileCtrl.selectedMarker}"
+                                        onMarkerSelect="#{memberProfileCtrl.onMarkerSelect}"
+                                        zoom="#{memberProfileCtrl.mapZoom}"  />
                 <h2 class="groupEventListHeader">#{lang['component.header.members.events.label-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
 
                 <gw:lastEvents singleEvents="#{memberProfileCtrl.account.singleEventsAsList}"/>
@@ -45,10 +46,10 @@
 
             <ui:define name="contentRight">
                 <div style="margin-top: 30px;">
-                <gw:garbage
-                        width="300"
-                        height="231"
-                        startWastes="#{memberProfileCtrl.account.allMemberGarbageAsJSObjectList}"/>
+                    <gw:garbage
+                            width="300"
+                            height="231"
+                            startWastes="#{memberProfileCtrl.account.allMemberGarbageAsJSObjectList}"/>
                 </div>
             </ui:define>
 

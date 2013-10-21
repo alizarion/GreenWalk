@@ -33,7 +33,10 @@
                         rowIndexVar="index"
                         rows="9"
                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
-                <gw:groupEventElementDisplay  isOwnerEvent="#{tabViewWrapper.editable}" withHeaders="#{index==0}" event="#{groupEvent}"/>
+                <gw:groupEventElementDisplay
+                        isOwnerEvent="#{tabViewWrapper.editable}"
+                        withHeaders="#{index==0}"
+                        event="#{groupEvent}"/>
                 <div style=""></div>
             </p:dataGrid>
         </p:tab>

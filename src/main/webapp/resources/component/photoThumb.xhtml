@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:gw="http://java.sun.com/jsf/composite/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+
+    <cc:attribute
+            name="images"
+            type="java.util.List"
+            required="true"/>
+
+    <cc:attribute
+            name="width"
+            type="java.lang.String"
+            required="true"/>
+    <cc:attribute
+            name="height"
+            type="java.lang.String"
+            required="true"/>
+</cc:interface>
+
+<cc:implementation>
+
+    <div  class="sc_menu" style="width: #{cc.attrs.width}px; min-height: #{cc.attrs.height}px; overflow: hidden;">
+        <div class="sc_submenu" style="width: 9999999px !important;" >
+            <ui:repeat value="#{cc.attrs.images}"  var="imagecontent">
+                <gw:lightBoxImage imageContent="#{imagecontent.image}" width="100" height="100"/>
+            </ui:repeat>
+
+        </div>
+    </div>
+
+</cc:implementation>
+
+</html>

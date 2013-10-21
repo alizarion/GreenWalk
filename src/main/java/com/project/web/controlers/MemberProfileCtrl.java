@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
@@ -30,6 +29,8 @@ public class MemberProfileCtrl implements Serializable {
 
     private Account account;
 
+    private Account currentAccount;
+
     private Marker selectedMarker;
 
     private Integer mapZoom = 4;
@@ -43,6 +44,7 @@ public class MemberProfileCtrl implements Serializable {
         HttpServletRequest request  =  (HttpServletRequest) FacesContext.
                 getCurrentInstance().getExternalContext().getRequest();
         String username = (String) request.getAttribute("username");
+        this.currentAccount= facade.getActiveUser();
         this.account = facade.findAccountProfileByName(username);
     }
 
@@ -61,6 +63,10 @@ public class MemberProfileCtrl implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Account getCurrentAccount() {
+        return currentAccount;
     }
 
     public void onMarkerSelect(OverlaySelectEvent event) {

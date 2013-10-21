@@ -47,19 +47,13 @@
 
         </h:panelGroup>
 
-        <h:panelGroup id="gallerieGroup">
-            <ui:repeat
-                    value="#{singleEventCtrl.imageContents}"
-                    var="imagecontent"   >
-                <p:graphicImage width="100" height="100"
-                                value="/images/dynamic/?file=#{imagecontent.file.id}&#38;hctrl=#{imagecontent.file.hashControl}" alt="Image Description for "/>
-            </ui:repeat>
+        <div style="height: 20px; clear: both;"></div>
 
-        </h:panelGroup>
         <h:panelGroup >
 
 
             <p:inputTextarea id="description"
+                             style="width: 240px"
                              requiredMessage="#{lang['form.singleEvent.description.required.message'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                              autoResize="false"
                              value="#{cc.attrs.singleEventObject.description}"/>
@@ -68,17 +62,25 @@
 
 
         </h:panelGroup>
-
+        <div style="height: 20px; clear: both;"></div>
         <p:fileUpload fileUploadListener="#{singleEventCtrl.fileUploadListenerImageContent}"
                       dragDropSupport="true"
                       auto="true"
                       process="@this"
                       immediate="true"
+                      label="add some photos"
                       showButtons="false"
                       multiple="true"
+                      oncomplete="createLightBox();imagesHover();"
                       update="singleEventForm:gallerieGroup"
                       sizeLimit="10000000"
                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+        <div style="height: 20px; clear: both;"></div>
+        <h:panelGroup id="gallerieGroup">
+            <gw:photoThumb width="240" rendered="#{fn:length(singleEventCtrl.imageContents)>0}" images="#{singleEventCtrl.imageContents}" height="100"/>
+
+        </h:panelGroup>
+        <div style="height: 20px; clear: both;"></div>
 
         <p:commandButton value="#{lang['form.singleEvent.submit.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
                          oncomplete="reloadOnSuccess(xhr, status, args)"

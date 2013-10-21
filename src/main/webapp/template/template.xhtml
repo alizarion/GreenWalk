@@ -36,17 +36,18 @@
             <li class="menuItem">
                 <h:link
                         value="#{lang['page.template.my.subscribed.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                        outcome="next-missions-outcome"/>
+                        outcome="member-groupevent-outcome"/>
             </li>
             <li class="menuItem">
                 <h:link
-                        value="#{lang['page.template.my.create.event-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                        outcome="community-outcome"/>
+                        value="#{lang['common.profile.private.conversation.list-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
+                        outcome="conversation-outcome"/>
             </li>
             <li class="menuItem">
-                <h:link
-                        value="#{lang['page.template.my.last.declaration-'.concat(sessionAttributeCtrl.selectedLang.key)]}"
-                        outcome="community-outcome"/>
+                <h:outputLink target="_blank"  value="#{'/profile/'.concat(request.userPrincipal.name)}">
+                    #{lang['page.template.my.last.declaration-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h:outputLink>
+
+
             </li>
             <li class="menuItem">
                 <h:form id="notificationsForm">
@@ -220,6 +221,7 @@
 
     $(function() {
         createLightBox();
+        imagesHover();
 
     });
 

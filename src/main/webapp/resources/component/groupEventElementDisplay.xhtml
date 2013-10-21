@@ -22,10 +22,13 @@
             name="isOwnerEvent"
             type="java.lang.Boolean"
             required="false"/>
+
     <cc:attribute
             name="withHeaders"
             type="java.lang.Boolean"
             required="true"/>
+
+
 
 </cc:interface>
 
@@ -39,20 +42,24 @@
                     value="#{lang['common.label.date.time-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
 
-         <span class="eventLocationColumn columnHeader rightHeaderBorders">
+         <span class="titleColumn columnHeader rightHeaderBorders">
                 <h:outputText
-                        value="#{lang['common.label.group.event.location-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+                        value="#{lang['common.label.group.event.title-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
 
          <span class="eventShortDescriptionColumn columnHeader rightHeaderBorders">
              <h:outputText
                      value="#{lang['common.label.group.event.description-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
+        <span class="eventLocationColumn columnHeader rightHeaderBorders">
+                        <h:outputText
+                                value="#{lang['common.label.group.event.location-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+                </span>
 
 
         <span class="eventOrganiserColumn columnHeader">
-             <h:outputText
-                     value="#{lang['common.label.group.event.organiser-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+             <h:outputText   rendered="#{!cc.attrs.isOwnerEvent}"
+                             value="#{lang['common.label.group.event.organiser-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
         </span>
 
     </h:panelGroup>
@@ -66,23 +73,34 @@
         </span>
 
 
-           <span class="eventLocationColumn">
-                  <h:outputText  value="#{cc.attrs.event.address}" />
+           <span class="titleColumn">
+               <h:outputLink target="_blank" value="/group-pick-up/#{cc.attrs.event.id}">
+                   <h:outputText  value="#{cc.attrs.event.titleShort}..." />
+               </h:outputLink>
         </span>
            <span class="eventShortDescriptionColumn">
               <h:outputText value="#{cc.attrs.event.descriptionShort}" />
             <a  target="_blank" href="/group-pick-up/#{cc.attrs.event.id}">...more</a>
         </span>
+        <span class="eventLocationColumn">
+            #{cc.attrs.event.address.country} (#{cc.attrs.event.address.city})
+        </span>
 
-         <span class="eventOrganiserColumn">
+        <h:panelGroup rendered="#{!cc.attrs.isOwnerEvent}" class="eventOrganiserColumn">
             <h:outputText id="member"
                           styleClass="memberName"
                           style="float: left"
                           value="#{cc.attrs.event.owner.lastName} #{cc.attrs.event.owner.firstName}" />
-              <p:overlayPanel id="avatarPanel#{cc.attrs.event.owner.id}" for="member" my="left top" hideEffect="fade">
-                  <gw:avatarDisplay height="40" onSelectOpenProfile="#{false}" account="#{cc.attrs.event.owner}" width="40" />
-              </p:overlayPanel>
-        </span>
+            <p:overlayPanel id="avatarPanel#{cc.attrs.event.owner.id}" for="member" my="left top" hideEffect="fade">
+                <gw:avatarDisplay height="40" onSelectOpenProfile="#{false}" account="#{cc.attrs.event.owner}" width="40" />
+            </p:overlayPanel>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="eventOrganiserColumn" rendered="#{cc.attrs.isOwnerEvent}">
+            <p:button rendered="#{cc.attrs.isOwnerEvent}" value="edit" outcome="groupevent-outcome">
+                <f:param value="#{cc.attrs.event.id}" name="eventId"/>
+            </p:button>
+        </h:panelGroup>
 
 
     </div>

@@ -51,19 +51,12 @@
                 <div class="eventDescription">
                     <p>#{cc.attrs.event.description}</p>
                     <h:panelGroup  rendered="#{cc.attrs.displayCommentLink}" style="float: right;">
-                    <a  href="/picked-up/#{cc.attrs.event.id}">#{fn:length(cc.attrs.event.commentsAsList)} Comment >></a>
+                        <a  href="/picked-up/#{cc.attrs.event.id}">#{fn:length(cc.attrs.event.commentsAsList)} Comment >></a>
                     </h:panelGroup>
                 </div>
-                <div class="eventPhotos">
 
-                    <ui:repeat value="#{cc.attrs.event.contentAsList}"  var="imagecontent">
-                        <gw:lightBoxImage imageContent="#{imagecontent.image}" width="100" height="100"/>
-                    </ui:repeat>
+                <gw:photoThumb rendered="#{fn:length(cc.attrs.event.contentAsList)>0}" height="100" images="#{cc.attrs.event.contentAsList}" width="300" />
 
-
-
-
-                </div>
             </h:panelGroup>
 
         </h:panelGrid>

@@ -28,23 +28,34 @@
 
 
 <cc:implementation>
-    <h:panelGroup
-            rendered="#{cc.attrs.privateMessage.sender.id == cc.attrs.currentUser.id}"
-            style="display: inline-block;float:#{cc.attrs.privateMessage.sender.id == cc.attrs.currentUser.id ? 'left' : 'right'};">
-        <gw:avatarDisplay
-                account="#{cc.attrs.privateMessage.sender}"
-                onSelectOpenProfile="#{true}"
-                height="60"
-                width="60"/>
-    </h:panelGroup>
+        <h:panelGroup
+                rendered="#{cc.attrs.privateMessage.sender.id == cc.attrs.currentUser.id}"
+                style="display: inline-block;float:#{cc.attrs.privateMessage.sender.id == cc.attrs.currentUser.id ? 'left' : 'right'};">
+            <gw:avatarDisplay
+                    account="#{cc.attrs.privateMessage.sender}"
+                    onSelectOpenProfile="#{true}"
+                    height="60"
+                    width="60"/>
+        </h:panelGroup>
 
-    <div style="display: inline-block;" class="container">
-        <h:outputText value="#{cc.attrs.privateMessage.creationDate}">
-            <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
-        </h:outputText>
-          #{cc.attrs.privateMessage.message}
-    </div>
-    <div style="clear: both;"></div>
+    <h:panelGroup
+                  rendered="#{cc.attrs.privateMessage.receiver.id == cc.attrs.currentUser.id}"
+                  style="display: inline-block;float:#{cc.attrs.privateMessage.receiver.id == cc.attrs.currentUser.id ? 'right' : 'left'};">
+              <gw:avatarDisplay
+                      account="#{cc.attrs.privateMessage.sender}"
+                      onSelectOpenProfile="#{true}"
+                      height="60"
+                      width="60"/>
+          </h:panelGroup>
+
+
+        <div style="width:70%;display: inline-block;float:#{cc.attrs.privateMessage.sender.id == cc.attrs.currentUser.id ? 'left' : 'right'};" class="container">
+            <h:outputText value="#{cc.attrs.privateMessage.creationDate}">
+                <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
+            </h:outputText>
+            #{cc.attrs.privateMessage.message}
+        </div>
+    <div style="clear: both;height: 40px;"></div>
 </cc:implementation>
 
 </html>

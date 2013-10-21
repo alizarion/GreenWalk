@@ -75,6 +75,18 @@
         </navigation-case>
 
         <navigation-case>
+            <from-outcome>conversation-outcome</from-outcome>
+            <to-view-id>/user/conversations.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>private-message-outcome</from-outcome>
+            <to-view-id>/user/privateConversation.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+        <navigation-case>
             <from-outcome>success-group-event-outcome</from-outcome>
             <to-view-id>/successGroupEvent.xhtml</to-view-id>
             <redirect>true</redirect>
@@ -83,6 +95,12 @@
         <navigation-case>
             <from-outcome>private-conversation-outcome</from-outcome>
             <to-view-id>/user/privateConversation.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>member-groupevent-outcome</from-outcome>
+            <to-view-id>/user/memberGoupEvents.xhtml</to-view-id>
             <redirect>true</redirect>
         </navigation-case>
 
