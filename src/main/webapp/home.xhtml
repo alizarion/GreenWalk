@@ -11,6 +11,14 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/template.xhtml">
+            <ui:define name="header">
+                <gw:gwOpenGraphData
+                        ogImage="#{app['APP_URL']}/resources/img/logo_greenwalk.png"
+                        ogDescription="Walk and clean your planet"
+                        ogtitle="GreenWalk"
+                        ogUrl="#{app['APP_URL']}"
+                        />
+            </ui:define>
             <ui:define name="center">
                 <div class="center" >
                     <div  class="verticalAlignement visual-block"  >
@@ -42,10 +50,12 @@
 
             </ui:define>
             <ui:define name="contentRight">
-             <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
-                <gw:gwSocial facebook="#{true}"
-                             twitter="#{true}"
-                             gplus="#{true}"/>
+                <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+                <div class="container"  style="background-color: #ffffff;">
+                    <h3>Make known our mission around you:</h3>
+                    <gw:gwSocial text="Walk and help your planet"
+                            link="http://greenwalk.fr"/>
+                </div>
                 <gw:nextPickups nextPickupsList="#{homeCtrl.groupEvents}" />
             </ui:define>
 

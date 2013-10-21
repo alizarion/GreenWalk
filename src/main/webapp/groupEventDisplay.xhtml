@@ -15,7 +15,10 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/template.xhtml">
+            <ui:define name="header">
+                    <gw:groupEventOGData event="#{groupEventDisplayCtrl.event}" />
 
+            </ui:define>
             <ui:define name="center">
                 <div class="greenCenter">
                     <div class="centerMargin centerContainer" >
@@ -57,7 +60,6 @@
 
         </ui:composition>
     </h:body>
-
 </f:view>
 </html>
 

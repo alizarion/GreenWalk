@@ -31,6 +31,11 @@ public class Explorer {
                 getResultList());
     }
 
+    /**
+     * Method to get user credentials by username
+     * @param userName
+     * @return
+     */
     public Credential getCredentialByUserName(String userName){
         try{
             Credential credential = (Credential) em.createNamedQuery(
@@ -45,13 +50,21 @@ public class Explorer {
         }
     }
 
-
+    /**
+     * Method to find account by user name
+     * @param name
+     * @return
+     */
     public Account findAccountByName(String name){
         return (Account) em.createNamedQuery(
                 Account.FIND_ACCOUNT_BY_NAME).
                 setParameter("name", name).getSingleResult();
     }
 
+    /**
+     * Method to get all available wastes
+     * @return
+     */
     public List<Waste> getAllAvailableWastes(){
         try{
             List<Waste> wastes = new ArrayList<Waste>(em.createNamedQuery(
@@ -63,6 +76,10 @@ public class Explorer {
         }
     }
 
+    /**
+     * Method to get total
+     * @return
+     */
     public List<WasteGarbage> getPickedUpGarbages(){
         try{
             List<WasteGarbage> wasteGarbages =

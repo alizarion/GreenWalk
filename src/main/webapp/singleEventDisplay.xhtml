@@ -15,6 +15,10 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/template.xhtml">
+            <ui:define name="header">
+                <gw:singleEventOGData
+                        event="#{eventCommentCtrl.event}" />
+            </ui:define>
             <ui:define name="center">
             <div class="greenCenter">
                 <div class="centerMargin centerBlockContainer" >

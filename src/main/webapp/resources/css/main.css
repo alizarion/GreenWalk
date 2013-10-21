@@ -483,9 +483,15 @@ body h3{
 
 
 
-
 .social-buttons {
     width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.small-social-buttons {
+    width: 150px;
+    height: 30px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -533,7 +539,6 @@ html, body .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-h
 
 .gwfontTitle{
     color: #009E9D;
-
     font-family: 'Boogaloo',regular;
 
 }

@@ -32,11 +32,12 @@
                 columns="1"
                 paginator="true"
                 rows="9"
+
                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
         <gw:singleEventDisplay displayCommentLink="true" event="#{singleEvent}"/>
     </p:dataGrid>
 
-    <p:ajaxStatus  oncomplete="createLightBox();"/>
+    <p:ajaxStatus  oncomplete="createLightBox();loadSocial();"/>
 
 </cc:implementation>
 

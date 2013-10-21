@@ -106,4 +106,9 @@ public class Position implements Serializable {
         result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return latitude.toString().replaceAll(",",".") + "," + longitude.toString().replaceAll(",",".") ;
+    }
 }

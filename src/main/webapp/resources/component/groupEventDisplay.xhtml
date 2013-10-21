@@ -122,7 +122,9 @@
                 </div>
 
                 <br/>
-
+                 <gw:gwSocial
+                         text="#{cc.attrs.event.title} #{cc.attrs.event.address.country} (#{cc.attrs.event.address.city})"
+                         link="#{app['APP_URL']}/group-pick-up/#{cc.attrs.event.id}"/>
 
             </h:panelGroup>
 
