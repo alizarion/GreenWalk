@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:bm="http://www.bookmgr.com/bm"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view locale="fr">
+
+    <h:head>
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+
+            <ui:define name="center">
+                <f:metadata>
+                    <f:viewParam
+                            name="from"
+                            value="#{loginCtrl.from}"/>
+
+                </f:metadata>
+                <div class="greenCenter">
+                    <div class="centerMargin centerBlockContainer" >
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem value="#{lang['common.menu.label.about.us-'.concat(sessionAttributeCtrl.selectedLang.key)]}" url="#"/>
+
+                        </p:breadCrumb>
+                    </div>
+                </div>
+                <div class="whiteCenterBackground" style="padding-bottom: 40px;padding-top: 10px;">
+                    <div class="centerMargin centerContainer"  >
+                        <h1 class="titleGroupEvent" >#{lang['page.about.us.title.how.does.it.work-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
+                        <div class="aboutUsMainContainer">
+                            <div style="display: inline-block;">
+                                <iframe width="500" height="274" src="//www.youtube.com/embed/BLPih_FSzw4" frameborder="0" >
+
+                                </iframe>
+                            </div>
+                            <div style="display: inline-block;float: right; background-image: url('/resources/img/about-us-steps.jpg');background-repeat:no-repeat;height:274px;width: 240px;background-size: 100% 100%; ">
+                                <div class="aboutUsStep">
+                                    <p style="margin: 0;">
+                                        <h:outputText  escape="false" value="#{lang['page.about.us.step.one-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                                    </p>
+                                </div>
+                                <div class="aboutUsStep">
+                                    <p style="margin: 0;">
+                                        <h:outputText  escape="false" value="#{lang['page.about.us.step.two-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                                    </p>
+                                </div>
+                                <div class="aboutUsStep">
+                                    <p style="margin: 0;">
+                                        <h:outputText escape="false" value="#{lang['page.about.us.step.three-'.concat(sessionAttributeCtrl.selectedLang.key)]}"/>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="centerMargin centerContainer" style="padding-bottom: 20px;" >
+                    <h2 class="groupEventListHeader">#{lang['page.about.us.our.association.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} :</h2>
+                    #{lang['page.about.us.our.association.description-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+
+                    <h2 class="groupEventListHeader">#{lang['page.about.us.our.your.mission.title-'.concat(sessionAttributeCtrl.selectedLang.key)]} :</h2>
+                    #{lang['page.about.us.our.your.mission.description-'.concat(sessionAttributeCtrl.selectedLang.key)]}
+
+                </div>
+                <div class="centerMargin aboutUsSubscribeBtn">
+                    <p:button outcome="register-outcome" value="#{lang['page.about.us.our.subscribe.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" />
+                </div>
+
+            </ui:define>
+            <ui:define name="footerContent">
+
+
+                <h:panelGroup id="googlepausecaca" rendered="#{msg['project.name.minuscule'] == 'pausecaca'}">
+                    <script type="text/javascript">
+                        var _gaq = _gaq || [];
+                        _gaq.push(['_setAccount', 'UA-35269447-1']);
+                        _gaq.push(['_trackPageview']);
+
+                        (function() {
+                            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                        })();
+                    </script>
+
+                </h:panelGroup>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+
+</f:view>
+</html>
+

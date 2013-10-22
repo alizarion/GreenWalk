@@ -146,7 +146,7 @@ public class GroupEvent extends Event implements Notified {
 
     public String getOverlayDescription(String localeKey){
         return   new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm",
-                LocaleUtils.toLocale(localeKey)).format(this.eventDate) + " : "+ this.getTitleShort() + "<br/>"+
+                LocaleUtils.toLocale(localeKey)).format(this.eventDate) + " : "+ "<br/><h3 class='titleHomeText5'>"+ this.getTitleShort() + "</h3><br/>"+
                 "<a target='_blank' href='../group-pick-up/"+super.getId() +"'>"+
                 this.getDescriptionShort()+"..more</a>";
     }

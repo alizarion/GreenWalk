@@ -34,7 +34,7 @@
                 <h2 class="groupEventListHeader">#{lang['common.profile.display.member.action.area-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h2>
                 <gw:gmapGroupEventList  actualLocation=""
                                         getActualLocation="#{null}"
-                                        mapModel="#{memberProfileCtrl.account.lastActionAreasMap}"
+                                        mapModel="#{memberProfileCtrl.account.getLastActionAreasMap(sessionAttributeCtrl.selectedLang.key)}"
                                         selectedMarker="#{memberProfileCtrl.selectedMarker}"
                                         onMarkerSelect="#{memberProfileCtrl.onMarkerSelect}"
                                         zoom="#{memberProfileCtrl.mapZoom}"  />

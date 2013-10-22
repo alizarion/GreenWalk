@@ -63,7 +63,7 @@
                     model="#{cc.attrs.mapModel}"
                     mapTypeControl="true" navigationControl="false"
                     widgetVar="gmap">
-                <p:ajax event="overlaySelect" listener="#{cc.onMarkerSelect}" />
+                <p:ajax event="overlaySelect" process="@this" listener="#{cc.onMarkerSelect}" />
                 <p:gmapInfoWindow>
                     <p:outputPanel style="text-align:center;display:block;margin:auto:">
                         <h:outputText escape="false" value="#{cc.attrs.selectedMarker.title}" />

@@ -42,7 +42,7 @@
                     <gw:smallSocial text="#{cc.attrs.event.description != null ? cc.attrs.event.description
                     :(cc.attrs.event.owner.firstName.concat(' ').concat(cc.attrs.event.owner.lastName).concat(' ').concat(lang['component.event.header.declare-'.concat(sessionAttributeCtrl.selectedLang.key)]))}"
                                     link="#{app['APP_URL']}/picked-up/#{cc.attrs.event.id}"  />
-                    <div>
+                    <div style="clear: both;">
                         <ui:repeat value="#{cc.attrs.event.garbageAsList}" var="wastes">
                             <gw:wasteDisplay
                                     displayQuatity="#{true}"

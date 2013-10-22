@@ -8,12 +8,14 @@ import com.project.services.mail.MailSender;
 import com.project.services.mail.RegisterEmail;
 import com.project.services.mail.SMTPEmailProvider;
 import com.project.web.GroupEventFilter;
+import com.project.web.controlers.SessionAttributeCtrl;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -40,6 +42,9 @@ public class EntityFacade implements Serializable{
     EntityManager em;
 
     private Explorer explorer;
+
+    @Inject
+    private SessionAttributeCtrl sessionAttributeCtrl;
 
     @PostConstruct
     protected void postConstruct() {
@@ -143,7 +148,7 @@ public class EntityFacade implements Serializable{
     public Account findAccountProfileByName(String name){
         Account account= this.explorer.findAccountByName(name);
         account.getAllMemberGarbageAsJSObjectList();
-        account.getLastActionAreasMap();
+        account.getLastActionAreasMap(this.sessionAttributeCtrl.getSelectedLang().getKey());
         account.loadSingleEventEagerly();
         return account;
     }

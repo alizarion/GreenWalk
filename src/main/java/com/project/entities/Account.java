@@ -160,6 +160,9 @@ public class Account implements Serializable {
             fetch = FetchType.LAZY)
     private Set<WasteGarbage> wasteGarbages = new HashSet<WasteGarbage>();
 
+    @Transient
+    private MapModel mapModel = null;
+
     @PrePersist
     public void onPrePersist(){
         File file = new File(Helper.getUserDirectoryPath(),
@@ -401,23 +404,25 @@ public class Account implements Serializable {
         }
     }
 
-    public MapModel getLastActionAreasMap(){
-        MapModel mapModel = new DefaultMapModel();
+    public MapModel getLastActionAreasMap(String localeKey){
+        if (this.mapModel == null){
+            this.mapModel = new DefaultMapModel();
         for(GroupEvent groupEvent :  this.groupEvents){
             if (groupEvent.getAddress().getPosition().getAsLatLng() != null){
                 mapModel.addOverlay(new Marker(groupEvent.getAddress().
                         getPosition().getAsLatLng(),
-                        groupEvent.getTitle()));
+                        groupEvent.getOverlayDescription(localeKey)));
             }
         }
         for(GroupEventSubscriber subscriber : this.subscribedEvents){
             if (subscriber.getGroupEvent().
-                    getAddress().getPosition().getAsLatLng() != null)
+                    getAddress().getPosition().getAsLatLng() != null&&subscriber.getConfirmed() )
                 mapModel.addOverlay(new Marker(subscriber.getGroupEvent().
                         getAddress().getPosition().getAsLatLng(),
-                        subscriber.getGroupEvent().getTitle()));
+                        subscriber.getGroupEvent().getOverlayDescription(localeKey)));
         }
 
+        }
         return mapModel;
     }
 

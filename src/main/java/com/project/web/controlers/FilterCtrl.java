@@ -74,6 +74,8 @@ public class FilterCtrl implements Serializable {
 
     private GroupEventFilter filter = new GroupEventFilter();
 
+    private Boolean mapModelUpdated = false;
+
 
     @PostConstruct
     private void postInit(){
@@ -83,9 +85,11 @@ public class FilterCtrl implements Serializable {
                 EntityFacade.EF_NAME, this.facade);
      //   this.singleEvents = facade.findLastSingleEvents();
 
+
     }
 
     public void updateMapModel(){
+        if (!mapModelUpdated){
         LOG.info("FilterCtrl : updateMapModel");
         this.groupEvents = facade.getGroupEventByFilter(this.filter);
         getCurrent();
@@ -104,6 +108,8 @@ public class FilterCtrl implements Serializable {
                         groupEvent.getOverlayDescription(
                                 sessionAttribute.getSelectedLang().getKey())));
             }
+        }
+            mapModelUpdated = true;
         }
     }
 

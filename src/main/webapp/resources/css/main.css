@@ -37,6 +37,13 @@ ol li{
     list-style: none;
 
 }
+
+.aboutUsStepNumber{
+    color: #53C6C4;
+    margin: 0;
+    display: inline-block;
+}
+
 ol, ul, li {
     border: 0;
     margin: 0;
@@ -160,6 +167,12 @@ body .ui-datagrid .ui-paginator-top {
     padding-bottom: 5px;
     font-weight: normal;
 
+}
+
+body, table{
+
+    display: inline-block;
+    width: 100%;
 }
 .menuItem:after{
     content: "|";
@@ -373,7 +386,19 @@ p {
     margin-left: auto;
     margin-right: auto;
     width: 760px;
-    min-height: 500px;
+
+}
+
+.aboutUsMainContainer{
+    width: 100%;
+    clear: both;
+    margin-top: 10px;
+}
+
+.aboutUsSubscribeBtn{
+    width: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #contentLeft {
@@ -440,6 +465,10 @@ body .greenCenter .ui-menuitem-text {
 }
 
 
+.aboutUsStep{
+    height: 100px;
+    margin-left: 60px;
+}
 
 body .greenCenter .ui-menuitem-text:hover{
     color:#00323f ;
@@ -880,11 +909,12 @@ body .ui-menu  .ui-state-hover  {
 }
 
 .bottle-glass-icon {
-    background-position: 3px -12px;
+
+    background-position: 3px -43px;
 }
 
 .bottle-plastic-icon {
-    background-position: 3px -43px;
+    background-position: 3px -12px;
 }
 
 .electronic-icon {
