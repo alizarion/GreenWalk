@@ -24,11 +24,11 @@
                     <div  class="verticalAlignement visual-block"  >
                         <gw:garbage width="457" height="352" startWastes="#{sessionAttributeCtrl.collectedWasteJSObjects}"/>
                         <div style="width: 290px;float: left;height:330px;display: inline-block;">
-                            <p class="titleHomeText1">together,</p>
-                            <p class="titleHomeText2">we have freed the nature of
+                            <p class="titleHomeText1">#{lang['total.count.part1-'.concat(sessionAttributeCtrl.selectedLang.key)]}</p>
+                            <p class="titleHomeText2">#{lang['total.count.part2-'.concat(sessionAttributeCtrl.selectedLang.key)]}
                                 <span style="float: left;" class="titleHomeNumber">#{sessionAttributeCtrl.totalWastesCount}</span>
                                <span style="float: left;display: inline-block;margin-bottom: 0;height: 60px">
-                                    <span style="display: block;">kinds of waste</span>
+                                    <span style="display: block;">#{lang['total.count.part3-'.concat(sessionAttributeCtrl.selectedLang.key)]}</span>
                                <h:graphicImage style="display: inline-block" value="../resources/img/underline_wave.png" />
                                </span>
                             </p>
@@ -52,7 +52,7 @@
             <ui:define name="contentRight">
                 <h1 class="commentAndEventHead">  #{lang['our.community-'.concat(sessionAttributeCtrl.selectedLang.key)]}</h1>
                 <div class="container"  style="background-color: #ffffff;">
-                    <h3>Make known our mission around you:</h3>
+                    <h3> #{lang['common.social.buttons.title-'.concat(sessionAttributeCtrl.selectedLang.key)]}:</h3>
                     <gw:gwSocial text="Walk and help your planet"
                             link="http://greenwalk.fr"/>
                 </div>

@@ -25,6 +25,15 @@
             </ui:define>
             <ui:define name="title" >Inscription #{msg['meta.data.title']}</ui:define>
             <ui:define name="center">
+                    <div class="greenCenter">
+                        <div class="centerMargin centerBlockContainer" >
+                            <p:breadCrumb>
+                                <p:menuitem value="Categories" url="/" />
+                                <p:menuitem value="#{lang['login.registration.link-'.concat(sessionAttributeCtrl.selectedLang.key)]}" url="#"/>
+
+                            </p:breadCrumb>
+                        </div>
+                    </div>
                 <div style="width: 100%;height:1000px; ">
                     <div class="registerContent">
                         <h:form  styleClass="Form StaticForm registerForm noMargin">

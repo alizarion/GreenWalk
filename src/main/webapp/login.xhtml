@@ -23,6 +23,15 @@
                             value="#{loginCtrl.from}"/>
 
                 </f:metadata>
+                <div class="greenCenter">
+                    <div class="centerMargin centerBlockContainer" >
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="/" />
+                            <p:menuitem value="#{lang['page.template.login.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}" url="#"/>
+
+                        </p:breadCrumb>
+                    </div>
+                </div>
                 <div style="margin-right:auto;margin-left:auto;width: 300px;height: 400px;margin-top: 200px;">
                     <h:form  styleClass="Form StaticForm registerForm noMargin">
                         <h:panelGroup id="loginGrid">

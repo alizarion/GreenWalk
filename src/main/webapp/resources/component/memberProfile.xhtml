@@ -40,7 +40,7 @@
              <br/>
             <h:outputLabel  styleClass="label" value="#{lang['common.profile.display.member.since-'.concat(sessionAttributeCtrl.selectedLang.key)]} : "/>
             <h:outputText value="#{cc.attrs.account.creationDate}" >
-                <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy HH:mm"  />
+                <f:convertDateTime type="date" locale="#{sessionAttributeCtrl.selectedLang.key}"  pattern="d MMM yyyy"  />
             </h:outputText>
             <br/>
             <p:button  rendered="#{cc.attrs.showPMButton}" outcome="private-conversation-outcome"  value="#{lang['common.profile.private.message.button-'.concat(sessionAttributeCtrl.selectedLang.key)]}">

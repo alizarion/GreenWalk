@@ -29,7 +29,7 @@ public class SessionAttributeCtrl implements Serializable {
     private List<AvailableLang> langs = new ArrayList<AvailableLang>(
             Arrays.asList(AvailableLang.values()));
 
-    private AvailableLang selectedLang = AvailableLang.EN;
+    private AvailableLang selectedLang = AvailableLang.FR;
 
     private String collectedWasteJSObjects;
 

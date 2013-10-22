@@ -54,7 +54,7 @@
                 <div class="eventDescription">
                     <p>#{cc.attrs.event.description}</p>
                     <h:panelGroup  rendered="#{cc.attrs.displayCommentLink}" style="float: right;">
-                        <a  href="/picked-up/#{cc.attrs.event.id}">#{fn:length(cc.attrs.event.commentsAsList)} Comment >></a>
+                        <a  href="/picked-up/#{cc.attrs.event.id}">#{fn:length(cc.attrs.event.commentsAsList)} #{lang['component.single.event.comment.link-'.concat(sessionAttributeCtrl.selectedLang.key)]} >></a>
                     </h:panelGroup>
                 </div>
 
