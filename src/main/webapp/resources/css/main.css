@@ -829,6 +829,9 @@ body .ui-autocomplete-items td, tr{
 .footerContainer{
     height: 200px;
     width: 100%;
+    margin-bottom: 0;
+    position: absolute;
+
     margin-top: 20px;
     clear: both;
     background-image: url('/resources/img/motif_background_green.jpg');
