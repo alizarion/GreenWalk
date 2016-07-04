@@ -1,4 +1,4 @@
 GreenWalk
 =========
 
-greenwalk.fr
+greenwalk.info
